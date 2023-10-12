@@ -123,4 +123,5 @@ export default {
   line-height: 150%; /* 24px */
   border-color: transparent;
 }
+
 </style>

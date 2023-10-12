@@ -216,6 +216,7 @@ export default {
   font-weight: 400;
   line-height: 150%; /* 24px */
   border-color: transparent;
+  background-color: transparent;
 }
 .sms-progress {
   display: flex !important;

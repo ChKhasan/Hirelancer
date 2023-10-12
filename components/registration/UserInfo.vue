@@ -109,7 +109,7 @@
                   class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6"
                   :class="{ active: form.genger == 'male' }"
                 >
-                  <div class="flex justify-between items-center">
+                  <div class="flex justify-between items-center w-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -131,7 +131,7 @@
                   class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6"
                   :class="{ active: form.genger == 'female' }"
                 >
-                  <div class="flex justify-between items-center">
+                  <div class="flex justify-between items-center w-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
