@@ -13,7 +13,7 @@
           :key="item"
         >
           <div class="flex gap-2 items-center">
-            <img src="@/assets/images/Achir.png" alt="" />
+            <img src="../../../assets/images/Achir.png" alt="" />
             <h6 class="text-grey-80 text-base font-semibold">Лучший дизайнер</h6>
           </div>
           <p class="text-base text-grey-64">
