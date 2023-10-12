@@ -7,7 +7,7 @@
       <a class="text-blue text-[14px] font-medium font-tt underline" href="">Подробнее</a>
     </div>
     <div>
-      <img class="absolute bottom-0" src="@/assets/images/Telegram.png" alt="" />
+      <img class="absolute bottom-0" src="@/assets/images/telegram.png" alt="" />
     </div>
   </div>
 </template>
