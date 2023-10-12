@@ -1,0 +1,175 @@
+@import "@/assets/fonts/stylesheet.css";
+
+/* fonts */
+@font-face {
+  font-family: "venture13-100";
+  src: url(../fonts/Venture13-Thin.ttf);
+}
+@font-face {
+  font-family: "venture13-400";
+  src: url(../fonts/Venture13.ttf);
+}
+@font-face {
+  font-family: "venture13-700";
+  src: url(../fonts/Venture13-Bold.ttf);
+}
+
+/* variables */
+:root {
+  /* fonts  */
+  --thin: "venture13-100";
+  --regular: "venture13-400";
+  --bold: "venture13-700";
+
+  /* colors */
+  --grey-8: #ebebeb;
+  --grey-24: #c2c2c3;
+  --grey-40: #9a999b;
+  --grey-80: #353437;
+  --bg-grey: #f8f9ff;
+  --blue: #5c46e5;
+  --black: #020105;
+  --dark-yellow: #f2994a;
+  --green: #009a10;
+  --yellow: #f2c94c;
+  --light-red: #f2154a;
+  --pantone-2023: #bb2649;
+  --red: #ed3237;
+  --purple: #7037ea;
+  --argo-green: #00cd69;
+  --border-darik: #e0e0ed;
+  --main-color: #5c46e5;
+}
+
+/* main/css */
+
+.font-100 {
+  font-family: var(--thin);
+}
+.font-400 {
+  font-family: var(--regular);
+}
+.font-700 {
+  font-family: var(--bold);
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "TT Interfaces";
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+a,
+button {
+  font-family: "TT Interfaces";
+}
+.font-tt {
+  font-family: "TT Interfaces";
+}
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol
+      *)) {
+  all: unset;
+  display: revert;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+a,
+button {
+  cursor: pointer;
+}
+ol,
+ul,
+menu {
+  list-style: none;
+}
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+table {
+  border-collapse: collapse;
+}
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+textarea {
+  white-space: revert;
+}
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+:where(pre) {
+  all: revert;
+}
+::placeholder {
+  color: unset;
+}
+::marker {
+  content: initial;
+}
+:where([hidden]) {
+  display: none;
+}
+:where([contenteditable]:not([contenteditable="false"])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}
+:where(dialog:modal) {
+  all: revert;
+}
+ul {
+  margin: 0;
+}
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+p {
+  margin: 0;
+  margin-bottom: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  margin-bottom: 0;
+}
+.ant-form-item {
+  margin-bottom: 0;
+}
+a:hover {
+  color: var(--blue);
+}
+.ant-modal-footer {
+  display: none !important;
+}
+.auth-item label {
+  color: var(--black);
+  font-family: "TT Interfaces";
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+}
+.auth-item label::after,
+.auth-item label::before {
+  display: none;
+}
