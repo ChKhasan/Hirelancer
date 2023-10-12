@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="card specialists-card border-4 px-6 py-6 flex flex-col gap-3 bg-bg-f9">
+  <div class="card specialists-card  px-6 py-6 flex flex-col gap-3 bg-bg-f9">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="56"
