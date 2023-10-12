@@ -3,7 +3,7 @@
     <div class="image h-[270px] border-[0] border-b border-solid border-grey-8 relative">
       <img
         class="h-full w-full object-cover"
-        src="@/assets/images/Portfolio.png"
+        src="@/assets/images/portfolio.png"
         alt=""
       />
       <div

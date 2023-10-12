@@ -3,7 +3,7 @@
     <div class="image h-[270px] relative">
       <img
         class="h-full w-full object-cover"
-        src="@/assets/images/Portfolio.png"
+        src="@/assets/images/portfolio.png"
         alt=""
       />
       <div class="absolute right-[14px] top-[14px] flex gap-[12px]">
