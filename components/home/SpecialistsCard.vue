@@ -1,6 +1,8 @@
 <template lang="html">
-  <div class="card specialists-card  px-6 py-6 flex flex-col gap-3 bg-bg-f9">
+  <div class="card specialists-card px-6 py-6 flex flex-col gap-3 bg-bg-f9">
+    <img class="w-[56px] h-[56px]" :src="obj?.icon" v-if="obj?.icon" alt="" />
     <svg
+      v-else
       xmlns="http://www.w3.org/2000/svg"
       width="56"
       height="56"
@@ -34,10 +36,12 @@
         fill="#009A10"
       />
     </svg>
-    <p class="font-medium text-[18px] text-black">Разработка сайтов</p>
+    <p class="font-medium text-[18px] text-black">{{ obj?.name_ru }}</p>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["obj"],
+};
 </script>
 <style lang=""></style>

@@ -34,6 +34,25 @@ import Statistics from "@/components/profile/Statistics.vue";
 import Comments from "@/components/profile/Comments.vue";
 
 export default {
+  data() {
+    return {
+      userInfo: {},
+    };
+  },
+  // async asyncData({ store }) {
+  //   const [userInfoData] = await Promise.all([store.dispatch("fetchAuth/getUserInfo")]);
+  //   const userInfo = userInfoData.content;
+  //   console.log(userInfo);
+  //   console.log(userInfo);
+  //   return {};
+  // },
+  async mounted() {
+    const [userInfoData] = await Promise.all([
+      this.$store.dispatch("fetchAuth/getUserInfo"),
+    ]);
+    this.userInfo = userInfoData;
+    this.$store.commit("getUserInfo", userInfoData);
+  },
   components: {
     PersonalInfo,
     Achievements,

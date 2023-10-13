@@ -26,7 +26,6 @@ export default {
     async __POST_SEND_CODE(form) {
       try {
         const data = await this.$store.dispatch("fetchAuth/postSendCode", form);
-        console.log(data);
         if (data.success) {
           this.$router.push("/registration/user-type");
         }

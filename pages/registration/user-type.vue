@@ -23,8 +23,30 @@ export default {
     return {};
   },
   methods: {
-    sendCode(ad) {
-      this.$router.push("/registration/user-info");
+    sendCode(form) {
+      console.log(form);
+      // this.$router.push("/registration/user-info");
+      this.__POST_SEND_CODE(form);
+    },
+    async __POST_SEND_CODE(form) {
+      try {
+        const data = await this.$store.dispatch("fetchAuth/postLogin", form);
+        if (data.success) {
+          await localStorage.setItem("auth-token", data.content.accessToken);
+          this.__GET_USER();
+        }
+      } catch (e) {}
+    },
+    async __GET_USER() {
+      try {
+        const userInfoData = this.$store.dispatch("fetchAuth/getUserInfo");
+        this.userInfo = userInfoData;
+        if (this.userInfo?.name) {
+          this.$router.push("/profile/freelancer");
+        } else {
+          this.$router.push("/registration/user-info");
+        }
+      } catch (e) {}
     },
   },
   components: { UserType },

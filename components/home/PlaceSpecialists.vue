@@ -2,18 +2,7 @@
   <div class="place flex flex-col mb-[96px]">
     <h2 class="text-black text-[32px] mb-8 font-semibold">Buyurtma qanday beriladi</h2>
     <div class="list">
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
-      <SpecialistsCard />
+      <SpecialistsCard v-for="elem in specialities" :key="elem?.id" :obj="elem" />
     </div>
     <button
       class="mx-auto mt-6 rounded-lg flex gap-4 w-[352px] h-16 items-center justify-center border border-grey-8 border-solid text-blue font-medium text-[18px] font-tt"
@@ -40,7 +29,7 @@
 <script>
 import SpecialistsCard from "./SpecialistsCard.vue";
 
-export default { components: { SpecialistsCard } };
+export default { props: ["specialities"], components: { SpecialistsCard } };
 </script>
 <style lang="css" scoped>
 .list {

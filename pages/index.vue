@@ -3,7 +3,7 @@
     <div class="2xl:container mx-auto">
       <Banner />
       <PlaceOrder />
-      <PlaceSpecialists />
+      <PlaceSpecialists :specialities="specialities" />
     </div>
     <Orders />
     <TheFreelancers :freelancers="freelancers" />
@@ -26,8 +26,10 @@ export default {
       store.dispatch("fetchFreelancers/getFreelancers"),
     ]);
     const freelancers = freeLancersData.content.freelancers;
+    const specialities = freeLancersData.content.specialities;
     return {
       freelancers,
+      specialities,
     };
   },
   mounted() {

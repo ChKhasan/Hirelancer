@@ -45,9 +45,18 @@
           prop="phone"
         >
           <!-- <a-input v-model="form.name" /> -->
-          <div class="input-block flex items-center">
+          <div
+            class="input-block border border-solid flex items-center"
+            :class="onFocus ? 'border-blue boxShadow' : 'border-border-darik'"
+          >
             <span class="mr-1 text-base text-black">+998</span>
-            <input v-mask="'## ### ## ##'" v-model="form.phone" type="text" />
+            <input
+              v-mask="'## ### ## ##'"
+              @focus="onFocus = true"
+              @blur="onFocus = false"
+              v-model="form.phone"
+              type="text"
+            />
           </div>
         </a-form-model-item>
         <p class="text-grey-40 text-[14px] mt-[11px]">
@@ -75,6 +84,7 @@
 export default {
   data() {
     return {
+      onFocus: false,
       other: "",
       form: {
         phone: "",
@@ -92,8 +102,9 @@ export default {
     onSubmit() {
       const data = {
         ...this.form,
-        phone: `+998${this.form.phone.replace(" ", "")}`,
+        phone: `+998${this.form.phone.replaceAll(" ", "")}`,
       };
+      localStorage.setItem("phone", this.form.phone.replaceAll(" ", ""));
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.$emit("checkNumber", data);
@@ -107,12 +118,14 @@ export default {
 };
 </script>
 <style lang="css" scoped>
+.boxShadow {
+  box-shadow: 0px 0px 0px 3px rgba(70, 105, 229, 0.2);
+}
 .auth-item .input-block {
   height: 47px;
-  border: 1px solid var(--border-darik);
-  background: #fff;
   border-radius: 8px;
   padding: 12px 16px;
+  transition: all 0.3s;
 }
 .auth-item .input-block input {
   color: var(--black);
@@ -123,5 +136,4 @@ export default {
   line-height: 150%; /* 24px */
   border-color: transparent;
 }
-
 </style>

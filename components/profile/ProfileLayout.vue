@@ -16,6 +16,7 @@ import ProfileTab from "../../components/profile/ProfileTab.vue";
 import FreelancerTab from "./FreelancerTab.vue";
 
 export default {
+  name: "ProfileLayout",
   props: ["profile"],
   components: {
     PersonalBlock,

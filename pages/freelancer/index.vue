@@ -2,7 +2,7 @@
   <div class="profile">
     <ProfileLayout :profile="false">
       <div class="personal-information mt-8">
-        <PersonalInfo :isEdit="false"/>
+        <PersonalInfo :isEdit="false" />
         <Achievements />
       </div>
       <div class="portfolio-block mt-[40px]">
@@ -22,6 +22,7 @@ import Events from "../../components/profile/Events.vue";
 import ProfileLayout from "../../components/profile/ProfileLayout.vue";
 
 export default {
+
   components: {
     PersonalInfo,
     Achievements,

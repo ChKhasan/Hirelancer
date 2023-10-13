@@ -32,14 +32,35 @@
               </svg>
             </span>
           </div>
-          <div class="info flex flex-col gap-2">
-            <h3 class="text-black text-[20px] font-semibold">
-              Muhammadullo Egamberdiyev
-            </h3>
-            <p class="text-base text-grey-40">Зарегистрирован: более 5 лет назад</p>
+          <div class="info flex flex-col gap-2 w-full justify-center">
+            <a-skeleton
+              :paragraph="false"
+              :loading="
+                !$store.state.userInfo['name'] || !$store.state.userInfo['surname']
+              "
+            >
+              <h3 class="text-black text-[20px] font-semibold text-center">
+                {{
+                  `${$store.state.userInfo["name"]} ${$store.state.userInfo["surname"]}`
+                }}
+              </h3>
+            </a-skeleton>
+            <a-skeleton
+              :paragraph="false"
+              :loading="
+                !$store.state.userInfo['name'] || !$store.state.userInfo['surname']
+              "
+            >
+              <p class="text-base text-center text-grey-40">
+                Зарегистрирован: более 5 лет назад
+              </p>
+            </a-skeleton>
           </div>
-          <div class="status flex justify-between w-full px-6">
-            <p class="text-grey-80 text-[14px]">ID: 545</p>
+          <div
+            class="status flex justify-between w-full px-6"
+            v-if="$store.state.userInfo['name'] || $store.state.userInfo['surname']"
+          >
+            <p class="text-grey-80 text-[14px]">ID: {{$store.state.userInfo["id"]}}</p>
             <span class="w-[1px] h-[20px] bg-grey-8"> </span>
             <p class="text-grey-80 text-[14px] flex gap-2 items-center">
               <svg
@@ -53,11 +74,12 @@
                   d="M8.36076 2.7265C9.03133 1.31382 10.9688 1.31382 11.6394 2.7265L12.7983 5.16797C13.0646 5.72895 13.5793 6.11777 14.1748 6.20773L16.7662 6.59924C18.2656 6.82577 18.8644 8.74161 17.7794 9.84123L15.9042 11.7417C15.4733 12.1783 15.2767 12.8074 15.3784 13.424L15.8211 16.1074C16.0772 17.6601 14.5098 18.8442 13.1686 18.1111L10.8508 16.8442C10.3182 16.5531 9.68196 16.5531 9.14939 16.8442L6.83155 18.1111C5.49041 18.8442 3.92293 17.6601 4.17907 16.1075L4.62174 13.424C4.72345 12.8074 4.52684 12.1783 4.09598 11.7417L2.22081 9.84123C1.1358 8.74161 1.73452 6.82577 3.23397 6.59924L5.82539 6.20773C6.42082 6.11777 6.93555 5.72895 7.20184 5.16797L8.36076 2.7265Z"
                   fill="#F2C94C"
                 /></svg
-              >489
+              >{{$store.state.userInfo["rating"]}}
             </p>
             <span class="w-[1px] h-[20px] bg-grey-8"> </span>
             <p class="text-grey-80 text-[14px] flex gap-2 items-center">
               <svg
+                v-if="$store.state.userInfo['online']"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -80,10 +102,37 @@
                   r="7.75"
                   stroke="#00CD69"
                   stroke-width="0.5"
+                />
+              </svg>
+              <svg
+                v-else
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <circle cx="8" cy="8" r="4" fill="#f2154a" />
+                <circle
+                  opacity="0.3"
+                  cx="8"
+                  cy="8"
+                  r="5.75"
+                  stroke="#f2154a"
+                  stroke-width="0.5"
+                />
+                <circle
+                  opacity="0.2"
+                  cx="8"
+                  cy="8"
+                  r="7.75"
+                  stroke="#f2154a"
+                  stroke-width="0.5"
                 /></svg
-              >Online
+              >{{ $store.state.userInfo["online"] ? "Online" : "Offline" }}
             </p>
           </div>
+          <a-skeleton :paragraph="false" v-else />
         </div>
         <div class="buttons">
           <button

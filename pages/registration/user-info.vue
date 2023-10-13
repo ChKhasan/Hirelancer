@@ -10,9 +10,14 @@
         </button>
       </div>
       <div class="flex justify-center">
-        <UserInfo @sendCode="sendCode" />
+        <UserInfo
+          @sendRegister="sendRegister"
+          :regions="regions"
+          :specialities="specialities"
+        />
       </div>
     </div>
+    
   </div>
 </template>
 <script>
@@ -22,9 +27,31 @@ export default {
   data() {
     return {};
   },
+  async asyncData({ store }) {
+    const [regionsData, freeLancersData] = await Promise.all([
+      store.dispatch("fetchRegions/getRegions"),
+      store.dispatch("fetchSpecialities/getSpecialities"),
+    ]);
+    const regions = regionsData.content;
+    const specialities = freeLancersData.content;
+
+    return {
+      regions,
+      specialities,
+    };
+  },
   methods: {
-    sendCode(ad) {
-      this.$router.push("/registration/user-info");
+    sendRegister(form) {
+      this.__POST_REGISTER(form);
+    },
+    async __POST_REGISTER(form) {
+      try {
+        const data = await this.$store.dispatch("fetchAuth/postRegister", form);
+        if (data.success) {
+          // localStorage.setItem("auth-token", data.content.accessToken);
+          this.$router.push("/profile/freelancer");
+        }
+      } catch (e) {}
     },
   },
   components: { UserInfo },
@@ -35,4 +62,5 @@ export default {
   width: 100%;
   max-width: 712px;
 }
+
 </style>

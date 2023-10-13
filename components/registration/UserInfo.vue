@@ -101,13 +101,13 @@
           >
             <a-input v-model="form.surname" placeholder="Faimilyangini kiriting" />
           </a-form-model-item>
-          <a-form-model-item ref="name" class="form-item" label="Jinsingiz" prop="genger">
-            <a-radio-group v-model="form.genger">
+          <a-form-model-item ref="name" class="form-item" label="Jinsingiz" prop="gender">
+            <a-radio-group v-model="form.gender">
               <div class="grid grid-cols-2 gap-4 gender-btns">
                 <button
-                  @click="form.genger = 'male'"
+                  @click="form.gender = 'male'"
                   class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6"
-                  :class="{ active: form.genger == 'male' }"
+                  :class="{ active: form.gender == 'male' }"
                 >
                   <div class="flex justify-between items-center w-full">
                     <svg
@@ -127,9 +127,9 @@
                   <h5 class="text-[18px] text-grey-64 font-semibold">Erkaklar</h5>
                 </button>
                 <button
-                  @click="form.genger = 'female'"
+                  @click="form.gender = 'female'"
                   class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6"
-                  :class="{ active: form.genger == 'female' }"
+                  :class="{ active: form.gender == 'female' }"
                 >
                   <div class="flex justify-between items-center w-full">
                     <svg
@@ -161,14 +161,19 @@
             label="Sohangizni tanlang"
           >
             <div
-              class="h-[58px] border border-solid flex justify-between border-grey-8 rounded-lg px-4 py-3"
+              class="min-h-[58px] items-center border border-solid flex justify-between border-grey-8 rounded-lg px-4 py-3"
             >
-              <div>
+              <p class="text-grey-40 text-base" v-if="activeCheckedList == 0">
+                Специальности
+              </p>
+              <div v-else class="w-full flex flex-wrap gap-[4px]">
                 <div
-                  class="px-4 h-full rounded-[4px] bg-apple-grey flex gap-1 items-center text-blue text-[14px] font-medium"
+                  v-for="listItem in activeCheckedList"
+                  :key="listItem?.id"
+                  class="px-4 h-[34px] rounded-[4px] bg-apple-grey flex gap-1 items-center text-blue text-[14px] font-medium"
                 >
-                  Программирование
-                  <button>
+                  {{ listItem?.name_ru }}
+                  <button @click="deleteChecked(listItem?.id)">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -186,7 +191,10 @@
                   </button>
                 </div>
               </div>
-              <button class="w-6" @click="visible = true">
+              <button
+                class="w-6"
+                @click="(visible = true), (checkedList = [...activeCheckedList])"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="3"
@@ -225,8 +233,9 @@
           </a-form-model-item>
           <a-form-model-item ref="name" class="form-item" label="Viloyat tanlang">
             <a-select v-model="form.region_id" placeholder="Viloyat tanlang">
-              <a-select-option value="shanghai"> Zone one </a-select-option>
-              <a-select-option value="beijing"> Zone two </a-select-option>
+              <a-select-option :value="region?.id" v-for="region in regions" :key="region?.id">
+                {{ region?.name_ru }}</a-select-option
+              >
             </a-select>
           </a-form-model-item>
         </div>
@@ -234,7 +243,7 @@
     </div>
     <div class="buttons grid grid-cols-2 gap-4">
       <button
-      @click="$router.go(-1)"
+        @click="$router.go(-1)"
         class="h-[60px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
       >
         Bekor qilish
@@ -262,7 +271,8 @@
         <div class="flex justify-between items-center">
           <h6 class="text-black text-[24px] font-semibold">Sohangizni tanlang</h6>
           <p class="text-[18px] text-grey-80 flex gap-2 items-center">
-            <span class="text-main-color font-medium">0</span>: yonalish tanlandi
+            <span class="text-main-color font-medium">{{ checkedList.length }}</span
+            >: yonalish tanlandi
             <span>(max 3 ta)</span>
           </p>
         </div>
@@ -272,9 +282,11 @@
           >
             <div
               class="cursor-pointer flex gap-3 items-center h-[67px] px-6 rounded-xl bg-bg-f9 text-black text-base font-medium border-[2px] border-solid border-bg-f9"
-              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 12, 3, 4, , 4, 5, 9, 6]"
-              @click="modalList = item"
-              :class="{ active: modalList == item }"
+              v-for="item in specialities"
+              @click="onSelect(item?.id)"
+              :class="{
+                active: (modalList ? modalList : specialities[0]?.id) == item?.id,
+              }"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -310,31 +322,39 @@
                   fill="#009A10"
                 />
               </svg>
-              Разработка сайтов
+              {{ item?.name_ru }}
             </div>
           </div>
           <div class="modal-board flex flex-col justify-between">
             <div class="flex gap-3 flex-wrap">
-              <div
+              <button
                 class="px-4 py-2 bg-bg-grey rounded-[22px] flex items-center gap-2"
-                v-for="item in [1, 2, 3, 4, 5, 6, 7, 78, 8]"
+                v-for="child in specialities?.find(
+                  (elem) =>
+                    elem.id == (modalList != null ? modalList : specialities[0]?.id)
+                )?.children"
+                @click="onchecked(child)"
               >
-                <a-checkbox />
-                <p class="text-grey-80 text-[14px] font-medium">Веб разработка</p>
-              </div>
+                <a-checkbox
+                  :checked="
+                    Boolean(checkedList.find((elemChild) => elemChild.id == child.id))
+                  "
+                />
+                <p class="text-grey-80 text-[14px] font-medium">{{ child?.name_ru }}</p>
+              </button>
             </div>
             <div class="flex gap-4 justify-end">
               <button
-                @click="visible = false"
+                @click="closeChecked"
                 class="h-[60px] border border-solid w-[227px] border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
               >
                 Bekor qilish
               </button>
               <button
-                @click="onSubmit"
+                @click="saveChecked"
                 class="h-[60px] border border-solid w-[227px] border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] text-white font-medium"
               >
-                Kodni jo’natish
+                Tasdiqlash
               </button>
             </div>
           </div>
@@ -344,9 +364,13 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
+  props: ["regions", "specialities"],
   data() {
     return {
+      checkedList: [],
+      activeCheckedList: [],
       modalList: null,
       visible: false,
       userType: true,
@@ -354,16 +378,15 @@ export default {
       form: {
         name: "",
         surname: "",
-        genger: "",
+        gender: "",
         date_of_birth: "",
-        specialities: [],
         specialities: [],
         region_id: undefined,
       },
       rules: {
         name: [{ required: true, message: "This field is required", trigger: "blur" }],
         surname: [{ required: true, message: "This field is required", trigger: "blur" }],
-        genger: [{ required: true, message: "This field is required", trigger: "blur" }],
+        gender: [{ required: true, message: "This field is required", trigger: "blur" }],
         specialities: [
           { required: true, message: "This field is required", trigger: "blur" },
         ],
@@ -371,6 +394,33 @@ export default {
     };
   },
   methods: {
+    closeChecked() {
+      this.checkedList = [];
+      this.visible = false;
+    },
+    saveChecked() {
+      this.activeCheckedList = [...this.checkedList];
+      this.checkedList = [];
+      this.visible = false;
+    },
+    onchecked(obj) {
+      if (this.checkedList.includes(obj)) {
+        this.checkedList = this.checkedList.filter((item) => item.id != obj.id);
+      } else {
+        if (this.checkedList.length == 3) {
+          this.checkedList.shift();
+        }
+        this.checkedList.push(obj);
+      }
+      console.log(this.checkedList);
+    },
+    deleteChecked(id) {
+      this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
+    },
+    onSelect(id) {
+      this.modalList = id;
+      console.log(id);
+    },
     handleOk() {
       this.visible = false;
     },
@@ -378,10 +428,28 @@ export default {
       console.log(date, dateString);
     },
     onSubmit() {
+      // name: "",
+      //   surname: "",
+      //   gender: "",
+      //   date_of_birth: "",
+      //   specialities: [1],
+      //   region_id: undefined,
+      // let formData = new FormData();
+      // formData.append("name", this.form.name);
+      // formData.append("surname", this.form.surname);
+      // formData.append("surname", this.form.surname);
+      // formData.append("date_of_birth", this.form.date_of_birth);
+      // formData.append("region_id", this.form.region_id);
+      // formData.append("specialities[]", JSON.stringify(this.form.specialities));
+      const data = {
+        ...this.form,
+        date_of_birth: moment(this.form.date_of_birth).format("DD.MM.YYYY"),
+        // [`specialities[]`]: this.form.specialities,
+      };
+      delete data["specialities"];
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          console.log(this.form);
-          // this.$emit("checkNumber", this.form);
+          this.$emit("sendRegister", data);
         } else {
           console.log("error submit!!");
           return false;
@@ -529,7 +597,8 @@ export default {
   border-color: var(--blue);
   color: var(--blue);
 }
-:deep(.ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
+:deep(.ant-select-focused
+    .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
   border: 1px solid var(--blue);
   box-shadow: 0px 0px 0px 3px rgba(70, 105, 229, 0.2);
 }

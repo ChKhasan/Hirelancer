@@ -26,7 +26,7 @@ import {
   message,
   // Affix,
   // InputNumber,
-  // Skeleton,
+  Skeleton,
   // Empty,
   // Alert,
   // Spin,
@@ -57,7 +57,7 @@ Vue.use(Pagination);
 // Vue.use(Alert);
 // Vue.use(Empty);
 Vue.use(DatePicker);
-// Vue.use(Skeleton);
+Vue.use(Skeleton);
 // Vue.use(TimePicker);
 // Vue.use(InputNumber);
 Vue.use(FormModel);
