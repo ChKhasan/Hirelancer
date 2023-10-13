@@ -1,6 +1,13 @@
 <template lang="html">
-  <div class="card specialists-card px-6 py-6 flex flex-col gap-3 bg-bg-f9">
-    <img class="w-[56px] h-[56px]" :src="obj?.icon" v-if="obj?.icon" alt="" />
+  <div
+    class="card specialists-card px-6 py-6 flex flex-col gap-3 bg-bg-f9 xl:bg-white xl:border-[1px] xl:border-grey-8 xl:border-solid xl:rounded-[12px] xl:p-[16px]"
+  >
+    <img
+      class="w-[56px] h-[56px] xl:w-[32px] xl:h-[32px]"
+      :src="obj?.icon"
+      v-if="obj?.icon"
+      alt=""
+    />
     <svg
       v-else
       xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +43,9 @@
         fill="#009A10"
       />
     </svg>
-    <p class="font-medium text-[18px] text-black">{{ obj?.name_ru }}</p>
+    <p class="font-medium text-[18px] text-black xl:text-[14px]">
+      {{ obj?.name_ru }}
+    </p>
   </div>
 </template>
 <script>

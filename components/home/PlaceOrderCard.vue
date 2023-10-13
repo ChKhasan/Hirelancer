@@ -1,6 +1,10 @@
 <template lang="html">
-  <div class="card place-order-card px-8 py-8 border-grey-8 border-solid rounded-2xl border flex flex-col gap-[30px]">
-    <h6 class="text-blue font-400 text-base">1 - qadam</h6>
+  <div
+    class="card place-order-card px-8 py-8 border-grey-8 border-solid rounded-2xl border flex flex-col gap-[30px] xl:p-[16px] xl:gap-[12px]"
+  >
+    <h6 class="text-blue font-400 text-base xl:text-[10px] xl:leading-[150%]">
+      1 - qadam
+    </h6>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -27,7 +31,9 @@
         />
       </defs>
     </svg>
-    <p class="font-semibold text-[18px] text-black">
+    <p
+      class="font-semibold text-[18px] text-black xl:text-[14px] xl:leading-[140%]"
+    >
       Freelancer topish uchun loyihani bepul joylashtiring
     </p>
   </div>

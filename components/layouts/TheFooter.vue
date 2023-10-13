@@ -1,8 +1,8 @@
 <template lang="html">
-  <div class="footer pt-16 bg-dark-violet">
+  <div class="footer pt-16 bg-dark-violet xl:px-4 xl:pt-[32px]">
     <div class="2xl:container mx-auto">
       <div
-        class="lists flex justify-between pb-[80px] border-b-[3px] border-[0] border-[color:#362B42] border-solid"
+        class="lists flex justify-between pb-[80px] border-b-[1px] border-[0] border-[color:#362B42] border-solid xl:flex-col xl:pb-[32px]"
       >
         <div class="list">
           <h6 class="text-[18px] text-white font-semibold">Mijozlar uchun</h6>
@@ -10,14 +10,18 @@
             <nuxt-link class="text-[18px] text-white" to="/"
               >Qanday qillib yo’llash kerak</nuxt-link
             >
-            <nuxt-link class="text-[18px] text-white" to="/">Marketplace</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Marketplace</nuxt-link
+            >
             <nuxt-link class="text-[18px] text-white" to="/"
               >Loyihalar katalogi</nuxt-link
             >
             <nuxt-link class="text-[18px] text-white" to="/"
               >Agentlarni yo’llash</nuxt-link
             >
-            <nuxt-link class="text-[18px] text-white" to="/">Korxonalar</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Korxonalar</nuxt-link
+            >
 
             <nuxt-link class="text-[18px] text-white" to="/"
               >buyurtma olish shart nomasi</nuxt-link
@@ -34,7 +38,9 @@
           </div>
         </div>
         <div class="list">
-          <h6 class="text-[18px] text-white font-semibold">Mutaxasislar uchun</h6>
+          <h6 class="text-[18px] text-white font-semibold">
+            Mutaxasislar uchun
+          </h6>
           <div class="links mt-8 flex flex-col gap-6">
             <nuxt-link class="text-[18px] text-white" to="/"
               >Ishni qanday topish mumkin</nuxt-link
@@ -62,10 +68,16 @@
             <nuxt-link class="text-[18px] text-white" to="/"
               >Yuqori ish sharhlari</nuxt-link
             >
-            <nuxt-link class="text-[18px] text-white" to="/">Resurslar</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Resurslar</nuxt-link
+            >
             <nuxt-link class="text-[18px] text-white" to="/">Blog</nuxt-link>
-            <nuxt-link class="text-[18px] text-white" to="/">Jamoamiz</nuxt-link>
-            <nuxt-link class="text-[18px] text-white" to="/">Hamkorlik dasturi</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Jamoamiz</nuxt-link
+            >
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Hamkorlik dasturi</nuxt-link
+            >
             <nuxt-link class="text-[18px] text-white" to="/"
               >Bepul biznes vositalari</nuxt-link
             >
@@ -74,12 +86,18 @@
         <div class="list">
           <h6 class="text-[18px] text-white font-semibold">Kompaniya</h6>
           <div class="links mt-8 flex flex-col gap-6">
-            <nuxt-link class="text-[18px] text-white" to="/">Biz haqimizda</nuxt-link>
-            <nuxt-link class="text-[18px] text-white" to="/">Rahbarlarimiz</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Biz haqimizda</nuxt-link
+            >
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Rahbarlarimiz</nuxt-link
+            >
             <nuxt-link class="text-[18px] text-white" to="/"
               >Investor bilan aloqamiz</nuxt-link
             >
-            <nuxt-link class="text-[18px] text-white" to="/">Martabamiz</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Martabamiz</nuxt-link
+            >
             <nuxt-link class="text-[18px] text-white" to="/"
               >Bizning matbuotimiz</nuxt-link
             >
@@ -92,11 +110,15 @@
             <nuxt-link class="text-[18px] text-white" to="/"
               >To’g’ridan-to’g’ri shartnoma</nuxt-link
             >
-            <nuxt-link class="text-[18px] text-white" to="/">Zamonaviy bayonot</nuxt-link>
+            <nuxt-link class="text-[18px] text-white" to="/"
+              >Zamonaviy bayonot</nuxt-link
+            >
           </div>
         </div>
       </div>
-      <div class="py-6 flex justify-between">
+      <div
+        class="py-6 flex justify-between xl:items-center xl:flex-col xl:gap-[12px]"
+      >
         <p class="text-white text-[18px]">Все права защищены © 2023</p>
         <div class="messangers flex gap-[42px]">
           <a href="#"
@@ -154,4 +176,11 @@
 <script>
 export default {};
 </script>
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.links {
+  margin: 12px 0 32px 0;
+}
+.links a {
+  font-size: 14px;
+}
+</style>

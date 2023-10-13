@@ -1,9 +1,9 @@
 <template lang="html">
   <div
-    class="card freelancer-card px-6 py-6 border border-solid border-grey-8 rounded-2xl cursor-pointer"
+    class="card freelancer-card px-6 py-6 border border-solid border-grey-8 rounded-2xl cursor-pointer xl:rounded-[16px] xl:p-[16px]"
     @click="$router.push('/freelancer')"
   >
-    <div class="image w-[80px] h-[80px] relative">
+    <div class="image w-[80px] h-[80px] relative xl:w-[66px] xl:h-[66px]">
       <!-- <img v-if="freelancer?.avatar" class="w-full h-full object-cover" :src="freelancer?.avatar" alt="" /> -->
       <div class="rounded-full overflow-hidden h-full w-full">
         <img
@@ -32,10 +32,12 @@
           /></svg
       ></span>
     </div>
-    <div class="body flex flex-col justify-between">
+    <div class="body flex flex-col justify-between xl:w-[70%] xl:gap-[8px]">
       <div>
-        <h4 class="text-[14px] font-medium text-black truncate name whitespace-normal">
-          {{ freelancer?.name }} 
+        <h4
+          class="text-[14px] font-medium text-black truncate name whitespace-normal"
+        >
+          {{ freelancer?.name }}
         </h4>
         <div class="flex items-center gap-3 mt-2">
           <p class="text-xs font-medium text-yellow flex gap-[4px]">
@@ -72,7 +74,8 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               /></svg
-            ><span class="text-green">26</span><span class="text-grey-40">/</span
+            ><span class="text-green">26</span
+            ><span class="text-grey-40">/</span
             ><span class="text-pantone-2023">2</span
             ><svg
               xmlns="http://www.w3.org/2000/svg"
@@ -154,5 +157,12 @@ export default {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
+}
+@media screen and (max-width: 1024px) {
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 }
 </style>

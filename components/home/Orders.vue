@@ -1,9 +1,13 @@
 <template lang="html">
-  <div class="orders bg-bg-grey py-[120px]">
+  <div class="orders bg-bg-grey py-[120px] xl:py-[40px] xl:px-4">
     <div class="max-w-[954px] mx-auto">
       <div class="flex justify-between">
-        <h1 class="text-black text-[32px] font-semibold">Faol buyurtmalar</h1>
-        <nuxt-link class="flex gap-[6px] text-blue text-[18px] font-medium" to="/orders"
+        <h1 class="text-black text-[32px] font-semibold xl:text-[18px]">
+          Faol buyurtmalar
+        </h1>
+        <nuxt-link
+          class="flex gap-[6px] text-blue text-[18px] items-center font-medium xl:text-[14px]"
+          to="/orders"
           >Ko’proq ko’rish
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +25,7 @@
             /></svg
         ></nuxt-link>
       </div>
-      <div class="list flex flex-col gap-4 mt-8">
+      <div class="list flex flex-col gap-4 mt-8 xl:mt-[16px]">
         <OrderCard />
         <OrderCard />
         <OrderCard />

@@ -1,8 +1,12 @@
 <template lang="html">
-  <div class="2xl:container mx-auto mt-[96px]">
-    <div class="flex justify-between mb-[40px] items-center">
-      <h1 class="text-black text-[32px] font-semibold">Eng yaxshi frilanserlar</h1>
-      <nuxt-link class="flex gap-[6px] text-blue text-[18px] font-medium" to="/"
+  <div class="2xl:container mx-auto mt-[96px] xl:mt-[40px] xl:px-4">
+    <div class="flex justify-between mb-[40px] items-center xl:mb-[16px]">
+      <h1 class="text-black text-[32px] font-semibold xl:text-[18px]">
+        Eng yaxshi frilanserlar
+      </h1>
+      <nuxt-link
+        class="flex gap-[6px] items-center text-blue text-[18px] font-medium xl:text-[14px]"
+        to="/"
         >Ko’proq ko’rish
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -44,5 +48,11 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   row-gap: 24px;
   column-gap: 16px;
+}
+@media screen and (max-width: 1024px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
 }
 </style>
