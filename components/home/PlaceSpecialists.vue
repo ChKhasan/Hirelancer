@@ -1,14 +1,23 @@
 <template lang="html">
-  <div class="place flex flex-col mb-[96px]">
-    <h2 class="text-black text-[32px] mb-8 font-semibold">Buyurtma qanday beriladi</h2>
+  <div class="place flex flex-col mb-[96px] xl:mb-[50px]">
+    <h2
+      class="text-black text-[32px] mb-8 font-semibold xl:text-[18px] xl:mb-[12px]"
+    >
+      Buyurtma qanday beriladi
+    </h2>
     <div class="list">
-      <SpecialistsCard v-for="elem in specialities" :key="elem?.id" :obj="elem" />
+      <SpecialistsCard
+        v-for="elem in specialities"
+        :key="elem?.id"
+        :obj="elem"
+      />
     </div>
     <button
-      class="mx-auto mt-6 rounded-lg flex gap-4 w-[352px] h-16 items-center justify-center border border-grey-8 border-solid text-blue font-medium text-[18px] font-tt"
+      class="mx-auto mt-6 rounded-lg flex gap-4 w-[352px] h-16 items-center justify-center border border-grey-8 border-solid text-blue font-medium text-[18px] font-tt xl:mx-0 xl:w-[100%] xl:mt-[12px] h-[40px] xl:text-[14px]"
     >
       Ko’proq ko’rish
       <svg
+        class="xl:w-[20px]"
         xmlns="http://www.w3.org/2000/svg"
         width="25"
         height="25"
@@ -36,5 +45,11 @@ export default { props: ["specialities"], components: { SpecialistsCard } };
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+}
+@media screen and (max-width: 1024px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 </style>

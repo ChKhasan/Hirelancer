@@ -1,12 +1,12 @@
 <template lang="html">
   <div
-    class="card order-card pt-[25px] pr-[32px] pb-[31px] pl-[34px] rounded-3xl bg-white cursor-pointer"
+    class="card relative order-card pt-[25px] pr-[32px] pb-[31px] pl-[34px] rounded-3xl bg-white cursor-pointer xl:border-[1px] xl:border-solid xl:border-grey-8 xl:rounded-[12px] xl:p-[16px]"
     @click="$router.push('/orders/1')"
   >
-    <div class="header flex justify-between">
-      <div class="flex gap-[20px] items-center">
+    <div class="header flex justify-between xl:flex-wrap xl:gap-[12px]">
+      <div class="flex gap-[20px] items-center xl:gap-[12px]">
         <span
-          class="border light-yellow rounded-[500px] border-solid border-dark-yellow text-dark-yellow h-[36px] px-[20px] flex items-center"
+          class="border light-yellow rounded-[500px] border-solid border-dark-yellow text-dark-yellow h-[36px] px-[20px] flex items-center xl:text-[12px] xl:gap-[12px]"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -26,16 +26,16 @@
         >
         <span class="flex w-[1px] h-[27px] bg-grey-8"></span>
         <button
-          class="whitespace-nowrap h-[36px] flex items-center bg-apple-grey font-tt text-grey-64 py-2 px-4 rounded-[22px] text-[14px]"
+          class="whitespace-nowrap h-[36px] flex items-center bg-apple-grey font-tt text-grey-64 py-2 px-4 rounded-[22px] text-[14px] xl:text-[12px]"
         >
           UI/UX dizayner
         </button>
       </div>
-      <div class="flex gap-[28px] items-center">
-        <div class="flex gap-[16px] items-center">
-          <p class="text-base text-grey-40">14:30</p>
+      <div class="flex gap-[28px] items-center xl:justify-between">
+        <div class="flex gap-[16px] items-center xl:gap-[12px]">
+          <p class="text-base text-grey-40 xl:text-[12px]">14:30</p>
           <span class="flex w-[1px] h-[27px] bg-grey-8"></span>
-          <p class="text-base text-grey-40">25.02.2023</p>
+          <p class="text-base text-grey-40 xl:text-[12px]">25.02.2023</p>
         </div>
         <button
           class="w-[42px] h-[42px] rounded-full border-[2px] border-grey-light border-solid flex items-center justify-center"
@@ -60,24 +60,31 @@
       </div>
     </div>
     <div
-      class="body flex gap-4 flex-col mt-6 border-[0] border-b border-grey-8 border-solid pb-4"
+      class="body flex gap-4 flex-col mt-6 border-[0] border-b border-grey-8 border-solid pb-4 xl:mt-[12px] xl:gap-[16px]"
     >
-      <h6 class="text-[20px] font-semibold text-black">
+      <h6 class="text-[20px] font-semibold text-black xl:text-[18px]">
         I will design wix website redesign wix website wix ecommerce website
       </h6>
-      <p class="text-base text-grey-80">
-        Join our world-class innovation team, revolutionizing education at ASU Prep
-        Digital. Our mission is to enhance student performance and provide access to
-        transformative educational pathways. We're seeking Graphic Designers to create
-        visually engaging digital lessons for grades 8-12.Contract Expectations:During the
-        first month, you'll familiarize yourself with our media and curriculum teams
+      <p class="text-base text-grey-80 xl:text-[14px]">
+        Join our world-class innovation team, revolutionizing education at ASU
+        Prep Digital. Our mission is to enhance student performance and provide
+        access to transformative educational pathways. We're seeking Graphic
+        Designers to create visually engaging digital lessons for grades
+        8-12.Contract Expectations:During the first month, you'll familiarize
+        yourself with our media and curriculum teams
       </p>
     </div>
-    <div class="footer flex justify-between mt-[23px]">
-      <h1 class="text-grey-80 text-2xl font-semibold">1 743 000 sum</h1>
-      <div class="flex gap-8">
-        <div class="flex gap-[24px] items-center">
-          <p class="text-base flex gap-3 text-grey-40">
+    <div
+      class="footer flex justify-between mt-[23px] xl:flex-col xl:mt-[16px] xl:items-center xl:gap-[20px]"
+    >
+      <h1 class="text-grey-80 text-2xl font-semibold xl:text-[20px]">
+        1 743 000 sum
+      </h1>
+      <div class="flex gap-8 xl:flex-col xl:gap-[20px]">
+        <div class="flex gap-[24px] items-center xl:gap-[16px]">
+          <p
+            class="text-base flex gap-3 text-grey-40 xl:text-[14px] xl:gap-[6px]"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -90,11 +97,19 @@
                 stroke="#9A999B"
                 stroke-width="1.5"
               />
-              <circle cx="12" cy="12.5" r="3" stroke="#9A999B" stroke-width="1.5" /></svg
+              <circle
+                cx="12"
+                cy="12.5"
+                r="3"
+                stroke="#9A999B"
+                stroke-width="1.5"
+              /></svg
             >300
           </p>
           <span class="flex w-[1px] h-[27px] bg-grey-8"></span>
-          <p class="text-base flex gap-3 text-grey-40 font-tt">
+          <p
+            class="text-base flex gap-3 text-grey-40 font-tt xl:text-[14px] xl:gap-[6px]"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -114,10 +129,14 @@
             >42 запросов
           </p>
         </div>
-        <div class="buttons flex gap-6">
-          <button class="underline text-grey-80 text-base font-medium">Подробнее</button>
+        <div class="buttons flex gap-6 xl:flex-col-reverse">
           <button
-            class="py-[15px] px-[20px] font-semibold font-tt bg-blue text-white rounded-lg"
+            class="underline text-grey-80 text-base font-medium text-center xl:pb-[20px]"
+          >
+            Подробнее
+          </button>
+          <button
+            class="py-[15px] px-[20px] font-semibold font-tt bg-blue text-white rounded-lg text-center"
           >
             Отправить заявку
           </button>

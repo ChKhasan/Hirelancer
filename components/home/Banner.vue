@@ -1,16 +1,24 @@
 <template lang="html">
-  <div class="banner bg-bg-grey rounded-[32px] mb-[102px]">
-    <div class="left pt-16 pl-[80px] pb-[50px] flex flex-col justify-between">
+  <div
+    class="banner bg-bg-grey rounded-[32px] mb-[102px] xl:bg-blue xl:rounded-[12px] xl:mb-[40px]"
+  >
+    <div
+      class="left pt-16 pl-[80px] pb-[50px] flex flex-col justify-between xl:py-[28px] xl:px-[20px] xl:justify-center"
+    >
       <div class="flex flex-col">
-        <h3 class="font-semibold text-black text-[48px]">
+        <h3
+          class="font-semibold text-black text-[48px] xl:text-[16px] xl:text-white"
+        >
           Vazifalaringizni bajarishga qodir
-          <span class="text-blue">Frilanserlarni</span> qidiring
+          <span class="text-blue xl:text-yellow">Frilanserlarni</span> qidiring
         </h3>
-        <p class="text-black text-[18px] mt-4">
-          Eski qoidalarni unuting. Siz eng yaxshi frilanserlarni mana shu yerda. ega
-          chiqishingiz mumkin.
+        <p
+          class="text-black text-[18px] mt-4 xl:mt-[6px] xl:text-[12px] xl:text-white"
+        >
+          Eski qoidalarni unuting. Siz eng yaxshi frilanserlarni mana shu yerda.
+          ega chiqishingiz mumkin.
         </p>
-        <div class="list flex gap-3 mt-8">
+        <div class="list flex gap-3 mt-8 xl:hidden">
           <button
             class="whitespace-nowrap bg-grey-8 font-tt text-black py-2 px-4 rounded-[500px] text-[14px]"
           >
@@ -52,7 +60,7 @@
           </button>
         </div>
       </div>
-      <div class="buttons flex gap-4">
+      <div class="buttons flex gap-4 xl:hidden">
         <button
           class="flex gap-2 h-[60px] px-[20px] text-[18px] bg-blue rounded-xl text-white font-tt items-center font-medium"
         >
@@ -79,7 +87,13 @@
       </div>
     </div>
     <div class="right">
-      <img src="@/assets/images/banner.png" alt="" />
+      <img
+        src="@/assets/images/banner.png"
+        width="100%"
+        height="100%"
+        alt=""
+        class="xl:h-[150px] xl:object-cover"
+      />
     </div>
   </div>
 </template>
@@ -90,5 +104,10 @@ export default {};
 .banner {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+@media screen and (max-width: 1024px) {
+  .banner {
+    grid-template-columns: 6.5fr 3.5fr;
+  }
 }
 </style>

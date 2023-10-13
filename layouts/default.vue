@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="layout W-100">
-    <TheHeader />
+    <TheHeader class="xl:hidden" />
     <Nuxt />
     <TheFooter />
   </div>
