@@ -313,9 +313,26 @@ export default {
     openModal() {
       this.bottomModal = true;
     },
-    submit() {
-      this.visible = true;
-      this.bottomModal = false;
+    submit(form) {
+      console.log(form);
+      this.__POST_ORDER(form);
+    },
+    async __POST_ORDER(data) {
+      try {
+        await this.$store.dispatch("fetchOrders/postSendRequest", {
+          ...data,
+          order_id: this.$route.params.slug,
+        });
+        this.bottomModal = false;
+        this.visible = true;
+        // this.$router.go(-1);
+      } catch (e) {
+        console.log(e.response);
+        this.$notification["error"]({
+          message: "Error",
+          description: e.response.statusText,
+        });
+      }
     },
     handleOk() {
       this.visible = false;

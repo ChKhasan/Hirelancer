@@ -121,8 +121,13 @@
           </button>
         </div>
         <div class="login flex gap-6">
-          <button @click="visible = true" class="text-black text-[18px] font-normal">
-            Kirish
+          <button
+            @click="
+              $store.state.auth ? $router.push('/profile/freelancer') : (visible = true)
+            "
+            class="text-black text-[18px] font-normal"
+          >
+            {{ $store.state.auth ? $store.state.userInfo["name"] : "Kirish" }}
           </button>
           <button
             @click="$router.push('/registration')"
@@ -137,6 +142,7 @@
   </div>
 </template>
 <script>
+import userInfoVue from "../../pages/registration/user-info.vue";
 import LoginAuth from "../modals/LoginAuth.vue";
 
 export default {

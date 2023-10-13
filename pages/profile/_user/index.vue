@@ -46,13 +46,7 @@ export default {
   //   console.log(userInfo);
   //   return {};
   // },
-  async mounted() {
-    const [userInfoData] = await Promise.all([
-      this.$store.dispatch("fetchAuth/getUserInfo"),
-    ]);
-    this.userInfo = userInfoData;
-    this.$store.commit("getUserInfo", userInfoData);
-  },
+
   components: {
     PersonalInfo,
     Achievements,

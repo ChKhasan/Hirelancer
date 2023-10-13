@@ -23,4 +23,12 @@ export const actions = {
     });
     return res;
   },
+  async postUserEdit({}, payload) {
+    const res = await this.$axios.$post(`/settings/freelancer/update-personal-data`, payload, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
+      },
+    });
+    return res;
+  },
 };

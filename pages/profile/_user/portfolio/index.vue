@@ -69,17 +69,22 @@
           </div>
         </div>
       </div>
-      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]">
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
-        <PortfolioCard />
+      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]" v-if="loading">
+        <a-skeleton
+          :paragraph="false"
+          class="loading-card"
+          v-for="elem in [1, 2, 3, 4, 5, 6]"
+          :key="elem"
+        />
       </div>
+      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]" v-else>
+        <PortfolioCard
+          v-for="portfolio in portfolios"
+          :key="portfolio?.id"
+          :portfolio="portfolio"
+        />
+      </div>
+
       <div>
         <VPagination />
       </div>
@@ -92,8 +97,19 @@ import PortfolioCard from "@/components/profile/portfolio/PortfolioCard.vue";
 import VPagination from "@/components/VPagination.vue";
 
 export default {
-  mounted() {
-    console.log(this.$route);
+  data() {
+    return {
+      loading: false,
+      portfolios: [],
+    };
+  },
+  async mounted() {
+    this.loading = true;
+    const [portfolioData] = await Promise.all([
+      this.$store.dispatch("fetchPortfolio/getWorks"),
+    ]);
+    this.portfolios = portfolioData.content;
+    this.loading = false;
   },
   components: {
     ProfileLayout,
@@ -106,5 +122,9 @@ export default {
   border-color: var(--blue);
   color: var(--blue);
   background-color: #fff;
+}
+:deep(.loading-card .ant-skeleton-title) {
+  width: 100%;
+  height: 390px;
 }
 </style>

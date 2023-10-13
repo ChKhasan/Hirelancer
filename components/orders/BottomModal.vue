@@ -10,17 +10,19 @@
         <img class="absolute bottom-0" src="@/assets/images/bottom.png" alt="" />
       </div>
       <div class="form flex flex-col gap-[26px] relative">
-        <a-form-model :model="form">
+        <a-form-model :model="form" ref="ruleForm" :rules="rules">
           <div class="grid grid-cols-2 gap-[19px]">
             <div class="flex flex-col justify-between">
               <a-form-model-item
+                prop="deadline"
                 class="form-item w-full mb-0"
                 label="Срок исполнения в днях"
+                
               >
-                <a-input v-model="form.name" placeholder="0 дней" />
+                <a-input v-model="form.deadline" placeholder="0 дней"  type="number"/>
               </a-form-model-item>
-              <a-form-model-item class="form-item w-full" label="Цена">
-                <a-input v-model="form.name" placeholder="0 сум" />
+              <a-form-model-item class="form-item w-full" label="Цена" prop="price">
+                <a-input v-model="form.price" placeholder="0 сум" type="number" />
               </a-form-model-item>
             </div>
             <div>
@@ -28,7 +30,7 @@
                 <a-input
                   type="textarea"
                   rows="6"
-                  v-model="form.name"
+                  v-model="form.additional_info"
                   placeholder="Дополнительная информация"
                 />
               </a-form-model-item>
@@ -93,13 +95,29 @@ export default {
   data() {
     return {
       form: {
-        name: "",
+        additional_info: "",
+        price: "",
+        deadline: "",
+      },
+      rules: {
+        price: [
+          { required: true, message: "Please input Activity name", trigger: "blur" },
+        ],
+        deadline: [
+          { required: true, message: "Please input Activity name", trigger: "blur" },
+        ],
       },
     };
   },
   methods: {
     submitForm() {
-      this.$emit("submit");
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.$emit("submit", this.form);
+        } else {
+          return false;
+        }
+      });
     },
   },
 };
@@ -127,5 +145,22 @@ export default {
 }
 .form-item :deep(input) {
   height: 54px;
+}
+.form-item :deep(.ant-form-item-required) {
+  padding-right: 10px;
+}
+.form-item :deep(.ant-form-item-required)::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: #f5222d;
+  font-size: 14px;
+  line-height: 1;
+  content: "*";
+  position: absolute;
+  right: -5px;
+  top: 0;
+}
+.form-item :deep(.ant-form-item-required)::after {
+  display: none !important;
 }
 </style>

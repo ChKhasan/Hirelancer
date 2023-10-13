@@ -1,21 +1,27 @@
 <template lang="html">
   <div class="portfolio-card rounded-2xl border border-solid border-grey-8">
-    <div class="image h-[270px] border-[0] border-b border-solid border-grey-8 relative">
-      <img
-        class="h-full w-full object-cover"
-        src="@/assets/images/portfolio.png"
-        alt=""
-      />
+    <a :href="portfolio?.link">
       <div
-        class="count text-purple text-[14px] font-semibold absolute w-[40px] h-[36px] rounded-[8px] border border-solid border-grey-8 bg-white flex items-center justify-center right-4 bottom-4"
+        class="image overflow-hidden h-[270px] border-[0] border-b border-solid border-grey-8 relative"
       >
-        3+
+        <img
+          class="h-full w-full object-cover"
+          src="@/assets/images/portfolio.png"
+          alt=""
+        />
+        <div
+          class="count text-purple text-[14px] font-semibold absolute w-[40px] h-[36px] rounded-[8px] border border-solid border-grey-8 bg-white flex items-center justify-center right-4 bottom-4"
+        >
+          3+
+        </div>
       </div>
-    </div>
+    </a>
     <div class="body px-4 pt-3 pb-4 flex flex-col gap-[44px]">
-      <h4 class="text-black text-[18px] font-semibold">Сайт для компании PromAvto</h4>
+      <h4 class="text-black text-[18px] font-semibold">{{ portfolio?.name }}</h4>
       <div class="flex justify-between">
-        <p class="text-base font-medium text-grey-40">Веб-дизайн</p>
+        <p class="text-base font-medium text-grey-40">
+          {{ portfolio?.specialities[0]?.name_ru }}
+        </p>
         <div class="flex gap-6">
           <p class="text-[14px] font-medium flex gap-[6px] items-center">
             <svg
@@ -67,10 +73,18 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["portfolio"],
+};
 </script>
 <style lang="css" scoped>
 .count {
   box-shadow: 0px 4px 16px 0px rgba(11, 11, 21, 0.16);
+}
+.image img {
+  transition: all 0.3s;
+}
+.image:hover img {
+  transform: scale(1.1);
 }
 </style>

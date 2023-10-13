@@ -336,6 +336,7 @@ export default {
         "file7",
         "file8",
       ],
+      portfolio: {},
     };
   },
   async asyncData({ store }) {
@@ -348,7 +349,28 @@ export default {
       specialities,
     };
   },
+  mounted() {
+    this.__GET_PORTFOLIO_BY_ID();
+  },
   methods: {
+    async __GET_PORTFOLIO_BY_ID() {
+      const [portfolioData] = await Promise.all([
+        this.$store.dispatch("fetchPortfolio/getWorkById", this.$route.params.id),
+      ]);
+      this.portfolio = portfolioData.content;
+      Object.keys(this.form).forEach((item) => {
+        this.form[item] = this.portfolio[item];
+      });
+      this.activeCheckedList = this.portfolio.specialities.map((item) => item);
+      this.portfolio.images.forEach((item, index) => {
+        this.fileList[this.uploadList[index]][0] = {
+          uid: "-1",
+          name: "image.png",
+          status: "done",
+          url: item.img,
+        };
+      });
+    },
     onSubmit() {
       let formData = new FormData();
       this.activeCheckedList.forEach((item) => {
@@ -356,7 +378,11 @@ export default {
       });
       this.uploadList.forEach((elem) => {
         if (this.fileList[elem].length > 0)
-          formData.append("images[]", this.fileList[elem][0].originFileObj);
+          if (this.fileList[elem][0].originFileObj) {
+            formData.append("images[]", this.fileList[elem][0].originFileObj);
+          } else {
+            formData.append("images[]", "");
+          }
       });
       formData.append("name", this.form.name);
       formData.append("link", this.form.link);

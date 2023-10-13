@@ -29,7 +29,7 @@ import {
   Skeleton,
   // Empty,
   // Alert,
-  // Spin,
+  Spin,
   // BackTop,
   Tooltip,
   Radio,
@@ -70,6 +70,6 @@ Vue.use(Modal);
 // Vue.use(Radio);
 // Vue.use(Icon);
 Vue.use(Input);
-// Vue.use(Spin);
+Vue.use(Spin);
 // Vue.use(Dropdown);
 // Vue.use(Menu);

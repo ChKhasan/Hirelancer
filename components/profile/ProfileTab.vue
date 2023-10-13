@@ -2,7 +2,7 @@
   <div class="profile-tab flex justify-start">
     <div class="rounded-2xl bg-bg-grey px-4 py-4 flex gap-6">
       <nuxt-link
-        to="/profile/freelancer"
+        :to="`/profile/${$route.params.user}`"
         :class="{ active: $route.name == 'profile-user' }"
         class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
@@ -72,7 +72,7 @@
       <nuxt-link
         v-if="$route.params.user == 'freelancer'"
         to="/"
-        class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="opacity-50 pointer-events-none text-black  text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -94,7 +94,7 @@
       <nuxt-link
         v-if="$route.params.user == 'freelancer'"
         to="/"
-        class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="opacity-50 pointer-events-none text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -119,7 +119,7 @@
       <nuxt-link
         v-if="$route.params.user == 'freelancer'"
         to="/"
-        class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="opacity-50 pointer-events-none text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -139,7 +139,8 @@
         Блоги</nuxt-link
       >
       <nuxt-link
-        to="/"
+        :to="`/profile/${$route.params.user}/settings`"
+        :class="{ active: $route.name.includes('settings') }"
         class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"

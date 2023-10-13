@@ -3,7 +3,7 @@
     <div class="profile-grid">
       <PersonalBlock :profile="profile" />
       <div class="min-w-0">
-        <ProfileTab v-if="profile" />
+        <ProfileTab v-if="profile"/>
         <FreelancerTab v-else />
         <slot></slot>
       </div>
@@ -18,6 +18,13 @@ import FreelancerTab from "./FreelancerTab.vue";
 export default {
   name: "ProfileLayout",
   props: ["profile"],
+  async mounted() {
+    const [userInfoData] = await Promise.all([
+      this.$store.dispatch("fetchAuth/getUserInfo"),
+    ]);
+    this.userInfo = userInfoData;
+    this.$store.commit("getUserInfo", userInfoData);
+  },
   components: {
     PersonalBlock,
     ProfileTab,
