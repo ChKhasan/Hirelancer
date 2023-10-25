@@ -1,5 +1,20 @@
 <template lang="html">
-  <div class="comments-card border border-solid border-grey-8 rounded-[12px] px-4 py-4 flex flex-col gap-6">
+  <div
+    class="comments-card border border-solid border-grey-8 rounded-[12px] px-4 py-4 flex flex-col gap-[19px]"
+  >
+    <div class="price-info rounded-[4px] text-grey-80  text-base px-4 py-1">
+      За выполнение заказа
+      <span class="text-black font-medium">Настройка Google Merchant Center</span> фид на
+      сумму 200 000 so’m
+    </div>
+    <div class="body">
+      <p class="text-base text-grey-64">
+        В течение последнего десятилетия мы стремились помочь нашим партнерам, от малого и
+        среднего бизнеса до таких предприятий, как Corel и Oppo, расширить свое цифровое
+        присутствие и повысить качество своих продуктов. Мы всегда стараемся делать это с
+        большой отдачей и страстью, потому что это Путь!
+      </p>
+    </div>
     <div class="flex justify-between">
       <div class="flex gap-4">
         <div class="image w-[56px] h-[56px] rounded-full overflow-hidden">
@@ -27,33 +42,49 @@
           </p>
         </div>
       </div>
-      <p class="flex gap-2 text-[14px] text-grey-40 font-medium">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 18 18"
-          fill="none"
+      <div class="flex flex-col justify-between gap-2 items-end">
+        <span
+          class="flex gap-1 items-center bg-grey-light text-main-color text-[14px] px-[10px] h-[36px] rounded-[500px] border border-solid border-main-color"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M14.9379 11.7044C14.9379 14.4319 12.7269 16.6429 9.99948 16.6429C7.27205 16.6429 5.06104 14.4319 5.06104 11.7044C5.06104 10.7956 5.23385 9.87681 5.528 8.98814C5.76726 9.98386 6.66355 10.7238 7.73268 10.7238C8.9849 10.7238 10 9.70871 10 8.45649C10 7.20426 9.14622 6.35205 9.14622 5.13471C9.14622 3.55024 10.2939 2.33594 11.61 2.33594C11.61 4.23535 12.3057 4.95405 13.0609 6.17342C13.9575 7.62093 14.9379 9.20384 14.9379 11.7044Z"
+              stroke="#5C46E6"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          >Положительный</span
         >
-          <path
-            d="M2.25 6.75V13.5C2.25 15.1569 3.59315 16.5 5.25 16.5H12.75C14.4069 16.5 15.75 15.1569 15.75 13.5V6.75M2.25 6.75V5.625C2.25 3.96815 3.59315 2.625 5.25 2.625H12.75C14.4069 2.625 15.75 3.96815 15.75 5.625V6.75M2.25 6.75H15.75M12 1.5V3.75M6 1.5V3.75"
-            stroke="#9A999B"
-            stroke-linecap="round"
-          /></svg
-        >16.10.2023
-      </p>
-    </div>
-    <div class="body">
-      <p class="text-base text-grey-64">
-        В течение последнего десятилетия мы стремились помочь нашим партнерам, от малого и
-        среднего бизнеса до таких предприятий, как Corel и Oppo, расширить свое цифровое
-        присутствие и повысить качество своих продуктов. Мы всегда стараемся делать это с
-        большой отдачей и страстью, потому что это Путь!
-      </p>
+        <p class="flex gap-2 text-[14px] text-grey-40 font-medium">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+          >
+            <path
+              d="M2.25 6.75V13.5C2.25 15.1569 3.59315 16.5 5.25 16.5H12.75C14.4069 16.5 15.75 15.1569 15.75 13.5V6.75M2.25 6.75V5.625C2.25 3.96815 3.59315 2.625 5.25 2.625H12.75C14.4069 2.625 15.75 3.96815 15.75 5.625V6.75M2.25 6.75H15.75M12 1.5V3.75M6 1.5V3.75"
+              stroke="#9A999B"
+              stroke-linecap="round"
+            /></svg
+          >16.10.2023
+        </p>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {};
 </script>
-<style lang=""></style>
+<style lang="css" scoped>
+.price-info {
+  background: rgba(255, 169, 39, 0.12);
+}
+</style>

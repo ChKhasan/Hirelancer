@@ -34,18 +34,18 @@
         </div>
       </div>
       <div class="list flex flex-col gap-4 mt-6 mb-[40px]">
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
-        <ProfileOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
+        <CompletedOrdersCard />
       </div>
       <div>
         <VPagination />
@@ -57,16 +57,16 @@
 import ProfileLayout from "@/components/profile/ProfileLayout.vue";
 import PortfolioCard from "@/components/profile/portfolio/PortfolioCard.vue";
 import VPagination from "@/components/VPagination.vue";
-import ProfileOrdersCard from "@/components/profile/orders/ProfileOrdersCard.vue";
 import OrdersTab from "@/components/profile/orders/OrdersTab.vue";
+import CompletedOrdersCard from "../../../../components/profile/orders/CompletedOrdersCard.vue";
 
 export default {
   components: {
     ProfileLayout,
     PortfolioCard,
-    ProfileOrdersCard,
     OrdersTab,
-  },
+    CompletedOrdersCard
+},
 };
 </script>
 <style lang="css" scoped></style>

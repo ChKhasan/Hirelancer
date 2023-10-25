@@ -26,7 +26,7 @@
   --grey-24: #c2c2c3;
   --grey-40: #9a999b;
   --grey-80: #353437;
-  --grey-light: #E7EDFB;
+  --grey-light: #e7edfb;
   --bg-grey: #f8f9ff;
   --blue: #5c46e5;
   --black: #020105;
@@ -176,4 +176,18 @@ a:hover {
 .auth-item label::after,
 .auth-item label::before {
   display: none;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: 6px;
 }

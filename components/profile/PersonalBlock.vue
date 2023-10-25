@@ -60,7 +60,7 @@
             class="status flex justify-between w-full px-6"
             v-if="$store.state.userInfo['name'] || $store.state.userInfo['surname']"
           >
-            <p class="text-grey-80 text-[14px]">ID: {{$store.state.userInfo["id"]}}</p>
+            <p class="text-grey-80 text-[14px]">ID: {{ $store.state.userInfo["id"] }}</p>
             <span class="w-[1px] h-[20px] bg-grey-8"> </span>
             <p class="text-grey-80 text-[14px] flex gap-2 items-center">
               <svg
@@ -74,7 +74,7 @@
                   d="M8.36076 2.7265C9.03133 1.31382 10.9688 1.31382 11.6394 2.7265L12.7983 5.16797C13.0646 5.72895 13.5793 6.11777 14.1748 6.20773L16.7662 6.59924C18.2656 6.82577 18.8644 8.74161 17.7794 9.84123L15.9042 11.7417C15.4733 12.1783 15.2767 12.8074 15.3784 13.424L15.8211 16.1074C16.0772 17.6601 14.5098 18.8442 13.1686 18.1111L10.8508 16.8442C10.3182 16.5531 9.68196 16.5531 9.14939 16.8442L6.83155 18.1111C5.49041 18.8442 3.92293 17.6601 4.17907 16.1075L4.62174 13.424C4.72345 12.8074 4.52684 12.1783 4.09598 11.7417L2.22081 9.84123C1.1358 8.74161 1.73452 6.82577 3.23397 6.59924L5.82539 6.20773C6.42082 6.11777 6.93555 5.72895 7.20184 5.16797L8.36076 2.7265Z"
                   fill="#F2C94C"
                 /></svg
-              >{{$store.state.userInfo["rating"]}}
+              >{{ $store.state.userInfo["rating"] }}
             </p>
             <span class="w-[1px] h-[20px] bg-grey-8"> </span>
             <p class="text-grey-80 text-[14px] flex gap-2 items-center">
@@ -134,7 +134,7 @@
           </div>
           <a-skeleton :paragraph="false" v-else />
         </div>
-        <div class="buttons">
+        <div class="buttons" v-if="$route.name == 'freelancer'">
           <button
             class="border border-solid border-blue rounded-[12px] h-12 flex gap-2 justify-center items-center text-base text-blue font-medium"
           >
@@ -230,9 +230,41 @@
           </button>
         </div>
         <div class="messengers flex flex-col gap-3">
-          <h6 class="text-[12px] font-semibold text-grey-40">Социальные сети</h6>
+          <h6 class="text-[12px] font-semibold text-grey-40 uppercase">
+            Социальные сети
+          </h6>
           <PersonalMessengers />
         </div>
+        <div  v-if="profile">
+        <div
+          class="personalBlock-price border border-dashed border-blue rounded-[15px] px-[20px] py-[20px] bg-white"
+        >
+          <div class="flex justify-between">
+            <p class="text-grey-40 text-base">Баланс</p>
+            <nuxt-link class="text-blue text-[14px] underline" to="/"
+              >История транзакций</nuxt-link
+            >
+          </div>
+          <h4 class="text-black text-[24px] font-semibold mt-2">560,000 сум</h4>
+          <button
+            class="rounded-[8px] h-[44px] w-full bg-apple-grey flex items-center justify-center text-blue text-[14px] font-semibold mt-4"
+          >
+            Пополнить
+          </button>
+        </div>
+      </div>
+      <button
+        class="pro-btn overflow-hidden relative h-[75px] rounded-[16px] flex items-center justify-center"
+      >
+        <img
+          class="w-full h-full object-cover"
+          src="@/assets/images/profile-btn.png"
+          alt=""
+        />
+        <p class="absolute z-10 text-white text-[18px] font-semibold">
+          Получить про аккаунт
+        </p>
+      </button>
       </div>
       <!-- <div class="mt-[34px] flex flex-col gap-8">
         <div class="flex flex-col gap-3">
@@ -356,30 +388,18 @@
           ></nuxt-link>
         </div>
       </div> -->
-      <div class="mt-8" v-if="profile">
-        <div
-          class="personalBlock-price border border-dashed border-blue rounded-[15px] px-[20px] py-[20px] bg-white"
-        >
-          <div class="flex justify-between">
-            <p class="text-grey-40 text-base">Баланс</p>
-            <nuxt-link class="text-blue text-[14px] underline" to="/"
-              >История транзакций</nuxt-link
-            >
-          </div>
-          <h4 class="text-black text-[24px] font-semibold mt-2">560,000 сум</h4>
-          <button
-            class="rounded-[8px] h-[44px] w-full bg-apple-grey flex items-center justify-center text-blue text-[14px] font-semibold mt-4"
-          >
-            Пополнить
-          </button>
-        </div>
-      </div>
+      
       <div class="flex flex-col gap-4 items-center mt-[100px]">
         <p class="text-grey-40 text-[12px] font-semibold uppercase">
           УЧАСТНИК С: 21 МАЯ 2010 ГОДА
         </p>
         <span class="h-[1px] w-full bg-grey-8"></span>
-        <p class="underline text-base text-pantone-2023 flex items-center gap-[10px]">
+        <button class="underline text-base text-pantone-2023 flex items-center gap-[10px]">выйти<svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.35355 7.5606C3.64645 7.26771 3.64645 6.79284 3.35355 6.49994C3.06066 6.20705 2.58579 6.20705 2.29289 6.49994L1 7.79284C0.316582 8.47625 0.316584 9.58429 1 10.2677L2.29289 11.5606C2.58579 11.8535 3.06066 11.8535 3.35355 11.5606C3.64645 11.2677 3.64645 10.7928 3.35355 10.4999L2.63388 9.78027L8.75 9.78027C9.16421 9.78027 9.5 9.44449 9.5 9.03027C9.5 8.61606 9.16421 8.28027 8.75 8.28027L2.63388 8.28027L3.35355 7.5606Z" fill="#F2154A"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.75 0.25L8.5 0.249999C5.87665 0.249999 3.75 2.37665 3.75 5C3.75 5.41421 4.08579 5.75 4.5 5.75C4.91421 5.75 5.25 5.41421 5.25 5C5.25 3.20507 6.70507 1.75 8.5 1.75L12.2859 1.75C13.1524 0.826731 14.3839 0.25 15.75 0.25ZM12.2859 16.25L8.5 16.25C6.70507 16.25 5.25 14.7949 5.25 13C5.25 12.5858 4.91421 12.25 4.5 12.25C4.08579 12.25 3.75 12.5858 3.75 13C3.75 15.6234 5.87665 17.75 8.5 17.75L15.75 17.75C14.3839 17.75 13.1524 17.1733 12.2859 16.25Z" fill="#F2154A"/>
+  <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M20.5 13C20.5 15.6234 18.3734 17.75 15.75 17.75C13.1266 17.75 11 15.6234 11 13L11 5C11 2.37665 13.1266 0.249999 15.75 0.25C18.3734 0.25 20.5 2.37665 20.5 5L20.5 13Z" fill="#F2154A"/>
+</svg></button>
+        <!-- <p class="underline text-base text-pantone-2023 flex items-center gap-[10px]">
           Сообщить модератору о нарушении
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +424,7 @@
               fill="#BB2649"
             />
           </svg>
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -473,5 +493,11 @@ export default {
 .client-types .activeF svg circle {
   stroke: #fff;
   /* fill: #fff; */
+}
+.pro-btn:hover img {
+  transform: scale(1.06);
+}
+.pro-btn img {
+  transition: 0.3s linear;
 }
 </style>

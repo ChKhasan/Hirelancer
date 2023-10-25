@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="flex gap-3">
     <a
-      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center"
+      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       href="#"
     >
       <svg
@@ -17,7 +17,7 @@
         /></svg
     ></a>
     <a
-      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center"
+      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       href="#"
     >
       <svg
@@ -33,7 +33,7 @@
         /></svg
     ></a>
     <a
-      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center"
+      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       href="#"
     >
       <svg
@@ -49,7 +49,7 @@
         /></svg
     ></a>
     <a
-      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center"
+      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       href="#"
     >
       <svg
@@ -65,7 +65,7 @@
         /></svg
     ></a>
     <a
-      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center"
+      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       href="#"
     >
       <svg
@@ -81,7 +81,7 @@
         /></svg
     ></a>
     <a
-      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center"
+      class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       href="#"
     >
       <svg

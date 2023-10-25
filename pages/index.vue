@@ -33,7 +33,6 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("fetchBanners/getBanners");
     console.log("a");
   },
 

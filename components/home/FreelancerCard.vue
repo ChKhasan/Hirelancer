@@ -32,7 +32,7 @@
           /></svg
       ></span>
     </div>
-    <div class="body flex flex-col justify-between xl:w-[70%] xl:gap-[8px]">
+    <div class="body flex flex-col justify-between xl:w-[70%] xl:gap-[8px] gap-3">
       <div>
         <h4
           class="text-[14px] font-medium text-black truncate name whitespace-normal"
@@ -114,7 +114,7 @@
       </div>
       <div class="flex justify-between">
         <div
-          class="bg-apple-grey text-xs font-medium text-grey-64 px-4 py-2 rounded-[22px]"
+          class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px]"
         >
           Adobe Photoshop
         </div>

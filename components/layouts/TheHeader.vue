@@ -120,14 +120,33 @@
             </svg>
           </button>
         </div>
-        <div class="login flex gap-6">
+       
+        <button
+        @click="$router.push('/profile/freelancer')"
+          class="user flex gap-2 items-center"
+          v-if="$store.state.auth && Boolean($store.state.userInfo['name'])"
+        >
+          <div class="flex flex-col">
+            <p class="text-[18px] text-black">{{$store.state.userInfo["name"]}}</p>
+            <!-- <p class="text-[14px] text-green">Я - Фрилансер</p> -->
+            <p class="text-[14px] text-light-red">Я - заказчик</p>
+          </div>
+          <div class="h-[52px] w-[52px]">
+            <img class="w-full h-full" src="@/assets/images/Avatar 5.png" alt="" />
+          </div>
+        </button>
+        <div class="login flex gap-6" v-else>
           <button
             @click="
               $store.state.auth ? $router.push('/profile/freelancer') : (visible = true)
             "
             class="text-black text-[18px] font-normal"
           >
-            {{ $store.state.auth ? $store.state.userInfo["name"] : "Kirish" }}
+            {{
+              $store.state.auth && Boolean($store.state.userInfo["name"])
+                ? $store.state.userInfo["name"]
+                : "Kirish"
+            }}
           </button>
           <button
             @click="$router.push('/registration')"

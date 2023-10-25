@@ -80,6 +80,7 @@
           >Buyurtma yuboring
         </button>
         <button
+        @click="$router.push('/registration')"
           class="flex g h-[60px] px-[20px] border-solid text-[18px] border-grey-64 bg-white border rounded-xl text-grey-64 font-tt items-center font-regular"
         >
           Frilanserga aylaning
