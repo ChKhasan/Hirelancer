@@ -3,20 +3,16 @@
     class="banner bg-bg-grey rounded-[32px] mb-[102px] xl:bg-blue xl:rounded-[12px] xl:mb-[40px]"
   >
     <div
-      class="left pt-16 pl-[80px] pb-[50px] flex flex-col justify-between xl:py-[28px] xl:px-[20px] xl:justify-center"
+      class="left pt-16 pl-[80px] pb-[50px] flex flex-col justify-between xl:py-[28px] xl:px-[20px] xl:justify-center h-full"
     >
       <div class="flex flex-col">
-        <h3
-          class="font-semibold text-black text-[48px] xl:text-[16px] xl:text-white"
-        >
+        <h3 class="font-semibold text-black text-[48px] xl:text-[16px] xl:text-white">
           Vazifalaringizni bajarishga qodir
           <span class="text-blue xl:text-yellow">Frilanserlarni</span> qidiring
         </h3>
-        <p
-          class="text-black text-[18px] mt-4 xl:mt-[6px] xl:text-[12px] xl:text-white"
-        >
-          Eski qoidalarni unuting. Siz eng yaxshi frilanserlarni mana shu yerda.
-          ega chiqishingiz mumkin.
+        <p class="text-black text-[18px] mt-4 xl:mt-[6px] xl:text-[12px] xl:text-white">
+          Eski qoidalarni unuting. Siz eng yaxshi frilanserlarni mana shu yerda. ega
+          chiqishingiz mumkin.
         </p>
         <div class="list flex gap-3 mt-8 xl:hidden">
           <button
@@ -80,20 +76,20 @@
           >Buyurtma yuboring
         </button>
         <button
-        @click="$router.push('/registration')"
+          @click="$router.push('/registration')"
           class="flex g h-[60px] px-[20px] border-solid text-[18px] border-grey-64 bg-white border rounded-xl text-grey-64 font-tt items-center font-regular"
         >
           Frilanserga aylaning
         </button>
       </div>
     </div>
-    <div class="right">
+    <div class="right h-[540px] xl:h-[150px]">
       <img
         src="@/assets/images/banner.png"
         width="100%"
         height="100%"
         alt=""
-        class="xl:h-[150px] xl:object-cover"
+        class=" xl:object-cover h-full"
       />
     </div>
   </div>

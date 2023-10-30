@@ -28,6 +28,7 @@
         class="w-full h-full object-cover"
         src="../../assets/images/events.png"
         alt=""
+        loading="lazy"
       />
     </div>
   </div>

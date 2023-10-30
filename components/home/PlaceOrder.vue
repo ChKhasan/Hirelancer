@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="place-order flex flex-col mb-[96px] xl:mb-[40px]">
+  <div class="place-order flex flex-col mb-[96px] xl:mb-[40px] xl:hidden">
     <h2
       class="text-black text-[32px] mb-8 font-semibold xl:text-[18px] xl:mb-[12px]"
     >

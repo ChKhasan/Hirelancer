@@ -1,12 +1,25 @@
 <template lang="html">
   <div>
-    <div>
-      <a-pagination class="order-pagination" :default-current="6" :total="500" />
+    <div class="flex gap-4">
+      <button
+        v-if="load"
+        class="h-[52px] rounded-[8px] bg-bg-grey text-grey-40 text-base border border-solid border-grey-8 w-[228px] flex justify-center items-center"
+      >
+        Load more
+      </button>
+      <a-pagination
+        class="order-pagination"
+        :default-current="6"
+        :total="20"
+        :hideOnSinglePage="true"
+      />
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["load"],
+};
 </script>
 <style lang="css" scoped>
 .order-pagination :deep(.ant-pagination-item),
@@ -58,5 +71,18 @@ export default {};
 }
 .order-pagination :deep(.ant-pagination-item-active) a {
   color: var(--blue);
+}
+@media (max-width: 1200px) {
+  .order-pagination :deep(.ant-pagination-item),
+  .order-pagination :deep(.ant-pagination-prev),
+  .order-pagination :deep(.ant-pagination-next),
+  .order-pagination :deep(.ant-pagination-jump-prev),
+  .order-pagination :deep(.ant-pagination-jump-next) {
+    min-width: 48px;
+    height: 48px;
+  }
+  .order-pagination :deep(.ant-pagination-item) a {
+    font-size: 14px;
+  }
 }
 </style>

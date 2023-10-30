@@ -32,10 +32,10 @@
           ></nuxt-link>
         </div>
         <div class="menu flex gap-[40px]">
-          <nuxt-link class="text-[18px] text-black font-tt font-normal" to="/"
+          <nuxt-link class="text-[18px] text-black font-tt font-normal" to="/orders"
             >Buyurtmalar</nuxt-link
           >
-          <nuxt-link class="text-[18px] text-black font-tt font-normal" to="/"
+          <nuxt-link class="text-[18px] text-black font-tt font-normal" to="/freelancers"
             >Frilanserlar</nuxt-link
           >
           <nuxt-link class="text-[18px] text-black font-tt font-normal" to="/"
@@ -69,6 +69,7 @@
             </svg>
           </button>
           <button
+            @click="$router.push('/notifications')"
             class="relative w-[52px] h-[52px] rounded-full border-[2px] border-grey-8 border-solid flex items-center justify-center"
           >
             <svg
@@ -120,14 +121,14 @@
             </svg>
           </button>
         </div>
-       
+
         <button
-        @click="$router.push('/profile/freelancer')"
+          @click="$router.push('/profile/freelancer')"
           class="user flex gap-2 items-center"
           v-if="$store.state.auth && Boolean($store.state.userInfo['name'])"
         >
           <div class="flex flex-col">
-            <p class="text-[18px] text-black">{{$store.state.userInfo["name"]}}</p>
+            <p class="text-[18px] text-black">{{ $store.state.userInfo["name"] }}</p>
             <!-- <p class="text-[14px] text-green">Я - Фрилансер</p> -->
             <p class="text-[14px] text-light-red">Я - заказчик</p>
           </div>

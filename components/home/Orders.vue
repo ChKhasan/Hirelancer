@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="orders bg-bg-grey py-[120px] xl:py-[40px] xl:px-4">
+  <div class="orders bg-bg-grey py-[120px] xl:py-6 xl:px-4">
     <div class="max-w-[954px] mx-auto">
       <div class="flex justify-between">
         <h1 class="text-black text-[32px] font-semibold xl:text-[18px]">

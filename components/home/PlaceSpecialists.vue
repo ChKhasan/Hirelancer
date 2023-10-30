@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="place flex flex-col mb-[96px] xl:mb-[50px]">
+  <div class="place flex flex-col mb-[96px] xl:mb-[40px]">
     <h2
-      class="text-black text-[32px] mb-8 font-semibold xl:text-[18px] xl:mb-[12px]"
+      class="text-black text-[32px] mb-8 font-semibold xl:text-[18px] xl:mb-4"
     >
       Buyurtma qanday beriladi
     </h2>
@@ -13,7 +13,7 @@
       />
     </div>
     <button
-      class="mx-auto mt-6 rounded-lg flex gap-4 w-[352px] h-16 items-center justify-center border border-grey-8 border-solid text-blue font-medium text-[18px] font-tt xl:mx-0 xl:w-[100%] xl:mt-[12px] h-[40px] xl:text-[14px]"
+      class="mx-auto mt-6 rounded-lg flex gap-4 w-[352px] h-16 items-center justify-center border border-grey-8 border-solid text-blue font-medium text-[18px] font-tt xl:mx-0 xl:w-[100%] xl:mt-[12px] xl:h-12 xl:text-[14px] xl:border-main-color"
     >
       Ko’proq ko’rish
       <svg

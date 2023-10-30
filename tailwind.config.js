@@ -51,15 +51,20 @@ module.exports = {
         "yellow-br": "#F2E8DF",
         yellow: "#FFFBF5",
         red: "#f2154a",
+        red2: '#FFF6F6'
       },
       "border-darik": "#E0E0ED",
       "light-yellow-br": "#F2E8DF",
       "light-yellow": "#FFFBF5",
       "light-red": "#f2154a",
       "pantone-2023": "#bb2649",
+      'blue-night': '#001935',
       red: "#ed3237",
       brown: "#f2154a1a",
+      'meta-grey': '#667B8C',
       "main-color": "#5C46E5",
+      'dark-grey-100': '#212529',
+      'dark-grey-70': '#6C757D'
     },
     fontFamily: {
       body: ["TT Interfaces"],

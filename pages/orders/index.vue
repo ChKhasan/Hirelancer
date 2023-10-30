@@ -1,19 +1,19 @@
 <template lang="html">
-  <div class="orders pt-8 pb-[170px]">
-    <div class="2xl:container mx-auto">
-      <Banner />
-      <div class="flex justify-between items-end mt-8">
-        <div class="flex flex-col gap-4">
-          <h1 class="text-[32px] font-semibold text-black">Faol buyurtmalar</h1>
-          <div class="buttons flex gap-4">
+  <div class="orders pt-8 pb-[170px] xl:px-4 xl:pt-6">
+    <div class="2xl:container mx-auto xl:flex xl:flex-col xl:gap-6">
+      <Banner class="xl:hidden" />
+      <div class="flex justify-between items-end mt-8 xl:mt-0">
+        <div class="flex flex-col gap-4 xl:w-full">
+          <h1 class="text-[32px] font-semibold xl:hidden text-black">Faol buyurtmalar</h1>
+          <div class="buttons flex gap-4 xl:grid xl:grid-cols-2 xl:w-full">
             <button
               :class="{ active: tab }"
-              class="rounded-[8px] bg-bg-grey px-6 py-2 text-[14px] text-grey-64 font-tt"
+              class="rounded-[8px] justify-center flex xl:h-[44px] xl:items-center xl:font-medium bg-bg-grey px-6 py-2 text-[14px] text-grey-64 font-tt"
             >
               Konkursi
             </button>
             <button
-              class="rounded-[8px] bg-bg-grey px-6 py-2 text-[14px] text-grey-64 font-tt"
+              class="rounded-[8px] justify-center flex xl:h-[44px] xl:items-center xl:font-medium bg-bg-grey px-6 py-2 text-[14px] text-grey-64 font-tt"
             >
               Заказы
             </button>
@@ -21,7 +21,7 @@
         </div>
         <a
           href="#"
-          class="telegram flex gap-2 h-12 px-[20px] items-center rounded-lg text-white font-semibold text-[16px]"
+          class="telegram xl:hidden flex gap-2 h-12 px-[20px] items-center rounded-lg text-white font-semibold text-[16px]"
           >Телеграм канал заказов
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,9 @@
             /></svg
         ></a>
       </div>
-      <OrdersList />
+     
+      <OrdersList class="xl:mt-0" />
+    
     </div>
   </div>
 </template>
@@ -50,6 +52,7 @@ export default {
       tab: true,
     };
   },
+ 
   components: { Banner, OrdersList },
 };
 </script>
@@ -62,5 +65,4 @@ export default {
 .telegram {
   background: linear-gradient(0deg, #28a9ea 0%, #28a9ea 100%), #1878f3;
 }
-
 </style>

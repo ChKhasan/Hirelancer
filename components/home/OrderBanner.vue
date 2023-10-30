@@ -41,6 +41,7 @@
           class="h-full xl:hidden"
           src="@/assets/images/order-banner.png"
           alt=""
+          loading="lazy"
         />
         <img
           width="100%"

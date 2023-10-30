@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-[40px] pb-[170px] xl:pb-[64px]">
+  <div class="pt-[40px] xl:pt-4 pb-[170px] xl:pb-[64px]">
     <div class="2xl:container mx-auto xl:px-4">
       <Banner />
       <PlaceOrder />

@@ -1,13 +1,13 @@
 <template lang="html">
-  <div class="modal h-[548px] w-full bg-white">
-    <div class="max-w-[1286px] mx-auto pt-[48px] grid-container h-full">
+  <div class="modal h-[548px] m-full mx-auto rounded-t-[16px] max-w-[1440px] bg-white px-8">
+    <div class="max-w-[1200px] mx-auto pt-[48px] grid-container h-full">
       <div class="info relative flex flex-col gap-4">
         <h2 class="text-[24px] text-black font-semibold">Отправить заявку</h2>
         <p class="text-base text-grey-80">
           Join our world-class innovation team, revolutionizing education at ASU Prep
           Digital. Our mission is to enhance student performance and provide access
         </p>
-        <img class="absolute bottom-0" src="@/assets/images/bottom.png" alt="" />
+        <img loading="lazy" class="absolute bottom-0" src="@/assets/images/bottom.png" alt="" />
       </div>
       <div class="form flex flex-col gap-[26px] relative">
         <a-form-model :model="form" ref="ruleForm" :rules="rules">
