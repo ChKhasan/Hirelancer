@@ -1,5 +1,6 @@
 <template lang="html">
   <div
+    ref="priceBox"
     class="bottom-bar px-3 hidden xl:block pb-3 bg-white z-50 pt-1 w-full fixed left-0 bottom-0 rounded-t-[16px] border-[0] border-t border-solid border-border-darik"
   >
     <div class="menu flex justify-between">
@@ -140,7 +141,23 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  mounted() {
+    var header = this.$refs.priceBox;
+    window.addEventListener("scroll", () => {
+      let documentHeight = document.body.scrollHeight;
+      let currentScroll = window.scrollY + window.innerHeight;
+      let modifier = 200;
+      if (window.innerWidth <= 576) {
+        if (currentScroll + modifier > documentHeight) {
+          header.style.display = `none`;
+        } else {
+          header.style.display = `block`;
+        }
+      }
+    });
+  },
+};
 </script>
 <style lang="css" scoped>
 .bottom-bar {

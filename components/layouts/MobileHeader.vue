@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="mobile-header fixed top-0 left-0 px-4 hidden bg-white w-full py-2 z-50">
+  <div class="mobile-header px-4 hidden bg-white w-full py-2 z-50">
     <div class="flex justify-between items-center">
       <h4
         v-for="item in titleList"
@@ -8,7 +8,7 @@
       >
         {{ item.title }}
       </h4>
-      <nuxt-link to="/" v-else
+      <nuxt-link to="/" v-if="!titleList.find((item) => item.pathName === $route.name)"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="94"
@@ -52,6 +52,31 @@
         </svg>
       </button>
     </div>
+    <div
+      v-if="'index' === $route.name"
+      class="search h-12 flex items-center border border-solid border-border-darik rounded-lg px-4"
+    >
+      <div class="flex justify-between w-full">
+        <input type="text" placeholder="Qidiruv" class="w-[80%]" />
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M22 22L20 20M2 11.5C2 6.25329 6.25329 2 11.5 2C16.7467 2 21 6.25329 21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5Z"
+              stroke="#020105"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -62,6 +87,10 @@ export default {
         {
           title: "Buyurtmalar",
           pathName: "orders",
+        },
+        {
+          title: "Freelanserlar",
+          pathName: "freelancers",
         },
       ],
     };

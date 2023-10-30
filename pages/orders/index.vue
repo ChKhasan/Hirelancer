@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="orders pt-8 pb-[170px] xl:px-4 xl:pt-6">
+  <div class="orders pt-8 pb-[170px] xl:px-4 xl:pt-6 xl:pb-6">
     <div class="2xl:container mx-auto xl:flex xl:flex-col xl:gap-6">
       <Banner class="xl:hidden" />
       <div class="flex justify-between items-end mt-8 xl:mt-0">

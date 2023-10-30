@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="freelancers pt-16 pb-[120px]">
+  <div class="freelancers pt-16 pb-[120px] xl:px-4 xl:pt-6 xl:pb-6">
     <div class="2xl:container mx-auto">
-      <div class="title flex justify-between">
+      <div class="title flex justify-between xl:hidden">
         <h2 class="text-black text-[32px] font-semibold">Frilanserlar</h2>
         <div class="button flex gap-6 items-center">
           <button
@@ -25,27 +25,108 @@
             </svg>
           </button>
           <button
-            class="h-[60px] w-[204px] flex justify-center items-center bg-blue rounded-xl text-base font-medium text-white"
+            class="xl:hidden h-[60px] w-[204px] flex justify-center items-center bg-blue rounded-xl text-base font-medium text-white"
           >
             Buyurtma qoshish
           </button>
         </div>
       </div>
-      <div class="tab flex gap-4">
+      <div class="filter-head hidden xl:flex justify-between xl:mb-6">
+        <h4 class="text-black text-[14px] font-medium">13 630 результатов</h4>
         <button
-          class="px-6 h-[40px] flex items-center bg-bg-grey rounded-lg text-[14px] text-grey-64 border border-solid border-bg-grey"
+          @click="open"
+          class="flex items-center gap-2 text-blue text-[14px] font-medium"
+        >
+          Фильтры<svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M2.5 5H8.33333"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2.5 10H10"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M15.8333 10H17.5"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M11.6667 5L17.5 5"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10.8333 15L16.6667 15"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M2.5 15H5"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <circle
+              cx="6.66667"
+              cy="15"
+              r="1.66667"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+            />
+            <ellipse
+              cx="14.1667"
+              cy="10"
+              rx="1.66667"
+              ry="1.66667"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+            />
+            <ellipse
+              cx="10"
+              cy="5.00004"
+              rx="1.66667"
+              ry="1.66667"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="tab flex gap-4 xl:grid xl:grid-cols-2">
+        <button
+          class="px-6 h-[40px] flex items-center bg-bg-grey rounded-lg xl:justify-center xl:h-[44px] text-[14px] text-grey-64 border border-solid border-bg-grey"
           :class="{ active: true }"
         >
           Фрилансеры
         </button>
         <button
-          class="px-6 h-[40px] flex items-center bg-bg-grey rounded-lg text-[14px] text-grey-64 border border-solid border-bg-grey"
+          class="px-6 h-[40px] flex items-center bg-bg-grey rounded-lg xl:justify-center xl:h-[44px] text-[14px] text-grey-64 border border-solid border-bg-grey"
         >
           Команды
         </button>
       </div>
-      <div class="body mt-8">
-        <FreelancersFilter />
+      <div class="body mt-8 xl:mt-4">
+        <FreelancersFilter class="xl:hidden" />
         <FreelancersContainer />
       </div>
     </div>
@@ -55,7 +136,17 @@
 import FreelancersContainer from "../components/freelancers/FreelancersContainer.vue";
 import FreelancersFilter from "../components/freelancers/FreelancersFilter.vue";
 
-export default { components: { FreelancersFilter, FreelancersContainer } };
+export default {
+  methods: {
+    open() {
+      this.$refs.myBottomSheet.open();
+    },
+    close() {
+      this.$refs.myBottomSheet.close();
+    },
+  },
+  components: { FreelancersFilter, FreelancersContainer },
+};
 </script>
 <style lang="css" scoped>
 .tab .active {
@@ -67,5 +158,11 @@ export default { components: { FreelancersFilter, FreelancersContainer } };
   display: grid;
   grid-template-columns: 332px 1fr;
   grid-gap: 32px;
+}
+@media (max-width: 1200px) {
+  .body {
+    grid-template-columns: 1fr;
+    grid-gap: 24px;
+  }
 }
 </style>

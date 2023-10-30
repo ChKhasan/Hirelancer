@@ -1,8 +1,14 @@
 <template lang="html">
   <div class="layout W-100">
-    <MobileHeader class="xl:block" />
+    <div class="fixed top-0 left-0 w-full z-50" ref="mHeader">
+      <MobileHeader class="xl:block" />
+    </div>
     <TheHeader class="xl:hidden" />
-    <div class="header-bg xl:block hidden h-[56px] w-full"></div>
+    <div
+      v-if="$route.name == 'index'"
+      class="header-bg xl:block hidden w-full h-[104px]"
+    ></div>
+    <div v-else class="header-bg xl:block hidden w-full h-[50px]"></div>
     <Nuxt />
     <TheFooter />
     <BottomBar />
@@ -25,6 +31,7 @@ export default {
       ],
     };
   },
+
   async mounted() {
     try {
       const [userInfoData] = await Promise.all([
@@ -33,6 +40,7 @@ export default {
       this.$store.commit("getUserInfo", userInfoData);
     } catch (e) {}
   },
+
   components: { TheHeader, TheFooter, BottomBar, MobileHeader },
 };
 </script>
