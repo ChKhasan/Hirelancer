@@ -1,10 +1,8 @@
 <template lang="html">
   <div class="layout W-100">
-  <MobileHeader class="xl:block"/>
+    <MobileHeader class="xl:block" />
     <TheHeader class="xl:hidden" />
-    <div class="header-bg xl:block hidden h-[56px] w-full">
-    
-    </div>
+    <div class="header-bg xl:block hidden h-[56px] w-full"></div>
     <Nuxt />
     <TheFooter />
     <BottomBar />
@@ -17,6 +15,16 @@ import TheFooter from "../components/layouts/TheFooter.vue";
 import TheHeader from "../components/layouts/TheHeader.vue";
 
 export default {
+  head() {
+    return {
+      meta: [
+        {
+          name: "theme-color",
+          content: "#5c46e5",
+        },
+      ],
+    };
+  },
   async mounted() {
     try {
       const [userInfoData] = await Promise.all([
@@ -28,4 +36,4 @@ export default {
   components: { TheHeader, TheFooter, BottomBar, MobileHeader },
 };
 </script>
-<style lang=""></style>
+<style lang="css"></style>
