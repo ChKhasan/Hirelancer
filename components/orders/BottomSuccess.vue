@@ -1,10 +1,21 @@
 <template lang="html">
   <div class="flex flex-col items-center gap-6 relative xl:px-4">
-    <button @click="handleOk" class="absolute top-1 right-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M16.2427 7.75738L7.75745 16.2427M16.2427 16.2426L7.75745 7.75732" stroke="#353437" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-        </button>
+    <button @click="$emit('close')" class="absolute top-1 right-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          d="M16.2427 7.75738L7.75745 16.2427M16.2427 16.2426L7.75745 7.75732"
+          stroke="#353437"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
     <span class="py-1 xl:mt-[20px]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +37,9 @@
         /></svg
     ></span>
     <div class="flex flex-col gap-4 items-center mt-[-16px] xl:gap-2">
-      <h4 class="text-[24px] text-black font-medium xl:text-[18px] xl:font-semibold">Ваша заявка отправлена</h4>
+      <h4 class="text-[24px] text-black font-medium xl:text-[18px] xl:font-semibold">
+        Ваша заявка отправлена
+      </h4>
       <div class="flex flex-col justify-center items-center">
         <p class="text text-base text-black xl:text-[14px]">
           Sledite za statusom zayavki cherez telegram bot
@@ -34,7 +47,7 @@
         <a class="text-black" href="">@udoo_alert_bot</a>
       </div>
     </div>
-    <div class="buttons flex flex-col gap-4 items-center mb-6 xl:w-full" >
+    <div class="buttons flex flex-col gap-4 items-center mb-6 xl:w-full">
       <a
         href="#"
         class="hover:text-white h-[40px] xl:h-[52px] px-6 rounded-[8px] xl:justify-center xl:w-full bg-light-blue2 text-white text-base xl:text-[14px] font-medium flex gap-[10px] items-center"

@@ -308,9 +308,9 @@
         <BottomModal @close="closeModal" @submit="submit" />
       </vue-bottom-sheet-vue2>
       <div class="hidden xl:flex">
-      <vue-bottom-sheet-vue2 ref="orderSucccess" class="bottom-drawer">
-        <BottomSuccess class="hidden xl:flex" />
-      </vue-bottom-sheet-vue2>
+        <vue-bottom-sheet-vue2 ref="orderSucccess" class="bottom-drawer">
+          <BottomSuccess class="hidden xl:flex" @close="closeSuccess" />
+        </vue-bottom-sheet-vue2>
       </div>
     </div>
   </div>
@@ -332,7 +332,9 @@ export default {
       visible: false,
     };
   },
-
+  mounted() {
+    console.log(window.innerWidth);
+  },
   methods: {
     open() {
       this.$refs.myBottomSheet.open();
@@ -350,12 +352,13 @@ export default {
       this.bottomModal = true;
     },
     submit(form) {
-      console.log(form);
       this.__POST_ORDER(form);
     },
     async __POST_ORDER(data) {
+      this.close();
       this.openSuccess();
-      this.visible = true;
+
+      if (window.innerWidth > 1200) this.visible = true;
       try {
         await this.$store.dispatch("fetchOrders/postSendRequest", {
           ...data,
