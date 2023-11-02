@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="filter-container flex flex-col gap-[20px]">
     <div
-      class="list border border-solid border-grey-light px-[28px] py-[28px] rounded-xl flex flex-col gap-4"
+      class="list border border-solid border-grey-light px-[28px] xl:px-4 py-[28px] rounded-xl flex flex-col gap-4 xl:border-0 xl:pt-[12px] xl:pb-[20px]"
     >
       <h2 class="text-[20px] text-black font-semibold">Тип работы</h2>
 
-      <div class="drop-list flex flex-col gap-2">
+      <div class="drop-list flex flex-col gap-2 xl:gap-8">
         <div
           class="dropdown overflow-hidden"
           :class="{ active: dropdownOpens.includes(dropItem) }"
@@ -13,7 +13,7 @@
           :key="dropItem"
         >
           <button
-            class="drop-head bg-white relative z-20 w-full flex justify-between items-center px-[10px] py-[10px]"
+            class="drop-head xl:px-0 xl:py-0 bg-white relative z-20 w-full flex justify-between items-center px-[10px] py-[10px]"
             @click="handleDropdown(dropItem)"
           >
             <h2
@@ -46,24 +46,24 @@
             class="w-auto flex h-[1px] mx-4 bg-border-darik"
           ></span>
           <!-- <Transition name="bounce"> -->
-            <div class="drop-body relative z-10" >
-              <div class="px-4 py-4 flex flex-col gap-4">
-                <button
-                  class="text-[14px] text-grey-80 flex gap-2 items-center"
-                  v-for="dropIn in [1, 2, 3, 4, 5]"
-                  :key="dropIn"
-                >
-                  HTML-верстка {{ dropIn }}
-                  <span class="text-[12px] text-grey-40">(24k)</span>
-                </button>
-              </div>
+          <div class="drop-body relative z-10">
+            <div class="px-4 py-4 flex flex-col gap-4 xl:gap-8">
+              <button
+                class="text-[14px] text-grey-80 flex gap-2 items-center"
+                v-for="dropIn in [1, 2, 3, 4, 5]"
+                :key="dropIn"
+              >
+                HTML-верстка {{ dropIn }}
+                <span class="text-[12px] text-grey-40">(24k)</span>
+              </button>
             </div>
+          </div>
           <!-- </Transition> -->
         </div>
       </div>
     </div>
     <div
-      class="filter border border-solid border-grey-light px-[28px] py-[28px] rounded-xl flex flex-col gap-4"
+      class="filter border border-solid border-grey-light px-[28px] py-[28px] rounded-xl flex flex-col gap-4 xl:mx-4 xl:px-4 xl:py-4"
     >
       <div class="flex flex-col gap-4">
         <h4 class="text-[20px] font-semibold text-black">Тип работы</h4>
@@ -116,49 +116,49 @@
           </span>
         </div>
       </div>
-      <div>
+      <div class="xl:hidden">
         <a-select v-model="sort" placeholder="Положительный" class="w-full">
           <a-select-option :value="region" v-for="region in [1, 2, 3, 4]" :key="region">
             {{ region }}</a-select-option
           >
         </a-select>
       </div>
-      <div class="flex gap-4">
+      <div class="flex gap-4 xl:flex-col">
         <button
-          class="flex w-full justify-center py-[15px] rounded-lg border border-blue border-solid text-[14px] font-tt font-semibold text-white bg-blue"
+          class="flex w-full justify-center xl:h-[52px] py-[15px] rounded-lg border border-blue border-solid text-[14px] font-tt font-semibold xl:font-medium text-white bg-blue"
         >
           Применить
         </button>
         <button
-          class="flex w-full justify-center py-[15px] rounded-lg border border-blue border-solid text-[14px] font-tt font-semibold text-blue bg-white"
+          class="flex w-full justify-center xl:h-[52px] py-[15px] rounded-lg border border-blue border-solid text-[14px] font-tt font-semibold xl:font-medium text-blue bg-white"
         >
           Сбросить
         </button>
       </div>
     </div>
-    <TelegramCard />
+    <TelegramCard  class="xl:hidden"/>
   </div>
 </template>
 <script>
-import TelegramCard from '../TelegramCard.vue';
+import TelegramCard from "../TelegramCard.vue";
 
 export default {
-    data() {
-        return {
-            dropdown: false,
-            sort: undefined,
-            dropdownOpens: [],
-        };
+  data() {
+    return {
+      dropdown: false,
+      sort: undefined,
+      dropdownOpens: [],
+    };
+  },
+  methods: {
+    handleDropdown(id) {
+      this.dropdownOpens.includes(id)
+        ? (this.dropdownOpens = this.dropdownOpens.filter((item) => item != id))
+        : this.dropdownOpens.push(id);
+      console.log(this.dropdownOpens);
     },
-    methods: {
-        handleDropdown(id) {
-            this.dropdownOpens.includes(id)
-                ? (this.dropdownOpens = this.dropdownOpens.filter((item) => item != id))
-                : this.dropdownOpens.push(id);
-            console.log(this.dropdownOpens);
-        },
-    },
-    components: { TelegramCard }
+  },
+  components: { TelegramCard },
 };
 </script>
 <style lang="css" scoped>
@@ -247,5 +247,12 @@ export default {
 :deep(.ant-select-focused
     .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
   box-shadow: 0 0 0 2px rgba(92, 70, 229, 0.2);
+}
+@media (max-width: 1200px) {
+  .drop-list .active {
+    border-radius: 0;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
 }
 </style>

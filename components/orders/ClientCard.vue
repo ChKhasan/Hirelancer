@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="card client-card px-[22px] py-[22px] border border-solid border-grey-8 rounded-2xl">
+  <div class="card client-card px-[22px] py-[22px] xl:px-4 xl:py-4 border border-solid border-grey-8 rounded-2xl ">
     <div
-      class="image w-[60px] h-[60px] rounded-full border-[2px] border-solid border-agro-green relative"
+      class="image w-[60px] h-[60px] xl:w-[52px] xl:h-[52px] rounded-full border-[2px] border-solid border-agro-green relative"
     >
       <img loading="lazy" class="w-full h-full" src="../../assets/images/Avatar 5.png" alt="" />
       <span class="absolute bottom-0 right-[-7px]">
@@ -12,9 +12,10 @@
       </span>
     </div>
     <div class="body flex flex-col justify-center">
-      <div class="flex justify-between mb-[2px]">
-        <p class="text-[14px] text-grey-64">Клиент:</p>
+      <div class="flex justify-between mb-[2px] xl:mb-[6px] xl:relative">
+        <p class="text-[14px] xl:text-[12px] text-grey-64 leading-[15px]">Клиент:</p>
         <svg
+        class="xl:absolute xl:right-0"
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
@@ -31,7 +32,7 @@
           />
         </svg>
       </div>
-      <h4 class="text-black text-base font-medium">Muhammadullo Egamberdiyev</h4>
+      <h4 class="text-black text-base font-medium xl:text-[14px]">Muhammadullo Egamberdiyev</h4>
     </div>
   </div>
 </template>
@@ -43,5 +44,11 @@ export default {};
   display: grid;
   grid-template-columns: 60px 1fr;
   grid-gap: 12px;
+}
+@media (max-width: 1200px) {
+  .card {
+  grid-template-columns: 52px 1fr;
+  grid-gap: 8px;
+}
 }
 </style>

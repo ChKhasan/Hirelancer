@@ -1,9 +1,9 @@
 <template lang="html">
-  <div class="pt-12 order lg:bg-red">
-    <div class="max-w-[1286px] mx-auto pb-[55px]">
+  <div class="pt-12 order">
+    <div class="max-w-[1286px] mx-auto pb-[55px] ">
       <nuxt-link
         to="/"
-        class="flex gap-4 w-[162px] py-3 border border-grey-24 border-solid rounded-lg justify-center items-center text-base font-medium text-blue hover:text-blue"
+        class="flex xl:hidden gap-4 w-[162px] py-3 border border-grey-24 border-solid rounded-lg justify-center items-center text-base font-medium text-blue hover:text-blue"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -21,14 +21,15 @@
         </svg>
         Отмена
       </nuxt-link>
-      <div class="content-box mt-6">
+      <div class="content-box mt-6 xl:mt-6 xl:px-4">
         <div>
-          <div class="info rounded-3xl border-solid border-grey-8 px-8 py-8 border">
-            <div class="head flex justify-between">
+          <div class="info rounded-3xl xl:rounded-2xl border-solid border-grey-8 px-8 py-8 xl:px-4 xl:py-4 border">
+            <div class="head flex justify-between xl:flex-col xl:gap-4">
               <div class="flex gap-4 items-center">
                 <span
-                  class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
+                  class="flex xl:text-xs gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
                   ><svg
+                  class="xl:w-4 xl:h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -70,19 +71,19 @@
                 >
               </div>
 
-              <div class="flex gap-6">
-                <p class="text-base text-grey-64">07 мая 2023, 15:24</p>
-                <p class="text-base text-grey-64 flex gap-[6px]">
+              <div class="flex gap-6 xl:justify-between">
+                <p class="text-base text-grey-64 xl:text-[14px]">07 мая 2023, 15:24</p>
+                <p class="text-base text-grey-64 xl:text-[14px] flex gap-[6px]">
                   Заказ:<span class="font-medium text-black">#14511</span>
                 </p>
               </div>
             </div>
             <div class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8">
-              <h1 class="title text-[24px] font-semibold text-black mb-4">
+              <h1 class="title text-[24px] font-semibold text-black mb-4 xl:text-[18px]">
                 Нужен разработчик в теме форекс/крипто/трейдинг, знаком с патернами
                 графического анализа на графиках
               </h1>
-              <p class="text-base text-grey-80">
+              <p class="text-base text-grey-80 xl:text-[14px]">
                 Join our world-class innovation team, revolutionizing education at ASU
                 Prep Digital. Our mission is to enhance student performance and provide
                 access to transformative educational pathways. We're seeking Graphic
@@ -94,7 +95,7 @@
                 decide on an extension. If it's a mutually beneficial fit, the contract
                 will be extended in 3-month increments.
               </p>
-              <p class="text-base text-grey-80 mt-8">
+              <p class="text-base text-grey-80 mt-8 xl:mt-5  xl:text-[14px]">
                 As we're developing curriculum for the next 4 years, there's potential for
                 a long-term contract.This is a project-based contract and not a retainer
                 arrangement. It does not involve a continuous or ongoing engagement where
@@ -104,21 +105,21 @@
               </p>
             </div>
             <div class="files flex flex-col gap-4 mt-4">
-              <h6 class="text-black text-[20px] font-semibold">Файлы к задаче</h6>
-              <div class="file-list flex gap-4 justify-start">
+              <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">Файлы к задаче</h6>
+              <div class="file-list flex gap-4 justify-start xl:flex-wrap">
                 <FileCard />
                 <FileCard />
                 <FileCard />
                 <FileCard />
               </div>
             </div>
-            <div class="files flex flex-col gap-4 mt-4 mb-6">
-              <h6 class="text-black text-[20px] font-semibold">Категории:</h6>
-              <div class="flex gap-[8px] items-center">
+            <div class="files flex flex-col gap-4 mt-4 xl:mt-6 mb-6">
+              <h6 class="text-black text-[20px] xl:text-[18px] font-semibold">Категории:</h6>
+              <div class="flex gap-2 items-center xl:flex-col xl:items-start">
                 <span
                   class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
                   >Программирование </span
-                ><span class="text-[20px] text-grey-64">/</span>
+                ><span class="text-[20px] text-grey-64 xl:hidden">/</span>
                 <span
                   class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
                 >
@@ -127,10 +128,10 @@
               </div>
             </div>
             <div
-              class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between"
+              class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[80%] xl:mx-auto"
             >
-              <div class="flex items-center gap-[28px]">
-                <p class="text-base text-grey-64 flex gap-[8px] items-center">
+              <div class="flex items-center gap-[28px] xl:justify-between">
+                <p class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -152,7 +153,7 @@
                     /></svg
                   >300
                 </p>
-                <p class="text-base text-grey-64 flex gap-[8px] items-center">
+                <p class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -185,7 +186,7 @@
                 </p>
               </div>
               <p
-                class="underline text-base text-pantone-2023 flex items-center gap-[10px]"
+                class="underline text-base text-pantone-2023 flex items-center gap-[10px] xl:text-center mx-auto"
               >
                 Сообщить модератору о нарушении
                 <svg
@@ -214,7 +215,11 @@
               </p>
             </div>
           </div>
-          <div class="flex flex-col gap-4 mt-8">
+          <div class="flex-col gap-4 hidden xl:flex xl:mt-6 xl:gap-6">
+          <ClientCard />
+          <PriceCard @open="openModal" />
+        </div>
+          <div class="flex flex-col gap-4 mt-8 xl:mt-6">
             <InfoCard
               title="Войдите чтобы отправить заявку"
               subtitle=" Условия обсуждаются индивидуально.Наши ожидания от исполнителей:1. Наличие
@@ -269,7 +274,7 @@
             ></InfoCard>
           </div>
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 xl:hidden">
           <ClientCard />
           <PriceCard @open="openModal" />
         </div>
@@ -395,6 +400,13 @@ export default {
 
   100% {
     opacity: 1;
+  }
+}
+@media (max-width: 1200px) {
+  .content-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 </style>

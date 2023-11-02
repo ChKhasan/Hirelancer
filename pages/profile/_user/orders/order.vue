@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="pt-12 order lg:bg-red">
+  <div class="pt-12 order">
     <div class="max-w-[1286px] mx-auto pb-[55px]">
       <nuxt-link
         to="/"

@@ -129,6 +129,9 @@
         <FreelancersFilter class="xl:hidden" />
         <FreelancersContainer />
       </div>
+      <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer" >
+        <FreelancersFilter class="hidden xl:flex pb-6" />
+      </vue-bottom-sheet-vue2>
     </div>
   </div>
 </template>

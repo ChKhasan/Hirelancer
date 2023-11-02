@@ -1,17 +1,19 @@
 <template lang="html">
-  <div class="card price-card px-[24px] py-[24px] rounded-2xl bg-bg-grey flex flex-col gap-6">
-    <div class="flex flex-col gap-[10px]">
-      <div class="flex flex-col">
-        <p class="text-grey-64 text-[14px]">Buyrtma narxi:</p>
+  <div
+    class="card price-card px-[24px] py-[24px] xl:px-4 xl:py-4 rounded-2xl bg-bg-grey flex flex-col gap-6"
+  >
+    <div class="flex flex-col gap-[10px] xl:gap-4">
+      <div class="flex flex-col xl:flex-row xl:justify-between xl:items-center">
+        <p class="text-grey-64 text-[14px] xl:text-base xl:font-semibold">Buyrtma narxi:</p>
 
-        <h1 class="text-blue text-[24px] font-semibold">99 200 000 so’m</h1>
+        <h1 class="text-blue text-[24px] font-semibold xl:text-base">99 200 000 so’m</h1>
       </div>
-      <div class="flex flex-col">
-        <p class="text-grey-64 text-[14px]">Срок:</p>
-        <h4 class="text-black text-base font-semibold">По договоренности</h4>
+      <div class="flex flex-col xl:flex-row xl:justify-between xl:items-center">
+        <p class="text-grey-64 text-[14px] xl:font-medium">Срок:</p>
+        <h4 class="text-black text-base font-semibold xl:font-medium xl:text-[14px]">По договоренности</h4>
       </div>
     </div>
-    <div class="buttons flex flex-col gap-4">
+    <div class="buttons flex flex-col gap-4 xl:hidden">
       <button
         @click="$emit('open')"
         class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-blue border-blue text-base text-white font-medium"
