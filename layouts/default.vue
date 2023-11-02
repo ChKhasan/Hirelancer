@@ -8,7 +8,7 @@
       v-if="$route.name == 'index'"
       class="header-bg xl:block hidden w-full h-[104px]"
     ></div>
-    <div v-else class="header-bg xl:block hidden w-full h-[50px]"></div>
+    <div v-else class="header-bg xl:block hidden w-full h-[56px]"></div>
     <Nuxt />
     <TheFooter />
     <BottomBar />

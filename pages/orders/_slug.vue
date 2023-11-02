@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="pt-12 order">
+  <div class="pt-12 order xl:pt-6">
     <div class="max-w-[1286px] mx-auto pb-[55px] ">
       <nuxt-link
         to="/"
@@ -21,7 +21,7 @@
         </svg>
         Отмена
       </nuxt-link>
-      <div class="content-box mt-6 xl:mt-6 xl:px-4">
+      <div class="content-box mt-6 xl:mt-0 xl:px-4">
         <div>
           <div class="info rounded-3xl xl:rounded-2xl border-solid border-grey-8 px-8 py-8 xl:px-4 xl:py-4 border">
             <div class="head flex justify-between xl:flex-col xl:gap-4">
