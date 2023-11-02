@@ -1,20 +1,38 @@
 <template lang="html">
   <div>
     <a-modal
+      class="xl:hidden flex"
       v-model="visible"
-      :body-style="{ padding: '32px', borderRadius: '24px' }"
+      :body-style="{ padding: '16px', borderRadius: '24px' }"
       :dialog-style="{ padding: '32px', borderRadius: '24px' }"
       centered
       :closable="false"
-      width="670px"
+      width="955px"
       @ok="handleOk"
     >
-      <div class="flex flex-col items-center pt-2 gap-8">
-        <span class="py-2">
+      <div class="flex flex-col items-center gap-6 relative">
+        <button @click="handleOk" class="absolute top-0 right-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="80"
-            height="80"
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            fill="none"
+          >
+            <path
+              d="M27.0718 12.929L12.9297 27.0711M27.0718 27.071L12.9297 12.9289"
+              stroke="#020105"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <span class="py-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="54"
+            height="54"
             viewBox="0 0 80 80"
             fill="none"
           >
@@ -30,17 +48,19 @@
               fill="#009A10"
             /></svg
         ></span>
-        <div class="flex flex-col gap-4 items-center">
-          <h4 class="text-2xl text-black font-medium">Ваша заявка отправлена</h4>
-          <p class="text text-base text-black">
-            Sledite za statusom zayavki cherez telegram bot
-            <a class="text-blue" href="">@udoo_alert_bot</a>
-          </p>
+        <div class="flex flex-col gap-4 items-center mt-[-16px]">
+          <h4 class="text-[24px] text-black font-medium">Ваша заявка отправлена</h4>
+          <div class="flex flex-col justify-center items-center">
+            <p class="text text-base text-black">
+              Sledite za statusom zayavki cherez telegram bot
+            </p>
+            <a class="text-black" href="">@udoo_alert_bot</a>
+          </div>
         </div>
-        <div class="buttons flex flex-col gap-4 items-center">
+        <div class="buttons flex flex-col gap-4 items-center mb-6">
           <a
             href="#"
-            class="hover:text-white h-[52px] px-6 rounded-[8px] bg-blue text-white text-base font-medium flex gap-[10px] items-center"
+            class="hover:text-white h-[40px] px-6 rounded-[8px] bg-light-blue2 text-white text-base font-medium flex gap-[10px] items-center"
           >
             Открыть телеграм-бот<svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,9 +77,9 @@
           </a>
           <button
             @click="visible = false"
-            class="w-[168px] justify-center h-[52px] px-6 rounded-[8px] border border-solid border-grey-24 bg-white text-grey-64 text-base font-medium flex items-center"
+            class="px-6 justify-center h-[40px] rounded-[8px] border border-solid border-blue bg-white text-blue text-base font-medium flex items-center"
           >
-            Закрыть
+            Посмотреть заказ
           </button>
         </div>
       </div>

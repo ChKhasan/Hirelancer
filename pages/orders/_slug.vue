@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="pt-12 order xl:pt-6">
-    <div class="max-w-[1286px] mx-auto pb-[55px] ">
+    <div class="max-w-[1286px] mx-auto pb-[55px]">
       <nuxt-link
         to="/"
         class="flex xl:hidden gap-4 w-[162px] py-3 border border-grey-24 border-solid rounded-lg justify-center items-center text-base font-medium text-blue hover:text-blue"
@@ -23,13 +23,15 @@
       </nuxt-link>
       <div class="content-box mt-6 xl:mt-0 xl:px-4">
         <div>
-          <div class="info rounded-3xl xl:rounded-2xl border-solid border-grey-8 px-8 py-8 xl:px-4 xl:py-4 border">
+          <div
+            class="info rounded-3xl xl:rounded-2xl border-solid border-grey-8 px-8 py-8 xl:px-4 xl:py-4 border"
+          >
             <div class="head flex justify-between xl:flex-col xl:gap-4">
               <div class="flex gap-4 items-center">
                 <span
                   class="flex xl:text-xs gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
                   ><svg
-                  class="xl:w-4 xl:h-4"
+                    class="xl:w-4 xl:h-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -95,7 +97,7 @@
                 decide on an extension. If it's a mutually beneficial fit, the contract
                 will be extended in 3-month increments.
               </p>
-              <p class="text-base text-grey-80 mt-8 xl:mt-5  xl:text-[14px]">
+              <p class="text-base text-grey-80 mt-8 xl:mt-5 xl:text-[14px]">
                 As we're developing curriculum for the next 4 years, there's potential for
                 a long-term contract.This is a project-based contract and not a retainer
                 arrangement. It does not involve a continuous or ongoing engagement where
@@ -105,7 +107,9 @@
               </p>
             </div>
             <div class="files flex flex-col gap-4 mt-4">
-              <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">Файлы к задаче</h6>
+              <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">
+                Файлы к задаче
+              </h6>
               <div class="file-list flex gap-4 justify-start xl:flex-wrap">
                 <FileCard />
                 <FileCard />
@@ -114,7 +118,9 @@
               </div>
             </div>
             <div class="files flex flex-col gap-4 mt-4 xl:mt-6 mb-6">
-              <h6 class="text-black text-[20px] xl:text-[18px] font-semibold">Категории:</h6>
+              <h6 class="text-black text-[20px] xl:text-[18px] font-semibold">
+                Категории:
+              </h6>
               <div class="flex gap-2 items-center xl:flex-col xl:items-start">
                 <span
                   class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
@@ -216,9 +222,9 @@
             </div>
           </div>
           <div class="flex-col gap-4 hidden xl:flex xl:mt-6 xl:gap-6">
-          <ClientCard />
-          <PriceCard @open="openModal" />
-        </div>
+            <ClientCard />
+            <PriceCard @open="openModal" />
+          </div>
           <div class="flex flex-col gap-4 mt-8 xl:mt-6">
             <InfoCard
               title="Войдите чтобы отправить заявку"
@@ -256,6 +262,7 @@
               subtitle="Условия обсуждаются индивидуально.Наши ожидания от исполнителей:1. Наличие
                 опыта и портфолио2. Оперативность выполнения заказов"
               btn="Отправить заявку"
+              @submit="open"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -294,7 +301,17 @@
           <BottomModal @close="closeModal" @submit="submit" />
         </div>
       </Transition>
-      <OrderSuccess :visibleProp="visible" @handleOkProp="handleOk" />
+      <div class="xl:hidden flex">
+        <OrderSuccess :visibleProp="visible" @handleOkProp="handleOk" />
+      </div>
+      <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer">
+        <BottomModal @close="closeModal" @submit="submit" />
+      </vue-bottom-sheet-vue2>
+      <div class="hidden xl:flex">
+      <vue-bottom-sheet-vue2 ref="orderSucccess" class="bottom-drawer">
+        <BottomSuccess class="hidden xl:flex" />
+      </vue-bottom-sheet-vue2>
+      </div>
     </div>
   </div>
 </template>
@@ -306,6 +323,7 @@ import SimilarOrders from "../../components/orders/SimilarOrders.vue";
 import PriceCard from "../../components/orders/PriceCard.vue";
 import BottomModal from "../../components/orders/BottomModal.vue";
 import OrderSuccess from "../../components/modals/OrderSuccess.vue";
+import BottomSuccess from "../../components/orders/BottomSuccess.vue";
 
 export default {
   data() {
@@ -314,7 +332,20 @@ export default {
       visible: false,
     };
   },
+
   methods: {
+    open() {
+      this.$refs.myBottomSheet.open();
+    },
+    close() {
+      this.$refs.myBottomSheet.close();
+    },
+    openSuccess() {
+      this.$refs.orderSucccess.open();
+    },
+    closeSuccess() {
+      this.$refs.orderSucccess.close();
+    },
     openModal() {
       this.bottomModal = true;
     },
@@ -323,6 +354,8 @@ export default {
       this.__POST_ORDER(form);
     },
     async __POST_ORDER(data) {
+      this.openSuccess();
+      this.visible = true;
       try {
         await this.$store.dispatch("fetchOrders/postSendRequest", {
           ...data,
@@ -330,6 +363,7 @@ export default {
         });
         this.bottomModal = false;
         this.visible = true;
+        this.openSuccess();
         // this.$router.go(-1);
       } catch (e) {
         console.log(e.response);
@@ -354,6 +388,7 @@ export default {
     PriceCard,
     BottomModal,
     OrderSuccess,
+    BottomSuccess,
   },
 };
 </script>
