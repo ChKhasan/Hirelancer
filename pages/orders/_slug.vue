@@ -262,7 +262,7 @@
               subtitle="Условия обсуждаются индивидуально.Наши ожидания от исполнителей:1. Наличие
                 опыта и портфолио2. Оперативность выполнения заказов"
               btn="Отправить заявку"
-              @submit="open"
+              @submit="openModal"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -349,7 +349,11 @@ export default {
       this.$refs.orderSucccess.close();
     },
     openModal() {
-      this.bottomModal = true;
+      if (window.innerWidth >= 1200) {
+        this.bottomModal = true;
+      } else {
+        this.open();
+      }
     },
     submit(form) {
       this.__POST_ORDER(form);
