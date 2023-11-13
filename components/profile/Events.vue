@@ -1,8 +1,25 @@
 <template lang="html">
-  <div class="portfolios flex flex-col gap-6">
+  <div class="portfolios flex flex-col gap-6 xl:gap-4 xl:pb-6 xl:border-[0] xl:border-solid xl:border-b xl:border-grey-light">
     <div class="flex justify-between">
-      <h1 class="text-black text-[24px] font-semibold">Участие в мероприятиях</h1>
-      <div class="flex gap-2">
+      <h1 class="text-black text-[24px] font-semibold xl:text-[18px]">Участие в мероприятиях</h1>
+      <button class="xl:block hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="25"
+          viewBox="0 0 24 25"
+          fill="none"
+        >
+          <path
+            d="M7 10.5L12 14.5L17 10.5"
+            stroke="#020105"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <div class="flex gap-2 xl:hidden">
         <div
           class="swiper-button-prev prev-btn min-w-[44px] h-[44px] rounded-full flex justify-center items-center border border-solid border-grey-8"
         >
@@ -46,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="xl:hidden">
       <div class="events-swiper swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -70,6 +87,14 @@
         </div>
       </div>
     </div>
+    <div class="flex-col gap-[6px] xl:flex hidden  xl:gap-2">
+      <EventsCard />
+      <EventsCard />
+      <EventsCard />
+      <EventsCard />
+      <EventsCard />
+      <EventsCard />
+    </div>
   </div>
 </template>
 <script>
@@ -85,6 +110,16 @@ export default {
       pagination: false,
       autoplay: {
         delay: 40000,
+      },
+      breakpoints: {
+        1200: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 24,
+        },
       },
       navigation: {
         nextEl: ".next-btn",

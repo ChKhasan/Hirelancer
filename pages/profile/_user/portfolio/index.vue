@@ -1,32 +1,32 @@
 <template lang="html">
-  <div class="portfolio">
+  <div class="portfolio xl:px-4">
     <ProfileLayout :profile="true">
-      <div class="head flex flex-col gap-4 mt-8">
-        <h3 class="text-[24px] text-black font-semibold">Портфолио</h3>
+      <div class="head flex flex-col gap-4 mt-8 xl:mt-0">
+        <h3 class="text-[24px] text-black font-semibold xl:hidden">Портфолио</h3>
         <div class="flex justify-between items-center">
-          <div class="buttons flex gap-6">
+          <div class="buttons flex gap-6 xl:overflow-x-scroll xl:gap-3">
             <button
-              class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="px-6 py-3 rounded-[12px] border-solid xl:rounded-lg border-[2px] border-bg-grey bg-bg-grey text-base xl:min-w-[120px] xl:py-2 xl:flex xl:justify-center whitespace-nowrap xl:text-[14px] text-grey-64 font-medium"
             >
               All works
             </button>
             <button
-              class="active px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="active px-6 py-3 rounded-[12px] border-solid xl:rounded-lg border-[2px] xl:border border-bg-grey bg-bg-grey text-base xl:min-w-[120px] xl:py-2 xl:flex xl:justify-center whitespace-nowrap xl:text-[14px] text-grey-64 font-medium"
             >
               Веб-дизайн
             </button>
             <button
-              class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="px-6 py-3 rounded-[12px] border-solid xl:rounded-lg border-[2px] border-bg-grey bg-bg-grey text-base xl:min-w-[120px] xl:py-2 xl:flex xl:justify-center whitespace-nowrap xl:text-[14px] text-grey-64 font-medium"
             >
               Логотипы
             </button>
             <button
-              class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="px-6 py-3 rounded-[12px] border-solid xl:rounded-lg border-[2px] border-bg-grey bg-bg-grey text-base xl:min-w-[120px] xl:py-2 xl:flex xl:justify-center whitespace-nowrap xl:text-[14px] text-grey-64 font-medium"
             >
               Фото
             </button>
           </div>
-          <div class="flex gap-[27px]">
+          <div class="flex gap-[27px] xl:hidden">
             <button
               class="border border-solid border-grey-8 rounded-[12px] h-12 w-12 flex justify-center items-center"
             >
@@ -69,7 +69,10 @@
           </div>
         </div>
       </div>
-      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]" v-if="loading">
+      <div
+        class="list grid grid-cols-3 gap-4 mt-6 mb-[40px] xl:grid-cols-2 xl:gap-1 xl:mt-4"
+        v-if="loading"
+      >
         <a-skeleton
           :paragraph="false"
           class="loading-card"
@@ -77,7 +80,10 @@
           :key="elem"
         />
       </div>
-      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]" v-else>
+      <div
+        class="list grid grid-cols-3 gap-4 mt-6 mb-[40px] xl:grid-cols-2 xl:gap-1 xl:mt-4"
+        v-else
+      >
         <PortfolioCard
           v-for="portfolio in portfolios"
           :key="portfolio?.id"
@@ -126,5 +132,16 @@ export default {
 :deep(.loading-card .ant-skeleton-title) {
   width: 100%;
   height: 390px;
+}
+.buttons {
+  padding-bottom: 5px;
+}
+.buttons::-webkit-scrollbar {
+  height: 0;
+}
+@media (max-width: 1200px) {
+  :deep(.loading-card .ant-skeleton-title) {
+    height: 217px;
+  }
 }
 </style>

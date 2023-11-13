@@ -1,8 +1,8 @@
 <template lang="html">
-  <div class="portfolio-card rounded-2xl border border-solid border-grey-8">
+  <div class="portfolio-card rounded-2xl xl:rounded-lg border border-solid border-grey-8">
     <a :href="portfolio?.link">
       <div
-        class="image overflow-hidden h-[270px] border-[0] border-b border-solid border-grey-8 relative"
+        class="image overflow-hidden h-[270px] border-[0] border-b border-solid border-grey-8 relative xl:h-[121px]"
       >
         <img
           class="h-full w-full object-cover"
@@ -10,21 +10,22 @@
           alt=""
         />
         <div
-          class="count text-purple text-[14px] font-semibold absolute w-[40px] h-[36px] rounded-[8px] border border-solid border-grey-8 bg-white flex items-center justify-center right-4 bottom-4"
+          class="count text-purple text-[14px] font-semibold absolute w-[40px] h-[36px] rounded-[8px] border border-solid border-grey-8 bg-white flex items-center justify-center right-4 bottom-4 xl:hidden"
         >
           3+
         </div>
       </div>
     </a>
-    <div class="body px-4 pt-3 pb-4 flex flex-col gap-[44px]">
-      <h4 class="text-black text-[18px] font-semibold">{{ portfolio?.name }}</h4>
-      <div class="flex justify-between">
-        <p class="text-base font-medium text-grey-40">
+    <div class="body px-4 pt-3 pb-4 flex flex-col gap-[44px] xl:gap-1 xl:px-3 xl:py-3">
+      <h4 class="text-black text-[18px] font-semibold xl:text-[14px]  xl:font-medium">{{ portfolio?.name }}</h4>
+      <div class="flex justify-between xl:flex-col xl:gap-2">
+        <p class="text-base font-medium text-grey-40 xl:text-[12px] font-normal">
           {{ portfolio?.specialities[0]?.name_ru }}
         </p>
         <div class="flex gap-6">
-          <p class="text-[14px] font-medium flex gap-[6px] items-center">
-            <svg
+          <p class="text-[14px] font-medium flex gap-[6px] items-center xl:text-[12px] ">
+            <svg 
+            class="xl:w-4 xl:h-4"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
@@ -43,8 +44,9 @@
               /></svg
             >300
           </p>
-          <p class="text-[14px] font-medium flex gap-[6px] items-center">
-            <svg
+          <p class="text-[14px] font-medium flex gap-[6px] items-center xl:text-[12px] ">
+            <svg 
+            class="xl:w-4 xl:h-4"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"

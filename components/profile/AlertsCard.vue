@@ -1,5 +1,7 @@
 <template lang="html">
-  <div class="alerts-card rounded-[8px] bg-bg-grey px-6 pb-[25px] pt-[36px] relative h-[195px]">
+  <div
+    class="alerts-card rounded-[8px] bg-bg-grey px-6 pb-[25px] pt-[36px] xl:px-4 xl:pt-[28px] xl:pb-4 relative h-[195px] xl:h-auto xl:min-w-[270px]"
+  >
     <button class="top-2 right-2 absolute">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -17,10 +19,12 @@
         />
       </svg>
     </button>
-    <div class="flex flex-col justify-between h-full">
+    <div class="flex flex-col justify-between h-full xl:gap-4">
       <div class="flex flex-col gap-2">
-        <h3 class="text-base font-medium text-black">Сообщение от Akmal Ikromov</h3>
-        <p class="text-[14px] text-gray-64">
+        <h3 class="text-base font-medium text-black xl:text-[14px]">
+          Сообщение от Akmal Ikromov
+        </h3>
+        <p class="text-[14px] text-gray-64 xl:text-[12px]">
           У заказчиков должна быть возможность оценить ваши навыки
         </p>
       </div>

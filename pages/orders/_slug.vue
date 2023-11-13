@@ -359,9 +359,6 @@ export default {
       this.__POST_ORDER(form);
     },
     async __POST_ORDER(data) {
-      this.close();
-      this.openSuccess();
-
       if (window.innerWidth > 1200) this.visible = true;
       try {
         await this.$store.dispatch("fetchOrders/postSendRequest", {
@@ -370,6 +367,7 @@ export default {
         });
         this.bottomModal = false;
         this.visible = true;
+        this.close();
         this.openSuccess();
         // this.$router.go(-1);
       } catch (e) {

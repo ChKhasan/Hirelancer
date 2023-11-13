@@ -1,23 +1,23 @@
 <template lang="html">
   <div
-    class="comments-card border border-solid border-grey-8 rounded-[12px] px-4 py-4 flex flex-col gap-[19px]"
+    class="comments-card border border-solid border-grey-8 rounded-[12px] px-4 py-4 flex flex-col gap-[19px] xl:gap-4 xl:min-w-[90%]"
   >
-    <div class="price-info rounded-[4px] text-grey-80  text-base px-4 py-1">
+    <div class="price-info rounded-[4px] text-grey-80  text-base px-4 py-1 xl:px-2 xl:py-2 xl:text-[12px] xl:leading-4">
       За выполнение заказа
       <span class="text-black font-medium">Настройка Google Merchant Center</span> фид на
       сумму 200 000 so’m
     </div>
     <div class="body">
-      <p class="text-base text-grey-64">
+      <p class="text-base text-grey-64 xl:text-[14px] xl:leading-5">
         В течение последнего десятилетия мы стремились помочь нашим партнерам, от малого и
         среднего бизнеса до таких предприятий, как Corel и Oppo, расширить свое цифровое
         присутствие и повысить качество своих продуктов. Мы всегда стараемся делать это с
         большой отдачей и страстью, потому что это Путь!
       </p>
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-between xl:flex-col xl:gap-4">
       <div class="flex gap-4">
-        <div class="image w-[56px] h-[56px] rounded-full overflow-hidden">
+        <div class="image w-[56px] h-[56px] rounded-full overflow-hidden xl:w-10 xl:h-10">
           <img
             class="w-full h-full object-cover"
             src="../../assets/images/Avatar 5.png"
@@ -25,7 +25,7 @@
           />
         </div>
         <div class="flex flex-col gap-2">
-          <h6 class="text-base text-black font-medium">Muhammadullo Egamberdiyev</h6>
+          <h6 class="text-base text-black font-medium xl:text-[12px] xl:leading-4">Muhammadullo Egamberdiyev</h6>
           <p class="text-[12px] text-yellow flex gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,9 +42,9 @@
           </p>
         </div>
       </div>
-      <div class="flex flex-col justify-between gap-2 items-end">
+      <div class="flex flex-col justify-between gap-2 items-end xl:flex-row xl:items-center">
         <span
-          class="flex gap-1 items-center bg-grey-light text-main-color text-[14px] px-[10px] h-[36px] rounded-[500px] border border-solid border-main-color"
+          class="flex gap-1 items-center bg-grey-light text-main-color text-[14px] px-[10px] h-[36px] rounded-[500px] border border-solid border-main-color xl:text-[12px] xl:font-semibold"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -61,8 +61,9 @@
             /></svg
           >Положительный</span
         >
-        <p class="flex gap-2 text-[14px] text-grey-40 font-medium">
+        <p class="flex gap-2 text-[14px] text-grey-40 font-medium xl:text-[12px] ">
           <svg
+          class="xl:w-4 xl:h-4"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"

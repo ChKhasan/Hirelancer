@@ -1,6 +1,27 @@
 <template lang="html">
   <div class="mobile-header px-4 hidden bg-white w-full py-2 z-50">
     <div class="flex justify-between items-center">
+      <button
+        v-for="item in titleList"
+        v-if="$route.name.includes('profile') && item.pathName === $route.name"
+        @click="$router.go(-1)"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+        >
+          <path
+            d="M16.6667 13.3334L10 20M10 20L16.6667 26.6667M10 20L30 20"
+            stroke="#020105"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
       <h4
         v-for="item in titleList"
         v-if="item.pathName === $route.name"
@@ -91,6 +112,10 @@ export default {
         {
           title: "Freelanserlar",
           pathName: "freelancers",
+        },
+        {
+          title: "Портфолио",
+          pathName: "profile-user-portfolio",
         },
       ],
     };

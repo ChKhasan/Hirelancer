@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="profile-tab flex justify-start">
-    <div class="rounded-2xl bg-bg-grey px-4 py-4 flex gap-6">
+    <div class="rounded-2xl bg-bg-grey px-4 py-4 flex gap-6 xl:hidden">
       <nuxt-link
         :to="`/profile/${$route.params.user}`"
         :class="{ active: $route.name == 'profile-user' }"

@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="statistic-card flex flex-col gap-6 px-6 py-6 rounded-[6px] bg-bg-grey relative">
-    <p class="text-base text-balck">Просмотры профиля</p>
-    <h1 class="text-[40px] text-blue font-semibold">265</h1>
+  <div class="statistic-card flex flex-col gap-6 px-6 py-6 rounded-[6px] bg-bg-grey relative xl:px-3 xl:py-3 xl:gap-3 overflow-hidden">
+    <p class="text-base text-balck xl:text-[12px] xl:text-black">Просмотры профиля</p>
+    <h1 class="text-[40px] text-blue font-semibold xl:text-[20px]">265</h1>
     <span class="absolute left-0 bottom-0">
       <svg
         xmlns="http://www.w3.org/2000/svg"

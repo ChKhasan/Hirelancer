@@ -1,8 +1,13 @@
 <template lang="html">
   <div class="comments flex flex-col gap-4">
     <div class="flex justify-between">
-      <h1 class="text-black text-[24px] font-semibold">Отзывы клиентов</h1>
-      <div class="flex gap-4 items-center">
+      <h1 class="text-black text-[24px] font-semibold xl:text-[18px] xl:flex xl:w-full xl:justify-between">Отзывы клиентов <span class="hidden xl:block ">
+        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 10.5L12 14.5L17 10.5" stroke="#020105" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+      </span></h1>
+      <div class="flex gap-4 items-center xl:hidden">
         <a-select v-model="sort" placeholder="Положительный" class="w-[216px]">
           <a-select-option :value="region" v-for="region in [1, 2, 3, 4]" :key="region">
             {{ region }}</a-select-option
@@ -27,7 +32,7 @@
         ></nuxt-link>
       </div>
     </div>
-    <div class="">
+    <div class="xl:hidden">
       <div class="comments-swiper swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -50,6 +55,14 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="hidden xl:flex gap-3 xl:overflow-x-scroll comments-grid">
+      <CommentsCard />
+      <CommentsCard />
+      <CommentsCard />
+      <CommentsCard />
+      <CommentsCard />
+      <CommentsCard />
     </div>
   </div>
 </template>
@@ -104,7 +117,14 @@ export default {
   border: 1px solid var(--grey-8);
   background: white;
 }
-.comments :deep(.ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
+.comments
+  :deep(.ant-select-focused
+    .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
   box-shadow: 0 0 0 2px rgba(92, 70, 229, 0.2);
+}
+@media (max-width: 1200px) {
+  .comments-grid::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

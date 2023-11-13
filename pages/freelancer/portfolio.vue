@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="portfolio">
     <ProfileLayout :profile="false">
-      <div class="head flex flex-col gap-4 mt-8">
-        <h3 class="text-[24px] text-black font-semibold">Портфолио</h3>
+      <div class="head flex flex-col gap-4 mt-8 ">
+        <h3 class="text-[24px] text-black font-semibold ">Портфолио</h3>
         <div class="flex justify-between items-center">
           <div class="buttons flex gap-6">
             <button
@@ -48,7 +48,7 @@
           </div>
         </div>
       </div>
-      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]">
+      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px] ">
         <PortfolioViewCard />
         <PortfolioViewCard />
         <PortfolioViewCard />

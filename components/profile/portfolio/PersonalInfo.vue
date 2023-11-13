@@ -1,9 +1,14 @@
 <template lang="html">
   <div class="personal-info">
-    <div class="border border-solid border-grey-8 px-6 py-4 rounded-2xl h-full">
+    <div
+      class="border border-solid border-grey-8 px-6 py-4 rounded-2xl h-full xl:border-[0] xl:px-0 xl:border-t xl:pt-6 xl:pb-0 rounded-none"
+    >
       <div class="flex justify-between">
-        <h6 class="text-[18px] font-medium text-black">О фрилансере</h6>
-        <button v-if="isEdit" class="flex gap-[6px] text-base text-blue font-medium items-center">
+        <h6 class="text-[18px] font-medium text-black xl:font-semibold">О фрилансере</h6>
+        <button
+          v-if="isEdit"
+          class="flex gap-[6px] text-base text-blue font-medium items-center xl:hidden"
+        >
           Редактировать
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,22 +32,39 @@
             </defs>
           </svg>
         </button>
+        <button class="hidden xl:block">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill="none"
+          >
+            <path
+              d="M7 10.5L12 14.5L17 10.5"
+              stroke="#020105"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
       </div>
       <div
-        class="body pt-6 border-[0] border-t border-solid border-grey-8 mt-4 flex flex-col gap-4"
+        class="body pt-6 border-[0] border-t border-solid border-grey-8 mt-4 flex flex-col gap-4 xl:border-[0] xl:pt-0"
       >
-        <p class="text-base text-grey-64">
+        <p class="text-base text-grey-64 xl:text-[14px]">
           В течение последнего десятилетия мы стремились помочь нашим партнерам, от малого
           и среднего бизнеса до таких предприятий, как Corel и Oppo, расширить свое
           цифровое присутствие и повысить качество своих продуктов. Мы всегда стараемся
           делать это с большой отдачей и страстью, потому что это Путь!
         </p>
-        <p class="text-base text-grey-64">
+        <p class="text-base text-grey-64 xl:text-[14px]">
           Наша приверженность принесла нам звездную оценку 4,9 ★★★★★ на основе более чем
           60 отзывов на Clutch. Наша страсть привела к получению более 70 наград, в том
           числе Top-1 Dribbble
         </p>
-        <p class="text-base text-grey-64">
+        <p class="text-base text-grey-64 xl:text-[14px]">
           Так что, если наша команда находит отклик у вас, просто напишите нам. Давайте
           обсудим, чего мы можем достичь вместе!
         </p>
@@ -52,7 +74,7 @@
 </template>
 <script>
 export default {
-  props: ['isEdit']
+  props: ["isEdit"],
 };
 </script>
 <style lang=""></style>
