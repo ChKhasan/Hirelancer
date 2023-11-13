@@ -176,7 +176,7 @@
         <ul class="rounded-[16px] border border-solid border-grey-light">
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
-              to="/"
+            :to="`/profile/${$route.params.user}/info`"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
               ><svg
                 width="24"

@@ -117,6 +117,10 @@ export default {
           title: "Портфолио",
           pathName: "profile-user-portfolio",
         },
+        {
+          title: "Профиль",
+          pathName: "profile-user-info",
+        },  
       ],
     };
   },
