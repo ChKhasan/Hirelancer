@@ -12,7 +12,9 @@
           </div>
           <div class="flex justify-center flex-col gap-2">
             <h4 class="text-black text-[14px] font-semibold leading-[19px]">
-              Muhammadullo Egamberdiyev Abbos O’gli
+              {{
+                  `${$store.state.userInfo["name"]} ${$store.state.userInfo["surname"]}`
+                }}
             </h4>
             <p class="text-grey-40 text-[12px]">Зарегистрирован: более 5 лет назад</p>
           </div>
