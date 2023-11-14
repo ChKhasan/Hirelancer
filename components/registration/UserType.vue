@@ -148,7 +148,7 @@
           telefon raqamingizga tasdiqlash kodi yuborildi
         </p>
         <div
-          class="buttons grid grid-cols-2 gap-4 mt-6 xl:mt-0 xl:flex xl:flex-col-reverse xl:gap-2 xl:w-full"
+          class="buttons grid grid-cols-2 gap-4 mt-6 xl:mt-0 xl:flex xl:flex-col-reverse xl:gap-2 xl:w-full xl:fixed xl:left-0 xl:px-4 xl:bottom-4"
         >
           <button
             @click="$router.go(-1)"

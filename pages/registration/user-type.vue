@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="registration pt-[130px] h-[100vh] w-full overflow-hidden xl:pt-20 relative xl:px-4" >
+  <div class="registration pt-[130px] h-[100vh] xl:h-full w-full overflow-hidden xl:pt-20 relative xl:px-4" >
     <div class="2xl:container mx-auto h-full flex flex-col gap-4">
       <div class="flex justify-center xl:h-full">
         <UserType @sendCode="sendCode" />
