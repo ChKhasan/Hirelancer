@@ -176,7 +176,7 @@
         <ul class="rounded-[16px] border border-solid border-grey-light">
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
-            :to="`/profile/${$route.params.user}/info`"
+              :to="`/profile/${$route.params.user}/info`"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
               ><svg
                 width="24"
@@ -524,10 +524,10 @@
             ></nuxt-link>
           </li>
           <li class="border-[0] border-b border-solid border-grey-light">
-            <nuxt-link
-              to=""
+            <button @click="$store.dispatch('logout')"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
-              ><svg
+            >
+              <svg
                 width="21"
                 height="18"
                 viewBox="0 0 21 18"
@@ -569,8 +569,9 @@
                     stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                  /></svg></span
-            ></nuxt-link>
+                  /></svg
+              ></span>
+            </button>
           </li>
         </ul>
       </div>

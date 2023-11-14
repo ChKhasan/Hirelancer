@@ -118,7 +118,11 @@
         >Frilanserlar
       </button>
       <button
-        @click="$router.push('/registration')"
+        @click="
+          $store.state.auth
+            ? $router.push('/profile/freelancer')
+            : $router.push('/registration')
+        "
         :class="{ active: $route.name.includes('profile') }"
         class="flex flex-col gap-1 items-center text-grey-64 text-[12px] font-medium px-1 pt-[6px]"
       >
@@ -134,8 +138,13 @@
             stroke="#5D5D5F"
             stroke-width="1.5"
             stroke-linejoin="round"
-          /></svg
-        >Kabinet
+          />
+        </svg>
+        {{
+          $store.state.auth && Boolean($store.state.userInfo["name"])
+            ? $store.state.userInfo["name"]
+            : "Kabinet"
+        }}
       </button>
     </div>
   </div>
