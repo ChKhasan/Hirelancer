@@ -115,7 +115,9 @@
                   class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6 xl:flex-row-reverse xl:px-3 xl:py-[14px]"
                   :class="{ active: form.gender == 'male' }"
                 >
-                  <div class="flex justify-between items-center w-full xl:justify-end xl:pr-1">
+                  <div
+                    class="flex justify-between items-center w-full xl:justify-end xl:pr-1"
+                  >
                     <svg
                       class="xl:hidden"
                       xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +157,9 @@
                   class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6 xl:flex-row-reverse xl:px-3 xl:py-[14px]"
                   :class="{ active: form.gender == 'female' }"
                 >
-                  <div class="flex justify-between items-center w-full xl:justify-end xl:pr-1">
+                  <div
+                    class="flex justify-between items-center w-full xl:justify-end xl:pr-1"
+                  >
                     <svg
                       class="xl:hidden"
                       xmlns="http://www.w3.org/2000/svg"
@@ -206,9 +210,12 @@
             label="Sohangizni tanlang"
           >
             <div
-              class="min-h-[58px] xl:min-h-[50px]  items-center border border-solid flex justify-between border-grey-8 rounded-lg px-4 py-3"
+              class="min-h-[58px] xl:min-h-[50px] items-center border border-solid flex justify-between border-grey-8 rounded-lg px-4 py-3"
             >
-              <p class="text-grey-40 text-base xl:text-[14px]" v-if="activeCheckedList == 0">
+              <p
+                class="text-grey-40 text-base xl:text-[14px]"
+                v-if="activeCheckedList == 0"
+              >
                 Специальности
               </p>
               <div v-else class="w-full flex flex-wrap gap-[4px]">
@@ -237,9 +244,25 @@
                 </div>
               </div>
               <button
-                class="w-6"
+                class="w-6 xl:hidden"
                 @click="(visible = true), (checkedList = [...activeCheckedList])"
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="3"
+                  height="13"
+                  viewBox="0 0 3 13"
+                  fill="none"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.5 1.25C2.5 1.94036 1.94036 2.5 1.25 2.5C0.559644 2.5 0 1.94036 0 1.25C0 0.559644 0.559644 0 1.25 0C1.94036 0 2.5 0.559644 2.5 1.25ZM2.5 6.25C2.5 6.94036 1.94036 7.5 1.25 7.5C0.559644 7.5 0 6.94036 0 6.25C0 5.55964 0.559644 5 1.25 5C1.94036 5 2.5 5.55964 2.5 6.25ZM1.25 12.5C1.94036 12.5 2.5 11.9404 2.5 11.25C2.5 10.5596 1.94036 10 1.25 10C0.559644 10 0 10.5596 0 11.25C0 11.9404 0.559644 12.5 1.25 12.5Z"
+                    fill="#020105"
+                  />
+                </svg>
+              </button>
+              <button class="w-6 hidden xl:block" @click="open">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="3"
@@ -290,7 +313,9 @@
         </div>
       </a-form-model>
     </div>
-    <div class="buttons grid grid-cols-2 gap-4 xl:flex xl:flex-col-reverse xl:gap-2 xl:pt-6">
+    <div
+      class="buttons grid grid-cols-2 gap-4 xl:flex xl:flex-col-reverse xl:gap-2 xl:pt-6"
+    >
       <button
         @click="$router.go(-1)"
         class="h-[60px] xl:h-[52px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-black font-medium"
@@ -410,6 +435,143 @@
         </div>
       </div>
     </a-modal>
+    <vue-bottom-sheet-vue2
+      ref="openSpecials"
+      class="bottom-drawer spicial-drawer h-full"
+      :init-sheet-height="700"
+    >
+      <div class="px-4 pb-4 flex flex-col justify-between h-full">
+        <div class="flex flex-col">
+          <div
+            class="flex justify-between items-center flex-col gap-3 pb-6 border-[0] border-b border-solid border-grey-light"
+          >
+            <h6 class="text-black text-[18px] font-semibold">Sohangizni tanlang</h6>
+            <p class="text-[14px] text-grey-80 flex gap-2 items-center">
+              <span class="text-main-color font-medium">{{ checkedList.length }}</span
+              >: yonalish tanlandi
+              <span>(max 3 ta)</span>
+            </p>
+          </div>
+          <div class="drop-list flex flex-col gap-2 xl:gap-8 mt-8">
+            <div
+              class="dropdown overflow-hidden"
+              :class="{ active: dropdownOpens.includes(item?.id) }"
+              v-for="item in specialities"
+              @click="onSelect(item?.id)"
+            >
+              <button
+                class="drop-head xl:px-0 xl:py-0 bg-white relative z-20 w-full flex justify-between items-center px-[10px] py-[10px]"
+                @click="handleDropdown(item?.id)"
+              >
+                <h2
+                  class="text-[14px] font-medium text-grey-80 flex gap-2 items-center"
+                  :class="{ 'text-blue': dropdownOpens.includes(item?.id) }"
+                >
+                  <span class="flex items-center gap-2"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M11.9996 20C8.46499 20 5.59961 17.0833 5.59961 13.4854C5.59961 9.91563 7.64227 5.75007 10.8293 4.26044C11.2007 4.08681 11.6002 4 11.9996 4V20Z"
+                        fill="#009A10"
+                      />
+                      <path
+                        opacity="0.3"
+                        d="M13.1703 4.26044C12.7989 4.08681 12.3994 4 12 4V9.60005L15.5453 6.05473C14.8551 5.29647 14.057 4.67489 13.1703 4.26044Z"
+                        fill="#009A10"
+                      />
+                      <path
+                        opacity="0.4"
+                        d="M12 9.60001V14L17.2914 8.70857C16.8337 7.73243 16.245 6.82334 15.5453 6.05469L12 9.60001Z"
+                        fill="#009A10"
+                      />
+                      <path
+                        opacity="0.6"
+                        d="M12 17.9999L18.2488 11.7511C18.0728 10.7187 17.7471 9.68039 17.2914 8.7085L12 13.9999V17.9999Z"
+                        fill="#009A10"
+                      />
+                      <path
+                        opacity="0.7"
+                        d="M18.2488 11.751L12 17.9998V19.9997C15.5346 19.9997 18.4 17.083 18.4 13.4851C18.4 12.9177 18.3484 12.3353 18.2488 11.751Z"
+                        fill="#009A10"
+                      />
+                    </svg>
+                    {{ item?.name_ru }}</span
+                  >
+                  <span class="text-[12px] text-grey-40"
+                    >({{ item?.children.length }})</span
+                  >
+                </h2>
+                <span
+                  :class="{ 'rotate-180': dropdownOpens.includes(item?.id) }"
+                  class="drop-icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M7 10L12 14L17 10"
+                      stroke="#020105"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    /></svg
+                ></span>
+              </button>
+
+              <div class="drop-body relative z-10">
+                <div class="py-4 flex flex-col gap-4 xl:gap-8">
+                  <div class="flex gap-3 flex-wrap">
+                    <button
+                      class="px-4 py-2 bg-bg-grey rounded-[22px] flex items-center gap-2"
+                      v-for="child in item?.children"
+                      @click="onchecked(child)"
+                    >
+                      <a-checkbox
+                        :checked="
+                          Boolean(
+                            checkedList.find((elemChild) => elemChild.id == child.id)
+                          )
+                        "
+                      />
+                      <p class="text-grey-80 text-[14px] font-medium">
+                        {{ child?.name_ru }}
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- </Transition> -->
+            </div>
+         
+            
+          </div>
+        </div>
+        <div class="flex gap-2 flex-col w-full mt-20">
+          <button
+            @click="saveChecked"
+            class="h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[14px] text-white font-medium"
+          >
+            Tasdiqlash
+          </button>
+          <button
+            @click="closeChecked"
+            class="h-[52px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[14px] text-black font-medium"
+          >
+            Bekor qilish
+          </button>
+        </div>
+      </div>
+    </vue-bottom-sheet-vue2>
   </div>
 </template>
 <script>
@@ -418,6 +580,8 @@ export default {
   props: ["regions", "specialities"],
   data() {
     return {
+      dropdown: false,
+      dropdownOpens: [],
       checkedList: [],
       activeCheckedList: [],
       modalList: null,
@@ -443,6 +607,11 @@ export default {
     };
   },
   methods: {
+    handleDropdown(id) {
+      this.dropdownOpens.includes(id)
+        ? (this.dropdownOpens = this.dropdownOpens.filter((item) => item != id))
+        : this.dropdownOpens.push(id);
+    },
     closeChecked() {
       this.checkedList = [];
       this.visible = false;
@@ -451,6 +620,13 @@ export default {
       this.activeCheckedList = [...this.checkedList];
       this.checkedList = [];
       this.visible = false;
+      this.close();
+    },
+    open() {
+      this.$refs.openSpecials.open();
+    },
+    close() {
+      this.$refs.openSpecials.close();
     },
     onchecked(obj) {
       if (this.checkedList.includes(obj)) {
@@ -504,6 +680,9 @@ export default {
 };
 </script>
 <style lang="css" scoped>
+.spicial-drawer :deep(.bottom-sheet__main) {
+  height: 100%;
+}
 .client-types .activeF {
   border-color: var(--blue);
   background-color: var(--blue);
@@ -645,6 +824,40 @@ export default {
     .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
   border: 1px solid var(--blue);
   box-shadow: 0px 0px 0px 3px rgba(70, 105, 229, 0.2);
+}
+.drop-body {
+  max-height: 0;
+  /* height: 0; */
+  overflow: hidden;
+  transition: max-height 0.2s linear;
+}
+.drop-icon {
+  transition: 0.2s linear;
+}
+.drop-list .active .drop-body {
+  max-height: 200px;
+  /* height: auto; */
+}
+.drop-list .active  .drop-head h2 {
+  color: var(--main-color);
+}
+.drop-head {
+  transition: 0.2s linear;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 @media (max-width: 1200px) {
   .form-item :deep(.ant-form-item-label label) {
