@@ -67,7 +67,7 @@
       </a-form-model>
     </div>
     <div
-      class="buttons grid grid-cols-2 gap-4 xl:gap-2 xl:flex xl:flex-col-reverse xl:absolute xl:bottom-4 xl:w-full xl:left-0"
+      class="buttons grid grid-cols-2 gap-4 xl:gap-2 xl:flex xl:flex-col-reverse xl:fixed xl:bottom-4 xl:w-full xl:left-0 xl:px-4"
     >
       <button
         @click="$router.go(-1)"
