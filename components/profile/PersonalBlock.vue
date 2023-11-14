@@ -235,36 +235,36 @@
           </h6>
           <PersonalMessengers />
         </div>
-        <div  v-if="profile">
-        <div
-          class="personalBlock-price border border-dashed border-blue rounded-[15px] px-[20px] py-[20px] bg-white"
-        >
-          <div class="flex justify-between">
-            <p class="text-grey-40 text-base">Баланс</p>
-            <nuxt-link class="text-blue text-[14px] underline" to="/"
-              >История транзакций</nuxt-link
-            >
-          </div>
-          <h4 class="text-black text-[24px] font-semibold mt-2">560,000 сум</h4>
-          <button
-            class="rounded-[8px] h-[44px] w-full bg-apple-grey flex items-center justify-center text-blue text-[14px] font-semibold mt-4"
+        <div v-if="profile">
+          <div
+            class="personalBlock-price border border-dashed border-blue rounded-[15px] px-[20px] py-[20px] bg-white"
           >
-            Пополнить
-          </button>
+            <div class="flex justify-between">
+              <p class="text-grey-40 text-base">Баланс</p>
+              <nuxt-link class="text-blue text-[14px] underline" to="/"
+                >История транзакций</nuxt-link
+              >
+            </div>
+            <h4 class="text-black text-[24px] font-semibold mt-2">560,000 сум</h4>
+            <button
+              class="rounded-[8px] h-[44px] w-full bg-apple-grey flex items-center justify-center text-blue text-[14px] font-semibold mt-4"
+            >
+              Пополнить
+            </button>
+          </div>
         </div>
-      </div>
-      <button
-        class="pro-btn overflow-hidden relative h-[75px] rounded-[16px] flex items-center justify-center"
-      >
-        <img
-          class="w-full h-full object-cover"
-          src="@/assets/images/profile-btn.png"
-          alt=""
-        />
-        <p class="absolute z-10 text-white text-[18px] font-semibold">
-          Получить про аккаунт
-        </p>
-      </button>
+        <button
+          class="pro-btn overflow-hidden relative h-[75px] rounded-[16px] flex items-center justify-center"
+        >
+          <img
+            class="w-full h-full object-cover"
+            src="@/assets/images/profile-btn.png"
+            alt=""
+          />
+          <p class="absolute z-10 text-white text-[18px] font-semibold">
+            Получить про аккаунт
+          </p>
+        </button>
       </div>
       <!-- <div class="mt-[34px] flex flex-col gap-8">
         <div class="flex flex-col gap-3">
@@ -388,17 +388,44 @@
           ></nuxt-link>
         </div>
       </div> -->
-      
+
       <div class="flex flex-col gap-4 items-center mt-[100px]">
         <p class="text-grey-40 text-[12px] font-semibold uppercase">
           УЧАСТНИК С: 21 МАЯ 2010 ГОДА
         </p>
         <span class="h-[1px] w-full bg-grey-8"></span>
-        <button class="underline text-base text-pantone-2023 flex items-center gap-[10px]">выйти<svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.35355 7.5606C3.64645 7.26771 3.64645 6.79284 3.35355 6.49994C3.06066 6.20705 2.58579 6.20705 2.29289 6.49994L1 7.79284C0.316582 8.47625 0.316584 9.58429 1 10.2677L2.29289 11.5606C2.58579 11.8535 3.06066 11.8535 3.35355 11.5606C3.64645 11.2677 3.64645 10.7928 3.35355 10.4999L2.63388 9.78027L8.75 9.78027C9.16421 9.78027 9.5 9.44449 9.5 9.03027C9.5 8.61606 9.16421 8.28027 8.75 8.28027L2.63388 8.28027L3.35355 7.5606Z" fill="#F2154A"/>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.75 0.25L8.5 0.249999C5.87665 0.249999 3.75 2.37665 3.75 5C3.75 5.41421 4.08579 5.75 4.5 5.75C4.91421 5.75 5.25 5.41421 5.25 5C5.25 3.20507 6.70507 1.75 8.5 1.75L12.2859 1.75C13.1524 0.826731 14.3839 0.25 15.75 0.25ZM12.2859 16.25L8.5 16.25C6.70507 16.25 5.25 14.7949 5.25 13C5.25 12.5858 4.91421 12.25 4.5 12.25C4.08579 12.25 3.75 12.5858 3.75 13C3.75 15.6234 5.87665 17.75 8.5 17.75L15.75 17.75C14.3839 17.75 13.1524 17.1733 12.2859 16.25Z" fill="#F2154A"/>
-  <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M20.5 13C20.5 15.6234 18.3734 17.75 15.75 17.75C13.1266 17.75 11 15.6234 11 13L11 5C11 2.37665 13.1266 0.249999 15.75 0.25C18.3734 0.25 20.5 2.37665 20.5 5L20.5 13Z" fill="#F2154A"/>
-</svg></button>
+        <button
+          @click="$store.dispatch('logout')"
+          class="underline text-base text-pantone-2023 flex items-center gap-[10px]"
+        >
+          выйти<svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="18"
+            viewBox="0 0 21 18"
+            fill="none"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M3.35355 7.5606C3.64645 7.26771 3.64645 6.79284 3.35355 6.49994C3.06066 6.20705 2.58579 6.20705 2.29289 6.49994L1 7.79284C0.316582 8.47625 0.316584 9.58429 1 10.2677L2.29289 11.5606C2.58579 11.8535 3.06066 11.8535 3.35355 11.5606C3.64645 11.2677 3.64645 10.7928 3.35355 10.4999L2.63388 9.78027L8.75 9.78027C9.16421 9.78027 9.5 9.44449 9.5 9.03027C9.5 8.61606 9.16421 8.28027 8.75 8.28027L2.63388 8.28027L3.35355 7.5606Z"
+              fill="#F2154A"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M15.75 0.25L8.5 0.249999C5.87665 0.249999 3.75 2.37665 3.75 5C3.75 5.41421 4.08579 5.75 4.5 5.75C4.91421 5.75 5.25 5.41421 5.25 5C5.25 3.20507 6.70507 1.75 8.5 1.75L12.2859 1.75C13.1524 0.826731 14.3839 0.25 15.75 0.25ZM12.2859 16.25L8.5 16.25C6.70507 16.25 5.25 14.7949 5.25 13C5.25 12.5858 4.91421 12.25 4.5 12.25C4.08579 12.25 3.75 12.5858 3.75 13C3.75 15.6234 5.87665 17.75 8.5 17.75L15.75 17.75C14.3839 17.75 13.1524 17.1733 12.2859 16.25Z"
+              fill="#F2154A"
+            />
+            <path
+              opacity="0.4"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M20.5 13C20.5 15.6234 18.3734 17.75 15.75 17.75C13.1266 17.75 11 15.6234 11 13L11 5C11 2.37665 13.1266 0.249999 15.75 0.25C18.3734 0.25 20.5 2.37665 20.5 5L20.5 13Z"
+              fill="#F2154A"
+            />
+          </svg>
+        </button>
         <!-- <p class="underline text-base text-pantone-2023 flex items-center gap-[10px]">
           Сообщить модератору о нарушении
           <svg

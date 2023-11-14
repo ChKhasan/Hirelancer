@@ -196,3 +196,8 @@ a:hover {
   background-color: var(--blue);
   border-radius: 6px;
 }
+@media (max-width: 1200px) {
+  .auth-item label {
+    font-size: 14px;
+  }
+}

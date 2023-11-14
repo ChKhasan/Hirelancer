@@ -19,7 +19,7 @@ export default {
     { src: "~plugins/antdv.js" },
     { src: "~plugins/v-mask.js", ssr: false },
     { src: "~plugins/vue-otp-input.js", ssr: false },
-    { src: "~plugins/vue-drawer-layout.js", ssr: false },   
+    { src: "~plugins/vue-drawer-layout.js", ssr: false },
   ],
 
   components: true,
@@ -34,6 +34,8 @@ export default {
     },
     baseURL: "https://hirelancer.kifa.uz/api",
   },
+
+
   build: {
     babel: {
       compact: true,

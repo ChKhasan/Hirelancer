@@ -458,9 +458,12 @@
         </div>
       </div>
     </a-modal>
+    <Loader v-if="loading" />
   </div>
 </template>
 <script>
+import Loader from "../../../../components/Loader.vue";
+
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -477,6 +480,7 @@ export default {
       errorSelect: false,
       modalList: null,
       visible: false,
+      loading: true,
       form: {
         name: "",
         description: "",
@@ -499,12 +503,19 @@ export default {
       uploadList: [1, 2, 3, 4, 5, 6, 7, 8],
     };
   },
+  mounted() {
+    this.loading = true;
+    if (!localStorage.getItem("auth-token")) {
+      this.$router.push("/");
+    } else {
+      this.loading = false;
+    }
+  },
   async asyncData({ store }) {
     const [specialitiesData] = await Promise.all([
       store.dispatch("fetchSpecialities/getSpecialities"),
     ]);
     const specialities = specialitiesData.content;
-
     return {
       specialities,
     };
@@ -528,17 +539,14 @@ export default {
         }
         this.checkedList.push(obj);
       }
-      console.log(this.checkedList);
     },
     deleteChecked(id) {
       this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
     },
     onSelect(id) {
       this.modalList = id;
-      console.log(id);
     },
     onSubmit() {
-      console.log(this.form);
       let formData = new FormData();
       this.fileList.forEach((item) => {
         formData.append("files[]", item.originFileObj);
@@ -548,7 +556,6 @@ export default {
       });
       formData.append("name", this.form.name);
       formData.append("description", this.form.description);
-
       if (!this.form.deadline_negotiable) {
         formData.append("deadline", this.form.deadline);
       } else {
@@ -564,7 +571,6 @@ export default {
       } else {
         this.errorSelect = false;
       }
-
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           if (this.fileList.length == 0) {
@@ -589,7 +595,6 @@ export default {
         });
         this.$router.go(-1);
       } catch (e) {
-        console.log(e.response);
         this.$notification["error"]({
           message: "Error",
           description: e.response.statusText,
@@ -629,6 +634,7 @@ export default {
       this.visible = false;
     },
   },
+  components: { Loader },
 };
 </script>
 <style lang="css" scoped>

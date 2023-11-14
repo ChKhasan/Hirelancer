@@ -33,12 +33,14 @@ export default {
   },
 
   async mounted() {
-    try {
-      const [userInfoData] = await Promise.all([
-        this.$store.dispatch("fetchAuth/getUserInfo"),
-      ]);
-      this.$store.commit("getUserInfo", userInfoData);
-    } catch (e) {}
+    if (localStorage.getItem("auth-token")) {
+      try {
+        const [userInfoData] = await Promise.all([
+          this.$store.dispatch("fetchAuth/getUserInfo"),
+        ]);
+        this.$store.commit("getUserInfo", userInfoData);
+      } catch (e) {}
+    }
   },
 
   components: { TheHeader, TheFooter, BottomBar, MobileHeader },

@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="registration pt-[130px] h-[100vh] w-full overflow-hidden">
+  <div class="registration pt-[130px] h-[100vh] w-full overflow-hidden xl:pt-20 relative xl:px-4" >
     <div class="2xl:container mx-auto h-full flex flex-col gap-4">
-      <div class="flex justify-center">
+      <div class="flex justify-center xl:h-full">
         <UserType @sendCode="sendCode" />
       </div>
     </div>
@@ -16,8 +16,6 @@ export default {
   },
   methods: {
     sendCode(form) {
-      console.log(form);
-      // this.$router.push("/registration/user-info");
       this.__POST_SEND_CODE(form);
     },
     async __POST_SEND_CODE(form) {
@@ -31,12 +29,15 @@ export default {
     },
     async __GET_USER() {
       try {
-        const userInfoData = this.$store.dispatch("fetchAuth/getUserInfo");
-        this.userInfo = userInfoData;
-        if (this.userInfo?.name) {
-          this.$router.push("/profile/freelancer");
-        } else {
-          this.$router.push("/registration/user-info");
+        if (localStorage.getItem("auth-token")) {
+          const userInfoData = await this.$store.dispatch("fetchAuth/getUserInfo");
+          this.userInfo = userInfoData;
+          this.$store.commit("getUserInfo", userInfoData);
+          if (this.userInfo?.name) {
+            this.$router.push("/profile/freelancer");
+          } else {
+            this.$router.push("/registration/user-info");
+          }
         }
       } catch (e) {}
     },

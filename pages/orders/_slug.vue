@@ -333,7 +333,6 @@ export default {
     };
   },
   mounted() {
-    console.log(window.innerWidth);
   },
   methods: {
     open() {
@@ -371,7 +370,6 @@ export default {
         this.openSuccess();
         // this.$router.go(-1);
       } catch (e) {
-        console.log(e.response);
         this.$notification["error"]({
           message: "Error",
           description: e.response.statusText,

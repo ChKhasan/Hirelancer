@@ -412,20 +412,17 @@ export default {
         }
         this.checkedList.push(obj);
       }
-      console.log(this.checkedList);
     },
     deleteChecked(id) {
       this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
     },
     onSelect(id) {
       this.modalList = id;
-      console.log(id);
     },
     handleOk() {
       this.visible = false;
     },
     onChange(date, dateString) {
-      console.log(date, dateString);
     },
     onSubmit() {
       // name: "",
@@ -451,7 +448,6 @@ export default {
         if (valid) {
           this.$emit("sendRegister", data);
         } else {
-          console.log("error submit!!");
           return false;
         }
       });

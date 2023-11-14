@@ -283,9 +283,12 @@
         </div>
       </div>
     </a-modal>
+    <Loader v-if="loading" />
   </div>
 </template>
 <script>
+import Loader from "../../../../components/Loader.vue";
+
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -297,6 +300,7 @@ function getBase64(file) {
 export default {
   data() {
     return {
+      loading: true,
       errorSelect: false,
       checkedList: [],
       activeCheckedList: [],
@@ -344,12 +348,17 @@ export default {
       store.dispatch("fetchSpecialities/getSpecialities"),
     ]);
     const specialities = specialitiesData.content;
-
     return {
       specialities,
     };
   },
   mounted() {
+    this.loading = true;
+    if (!localStorage.getItem("auth-token")) {
+      this.$router.push("/");
+    } else {
+      this.loading = false;
+    }
     this.__GET_PORTFOLIO_BY_ID();
   },
   methods: {
@@ -387,7 +396,6 @@ export default {
       formData.append("name", this.form.name);
       formData.append("link", this.form.link);
       formData.append("desc", this.form.desc);
-
       if (this.activeCheckedList.length == 0) {
         this.errorSelect = true;
       } else {
@@ -417,7 +425,6 @@ export default {
         });
         this.$router.go(-1);
       } catch (e) {
-        console.log(e.response);
         this.$notification["error"]({
           message: "Error",
           description: e.response.statusText,
@@ -445,18 +452,14 @@ export default {
         }
         this.checkedList.push(obj);
       }
-      console.log(this.checkedList);
     },
     deleteChecked(id) {
       this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
     },
     onSelect(id) {
       this.modalList = id;
-      console.log(id);
     },
-    handleChangeSelect(value) {
-      console.log(`selected ${value}`);
-    },
+    handleChangeSelect(value) {},
     handleCancel() {
       this.previewVisible = false;
     },
@@ -471,6 +474,7 @@ export default {
       this.fileList[name] = fileList;
     },
   },
+  components: { Loader },
 };
 </script>
 <style lang="css" scoped>

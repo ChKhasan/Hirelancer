@@ -73,7 +73,6 @@ import PortfolioViewCard from "../../components/profile/portfolio/PortfolioViewC
 
 export default {
   mounted() {
-    console.log(this.$route);
   },
   components: {
     ProfileLayout,

@@ -118,7 +118,7 @@
         >Frilanserlar
       </button>
       <button
-        @click="$router.push('/profile')"
+        @click="$router.push('/registration')"
         :class="{ active: $route.name.includes('profile') }"
         class="flex flex-col gap-1 items-center text-grey-64 text-[12px] font-medium px-1 pt-[6px]"
       >

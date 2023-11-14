@@ -434,6 +434,7 @@
         @submit="submitComplaint"
       />
     </div>
+    <Loader v-if="loading" />
   </div>
 </template>
 <script>
@@ -449,6 +450,7 @@ import CloseOrder from "../../../../components/modals/CloseOrder.vue";
 import CancellationOrder from "../../../../components/modals/CancellationOrder.vue";
 import ComplaintOrder from "../../../../components/modals/ComplaintOrder.vue";
 import OrderChat from "../../../../components/orders/OrderChat.vue";
+import Loader from "../../../../components/Loader.vue";
 
 export default {
   data() {
@@ -459,7 +461,16 @@ export default {
       visibleClose: false,
       visibleCancel: false,
       visibleComplaint: false,
+      loading: true,
     };
+  },
+  mounted() {
+    this.loading = true;
+    if (!localStorage.getItem("auth-token")) {
+      this.$router.push("/");
+    } else {
+      this.loading = false;
+    }
   },
   methods: {
     handleOk() {
@@ -477,12 +488,8 @@ export default {
     closeModal() {
       this.bottomModal = false;
     },
-    submitCancel() {
-      console.log("log");
-    },
-    submitComplaint() {
-      console.log("log");
-    },
+    submitCancel() {},
+    submitComplaint() {},
   },
   components: {
     FileCard,
@@ -497,6 +504,7 @@ export default {
     CancellationOrder,
     ComplaintOrder,
     OrderChat,
+    Loader,
   },
 };
 </script>

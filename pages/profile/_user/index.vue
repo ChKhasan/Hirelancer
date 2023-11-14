@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="profile">
-    <ProfileLayout :profile="true">
-      <div class="mt-8 ">
+    <!-- <ProfileLayout :profile="true"> -->
+      <div class="mt-8">
         <Alerts />
       </div>
       <div class="personal-information mt-8" v-if="$route.params.user == 'freelancer'">
@@ -20,7 +20,7 @@
       <div class="mt-[40px]" v-if="$route.params.user == 'freelancer'">
         <Comments />
       </div>
-    </ProfileLayout>
+    <!-- </ProfileLayout> -->
   </div>
 </template>
 <script>
@@ -34,18 +34,13 @@ import Statistics from "@/components/profile/Statistics.vue";
 import Comments from "@/components/profile/Comments.vue";
 
 export default {
+  middleware: "auth",
+  layout: "profileLayout",
   data() {
     return {
       userInfo: {},
     };
   },
-  // async asyncData({ store }) {
-  //   const [userInfoData] = await Promise.all([store.dispatch("fetchAuth/getUserInfo")]);
-  //   const userInfo = userInfoData.content;
-  //   console.log(userInfo);
-  //   console.log(userInfo);
-  //   return {};
-  // },
 
   components: {
     PersonalInfo,

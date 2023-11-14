@@ -39,13 +39,6 @@ export default {
       userInfo: {},
     };
   },
-  // async asyncData({ store }) {
-  //   const [userInfoData] = await Promise.all([store.dispatch("fetchAuth/getUserInfo")]);
-  //   const userInfo = userInfoData.content;
-  //   console.log(userInfo);
-  //   console.log(userInfo);
-  //   return {};
-  // },
 
   components: {
     PersonalInfo,

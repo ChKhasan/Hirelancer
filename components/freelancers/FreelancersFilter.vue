@@ -155,7 +155,6 @@ export default {
       this.dropdownOpens.includes(id)
         ? (this.dropdownOpens = this.dropdownOpens.filter((item) => item != id))
         : this.dropdownOpens.push(id);
-      console.log(this.dropdownOpens);
     },
   },
   components: { TelegramCard },

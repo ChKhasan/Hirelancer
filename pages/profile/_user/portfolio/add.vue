@@ -283,9 +283,12 @@
         </div>
       </div>
     </a-modal>
+    <Loader v-if="loading" />
   </div>
 </template>
 <script>
+import Loader from '../../../../components/Loader.vue';
+
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -295,156 +298,160 @@ function getBase64(file) {
   });
 }
 export default {
-  data() {
-    return {
-      errorSelect: false,
-      checkedList: [],
-      activeCheckedList: [],
-      modalList: null,
-      visible: false,
-      form: {
-        name: "",
-        link: "",
-        desc: "",
-        specialities: [],
-        images: [],
-      },
-      rules: {
-        name: [
-          { required: true, message: "Please input Activity name", trigger: "blur" },
-        ],
-      },
-      previewVisible: false,
-      previewImage: "",
-      fileList: {
-        file1: [],
-        file2: [],
-        file3: [],
-        file4: [],
-        file5: [],
-        file6: [],
-        file7: [],
-        file8: [],
-      },
-      uploadList: [
-        "file1",
-        "file2",
-        "file3",
-        "file4",
-        "file5",
-        "file6",
-        "file7",
-        "file8",
-      ],
-    };
-  },
-  async asyncData({ store }) {
-    const [specialitiesData] = await Promise.all([
-      store.dispatch("fetchSpecialities/getSpecialities"),
-    ]);
-    const specialities = specialitiesData.content;
-
-    return {
-      specialities,
-    };
-  },
-  methods: {
-    onSubmit() {
-      let formData = new FormData();
-      this.activeCheckedList.forEach((item) => {
-        formData.append("specialities[]", item.id);
-      });
-      this.uploadList.forEach((elem) => {
-        if (this.fileList[elem].length > 0)
-          formData.append("images[]", this.fileList[elem][0].originFileObj);
-      });
-      formData.append("name", this.form.name);
-      formData.append("link", this.form.link);
-      formData.append("desc", this.form.desc);
-
-      if (this.activeCheckedList.length == 0) {
-        this.errorSelect = true;
-      } else {
-        this.errorSelect = false;
-      }
-      this.$refs.ruleForm.validate((valid) => {
-        if (valid) {
-          if (this.fileList.file1.length == 0) {
-            this.$notification["error"]({
-              message: "Error",
-              description: "Img is required",
+    data() {
+        return {
+            loading: true,
+            errorSelect: false,
+            checkedList: [],
+            activeCheckedList: [],
+            modalList: null,
+            visible: false,
+            form: {
+                name: "",
+                link: "",
+                desc: "",
+                specialities: [],
+                images: [],
+            },
+            rules: {
+                name: [
+                    { required: true, message: "Please input Activity name", trigger: "blur" },
+                ],
+            },
+            previewVisible: false,
+            previewImage: "",
+            fileList: {
+                file1: [],
+                file2: [],
+                file3: [],
+                file4: [],
+                file5: [],
+                file6: [],
+                file7: [],
+                file8: [],
+            },
+            uploadList: [
+                "file1",
+                "file2",
+                "file3",
+                "file4",
+                "file5",
+                "file6",
+                "file7",
+                "file8",
+            ],
+        };
+    },
+    mounted() {
+        this.loading = true;
+        !localStorage.getItem("auth-token") ? this.$router.push("/") : (this.loading = false);
+    },
+    async asyncData({ store }) {
+        const [specialitiesData] = await Promise.all([
+            store.dispatch("fetchSpecialities/getSpecialities"),
+        ]);
+        const specialities = specialitiesData.content;
+        return {
+            specialities,
+        };
+    },
+    methods: {
+        onSubmit() {
+            let formData = new FormData();
+            this.activeCheckedList.forEach((item) => {
+                formData.append("specialities[]", item.id);
             });
-          } else {
-            this.__POST_WORK(formData);
-          }
-        } else {
-          return false;
-        }
-      });
+            this.uploadList.forEach((elem) => {
+                if (this.fileList[elem].length > 0)
+                    formData.append("images[]", this.fileList[elem][0].originFileObj);
+            });
+            formData.append("name", this.form.name);
+            formData.append("link", this.form.link);
+            formData.append("desc", this.form.desc);
+            if (this.activeCheckedList.length == 0) {
+                this.errorSelect = true;
+            }
+            else {
+                this.errorSelect = false;
+            }
+            this.$refs.ruleForm.validate((valid) => {
+                if (valid) {
+                    if (this.fileList.file1.length == 0) {
+                        this.$notification["error"]({
+                            message: "Error",
+                            description: "Img is required",
+                        });
+                    }
+                    else {
+                        this.__POST_WORK(formData);
+                    }
+                }
+                else {
+                    return false;
+                }
+            });
+        },
+        async __POST_WORK(data) {
+            try {
+                await this.$store.dispatch("fetchPortfolio/postWork", data);
+                this.$notification["success"]({
+                    message: "Success",
+                    description: "Успешно отправлен",
+                });
+                this.$router.go(-1);
+            }
+            catch (e) {
+                this.$notification["error"]({
+                    message: "Error",
+                    description: e.response.statusText,
+                });
+            }
+        },
+        handleOk() {
+            this.visible = false;
+        },
+        closeChecked() {
+            this.checkedList = [];
+            this.visible = false;
+        },
+        saveChecked() {
+            this.activeCheckedList = [...this.checkedList];
+            this.checkedList = [];
+            this.visible = false;
+        },
+        onchecked(obj) {
+            if (this.checkedList.includes(obj)) {
+                this.checkedList = this.checkedList.filter((item) => item.id != obj.id);
+            }
+            else {
+                if (this.checkedList.length == 3) {
+                    this.checkedList.shift();
+                }
+                this.checkedList.push(obj);
+            }
+        },
+        deleteChecked(id) {
+            this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
+        },
+        onSelect(id) {
+            this.modalList = id;
+        },
+        handleChangeSelect(value) { },
+        handleCancel() {
+            this.previewVisible = false;
+        },
+        async handlePreview(file) {
+            if (!file.url && !file.preview) {
+                file.preview = await getBase64(file.originFileObj);
+            }
+            this.previewImage = file.url || file.preview;
+            this.previewVisible = true;
+        },
+        handleChange({ fileList }, name) {
+            this.fileList[name] = fileList;
+        },
     },
-    async __POST_WORK(data) {
-      try {
-        await this.$store.dispatch("fetchPortfolio/postWork", data);
-        this.$notification["success"]({
-          message: "Success",
-          description: "Успешно отправлен",
-        });
-        this.$router.go(-1);
-      } catch (e) {
-        console.log(e.response);
-        this.$notification["error"]({
-          message: "Error",
-          description: e.response.statusText,
-        });
-      }
-    },
-    handleOk() {
-      this.visible = false;
-    },
-    closeChecked() {
-      this.checkedList = [];
-      this.visible = false;
-    },
-    saveChecked() {
-      this.activeCheckedList = [...this.checkedList];
-      this.checkedList = [];
-      this.visible = false;
-    },
-    onchecked(obj) {
-      if (this.checkedList.includes(obj)) {
-        this.checkedList = this.checkedList.filter((item) => item.id != obj.id);
-      } else {
-        if (this.checkedList.length == 3) {
-          this.checkedList.shift();
-        }
-        this.checkedList.push(obj);
-      }
-      console.log(this.checkedList);
-    },
-    deleteChecked(id) {
-      this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
-    },
-    onSelect(id) {
-      this.modalList = id;
-      console.log(id);
-    },
-    handleChangeSelect(value) {
-      console.log(`selected ${value}`);
-    },
-    handleCancel() {
-      this.previewVisible = false;
-    },
-    async handlePreview(file) {
-      if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj);
-      }
-      this.previewImage = file.url || file.preview;
-      this.previewVisible = true;
-    },
-    handleChange({ fileList }, name) {
-      this.fileList[name] = fileList;
-    },
-  },
+    components: { Loader }
 };
 </script>
 <style lang="css" scoped>

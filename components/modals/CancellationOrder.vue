@@ -66,7 +66,6 @@ export default {
   },
   watch: {
     visible(val) {
-        console.log(val);
       if (!val) {
         this.$emit("handleOkProp");
       }

@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    class="number-check flex flex-col px-[120px] gap-8 py-[80px] border border-solid border-grey-light rounded-3xl number-card"
+    class="number-check flex flex-col px-[120px] xl:px-0 gap-8 py-[80px] xl:py-0 border border-solid border-grey-light rounded-3xl number-card xl:border-0"
   >
     <div class="flex flex-col items-center">
       <nuxt-link to="/">
@@ -31,12 +31,14 @@
             <circle cx="81.8028" cy="7.87821" r="4.14823" fill="white" />
             <circle cx="119.966" cy="7.87821" r="4.14823" fill="white" /></svg></span
       ></nuxt-link>
-      <h4 class="flex text-black text-[24px] font-semibold mt-[31px]">
+      <h4 class="flex text-black text-[24px] font-semibold mt-[31px] xl:text-[20px]">
         Kirish yoki ro'yxatdan o'tish
       </h4>
-      <p class="flex text-base text-grey-64 mt-2">Единая авторизация и регистрация</p>
+      <p class="flex text-base text-grey-64 mt-2 xl:text-[14px]">
+        Единая авторизация и регистрация
+      </p>
     </div>
-    <div>
+    <div class="xl:pt-2">
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
         <a-form-model-item
           ref="name"
@@ -64,16 +66,18 @@
         </p>
       </a-form-model>
     </div>
-    <div class="buttons grid grid-cols-2 gap-4">
+    <div
+      class="buttons grid grid-cols-2 gap-4 xl:gap-2 xl:flex xl:flex-col-reverse xl:absolute xl:bottom-4 xl:w-full xl:left-0"
+    >
       <button
         @click="$router.go(-1)"
-        class="h-[60px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
+        class="h-[60px] xl:h-[52px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-black font-medium"
       >
         Bekor qilish
       </button>
       <button
         @click="onSubmit"
-        class="h-[60px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] text-white font-medium"
+        class="h-[60px] xl:h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-white font-medium"
       >
         Kodni jo’natish
       </button>
@@ -109,7 +113,6 @@ export default {
         if (valid) {
           this.$emit("checkNumber", data);
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
@@ -135,5 +138,14 @@ export default {
   font-weight: 400;
   line-height: 150%; /* 24px */
   border-color: transparent;
+}
+@media (max-width: 1200px) {
+  .auth-item .input-block {
+    height: 44px;
+  }
+  .auth-item .input-block input {
+    font-size: 14px;
+    line-height: 19px;
+  }
 }
 </style>

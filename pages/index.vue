@@ -21,19 +21,18 @@ import OrderBanner from "../components/home/OrderBanner.vue";
 
 export default {
   name: "IndexPage",
+  middleware: "auth",
   async asyncData({ store }) {
-    const [freeLancersData] = await Promise.all([
+    const [freeLancersData, specialitiesData] = await Promise.all([
       store.dispatch("fetchFreelancers/getFreelancers"),
+      store.dispatch("fetchSpecialities/getSpecialities"),
     ]);
-    const freelancers = freeLancersData.content.freelancers;
-    const specialities = freeLancersData.content.specialities;
+    const freelancers = freeLancersData.data;
+    const specialities = specialitiesData.content;
     return {
       freelancers,
       specialities,
     };
-  },
-  mounted() {
-    console.log("a");
   },
 
   components: {

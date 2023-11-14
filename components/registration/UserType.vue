@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    class="number-check flex flex-col px-[120px] gap-8 py-[80px] border border-solid border-grey-light rounded-3xl number-card"
+    class="number-check flex flex-col px-[120px] gap-8 py-[80px] border border-solid border-grey-light rounded-3xl number-card xl:border-0 xl:px-0 xl:py-0"
   >
     <div class="flex flex-col items-center">
       <nuxt-link to="/">
@@ -31,12 +31,16 @@
             <circle cx="81.8028" cy="7.87821" r="4.14823" fill="white" />
             <circle cx="119.966" cy="7.87821" r="4.14823" fill="white" /></svg></span
       ></nuxt-link>
-      <h4 class="flex text-black text-[24px] font-semibold mt-[31px]">Royxatdan otish</h4>
-      <p class="flex text-base text-grey-64 mt-2">Foydalanuvchi turini tanlang</p>
+      <h4 class="flex text-black text-[24px] font-semibold mt-[31px] xl:text-[20px]">
+        Royxatdan otish
+      </h4>
+      <p class="flex text-base text-grey-64 mt-2 xl:text-[14px]">
+        Foydalanuvchi turini tanlang
+      </p>
     </div>
-    <div>
+    <div class="xl:h-full xl:flex xl:flex-col xl:justify-between xl:pb-4 xl:pt-2">
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8 xl:gap-6">
           <a-form-model-item
             ref="name"
             class="auth-item"
@@ -45,9 +49,10 @@
           >
             <!-- <a-input v-model="form.name" /> -->
             <div
-              class="rounded-[8px] px-4 py-3 h-[47px] bg-bg-grey border border-solid border-border-darik flex items-center justify-between gap-4"
+              class="rounded-[8px] px-4 xl:pl-2 py-3 h-[47px] xl:h-11 bg-bg-grey border border-solid border-border-darik flex items-center justify-between gap-4"
             >
-              <span class="mr-1 text-base text-black px-3 py-[6px] rounded-[4px] bg-white"
+              <span
+                class="mr-1 text-base xl:text-[14px] text-black px-3 py-[6px] rounded-[4px] bg-white xl:leading-5"
                 >+998</span
               >
               <input
@@ -58,6 +63,7 @@
               />
               <button class="">
                 <svg
+                  class="xl:w-5 xl:h-5"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="25"
@@ -82,7 +88,7 @@
             prop="phone_number"
           >
             <div
-              class="rounded-[8px] sms-input pl-4 pr-2 py-3 h-[47px] bg-white border border-solid border-border-darik flex items-center justify-between gap-4"
+              class="rounded-[8px] xl:h-11 sms-input pl-4 pr-2 py-3 h-[47px] bg-white border border-solid border-border-darik flex items-center justify-between gap-4"
               :class="{ 'border-red': smsError && form.password.length != 6 }"
             >
               <v-otp-input
@@ -97,7 +103,7 @@
                 @on-complete="handleOnComplete"
               />
               <div
-                class="mr-1 text-base text-black px-4 py-[6px] rounded-[4px] bg-bg-grey flex gap-2 items-center"
+                class="mr-1 text-base text-black px-4 py-[6px] xl:pr-[6px] xl:leading-5 rounded-[4px] bg-bg-grey flex gap-2 items-center xl:max-h-8"
               >
                 <span
                   ><a-progress
@@ -105,7 +111,7 @@
                     type="circle"
                     :percent="timeProgress"
                 /></span>
-                <p class="text-base text-black font-medium">
+                <p class="text-base xl:text-[14px] text-black font-medium">
                   00:{{ time >= 10 ? time : `0${time}` }}
                 </p>
               </div>
@@ -114,12 +120,12 @@
         </div>
         <button
           :class="{ 'opacity-50 pointer-events-none': time > 0 }"
-          class="text-blue text-[15px] mt-3"
+          class="text-blue text-[15px] mt-3 xl:mt-2 xl:text-[14px]"
         >
           Qayta jonatish
         </button>
 
-        <p class="text-grey-40 text-[14px] mt-6">
+        <p class="text-grey-40 text-[14px] mt-6 xl:hidden">
           +998
           {{
             `${form?.phone_number}`
@@ -130,19 +136,33 @@
           telefon raqamingizga tasdiqlash kodi yuborildi
         </p>
       </a-form-model>
-      <div class="buttons grid grid-cols-2 gap-4 mt-6">
-        <button
-          @click="$router.go(-1)"
-          class="h-[60px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
+      <div class="w-full flex flex-col gap-6">
+        <p class="text-grey-40 text-[14px] mt-6 xl:block hidden text-center">
+          +998
+          {{
+            `${form?.phone_number}`
+              .match(/(\d{2})(\d{3})(\d{2})(\d{2})/)
+              .filter((item, index) => index != 0)
+              .join(" ")
+          }}
+          telefon raqamingizga tasdiqlash kodi yuborildi
+        </p>
+        <div
+          class="buttons grid grid-cols-2 gap-4 mt-6 xl:mt-0 xl:flex xl:flex-col-reverse xl:gap-2 xl:w-full"
         >
-          Bekor qilish
-        </button>
-        <button
-          @click="onSubmit"
-          class="h-[60px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] text-white font-medium"
-        >
-          Kodni jo’natish
-        </button>
+          <button
+            @click="$router.go(-1)"
+            class="h-[60px] xl:h-[52px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-black font-medium"
+          >
+            Bekor qilish
+          </button>
+          <button
+            @click="onSubmit"
+            class="h-[60px] xl:h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-white font-medium"
+          >
+            Kodni jo’natish
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -275,5 +295,10 @@ export default {
 }
 .required :deep(label) {
   padding-right: 10px;
+}
+@media (max-width: 1200px) {
+  .auth-item input {
+    font-size: 14px;
+  }
 }
 </style>
