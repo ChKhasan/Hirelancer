@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    class="number-check flex flex-col px-[120px] gap-8 py-[80px] border border-solid border-grey-light rounded-3xl number-card"
+    class="number-check flex flex-col px-[120px] gap-8 xl:gap-10 py-[80px] border border-solid border-grey-light rounded-3xl number-card xl:px-0 xl:border-0 xl:py-0"
   >
     <div class="flex flex-col items-center">
       <nuxt-link to="/">
@@ -31,16 +31,19 @@
             <circle cx="81.8028" cy="7.87821" r="4.14823" fill="white" />
             <circle cx="119.966" cy="7.87821" r="4.14823" fill="white" /></svg></span
       ></nuxt-link>
-      <h4 class="flex text-black text-[24px] font-semibold mt-[31px]">
+      <h4 class="flex text-black text-[24px] font-semibold mt-[31px] xl:text-[20px]">
         Foydalanuvchi turini tanlang
       </h4>
-      <div class="user-type h-12 flex client-types mt-6">
+      <div
+        class="user-type h-12 xl:h-11 flex client-types mt-6 xl:mt-4 xl:w-full xl:grid xl:grid-cols-2"
+      >
         <button
           @click="userType = true"
           :class="{ 'activeF bg-blue': userType }"
-          class="border-[2px] border-solid border-grey-light rounded-l-[12px] h-full w-[235px] flex gap-2 text-base text-black font-medium items-center justify-center"
+          class="border-[2px] border-solid border-grey-light rounded-l-[12px] h-full w-[235px] xl:w-auto flex gap-2 text-base xl:text-[14px] text-black font-medium items-center justify-center"
         >
           Я - Фрилансер<svg
+            class="xl:w-5 xl:h-5"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -59,9 +62,10 @@
         ><button
           @click="userType = false"
           :class="{ 'activeC bg-light-red': !userType }"
-          class="border-[2px] border-solid border-grey-light rounded-r-[12px] h-full w-[235px] flex gap-2 text-base text-black font-medium items-center justify-center"
+          class="border-[2px] border-solid border-grey-light rounded-r-[12px] h-full w-[235px] xl:w-auto flex gap-2 text-base xl:text-[14px] text-black font-medium items-center justify-center"
         >
           Я - заказчик<svg
+            class="xl:w-5 xl:h-5"
             xmlns="http://www.w3.org/2000/svg"
             width="25"
             height="24"
@@ -83,13 +87,15 @@
           </svg>
         </button>
       </div>
-      <p class="text-base text-grey-64 mt-4 text-center max-w-[90%]">
+      <p
+        class="text-base text-grey-64 mt-4 text-center max-w-[90%] xl:text-[14px] xl:leading-5"
+      >
         ищу работу ищу работу ищу работу ищу работу ищу работу ищу работу
       </p>
     </div>
     <div>
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
-        <div class="flex flex-col gap-8 pb-12">
+        <div class="flex flex-col gap-8 pb-12 xl:gap-6 xl:pb-0">
           <a-form-model-item ref="name" class="form-item" label="Ismingizni" prop="name">
             <a-input v-model="form.name" placeholder="Ismingizni kiriting" />
           </a-form-model-item>
@@ -106,11 +112,12 @@
               <div class="grid grid-cols-2 gap-4 gender-btns">
                 <button
                   @click="form.gender = 'male'"
-                  class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6"
+                  class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6 xl:flex-row-reverse xl:px-3 xl:py-[14px]"
                   :class="{ active: form.gender == 'male' }"
                 >
-                  <div class="flex justify-between items-center w-full">
+                  <div class="flex justify-between items-center w-full xl:justify-end xl:pr-1">
                     <svg
+                      class="xl:hidden"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -124,15 +131,33 @@
                     </svg>
                     <a-radio class="type-radio" value="male" />
                   </div>
-                  <h5 class="text-[18px] text-grey-64 font-semibold">Erkaklar</h5>
+                  <h5
+                    class="text-[18px] text-grey-64 font-semibold xl:text-base xl:flex xl:gap-2 xl:items-center"
+                  >
+                    <svg
+                      class="xl:w-5 xl:h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M14.558 3.24951C14.1438 3.24951 13.808 3.5853 13.808 3.99951C13.808 4.41373 14.1438 4.74951 14.558 4.74951V3.24951ZM20.0013 3.99951H20.7513C20.7513 3.5853 20.4155 3.24951 20.0013 3.24951V3.99951ZM19.2513 9.44276C19.2513 9.85697 19.5871 10.1928 20.0013 10.1928C20.4155 10.1928 20.7513 9.85697 20.7513 9.44276H19.2513ZM13.1277 9.81545C12.8347 10.1083 12.8347 10.5832 13.1276 10.8761C13.4204 11.169 13.8953 11.1691 14.1882 10.8762L13.1277 9.81545ZM20.5236 4.54201C20.8165 4.24914 20.8166 3.77427 20.5237 3.48135C20.2309 3.18843 19.756 3.18838 19.4631 3.48125L20.5236 4.54201ZM13.1253 17.8111C11.2084 19.7279 8.10059 19.7279 6.18374 17.8111L5.12308 18.8717C7.62572 21.3744 11.6833 21.3744 14.1859 18.8717L13.1253 17.8111ZM6.18374 17.8111C4.26688 15.8942 4.26688 12.7864 6.18374 10.8695L5.12308 9.80887C2.62043 12.3115 2.62043 16.3691 5.12308 18.8717L6.18374 17.8111ZM6.18374 10.8695C8.10059 8.95267 11.2084 8.95267 13.1253 10.8695L14.1859 9.80887C11.6833 7.30622 7.62572 7.30622 5.12308 9.80887L6.18374 10.8695ZM13.1253 10.8695C15.0421 12.7864 15.0421 15.8942 13.1253 17.8111L14.1859 18.8717C16.6886 16.3691 16.6886 12.3115 14.1859 9.80887L13.1253 10.8695ZM14.558 4.74951L20.0013 4.74951V3.24951L14.558 3.24951V4.74951ZM19.2513 3.99951V9.44276H20.7513V3.99951H19.2513ZM14.1882 10.8762L20.5236 4.54201L19.4631 3.48125L13.1277 9.81545L14.1882 10.8762Z"
+                        fill="#5C46E6"
+                      />
+                    </svg>
+                    Erkaklar
+                  </h5>
                 </button>
                 <button
                   @click="form.gender = 'female'"
-                  class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6"
+                  class="border border-solid border-border-darik px-4 py-4 rounded-lg flex flex-col gap-6 xl:flex-row-reverse xl:px-3 xl:py-[14px]"
                   :class="{ active: form.gender == 'female' }"
                 >
-                  <div class="flex justify-between items-center w-full">
+                  <div class="flex justify-between items-center w-full xl:justify-end xl:pr-1">
                     <svg
+                      class="xl:hidden"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -149,7 +174,27 @@
                     </svg>
                     <a-radio class="type-radio" value="female" />
                   </div>
-                  <h5 class="text-[18px] text-grey-64 font-semibold">Ayollar</h5>
+                  <h5
+                    class="text-[18px] text-grey-64 font-semibold xl:text-base xl:flex xl:gap-2 xl:items-center"
+                  >
+                    <svg
+                      class="xl:w-5 xl:h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.6579 13.6507L17.4887 17.4807M17.4887 17.4807L19.9933 19.9849M17.4887 17.4807L19.9933 14.9761M17.4887 17.4807L14.9845 19.9849M13.6556 5.65536C11.4459 3.44561 7.86316 3.44561 5.65341 5.65536C3.44366 7.86511 3.44366 11.4478 5.65341 13.6576C7.86316 15.8673 11.4459 15.8673 13.6556 13.6576C15.8654 11.4478 15.8654 7.86511 13.6556 5.65536Z"
+                        stroke="#BB2649"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    Ayollar
+                  </h5>
                 </button>
               </div>
             </a-radio-group>
@@ -161,9 +206,9 @@
             label="Sohangizni tanlang"
           >
             <div
-              class="min-h-[58px] items-center border border-solid flex justify-between border-grey-8 rounded-lg px-4 py-3"
+              class="min-h-[58px] xl:min-h-[50px]  items-center border border-solid flex justify-between border-grey-8 rounded-lg px-4 py-3"
             >
-              <p class="text-grey-40 text-base" v-if="activeCheckedList == 0">
+              <p class="text-grey-40 text-base xl:text-[14px]" v-if="activeCheckedList == 0">
                 Специальности
               </p>
               <div v-else class="w-full flex flex-wrap gap-[4px]">
@@ -212,7 +257,7 @@
               </button>
             </div>
           </a-form-model-item>
-          <div class="py-4 w-full flex justify-center items-center relative">
+          <div class="py-4 w-full flex justify-center items-center relative xl:py-[18px]">
             <span class="h-[1px] w-full absolute z-0 bg-border-darik"></span>
             <p class="relative text-base font-medium text-grey-80 z-10 bg-white px-2">
               Qoshimcha malumotlar
@@ -233,7 +278,11 @@
           </a-form-model-item>
           <a-form-model-item ref="name" class="form-item" label="Viloyat tanlang">
             <a-select v-model="form.region_id" placeholder="Viloyat tanlang">
-              <a-select-option :value="region?.id" v-for="region in regions" :key="region?.id">
+              <a-select-option
+                :value="region?.id"
+                v-for="region in regions"
+                :key="region?.id"
+              >
                 {{ region?.name_ru }}</a-select-option
               >
             </a-select>
@@ -241,18 +290,18 @@
         </div>
       </a-form-model>
     </div>
-    <div class="buttons grid grid-cols-2 gap-4">
+    <div class="buttons grid grid-cols-2 gap-4 xl:flex xl:flex-col-reverse xl:gap-2 xl:pt-6">
       <button
         @click="$router.go(-1)"
-        class="h-[60px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
+        class="h-[60px] xl:h-[52px] border border-solid border-border-darik rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-black font-medium"
       >
         Bekor qilish
       </button>
       <button
         @click="onSubmit"
-        class="h-[60px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] text-white font-medium"
+        class="h-[60px] xl:h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-white font-medium"
       >
-        Kodni jo’natish
+        Saqlash
       </button>
     </div>
 
@@ -422,8 +471,7 @@ export default {
     handleOk() {
       this.visible = false;
     },
-    onChange(date, dateString) {
-    },
+    onChange(date, dateString) {},
     onSubmit() {
       // name: "",
       //   surname: "",
@@ -597,5 +645,18 @@ export default {
     .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active) {
   border: 1px solid var(--blue);
   box-shadow: 0px 0px 0px 3px rgba(70, 105, 229, 0.2);
+}
+@media (max-width: 1200px) {
+  .form-item :deep(.ant-form-item-label label) {
+    font-size: 14px;
+  }
+  .form-item :deep(.ant-select-selection) {
+    height: 44px;
+    font-size: 14px;
+  }
+  .form-item :deep(.ant-input) {
+    height: 44px;
+    font-size: 14px;
+  }
 }
 </style>
