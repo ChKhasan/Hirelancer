@@ -8,6 +8,7 @@
       Активные заказы (1)
     </button>
     <button
+      v-if="$route.params.user == 'freelancer'"
       @click="$router.push(`/profile/${$route.params.user}/orders/offers`)"
       :class="{ active: $route.params.status == 'offers' }"
       class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"

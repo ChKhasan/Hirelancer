@@ -15,12 +15,8 @@ export const actions = {
     });
     return res;
   },
-  async getWorks({}) {
-    const res = await this.$axios.$get(`/works`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-      },
-    });
+  async getWorks({},payload) {
+    const res = await this.$axios.$get(`/works`, {...payload});
     return res;
   },
 };

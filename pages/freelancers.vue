@@ -126,10 +126,21 @@
         </button>
       </div>
       <div class="body mt-8 xl:mt-4">
-        <FreelancersFilter class="xl:hidden" />
-        <FreelancersContainer />
+        <FreelancersFilter
+          class="xl:hidden"
+          :specialities="specialities"
+          @filter="queryCreater"
+        />
+        <FreelancersContainer
+          :freelancers="freelancers"
+          :specialities="specialities"
+          @deleteFilter="queryCreater"
+          :loading="loading"
+          :totalPage="totalPage"
+          @getData="__GET_FREELANCERS"
+        />
       </div>
-      <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer" >
+      <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer">
         <FreelancersFilter class="hidden xl:flex pb-6" />
       </vue-bottom-sheet-vue2>
     </div>
@@ -138,8 +149,33 @@
 <script>
 import FreelancersContainer from "../components/freelancers/FreelancersContainer.vue";
 import FreelancersFilter from "../components/freelancers/FreelancersFilter.vue";
-
+import global from "@/mixins/global";
 export default {
+  mixins: [global],
+  data() {
+    return {
+      loading: false,
+    };
+  },
+  async asyncData({ store, query }) {
+    const [freeLancersData, specialitiesData] = await Promise.all([
+      store.dispatch("fetchFreelancers/getFreelancers", {
+        params: { page: 1, page_size: 5, ...query },
+      }),
+      store.dispatch("fetchSpecialities/getSpecialities"),
+    ]);
+    const freelancers = freeLancersData.data;
+    const specialities = specialitiesData.content;
+    const totalPage = freeLancersData?.meta?.total;
+    return {
+      freelancers,
+      specialities,
+      totalPage,
+    };
+  },
+  mounted() {
+    this.getFirstData();
+  },
   methods: {
     open() {
       this.$refs.myBottomSheet.open();
@@ -147,7 +183,43 @@ export default {
     close() {
       this.$refs.myBottomSheet.close();
     },
+    async queryCreater(name, id) {
+      let query = { ...this.$route.query };
+      if (!this.$route.query[name]) {
+        await this.$router.replace({
+          path: "freelancers",
+          query: {
+            ...query,
+            page: 1,
+            [`${name}`]: id,
+          },
+        });
+      } else {
+        delete query[name];
+        await this.$router.replace({
+          path: "freelancers",
+          query: { ...query },
+        });
+      }
+      this.__GET_FREELANCERS();
+    },
+
+    async __GET_FREELANCERS() {
+      this.loading = true;
+      try {
+        const data = await this.$store.dispatch("fetchFreelancers/getFreelancers", {
+          params: { ...this.$route.query },
+        });
+        this.freelancers = data.data;
+        this.totalPage = data?.meta?.total;
+        this.loading = false;
+      } catch (e) {
+      } finally {
+        this.loading = false;
+      }
+    },
   },
+
   components: { FreelancersFilter, FreelancersContainer },
 };
 </script>

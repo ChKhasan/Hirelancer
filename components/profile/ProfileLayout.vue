@@ -1,8 +1,9 @@
 <template lang="html">
   <div class="profile-layout max-w-[1680px] mx-auto pt-12 xl:pt-6 xl:pb-6 pb-[100px]">
     <div class="profile-grid">
-      <PersonalBlock :profile="profile" class="xl:hidden" />
+      <PersonalBlock :profile="profile" class="xl:hidden" :userInfo="freelancer" />
       <PersonalBlockMobile
+        :freelancer="freelancer"
         class="hidden xl:flex"
         :class="{ 'xl:hidden': $route.name !== `profile-user` }"
       />
@@ -12,63 +13,29 @@
         <slot></slot>
       </div>
     </div>
-    <Loader v-if="loading" />
   </div>
 </template>
 <script>
 import PersonalBlock from "../../components/profile/PersonalBlock.vue";
 import PersonalBlockMobile from "../../components/profile/PersonalBlockMobile.vue";
 import ProfileTab from "../../components/profile/ProfileTab.vue";
-import FreelancerTab from "./FreelancerTab.vue";
 import Loader from "../Loader.vue";
+import FreelancerTab from "./FreelancerTab.vue";
 
 export default {
   name: "ProfileLayout",
-  props: ["profile"],
+  props: ["profile", "freelancer"],
   data() {
-    return {
-      loading: false,
-    };
+    return {};
   },
-  computed: {
-    authHandle() {
-      return this.$store.state.auth;
-    },
-  },
-  async mounted() {
-    if (localStorage.getItem("auth-token")) {
-      try {
-        this.loading = true;
-        const [userInfoData] = await Promise.all([
-          this.$store.dispatch("fetchAuth/getUserInfo"),
-        ]);
-        this.userInfo = userInfoData;
-        this.$store.commit("getUserInfo", userInfoData);
-        this.loading = false;
-      } catch (e) {
-        if (e.response.status == 401) {
-          this.$store.dispatch("logout");
-        }
-      } finally {
-        this.loading = false;
-      }
-    } else {
-      this.$router.push("/");
-    }
-  },
-  watch: {
-    authHandle() {
-      if (!localStorage.getItem("auth-token")) {
-        this.$router.push("/");
-      }
-    },
-  },
+
   components: {
     PersonalBlock,
     ProfileTab,
     FreelancerTab,
     PersonalBlockMobile,
     Loader,
+    FreelancerTab,
   },
 };
 </script>

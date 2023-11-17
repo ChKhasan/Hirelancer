@@ -1,9 +1,9 @@
 <template lang="html">
-  <div class="freelancer-tab flex justify-start ">
+  <div class="freelancer-tab flex justify-start">
     <div class="rounded-2xl bg-bg-grey px-4 py-4 flex gap-6">
       <nuxt-link
-        to="/freelancer"
-        :class="{ active: $route.name == 'freelancer' }"
+        :to="`/freelancer/${$route.params.index}`"
+        :class="{ active: $route.name == `freelancer-index` }"
         class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +25,8 @@
       >
 
       <nuxt-link
-        to="/freelancer/portfolio"
-        :class="{ active: $route.name == 'freelancer-portfolio' }"
+        :to="`/freelancer/${$route.params.index}/portfolio`"
+        :class="{ active: $route.name == `freelancer-index-portfolio` }"
         class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"

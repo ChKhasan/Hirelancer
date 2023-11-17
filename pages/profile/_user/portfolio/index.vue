@@ -113,9 +113,13 @@ export default {
   async mounted() {
     this.loading = true;
     const [portfolioData] = await Promise.all([
-      this.$store.dispatch("fetchPortfolio/getWorks"),
+      this.$store.dispatch("fetchPortfolio/getWorks", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
+        },
+      }),
     ]);
-    this.portfolios = portfolioData.content;
+    this.portfolios = portfolioData.data;
     this.loading = false;
   },
   components: {

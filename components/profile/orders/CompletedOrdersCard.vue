@@ -2,29 +2,28 @@
   <div
     class="profile-orders-card border border-solid rounded-2xl border-grey-8 px-8 py-6 flex flex-col"
   >
-    <div class="head flex justify-between items-center ">
+    <div class="head flex justify-between items-center">
       <div class="flex gap-[10px] flex-col items-start">
         <h3 class="text-[20px] text-black font-medium">
-          Требуется дизайнер Figma для воссоздания существующего дизайна веб-сайта
+         {{order?.name}}
         </h3>
       </div>
-      <p class="text-[20px] text-black font-medium">2 160 000 сум</p>
+      <p class="text-[20px] text-black font-medium" v-if="order?.price">{{order?.price}} сум</p>
     </div>
     <div class="body flex justify-between mt-6">
       <div class="flex gap-[40px]">
         <div class="flex gap-4 items-center">
           <p class="text-base text-grey-64 flex gap-[6px]">
-            Срок выполнение: <span class="text-black">05.04.2023</span>
+            Срок выполнение: <span class="text-black">{{order?.start_of_execution ? order?.start_of_execution:'---'}}</span>
           </p>
         </div>
         <span class="h-[24px] w-[1px] bg-grey-8"></span>
         <div class="flex items-center gap-2">
           <p class="text-base text-grey-64 flex gap-[6px]">
-            Срок начала: <span class="text-black">25.03.2023</span>
+            Срок начала: <span class="text-black">{{order?.end_of_execution ? order?.end_of_execution:'---'}}</span>
           </p>
         </div>
       </div>
-    
     </div>
     <div class="offers flex flex-col gap-4 mt-2">
       <div class="flex justify-end">
@@ -52,7 +51,7 @@
       >
         <div @click="open(1)" class="flex justify-between">
           <div class="flex gap-[80px]">
-            <h4 class="text-base font-medium text-black">Предложений: 17</h4>
+            <h4 class="text-base font-medium text-black">Предложений: {{order?.request_count}}</h4>
           </div>
           <span
             ><svg
@@ -102,6 +101,7 @@
 </template>
 <script>
 export default {
+  props: ["order"],
   data() {
     return {
       offersList: [],

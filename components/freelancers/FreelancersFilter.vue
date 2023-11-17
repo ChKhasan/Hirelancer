@@ -8,23 +8,25 @@
       <div class="drop-list flex flex-col gap-2 xl:gap-8">
         <div
           class="dropdown overflow-hidden"
-          :class="{ active: dropdownOpens.includes(dropItem) }"
-          v-for="dropItem in [1, 2, 3, 4, 5]"
-          :key="dropItem"
+          :class="{ active: dropdownOpens.includes(dropItem?.id) }"
+          v-for="dropItem in specialities"
+          :key="dropItem?.id"
         >
           <button
             class="drop-head xl:px-0 xl:py-0 bg-white relative z-20 w-full flex justify-between items-center px-[10px] py-[10px]"
-            @click="handleDropdown(dropItem)"
+            @click="handleDropdown(dropItem?.id)"
           >
             <h2
               class="text-base text-blue-night flex gap-2 items-center"
-              :class="{ 'text-blue': dropdownOpens.includes(dropItem) }"
+              :class="{ 'text-main-color': dropdownOpens.includes(dropItem?.id) }"
             >
-              Все специальности {{ dropItem }}
-              <span class="text-[12px] text-grey-40">(24k)</span>
+              {{ dropItem?.name_ru }}
+              <span class="text-[12px] text-grey-40"
+                >({{ dropItem?.children.length }})</span
+              >
             </h2>
             <span
-              :class="{ 'rotate-180': dropdownOpens.includes(dropItem) }"
+              :class="{ 'rotate-180': dropdownOpens.includes(dropItem?.id) }"
               class="drop-icon"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +44,7 @@
             ></span>
           </button>
           <span
-            v-if="dropdownOpens.includes(dropItem)"
+            v-if="dropdownOpens.includes(dropItem?.id)"
             class="w-auto flex h-[1px] mx-4 bg-border-darik"
           ></span>
           <!-- <Transition name="bounce"> -->
@@ -50,10 +52,18 @@
             <div class="px-4 py-4 flex flex-col gap-4 xl:gap-8">
               <button
                 class="text-[14px] text-grey-80 flex gap-2 items-center"
-                v-for="dropIn in [1, 2, 3, 4, 5]"
-                :key="dropIn"
+                v-for="dropIn in dropItem.children"
+                :key="dropIn?.id"
+                @click="$emit('filter', `specialities[${dropIn?.id}]`, dropIn?.id)"
+                :class="{
+                  'text-main-color': Boolean(
+                    Object.entries($route.query)
+                      .filter((filterItem) => filterItem[0].includes('specialities'))
+                      .find((findItem) => findItem[1] == dropIn?.id)
+                  ),
+                }"
               >
-                HTML-верстка {{ dropIn }}
+                {{ dropIn?.name_ru }}
                 <span class="text-[12px] text-grey-40">(24k)</span>
               </button>
             </div>
@@ -136,13 +146,14 @@
         </button>
       </div>
     </div>
-    <TelegramCard  class="xl:hidden"/>
+    <TelegramCard class="xl:hidden" />
   </div>
 </template>
 <script>
 import TelegramCard from "../TelegramCard.vue";
 
 export default {
+  props: ["specialities"],
   data() {
     return {
       dropdown: false,

@@ -11,14 +11,13 @@
     <div v-else class="header-bg xl:block hidden w-full h-[56px]"></div>
     <div class="profile-layout max-w-[1680px] mx-auto pt-12 xl:pt-6 xl:pb-6 pb-[100px]">
       <div class="profile-grid">
-        <PersonalBlock :profile="$route.name.includes('profile')" class="xl:hidden" />
+        <PersonalBlock :profile="$route.name.includes('profile')" class="xl:hidden" :userInfo="$store.state.userInfo" />
         <PersonalBlockMobile
           class="hidden xl:flex"
           :class="{ 'xl:hidden': $route.name !== `profile-user` }"
         />
         <div class="min-w-0 x" :class="{ 'xl:hidden': $route.name == `profile-user` }">
           <ProfileTab v-if="$route.name.includes('profile')" />
-          <FreelancerTab v-else />
           <Nuxt />
         </div>
       </div>
@@ -32,7 +31,6 @@
 import PersonalBlock from "@/components/profile/PersonalBlock.vue";
 import PersonalBlockMobile from "@/components/profile/PersonalBlockMobile.vue";
 import ProfileTab from "@/components/profile/ProfileTab.vue";
-import FreelancerTab from "@/components/profile/FreelancerTab.vue";
 import Loader from "@/components/Loader.vue";
 import MobileHeader from "../components/layouts/MobileHeader.vue";
 import TheHeader from "../components/layouts/TheHeader.vue";
@@ -82,16 +80,13 @@ export default {
   components: {
     PersonalBlock,
     ProfileTab,
-    FreelancerTab,
     PersonalBlockMobile,
-    Loader,
-    FreelancerTab,
     Loader,
     MobileHeader,
     TheHeader,
     TheFooter,
-    BottomBar
-},
+    BottomBar,
+  },
 };
 </script>
 <style lang="css" scoped>

@@ -445,12 +445,12 @@ import SimilarOrders from "@/components/orders/SimilarOrders.vue";
 import PriceCard from "@/components/orders/PriceCard.vue";
 import BottomModal from "@/components/orders/BottomModal.vue";
 import OrderStatus from "@/components/profile/orders/OrderStatus.vue";
-import EndingProcess from "../../../../components/orders/EndingProcess.vue";
-import CloseOrder from "../../../../components/modals/CloseOrder.vue";
-import CancellationOrder from "../../../../components/modals/CancellationOrder.vue";
-import ComplaintOrder from "../../../../components/modals/ComplaintOrder.vue";
-import OrderChat from "../../../../components/orders/OrderChat.vue";
-import Loader from "../../../../components/Loader.vue";
+import EndingProcess from "@/components/orders/EndingProcess.vue";
+import CloseOrder from "@/components/modals/CloseOrder.vue";
+import CancellationOrder from "@/components/modals/CancellationOrder.vue";
+import ComplaintOrder from "@/components/modals/ComplaintOrder.vue";
+import OrderChat from "@/components/orders/OrderChat.vue";
+import Loader from "@/components/Loader.vue";
 
 export default {
   data() {

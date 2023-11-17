@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="portfolio">
-    <ProfileLayout :profile="false">
-      <div class="head flex flex-col gap-4 mt-8 ">
-        <h3 class="text-[24px] text-black font-semibold ">Портфолио</h3>
+    <ProfileLayout :profile="false" :freelancer="freelancer">
+      <div class="head flex flex-col gap-4 mt-8">
+        <h3 class="text-[24px] text-black font-semibold">Портфолио</h3>
         <div class="flex justify-between items-center">
           <div class="buttons flex gap-6">
             <button
@@ -48,16 +48,12 @@
           </div>
         </div>
       </div>
-      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px] ">
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
-        <PortfolioViewCard />
+      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]">
+        <PortfolioViewCard
+          v-for="portfolio in portfolios"
+          :portfolio="portfolio"
+          :key="portfolio?.id"
+        />
       </div>
       <div>
         <VPagination />
@@ -66,13 +62,34 @@
   </div>
 </template>
 <script>
-import ProfileLayout from "../../components/profile/ProfileLayout.vue";
-import PortfolioCard from "../../components/profile/portfolio/PortfolioCard.vue";
-import VPagination from "../../components/VPagination.vue";
-import PortfolioViewCard from "../../components/profile/portfolio/PortfolioViewCard.vue";
+import ProfileLayout from "@/components/profile/ProfileLayout.vue";
+import PortfolioCard from "@/components/profile/portfolio/PortfolioCard.vue";
+import VPagination from "@/components/VPagination.vue";
+import PortfolioViewCard from "@/components/profile/portfolio/PortfolioViewCard.vue";
 
 export default {
-  mounted() {
+  async asyncData({ store, query, params }) {
+    try {
+      const [freeLancerData, portfoliosData] = await Promise.all([
+        store.dispatch("fetchFreelancers/getFreelancerById", {
+          params: {
+            params: {},
+          },
+          id: params.index,
+        }),
+        store.dispatch("fetchPortfolio/getWorks", {
+          params: {
+            freelancer: params.index,
+          },
+        }),
+      ]);
+      const portfolios = portfoliosData.data;
+      const freelancer = freeLancerData.content;
+      return {
+        freelancer,
+        portfolios,
+      };
+    } catch (e) {}
   },
   components: {
     ProfileLayout,

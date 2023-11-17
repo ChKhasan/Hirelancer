@@ -24,10 +24,12 @@
           >Срочный заказ</span
         >
         <h3 class="text-[20px] text-black font-medium">
-          Требуется дизайнер Figma для воссоздания существующего дизайна веб-сайта
+          {{ order?.name }}
         </h3>
       </div>
-      <p class="text-[20px] text-black font-medium">2 160 000 сум</p>
+      <p class="text-[20px] text-black font-medium" v-if="order?.price">
+        {{ order?.price }} сум
+      </p>
     </div>
     <div class="body flex justify-between">
       <div class="flex gap-[40px]">
@@ -132,6 +134,7 @@
 </template>
 <script>
 export default {
+  props: ["order"],
   data() {
     return {
       offersList: [],

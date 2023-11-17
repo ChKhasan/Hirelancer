@@ -5,7 +5,7 @@
         <Alerts />
       </div>
       <div class="personal-information mt-8">
-        <PersonalInfo :isEdit="true"/>
+        <PersonalInfo :isEdit="true" />
         <Achievements />
       </div>
       <div class="personal-information mt-[45px]">
@@ -21,14 +21,14 @@
   </div>
 </template>
 <script>
-import PersonalInfo from "../../components/profile/portfolio/PersonalInfo.vue";
-import Achievements from "../../components/profile/portfolio/Achievements.vue";
-import Portfolios from "../../components/profile/portfolio/Portfolios.vue";
-import Events from "../../components/profile/Events.vue";
-import Alerts from "../../components/profile/Alerts.vue";
-import ProfileLayout from "../../components/profile/ProfileLayout.vue";
-import Statistics from "../../components/profile/Statistics.vue";
-import Comments from "../../components/profile/Comments.vue";
+import PersonalInfo from "@/components/profile/portfolio/PersonalInfo.vue";
+import Achievements from "@/components/profile/portfolio/Achievements.vue";
+import Portfolios from "@/components/profile/portfolio/Portfolios.vue";
+import Events from "@/components/profile/Events.vue";
+import Alerts from "@/components/profile/Alerts.vue";
+import ProfileLayout from "@/components/profile/ProfileLayout.vue";
+import Statistics from "@/components/profile/Statistics.vue";
+import Comments from "@/components/profile/Comments.vue";
 
 export default {
   components: {

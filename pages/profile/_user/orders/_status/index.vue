@@ -33,36 +33,16 @@
         </button>
       </div>
     </div>
+
     <div
       class="list flex flex-col gap-4 mt-6 mb-[40px]"
-      v-if="$route.params.status == 'completed'"
+      v-if="$route.params.user == 'customer'"
     >
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
-      <CompletedOrdersCard />
+      <CompletedOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
+
     <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-else>
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
-      <ProfileOrdersCard />
+      <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
 
     <div>
@@ -77,11 +57,25 @@ import PortfolioCard from "@/components/profile/portfolio/PortfolioCard.vue";
 import VPagination from "@/components/VPagination.vue";
 import ProfileOrdersCard from "@/components/profile/orders/ProfileOrdersCard.vue";
 import OrdersTab from "@/components/profile/orders/OrdersTab.vue";
-import Loader from "../../../../components/Loader.vue";
-import CompletedOrdersCard from "../../../../components/profile/orders/CompletedOrdersCard.vue";
+import Loader from "@/components/Loader.vue";
+import CompletedOrdersCard from "@/components/profile/orders/CompletedOrdersCard.vue";
 
 export default {
   layout: "profileLayout",
+  async asyncData({ store, query, params }) {
+    try {
+      const [ordersData] = await Promise.all([
+        store.dispatch("fetchOrders/getOrders", {
+          params: {
+            status: params.status == "active" ? 1 : params.status == "completed" ? 0 : -1,
+            client: store.state.userInfo["id"],
+          },
+        }),
+      ]);
+      const orders = ordersData?.data;
+      return { orders };
+    } catch (e) {}
+  },
   components: {
     ProfileLayout,
     PortfolioCard,

@@ -21,12 +21,13 @@
       ></nuxt-link>
     </div>
     <div class="list grid grid-cols-3 gap-4">
-      <PortfolioCard />
-      <PortfolioCard />
-      <PortfolioCard />
-      <PortfolioCard />
-      <PortfolioCard />
-      <PortfolioMoreCard />
+      <PortfolioCard
+        v-for="portfolio in portfolios"
+        :portfolio="portfolio"
+        :key="portfolio?.id"
+      />
+
+      <PortfolioMoreCard v-if="portfolios.length > 5"/>
     </div>
   </div>
 </template>
@@ -34,6 +35,9 @@
 import PortfolioCard from "./PortfolioCard.vue";
 import PortfolioMoreCard from "./PortfolioMoreCard.vue";
 
-export default { components: { PortfolioCard, PortfolioMoreCard } };
+export default {
+  props: ["portfolios"],
+  components: { PortfolioCard, PortfolioMoreCard },
+};
 </script>
 <style lang="css" scoped></style>

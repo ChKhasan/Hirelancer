@@ -9,16 +9,36 @@
       </button>
       <a-pagination
         class="order-pagination"
-        :default-current="6"
-        :total="20"
+        v-model.number="current"
+        @change="pageChange"
+        :total="totalPage"
+        :page-size.sync="params.pageSize"
         :hideOnSinglePage="true"
       />
     </div>
   </div>
 </template>
 <script>
+import global from "@/mixins/global";
 export default {
-  props: ["load"],
+  props: ["totalPage", "load"],
+  mixins: [global],
+  mounted() {
+    this.getFirstData();
+  },
+  methods: {
+    async pageChange(e) {
+      await this.changePagination(e);
+      this.$emit("getData");
+    },
+  },
+  watch: {
+    "$route.query.page"(val) {
+      if (val != this.current) {
+        this.current = val;
+      }
+    },
+  },
 };
 </script>
 <style lang="css" scoped>
