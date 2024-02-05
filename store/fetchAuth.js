@@ -1,10 +1,6 @@
 export const actions = {
   async getUserInfo({}) {
-    const res = await this.$axios.$get(`/auth/user`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-      },
-    });
+    const res = await this.$axiosInstance.$get(`/auth/user`);
     return res;
   },
   async postSendCode({}, payload) {
@@ -16,20 +12,14 @@ export const actions = {
     return res;
   },
   async postRegister({}, payload) {
-    const res = await this.$axios.$post(`/auth/register`, payload, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-      },
-    });
+    const res = await this.$axiosInstance.$post(`/auth/register`, payload);
     return res;
   },
   async postUserEdit({}, payload) {
-    const res = await this.$axios.$post(`/settings/freelancer/update-personal-data`, payload, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-      },
-    });
+    const res = await this.$axiosInstance.$post(
+      `/settings/freelancer/update-personal-data`,
+      payload
+    );
     return res;
   },
-  
 };

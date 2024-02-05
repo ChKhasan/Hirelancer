@@ -57,6 +57,7 @@
               @focus="onFocus = true"
               @blur="onFocus = false"
               v-model="form.phone"
+              @keyup.enter="onSubmit"
               type="text"
             />
           </div>
@@ -78,14 +79,19 @@
       <button
         @click="onSubmit"
         class="h-[60px] xl:h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-white font-medium"
+        :class="{ 'pointer-events-none opacity-50': loading ||  form.phone.length < 12}"
       >
-        Kodni jo’natish
+        <LoaderBtn v-if="loading" />
+        <span v-else>Kodni jo’natish</span>
       </button>
     </div>
   </div>
 </template>
 <script>
+import LoaderBtn from "../loader-btn.vue";
+
 export default {
+  props: ["loading"],
   data() {
     return {
       onFocus: false,
@@ -118,6 +124,7 @@ export default {
       });
     },
   },
+  components: { LoaderBtn },
 };
 </script>
 <style lang="css" scoped>

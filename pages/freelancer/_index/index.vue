@@ -2,11 +2,11 @@
   <div class="profile">
     <ProfileLayout :profile="false" :freelancer="freelancer">
       <div class="personal-information mt-8">
-        <PersonalInfo :isEdit="false" :freelancer="freelancer"/>
+        <PersonalInfo :isEdit="false" :freelancer="freelancer" />
         <Achievements />
       </div>
       <div class="portfolio-block mt-[40px]">
-        <Portfolios :portfolios="portfolios"/>
+        <Portfolios :portfolios="portfolios" />
       </div>
       <div class="events-block mt-[45px]">
         <Events />
@@ -29,6 +29,7 @@ export default {
     Events,
     ProfileLayout,
   },
+
   async asyncData({ store, query, params }) {
     try {
       const [freeLancerData, portfoliosData] = await Promise.all([

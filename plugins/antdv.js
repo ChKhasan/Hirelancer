@@ -27,7 +27,7 @@ import {
   // Affix,
   // InputNumber,
   Skeleton,
-  // Empty,
+  Empty,
   // Alert,
   Spin,
   // BackTop,
@@ -55,7 +55,7 @@ Vue.use(Pagination);
 // Vue.use(Carousel);
 
 // Vue.use(Alert);
-// Vue.use(Empty);
+Vue.use(Empty);
 Vue.use(DatePicker);
 Vue.use(Skeleton);
 // Vue.use(TimePicker);

@@ -396,6 +396,7 @@ export default {
       formData.append("name", this.form.name);
       formData.append("link", this.form.link);
       formData.append("desc", this.form.desc);
+      formData.append("_method", "PUT");
       if (this.activeCheckedList.length == 0) {
         this.errorSelect = true;
       } else {
@@ -409,16 +410,19 @@ export default {
               description: "Img is required",
             });
           } else {
-            this.__POST_WORK(formData);
+            this.__PUT_WORK(formData);
           }
         } else {
           return false;
         }
       });
     },
-    async __POST_WORK(data) {
+    async __PUT_WORK(data) {
       try {
-        await this.$store.dispatch("fetchPortfolio/postWork", data);
+        await this.$store.dispatch("fetchPortfolio/putWork", {
+          data,
+          id: this.$route.params.id,
+        });
         this.$notification["success"]({
           message: "Success",
           description: "Успешно отправлен",

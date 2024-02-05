@@ -3,20 +3,35 @@ export const actions = {
     const res = await this.$axios.$get(`/client/orders`, { ...payload });
     return res;
   },
-  async postOrder({}, data) {
-    const res = await this.$axios.$post(`/orders/create`, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-      },
+  async getMyOrders({}, payload) {
+    const res = await this.$axiosInstance.$get(`/client/orders`, {
+      ...payload,
     });
     return res;
   },
+  async getOrderById({}, payload) {
+    const res = await this.$axios.$get(`/client/orders/${payload.id}`);
+    return res;
+  },
+  async postOrder({}, data) {
+    const res = await this.$axiosInstance.$post(`/orders/create`, data);
+    return res;
+  },
+  async putOrder({}, payload) {
+    return await this.$axiosInstance.$post(
+      `/orders/update/${payload.id}?_method=put`,
+      payload.data
+    );
+  },
+  async postCanceledOrder({}, paylaod) {
+    const res = await this.$axiosInstance.$post(
+      `/orders/cancel/${paylaod.id}?_method=put`,
+      {}
+    );
+    return res;
+  },
   async postSendRequest({}, data) {
-    const res = await this.$axios.$post(`/order_request`, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-      },
-    });
+    const res = await this.$axiosInstance.$post(`/order_request`, data);
     return res;
   },
 };

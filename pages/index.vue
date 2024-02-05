@@ -5,7 +5,7 @@
       <PlaceOrder />
       <PlaceSpecialists :specialities="specialities" />
     </div>
-    <Orders />
+    <Orders :orders="orders"/>
     <TheFreelancers :freelancers="freelancers" />
     <OrderBanner />
   </div>
@@ -23,16 +23,22 @@ export default {
   name: "IndexPage",
   middleware: "auth",
   async asyncData({ store }) {
-    const [freeLancersData, specialitiesData] = await Promise.all([
+    const [freeLancersData, specialitiesData, ordersData] = await Promise.all([
       store.dispatch("fetchFreelancers/getFreelancers"),
       store.dispatch("fetchSpecialities/getSpecialities"),
+      store.dispatch("fetchOrders/getOrders"),
     ]);
     const freelancers = freeLancersData.data;
     const specialities = specialitiesData.content;
+    const orders = ordersData.data;
     return {
       freelancers,
       specialities,
+      orders,
     };
+  },
+  async mounted() {
+    this.$store.dispatch("fetchOrders/getOrders");
   },
 
   components: {

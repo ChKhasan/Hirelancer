@@ -7,6 +7,13 @@ export const actions = {
     });
     return res;
   },
+  async putWork({}, payload) {
+    const res = await this.$axiosInstance.$post(
+      `/works/${payload.id}`,
+      payload?.data
+    );
+    return res;
+  },
   async getWorkById({}, payload) {
     const res = await this.$axios.$get(`/works/${payload}`, {
       headers: {
@@ -15,8 +22,8 @@ export const actions = {
     });
     return res;
   },
-  async getWorks({},payload) {
-    const res = await this.$axios.$get(`/works`, {...payload});
+  async getWorks({}, payload) {
+    const res = await this.$axios.$get(`/works`, { ...payload });
     return res;
   },
 };

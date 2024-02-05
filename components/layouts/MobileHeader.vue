@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
       <button
         v-for="item in titleList"
-        v-if="$route.name.includes('profile') && item.pathName === $route.name"
+        v-if="$route.name?.includes('profile') && item.pathName === $route.name"
         @click="$router.go(-1)"
       >
         <svg

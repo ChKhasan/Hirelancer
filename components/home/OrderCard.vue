@@ -1,11 +1,12 @@
 <template lang="html">
   <div
     class="card relative order-card pt-[25px] pr-[32px] pb-[31px] pl-[34px] rounded-3xl bg-white cursor-pointer xl:border-[1px] xl:border-solid xl:border-grey-8 xl:rounded-[16px] xl:p-[16px]"
-    @click="$router.push('/orders/1')"
+    @click="$router.push(`/orders/${order?.id}`)"
   >
     <div class="header flex justify-between xl:flex-col-reverse xl:gap-2">
       <div class="flex gap-[20px] items-center xl:gap-[12px]">
         <span
+          v-if="order?.urgent"
           class="border light-yellow rounded-[500px] border-solid border-dark-yellow text-dark-yellow h-[36px] xl:h-[32px] px-[20px] xl:pl-2 xl:pr-3 flex items-center xl:text-[12px] xl:gap-1"
           ><svg
             class="xl:w-[16px] xl:h-[16px]"
@@ -25,7 +26,10 @@
             /></svg
           >Срочный заказ</span
         >
-        <span class="flex w-[1px] h-[27px] bg-grey-8 xl:hidden"></span>
+        <span
+          v-if="order?.urgent"
+          class="flex w-[1px] h-[27px] bg-grey-8 xl:hidden"
+        ></span>
         <button
           class="whitespace-nowrap h-[36px] xl:h-[32px] flex items-center bg-apple-grey font-tt text-grey-64 py-2 px-4 rounded-[22px] text-[14px] xl:text-[12px]"
         >
@@ -34,9 +38,13 @@
       </div>
       <div class="flex gap-[28px] items-center xl:justify-between">
         <div class="flex gap-[16px] items-center xl:gap-[12px]">
-          <p class="text-base text-grey-40 xl:text-[14px]">14:30</p>
+          <p class="text-base text-grey-40 xl:text-[14px]">
+            {{ moment(order?.created_at).format(hourFormat) }}
+          </p>
           <span class="flex w-[1px] h-[27px] xl:h-[20px] bg-grey-8"></span>
-          <p class="text-base text-grey-40 xl:text-[14px]">25.02.2023</p>
+          <p class="text-base text-grey-40 xl:text-[14px]">
+            {{ moment(order?.created_at).format(dateFormat) }}
+          </p>
         </div>
         <button
           class="w-[42px] h-[42px] xl:w-[40px] xl:h-[40px] rounded-full border-[2px] border-grey-light border-solid flex items-center justify-center"
@@ -65,14 +73,10 @@
       class="body flex gap-4 flex-col mt-6 border-[0] border-b border-grey-8 border-solid pb-4 xl:mt-4 xl:gap-[8px]"
     >
       <h6 class="text-[20px] font-semibold text-black xl:text-base xl:leading-[19px]">
-        I will design wix website redesign wix website wix ecommerce website
+        {{ order?.name }}
       </h6>
       <p class="text-base text-grey-80 xl:text-[14px] xl:line-clamp-3">
-        Join our world-class innovation team, revolutionizing education at ASU Prep
-        Digital. Our mission is to enhance student performance and provide access to
-        transformative educational pathways. We're seeking Graphic Designers to create
-        visually engaging digital lessons for grades 8-12.Contract Expectations:During the
-        first month, you'll familiarize yourself with our media and curriculum teams
+        {{ order?.description }}
       </p>
       <div class="justify-start hidden xl:flex mt-[-4px]">
         <button
@@ -85,7 +89,9 @@
     <div
       class="footer flex justify-between mt-[23px] xl:flex-row-reverse xl:mt-[20px] xl:gap-[20px]"
     >
-      <h1 class="text-grey-80 text-2xl font-semibold xl:text-base">1 743 000 sum</h1>
+      <h1 class="text-grey-80 text-2xl font-semibold xl:text-base">
+        {{ order?.price.toLocaleString() }} sum
+      </h1>
       <div class="flex gap-8 xl:flex-col xl:gap-[20px]">
         <div class="flex gap-[24px] items-center xl:gap-[12px]">
           <p
@@ -105,7 +111,7 @@
                 stroke-width="1.5"
               />
               <circle cx="12" cy="12.5" r="3" stroke="#9A999B" stroke-width="1.5" /></svg
-            >300
+            >{{ order?.view_count }}
           </p>
           <span class="flex w-[1px] h-[27px] bg-grey-8"></span>
           <p
@@ -128,7 +134,7 @@
               <circle cx="12" cy="12.5" r="1" fill="#9A999B" />
               <circle cx="16" cy="12.5" r="1" fill="#9A999B" />
               <circle cx="8" cy="12.5" r="1" fill="#9A999B" /></svg
-            >42 запросов
+            >{{ order?.request_count }} запросов
           </p>
         </div>
         <div class="buttons flex gap-6 xl:flex-col-reverse xl:hidden">
@@ -153,7 +159,19 @@
   </div>
 </template>
 <script>
-export default {};
+import moment from "moment";
+export default {
+  props: ["order"],
+  data() {
+    return {
+      dateFormat: "DD.MM.YYYY",
+      hourFormat: "HH:mm",
+    };
+  },
+  methods: {
+    moment,
+  },
+};
 </script>
 <style lang="css" scoped>
 .light-yellow {

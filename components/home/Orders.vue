@@ -26,16 +26,7 @@
         ></nuxt-link>
       </div>
       <div class="list flex flex-col gap-4 mt-8 xl:mt-[16px]">
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
+        <OrderCard v-for="order in orders" :order="order" :key="order.id"/>
       </div>
     </div>
   </div>
@@ -43,6 +34,6 @@
 <script>
 import OrderCard from "./OrderCard.vue";
 
-export default { components: { OrderCard } };
+export default { props: ["orders"], components: { OrderCard } };
 </script>
 <style lang="css" scoped></style>

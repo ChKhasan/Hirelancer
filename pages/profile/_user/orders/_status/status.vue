@@ -34,9 +34,17 @@
       </div>
     </div>
 
+    <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-if="loading">
+      <a-skeleton
+        :paragraph="false"
+        class="loading-card"
+        v-for="elem in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+        :key="elem"
+      />
+    </div>
     <div
       class="list flex flex-col gap-4 mt-6 mb-[40px]"
-      v-if="$route.params.user == 'customer'"
+      v-if="$route.params.user == 'customer' && !loading"
     >
       <CompletedOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
@@ -44,7 +52,12 @@
     <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-else>
       <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
-
+    <div
+      class="w-full h-[150px] flex justify-center items-center"
+      v-if="!loading && orders.length == 0"
+    >
+      <a-empty />
+    </div>
     <div>
       <VPagination />
     </div>
@@ -62,19 +75,35 @@ import CompletedOrdersCard from "@/components/profile/orders/CompletedOrdersCard
 
 export default {
   layout: "profileLayout",
-  async asyncData({ store, query, params }) {
-    try {
-      const [ordersData] = await Promise.all([
-        store.dispatch("fetchOrders/getOrders", {
+  data() {
+    return {
+      orders: [],
+      loading: true,
+    };
+  },
+  async mounted() {
+    this.__GET_ORDERS();
+  },
+  methods: {
+    async __GET_ORDERS() {
+      try {
+        const data = await this.$store.dispatch("fetchOrders/getMyOrders", {
           params: {
-            status: params.status == "active" ? 1 : params.status == "completed" ? 0 : -1,
-            client: store.state.userInfo["id"],
+            status:
+              this.$route.params.status == "active"
+                ? 1
+                : this.$route.params.status == "completed"
+                ? 0
+                : -1,
+            client: this.$store.state.userInfo["id"],
           },
-        }),
-      ]);
-      const orders = ordersData?.data;
-      return { orders };
-    } catch (e) {}
+        });
+        this.orders = data?.data;
+      } catch (e) {
+      } finally {
+        this.loading = false;
+      }
+    },
   },
   components: {
     ProfileLayout,
@@ -86,4 +115,10 @@ export default {
   },
 };
 </script>
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+:deep(.loading-card .ant-skeleton-title) {
+  width: 100%;
+  height: 230px;
+  border-radius: 16px;
+}
+</style>

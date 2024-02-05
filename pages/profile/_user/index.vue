@@ -34,7 +34,6 @@ import Statistics from "@/components/profile/Statistics.vue";
 import Comments from "@/components/profile/Comments.vue";
 
 export default {
-  middleware: "auth",
   layout: "profileLayout",
   data() {
     return {

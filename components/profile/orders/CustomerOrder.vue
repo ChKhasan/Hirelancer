@@ -2,7 +2,7 @@
   <div class="pt-12 order">
     <div class="max-w-[1200px] mx-auto">
       <nuxt-link
-        to="/"
+        to="/profile/customer/orders/active/status"
         class="flex gap-2 w-[126px] py-3 border border-main-color border-solid rounded-lg justify-center items-center text-base font-medium text-grey-80 hover:text-blue"
       >
         <svg
@@ -23,7 +23,7 @@
         Отмена
       </nuxt-link>
       <div class="flex flex-col gap-2 mt-6">
-        <h3 class="text-[24px] text-black font-semibold">Заказ: #14511</h3>
+        <h3 class="text-[24px] text-black font-semibold">Заказ: #{{ order?.id }}</h3>
         <p class="text-base text-grey-64">Заказы / Активные заказы</p>
       </div>
       <div class="content-box mt-6">
@@ -82,39 +82,30 @@
                 <div class="flex gap-6 items-center">
                   <div class="flex gap-6">
                     <p class="text-base text-grey-64 flex gap-[6px]">
-                      Заказ:<span class="font-medium text-black">#14511</span>
+                      Заказ:<span class="font-medium text-black">#{{ order?.id }}</span>
                     </p>
-                    <p class="text-base text-grey-40">15:24</p>
+                    <p class="text-base text-grey-40">{{ orderHours }}</p>
                   </div>
                   <span class="h-[19px] w-[1px] bg-grey-8"></span>
-                  <p class="text-base text-grey-40">25.02.2023</p>
+                  <p class="text-base text-grey-40">{{ orderDate }}</p>
                 </div>
               </div>
               <div class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8">
                 <h1 class="title text-[24px] font-semibold text-black mb-4">
-                  Нужен разработчик в теме форекс/крипто/трейдинг, знаком с патернами
-                  графического анализа на графиках
+                  {{ order?.name }}
                 </h1>
+
                 <p class="text-base text-grey-80">
-                  Join our world-class innovation team, revolutionizing education at ASU
-                  Prep Digital. Our mission is to enhance student performance and provide
-                  access to transformative educational pathways. We're seeking Graphic
-                  Designers to create visually engaging digital lessons for grades
-                  8-12.Contract Expectations:During the first month, you'll familiarize
-                  yourself with our media and curriculum teams, learn to build lessons
-                  using our proprietary tool, and adhere to the style guide(s) for your
-                  assigned course. After the initial month, we'll assess the contract's
-                  progress and decide on an extension. If it's a mutually beneficial fit,
-                  the contract will be extended in 3-month increments.
+                  {{ order?.description }}
                 </p>
-                <p class="text-base text-grey-80 mt-8">
+                <!-- <p class="text-base text-grey-80 mt-8">
                   As we're developing curriculum for the next 4 years, there's potential
                   for a long-term contract.This is a project-based contract and not a
                   retainer arrangement. It does not involve a continuous or ongoing
                   engagement where ASU Prep retains the contractor's services even when
                   there is no project-based work. Instead, the contract centers around
                   completing specific assigned tasks and billing hours to ASU Prep.
-                </p>
+                </p> -->
               </div>
               <div class="files flex flex-col gap-4 mt-4">
                 <h6 class="text-black text-[20px] font-semibold">Файлы к задаче</h6>
@@ -163,7 +154,7 @@
                         stroke="#5C46E6"
                         stroke-width="1.5"
                       /></svg
-                    >300
+                    >{{order?.view_count}}
                   </p>
                   <p class="text-base text-grey-64 flex gap-[8px] items-center">
                     <svg
@@ -194,7 +185,7 @@
                         ry="0.833333"
                         fill="#5C46E6"
                       /></svg
-                    >42 запросов
+                    >{{order?.request_count}} запросов
                   </p>
                 </div>
                 <p
@@ -258,15 +249,17 @@
           <div
             class="card price-card px-[24px] py-[24px] rounded-2xl bg-bg-grey flex flex-col gap-6"
           >
-          <div>
-          <h4>Tanlangan frilanser</h4>
-          <p>Tanlangan vaqti: 16:32  28.09.2023</p>
-          </div>
+            <div>
+              <h4>Tanlangan frilanser</h4>
+              <p>Tanlangan vaqti: 16:32 28.09.2023</p>
+            </div>
             <div class="flex flex-col gap-[10px]">
               <div class="flex flex-col">
                 <p class="text-grey-64 text-[14px]">Buyrtma narxi:</p>
 
-                <h1 class="text-blue text-[24px] font-semibold">99 200 000 so’m</h1>
+                <h1 class="text-blue text-[24px] font-semibold">
+                  {{ order?.price && order?.price.toLocaleString() }} so’m
+                </h1>
                 <p class="text-grey-40 text-[15px] line-through">750 000</p>
               </div>
               <div class="flex flex-col">
@@ -433,7 +426,9 @@ import CustomerChat from "./CustomerChat.vue";
 import Loader from "@/components/Loader.vue";
 import OffersOrderCard from "./OffersOrderCard.vue";
 import OffersChat from "./OffersChat.vue";
+import moment from "moment";
 export default {
+  props: ["order", "loading"],
   data() {
     return {
       bottomModal: false,
@@ -442,18 +437,23 @@ export default {
       visibleClose: false,
       visibleCancel: false,
       visibleComplaint: false,
-      loading: true,
     };
   },
+  computed: {
+    orderDate() {
+      return moment(this.order?.created_at).format("DD.MM.YYYY");
+    },
+    orderHours() {
+      return moment(this.order?.created_at).format("HH:mm");
+    },
+  },
   mounted() {
-    this.loading = true;
     if (!localStorage.getItem("auth-token")) {
       this.$router.push("/");
-    } else {
-      this.loading = false;
     }
   },
   methods: {
+    moment,
     handleOk() {
       this.visibleClose = false;
     },
@@ -469,8 +469,25 @@ export default {
     closeModal() {
       this.bottomModal = false;
     },
-    submitCancel() {},
+    submitCancel() {
+      this.__CANCEL_ORDER();
+    },
     submitComplaint() {},
+    async __CANCEL_ORDER() {
+      try {
+        const data = await this.$store.dispatch("fetchOrders/postCanceledOrder", {
+          id: this.$route.params.id,
+        });
+        this.$router.go(-1);
+      } catch (e) {
+        if (e.response) {
+          this.$notification["error"]({
+            message: "Error",
+            description: e.response.statusText,
+          });
+        }
+      }
+    },
   },
   components: {
     FileCard,

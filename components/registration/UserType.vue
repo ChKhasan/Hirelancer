@@ -159,8 +159,12 @@
           <button
             @click="onSubmit"
             class="h-[60px] xl:h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] xl:text-[14px] text-white font-medium"
+            :class="{
+              'pointer-events-none opacity-50': loading || form.password.length < 6,
+            }"
           >
-            Kodni jo’natish
+            <LoaderBtn v-if="loading" />
+            <span v-else>Kodni jo’natish</span>
           </button>
         </div>
       </div>
@@ -169,6 +173,7 @@
 </template>
 <script>
 export default {
+  props: ["loading"],
   data() {
     return {
       other: "",
@@ -207,11 +212,9 @@ export default {
         .forEach((input) => (input.placeholder = "*"));
     },
     handleOnComplete(value) {
-      console.log("OTP completed: ", value);
       this.form.password = value;
     },
     handleOnChange(value) {
-      console.log("OTP changed: ", value);
       this.form.password = value;
     },
     handleClearInput() {

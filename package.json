@@ -14,6 +14,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@webzlodimir/vue-bottom-sheet-vue2": "^0.0.9",
     "ant-design-vue": "^1.7.8",
+    "cookie": "^0.6.0",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
     "swiper": "^9.0.5",

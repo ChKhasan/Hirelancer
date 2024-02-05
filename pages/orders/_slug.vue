@@ -29,6 +29,7 @@
             <div class="head flex justify-between xl:flex-col xl:gap-4">
               <div class="flex gap-4 items-center">
                 <span
+                  v-if="order?.urgent"
                   class="flex xl:text-xs gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
                   ><svg
                     class="xl:w-4 xl:h-4"
@@ -48,7 +49,7 @@
                     /></svg
                   >Срочный заказ</span
                 >
-                <span class="h-[19px] w-[1px] bg-grey-8"></span>
+                <span v-if="order?.urgent" class="h-[19px] w-[1px] bg-grey-8"></span>
                 <span
                   class="flex gap-[7px] items-center rounded-[8px] px-[8px] py-[4px] text-green text-[14px] font-medium"
                   ><svg
@@ -74,37 +75,29 @@
               </div>
 
               <div class="flex gap-6 xl:justify-between">
-                <p class="text-base text-grey-64 xl:text-[14px]">07 мая 2023, 15:24</p>
+                <p class="text-base text-grey-64 xl:text-[14px]">
+                  {{ moment(order?.created_at).format(dateFormat) }}
+                </p>
                 <p class="text-base text-grey-64 xl:text-[14px] flex gap-[6px]">
-                  Заказ:<span class="font-medium text-black">#14511</span>
+                  Заказ:<span class="font-medium text-black">#{{ order?.id }}</span>
                 </p>
               </div>
             </div>
             <div class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8">
               <h1 class="title text-[24px] font-semibold text-black mb-4 xl:text-[18px]">
-                Нужен разработчик в теме форекс/крипто/трейдинг, знаком с патернами
-                графического анализа на графиках
+                {{ order?.name }}
               </h1>
               <p class="text-base text-grey-80 xl:text-[14px]">
-                Join our world-class innovation team, revolutionizing education at ASU
-                Prep Digital. Our mission is to enhance student performance and provide
-                access to transformative educational pathways. We're seeking Graphic
-                Designers to create visually engaging digital lessons for grades
-                8-12.Contract Expectations:During the first month, you'll familiarize
-                yourself with our media and curriculum teams, learn to build lessons using
-                our proprietary tool, and adhere to the style guide(s) for your assigned
-                course. After the initial month, we'll assess the contract's progress and
-                decide on an extension. If it's a mutually beneficial fit, the contract
-                will be extended in 3-month increments.
+                {{ order?.description }}
               </p>
-              <p class="text-base text-grey-80 mt-8 xl:mt-5 xl:text-[14px]">
+              <!-- <p class="text-base text-grey-80 mt-8 xl:mt-5 xl:text-[14px]">
                 As we're developing curriculum for the next 4 years, there's potential for
                 a long-term contract.This is a project-based contract and not a retainer
                 arrangement. It does not involve a continuous or ongoing engagement where
                 ASU Prep retains the contractor's services even when there is no
                 project-based work. Instead, the contract centers around completing
                 specific assigned tasks and billing hours to ASU Prep.
-              </p>
+              </p> -->
             </div>
             <div class="files flex flex-col gap-4 mt-4">
               <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">
@@ -122,15 +115,20 @@
                 Категории:
               </h6>
               <div class="flex gap-2 items-center xl:flex-col xl:items-start">
-                <span
-                  class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
-                  >Программирование </span
-                ><span class="text-[20px] text-grey-64 xl:hidden">/</span>
-                <span
-                  class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
+                <div
+                  class="flex gap-2 items-center"
+                  v-for="(specialit, index) in order?.specialities"
+                  :key="specialit?.id"
                 >
-                  Мобильные приложения
-                </span>
+                  <span
+                    class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
+                    >{{ specialit?.name_ru }} </span
+                  ><span
+                    v-if="index + 1 != order?.specialities.length"
+                    class="text-[20px] text-grey-64 xl:hidden"
+                    >/</span
+                  >
+                </div>
               </div>
             </div>
             <div
@@ -157,7 +155,7 @@
                       stroke="#5C46E6"
                       stroke-width="1.5"
                     /></svg
-                  >300
+                  >{{ order?.view_count }}
                 </p>
                 <p class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center">
                   <svg
@@ -188,7 +186,7 @@
                       ry="0.833333"
                       fill="#5C46E6"
                     /></svg
-                  >42 запросов
+                  >{{ order?.request_count }} запросов
                 </p>
               </div>
               <p
@@ -222,8 +220,8 @@
             </div>
           </div>
           <div class="flex-col gap-4 hidden xl:flex xl:mt-6 xl:gap-6">
-            <ClientCard />
-            <PriceCard @open="openModal" />
+            <ClientCard :client="order?.client"/>
+            <PriceCard @open="openModal" :order="order" />
           </div>
           <div class="flex flex-col gap-4 mt-8 xl:mt-6">
             <InfoCard
@@ -282,8 +280,8 @@
           </div>
         </div>
         <div class="flex flex-col gap-4 xl:hidden">
-          <ClientCard />
-          <PriceCard @open="openModal" />
+          <ClientCard :client="order?.client"/>
+          <PriceCard @open="openModal" :order="order" />
         </div>
       </div>
     </div>
@@ -324,17 +322,36 @@ import PriceCard from "../../components/orders/PriceCard.vue";
 import BottomModal from "../../components/orders/BottomModal.vue";
 import OrderSuccess from "../../components/modals/OrderSuccess.vue";
 import BottomSuccess from "../../components/orders/BottomSuccess.vue";
-
+import Loader from "../../components/Loader.vue";
+import moment from "moment";
 export default {
   data() {
     return {
       bottomModal: false,
       visible: false,
+      dateFormat: "DD MMM YYYY, HH:mm",
     };
   },
   mounted() {
+    this.__GET_ORDERS();
+  },
+  async asyncData({ store, params }) {
+    try {
+      const [orderData] = await Promise.all([
+        store.dispatch("fetchOrders/getOrderById", {
+          id: params.slug,
+        }),
+      ]);
+      const order = orderData?.content;
+      return {
+        order,
+      };
+    } catch (e) {
+    } finally {
+    }
   },
   methods: {
+    moment,
     open() {
       this.$refs.myBottomSheet.open();
     },
@@ -357,6 +374,15 @@ export default {
     submit(form) {
       this.__POST_ORDER(form);
     },
+    async __GET_ORDERS() {
+      try {
+        const data = await this.$store.dispatch("fetchOrders/getOrderById", {
+          id: this.$route.params.slug,
+        });
+      } catch (e) {
+      } finally {
+      }
+    },
     async __POST_ORDER(data) {
       if (window.innerWidth > 1200) this.visible = true;
       try {
@@ -368,6 +394,7 @@ export default {
         this.visible = true;
         this.close();
         this.openSuccess();
+        this.closeModal();
         // this.$router.go(-1);
       } catch (e) {
         this.$notification["error"]({
@@ -392,6 +419,7 @@ export default {
     BottomModal,
     OrderSuccess,
     BottomSuccess,
+    Loader,
   },
 };
 </script>

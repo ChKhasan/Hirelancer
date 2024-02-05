@@ -24,7 +24,7 @@
         Профиль
       </nuxt-link>
       <nuxt-link
-        :to="`/profile/${$route.params.user}/orders/active`"
+        :to="`/profile/${$route.params.user}/orders/active/status`"
         :class="{ active: $route.name.includes('orders') }"
         class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
         ><svg

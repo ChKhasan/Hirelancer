@@ -16,6 +16,8 @@ export default {
   css: ["ant-design-vue/dist/antd.css", "@/assets/css/main.css"],
 
   plugins: [
+    "~/plugins/axios",
+    "~/plugins/axios-instance",
     { src: "~plugins/antdv.js" },
     { src: "~plugins/v-mask.js", ssr: false },
     { src: "~plugins/vue-otp-input.js", ssr: false },
@@ -34,7 +36,6 @@ export default {
     },
     baseURL: "https://hirelancer.kifa.uz/api",
   },
-
   build: {
     babel: {
       compact: true,
