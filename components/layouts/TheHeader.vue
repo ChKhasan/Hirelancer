@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="right flex gap-12">
-        <div class="buttons flex gap-4">
+        <div class="buttons flex gap-4" v-if="$store.state.auth && Boolean($store.state.userInfo['name'])">
           <button
             class="w-[52px] h-[52px] rounded-full border-[2px] border-grey-8 border-solid flex items-center justify-center"
           >
@@ -121,7 +121,6 @@
             </svg>
           </button>
         </div>
-
         <button
           @click="$router.push('/profile/freelancer')"
           class="user flex gap-2 items-center"

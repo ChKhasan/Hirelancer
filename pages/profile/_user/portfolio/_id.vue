@@ -124,13 +124,26 @@
             </div>
             <div class="clearfix flex flex-col gap-2 mt-4">
               <div class="flex order-upload gap-2">
-                <a-upload
+                <!-- <a-upload
                   v-for="item in uploadList"
                   :key="item"
                   list-type="picture-card"
                   :file-list="fileList[item]"
                   @preview="handlePreview"
                   @change="($event) => handleChange($event, item)"
+                >
+                  <div v-if="fileList[item].length < 1" class="flex justify-center">
+                    <img src="@/assets/images/image-add.png" alt="" />
+                  </div>
+                </a-upload> -->
+                <a-upload
+                  v-for="item in uploadList"
+                  :key="item"
+                  list-type="picture-card"
+                  :file-list="fileList[item]"
+                  :remove="($event) => handleRemove($event, item)"
+                  :before-upload="handleBeforeUpload"
+                  :custom-request="($event) => customRequest($event, item)"
                 >
                   <div v-if="fileList[item].length < 1" class="flex justify-center">
                     <img src="@/assets/images/image-add.png" alt="" />
@@ -159,9 +172,12 @@
         <button
           @click="onSubmit()"
           class="border border-solid border-blue bg-blue rounded-[8px] h-[52px] w-[232px] flex justify-center items-center text-base text-white font-medium gap-2"
+          :class="{ 'pointer-events-none opacity-50': loadingBtn }"
         >
           Опубликовать
+          <LoaderBtn v-if="loadingBtn" />
           <svg
+            v-else
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -300,6 +316,7 @@ function getBase64(file) {
 export default {
   data() {
     return {
+      loadingBtn: false,
       loading: true,
       errorSelect: false,
       checkedList: [],
@@ -419,6 +436,7 @@ export default {
     },
     async __PUT_WORK(data) {
       try {
+        this.loadingBtn = true;
         await this.$store.dispatch("fetchPortfolio/putWork", {
           data,
           id: this.$route.params.id,
@@ -433,6 +451,8 @@ export default {
           message: "Error",
           description: e.response.statusText,
         });
+      } finally {
+        this.loadingBtn = false;
       }
     },
     handleOk() {
@@ -476,6 +496,30 @@ export default {
     },
     handleChange({ fileList }, name) {
       this.fileList[name] = fileList;
+    },
+    handleBeforeUpload(file) {
+      return true;
+    },
+    handleRemove(e, name) {
+      this.fileList[name] = [];
+    },
+    customRequest({ onSuccess, onError, file }, name) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const uploadedFile = {
+          uid: file.uid,
+          name: file.name,
+          originFileObj: file,
+          url: reader.result,
+        };
+        this.fileList[name].push(uploadedFile);
+        onSuccess();
+      };
+      reader.onerror = () => {
+        console.error("Error reading file as binary data");
+        onError(new Error("Error reading file"));
+      };
+      reader.readAsDataURL(file); // Use readAsDataURL to get Base64 data
     },
   },
   components: { Loader },

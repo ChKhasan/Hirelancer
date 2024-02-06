@@ -165,11 +165,36 @@
             </div>
             <div class="clearfix flex flex-col mt-6">
               <div class="flex order-upload gap-2">
-                <a-upload
+                <!-- <a-upload
                   list-type="picture-card"
                   :file-list="fileList"
                   @preview="handlePreview"
                   @change="handleChange"
+                >
+                  <div v-if="fileList.length < 10" class="flex justify-center bg-bg-grey">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M14.4357 13.7854C16.2815 13.7854 17.7774 12.2896 17.7774 10.4437C17.7774 8.5979 16.2815 7.10207 14.4357 7.10207C14.1782 7.10207 13.9299 7.13707 13.689 7.1929C12.9674 5.4979 11.2865 4.30957 9.3282 4.30957C6.71154 4.30957 4.58987 6.43124 4.58987 9.0479C3.28154 9.0479 2.2207 10.1087 2.2207 11.4171C2.2207 12.7254 3.28154 13.7862 4.58987 13.7862M7.12737 12.4412L9.56904 9.99957L12.0107 12.4412M9.56904 15.6896V10.0071"
+                        stroke="black"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </a-upload> -->
+                <a-upload
+                  list-type="picture-card"
+                  :file-list="fileList"
+                  :before-upload="handleBeforeUpload"
+                  :custom-request="customRequest"
                 >
                   <div v-if="fileList.length < 10" class="flex justify-center bg-bg-grey">
                     <svg
@@ -335,9 +360,12 @@
       <button
         @click="onSubmit"
         class="w-full border border-solid border-blue bg-blue rounded-[8px] h-[60px] flex justify-center items-center text-base text-white font-medium gap-2"
+        :class="{'pointer-events-none opacity-50':loadingBtn }"
       >
         Опубликовать
+        <LoaderBtn v-if="loadingBtn" />
         <svg
+          v-else
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -463,6 +491,7 @@
 </template>
 <script>
 import Loader from "../../../../components/Loader.vue";
+import LoaderBtn from "../../../../components/loader-btn.vue";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -475,6 +504,7 @@ function getBase64(file) {
 export default {
   data() {
     return {
+      loadingBtn: false,
       checkedList: [],
       activeCheckedList: [],
       errorSelect: false,
@@ -521,6 +551,27 @@ export default {
     };
   },
   methods: {
+    handleBeforeUpload(file) {
+      return true;
+    },
+    customRequest({ onSuccess, onError, file }) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const uploadedFile = {
+          uid: file.uid,
+          name: file.name,
+          originFileObj: file,
+          url: reader.result,
+        };
+        this.fileList.push(uploadedFile);
+        onSuccess();
+      };
+      reader.onerror = () => {
+        console.error("Error reading file as binary data");
+        onError(new Error("Error reading file"));
+      };
+      reader.readAsDataURL(file); // Use readAsDataURL to get Base64 data
+    },
     closeChecked() {
       this.checkedList = [];
       this.visible = false;
@@ -588,6 +639,7 @@ export default {
     },
     async __POST_ORDER(data) {
       try {
+        this.loadingBtn = true;
         await this.$store.dispatch("fetchOrders/postOrder", data);
         this.$notification["success"]({
           message: "Success",
@@ -599,6 +651,8 @@ export default {
           message: "Error",
           description: e.response.statusText,
         });
+      } finally {
+        this.loadingBtn = false;
       }
     },
     onChange() {},
@@ -616,6 +670,7 @@ export default {
       this.previewVisible = true;
     },
     handleChange({ fileList }) {
+      console.log(fileList);
       this.fileList = fileList.map((item) => {
         let url = URL.createObjectURL(item.originFileObj);
         return {
@@ -634,7 +689,7 @@ export default {
       this.visible = false;
     },
   },
-  components: { Loader },
+  components: { Loader, LoaderBtn },
 };
 </script>
 <style lang="css" scoped>

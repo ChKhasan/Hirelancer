@@ -291,12 +291,22 @@
             ref="name"
             class="form-item"
             label="Tugilgan sanangiz"
+            prop="date_of_birth"
           >
-            <a-date-picker
+            <!-- <a-date-picker
               @change="onChange"
               v-model="form.date_of_birth"
               class="w-full"
               placeholder="Tugilgan sanangiz"
+            /> -->
+
+            <a-input
+              type="text"
+              ref="date"
+              v-model="form.date_of_birth"
+              placeholder="Tugilgan sanangiz"
+              @input="formatDate"
+              @blur="blurHandler"
             />
           </a-form-model-item>
           <a-form-model-item ref="name" class="form-item" label="Viloyat tanlang">
@@ -552,8 +562,6 @@
               </div>
               <!-- </Transition> -->
             </div>
-         
-            
           </div>
         </div>
         <div class="flex gap-2 flex-col w-full mt-20">
@@ -576,10 +584,24 @@
 </template>
 <script>
 import moment from "moment";
+function isValidDate(day, month, year) {
+  if (month < 1 || month > 12) return false;
+  if (day < 1 || day > 31) return false;
+  if ((month === 4 || month === 6 || month === 9 || month === 11) && day === 31)
+    return false;
+  if (month === 2) {
+    if (day > 29) return false;
+    if (day === 29 && !((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0))
+      return false;
+  }
+  return true;
+}
 export default {
   props: ["regions", "specialities"],
   data() {
     return {
+      inputDate: "",
+      formattedDate: "",
       dropdown: false,
       dropdownOpens: [],
       checkedList: [],
@@ -607,6 +629,59 @@ export default {
     };
   },
   methods: {
+    checkValue(str, max) {
+      if (str.charAt(0) !== "0" || str == "00") {
+        var num = parseInt(str);
+        if (isNaN(num) || num <= 0 || num > max) num = 1;
+        str =
+          num > parseInt(max.toString().charAt(0)) && num.toString().length == 1
+            ? "0" + num
+            : num.toString();
+      }
+      return str;
+    },
+    formatDate() {
+      this.$refs.date.type = "text";
+      var input = this.form.date_of_birth;
+      if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
+      var values = input.split("/").map(function (v) {
+        return v.replace(/\D/g, "");
+      });
+      if (values[0]) values[0] = this.checkValue(values[0], 31);
+      if (values[1]) values[1] = this.checkValue(values[1], 12);
+      var output = values.map(function (v, i) {
+        return v.length == 2 && i < 2 ? v + " / " : v;
+      });
+      this.form.date_of_birth = output.join("").substr(0, 14);
+    },
+    blurHandler() {
+      this.$refs.date.type = "text";
+      var input = this.form.date_of_birth;
+      var values = input.split("/").map(function (v, i) {
+        return v.replace(/\D/g, "");
+      });
+      var output = "";
+
+      if (values.length == 3) {
+        var year =
+          values[2].length !== 4 ? parseInt(values[2]) + 2000 : parseInt(values[2]);
+        var month = parseInt(values[1]) - 1;
+        var day = parseInt(values[0]);
+        var d = new Date(year, month, day);
+        if (!isNaN(d)) {
+          this.formattedDate = d.toString();
+          var dates = [d.getDate(), d.getMonth() + 1, d.getFullYear()];
+          output = dates
+            .map(function (v) {
+              v = v.toString();
+              return v.length == 1 ? "0" + v : v;
+            })
+            .join(" / ");
+        }
+      }
+      this.form.date_of_birth = output;
+      // this.form.date_of_birth = output;
+    },
     handleDropdown(id) {
       this.dropdownOpens.includes(id)
         ? (this.dropdownOpens = this.dropdownOpens.filter((item) => item != id))
@@ -664,7 +739,7 @@ export default {
       // formData.append("specialities[]", JSON.stringify(this.form.specialities));
       const data = {
         ...this.form,
-        date_of_birth: moment(this.form.date_of_birth).format("DD.MM.YYYY"),
+        date_of_birth: this.form.date_of_birth.replaceAll(" ", "").replaceAll("/", "-"),
         // [`specialities[]`]: this.form.specialities,
       };
       delete data["specialities"];
@@ -838,7 +913,7 @@ export default {
   max-height: 200px;
   /* height: auto; */
 }
-.drop-list .active  .drop-head h2 {
+.drop-list .active .drop-head h2 {
   color: var(--main-color);
 }
 .drop-head {
