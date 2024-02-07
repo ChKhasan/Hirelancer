@@ -1,8 +1,10 @@
 <template lang="html">
-  <div class="create-order pt-[110px] pb-[120px] max-w-[1200px] mx-auto">
+  <div class="create-order pt-[110px] pb-[120px] max-w-[1200px] mx-auto xl:pt-6 xl:px-4">
     <div class="head flex justify-between">
-      <h1 class="flex text-[32px] text-black font-semibold">Добавить работу</h1>
-      <div class="buttons flex gap-4">
+      <h1 class="flex text-[32px] text-black font-semibold xl:text-[18px]">
+        Добавить работу
+      </h1>
+      <div class="buttons flex gap-4 xl:hidden">
         <button
           @click="$router.go(-1)"
           class="border border-solid border-grey-24 rounded-[8px] h-[52px] w-[168px] flex justify-center items-center text-base text-grey-64 font-medium"
@@ -10,6 +12,7 @@
           Отмена
         </button>
         <button
+          @click="onSubmit()"
           class="border border-solid border-blue bg-blue rounded-[8px] h-[52px] w-[232px] flex justify-center items-center text-base text-white font-medium gap-2"
         >
           Опубликовать
@@ -32,7 +35,7 @@
       </div>
     </div>
     <div
-      class="form-block max-w-[712px] px-8 py-[40px] rounded-[24px] bg-white mt-[40px] border-[2px] border-solid border-grey-light"
+      class="form-block max-w-[712px] px-8 py-[40px] rounded-[24px] bg-white mt-[40px] border-[2px] border-solid border-grey-light xl:mt-6 xl:py-0 xl:border-0 xl:px-0"
     >
       <a-form-model :model="form" ref="ruleForm" :rules="rules">
         <div class="flex flex-col gap-6">
@@ -132,14 +135,16 @@
           </a-form-model-item>
           <div class="images">
             <div class="flex flex-col gap-2">
-              <h2 class="text-base text-black font-medium">Добавить фото</h2>
+              <h2 class="text-base text-black font-medium xl:text-[14px]">
+                Добавить фото
+              </h2>
               <p class="text-[14px] text-grey-64">
                 Первое фото будет на обложке объявления. Перетащите, чтобы изменить
                 порядок.
               </p>
             </div>
             <div class="clearfix flex flex-col gap-2 mt-4">
-              <div class="flex order-upload gap-2">
+              <div class="flex order-upload gap-2 xl:grid xl:grid-cols-3">
                 <!-- <a-upload
                   v-for="item in uploadList"
                   :key="item"
@@ -184,7 +189,7 @@
           </a-form-model-item>
         </div>
       </a-form-model>
-      <div class="mt-8">
+      <div class="mt-8 xl:hidden">
         <button
           @click="onSubmit()"
           class="border border-solid border-blue bg-blue rounded-[8px] h-[52px] w-[232px] flex justify-center items-center text-base text-white font-medium gap-2"
@@ -208,6 +213,40 @@
               stroke-linejoin="round"
             />
           </svg>
+        </button>
+      </div>
+      <div
+        class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:flex flex-col gap-2"
+      >
+        <button
+          @click="onSubmit()"
+          class="border border-solid border-blue bg-blue rounded-[12px] h-[52px] w-full flex justify-center items-center text-[14px] text-white font-medium gap-2"
+          :class="{ 'pointer-events-none opacity-50': loadingBtn }"
+        >
+          Опубликовать
+          <LoaderBtn v-if="loadingBtn" />
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M8 12L10.5347 14.2812C10.9662 14.6696 11.6366 14.6101 11.993 14.1519L16 9M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <button
+          @click="$router.go(-1)"
+          class="border border-solid border-grey-24 rounded-[12px] h-[52px] w-full flex justify-center items-center text-[14px] text-grey-64 font-medium"
+        >
+          Отмена
         </button>
       </div>
     </div>
@@ -371,6 +410,9 @@ export default {
     },
     open() {
       this.openBottom = true;
+      setTimeout(() => {
+        if (this.openBottom) this.openBottom = false;
+      }, 10);
     },
     close() {
       this.openBottom = false;
@@ -586,5 +628,24 @@ export default {
 }
 .required :deep(label)::after {
   display: none !important;
+}
+@media (max-width: 1200px) {
+  .order-upload {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  :deep(.order-upload .ant-upload-select-picture-card) {
+    height: 102px;
+    border-radius: 8px;
+  }
+  .fixed-btns {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+  }
+  :deep(.order-item label),
+  :deep(.order-select label) {
+    font-size: 14px;
+  }
 }
 </style>

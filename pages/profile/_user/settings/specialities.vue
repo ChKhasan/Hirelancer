@@ -191,6 +191,9 @@ export default {
     },
     open() {
       this.openBottom = true;
+      setTimeout(() => {
+        if (this.openBottom) this.openBottom = false;
+      }, 10);
     },
     close() {
       this.openBottom = false;

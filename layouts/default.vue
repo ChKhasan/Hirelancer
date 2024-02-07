@@ -11,7 +11,7 @@
     <div v-else class="header-bg xl:block hidden w-full h-[56px]"></div>
     <Nuxt />
     <TheFooter />
-    <BottomBar />
+    <BottomBar v-if="routes.includes($route.name)" />
   </div>
 </template>
 <script>
@@ -29,6 +29,11 @@ export default {
           content: "#5c46e5",
         },
       ],
+    };
+  },
+  data() {
+    return {
+      routes: ["freelancers", "profile-index", "index", "orders"],
     };
   },
 

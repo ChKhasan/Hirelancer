@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="create-order pt-[110px] pb-[120px] max-w-[953px] mx-auto md:pt-6 md:px-4">
     <div class="head flex justify-between items-center">
-      <h1 class="flex text-[24px] text-black font-semibold">Buyurtma qo’shish</h1>
+      <h1 class="flex text-[24px] text-black font-semibold xl:hidden">
+        Buyurtma qo’shish
+      </h1>
 
       <div class="buttons flex gap-4 md:hidden">
         <button
@@ -14,9 +16,11 @@
     </div>
 
     <div
-      class="form-block px-8 py-8 md:px-4 md:py-4 rounded-[16px] bg-white border-border-darik border-solid border mt-4"
+      class="form-block px-8 py-8 md:px-4 md:py-4 rounded-[16px] bg-white border-border-darik border-solid border mt-4 xl:mt-0"
     >
-      <h2 class="text-[20px] text-black font-semibold mb-6">Информация о заказе</h2>
+      <h2 class="text-[20px] text-black font-semibold mb-6 xl:text-base">
+        Информация о заказе
+      </h2>
 
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
         <div class="flex flex-col gap-6">
@@ -174,7 +178,9 @@
             class="images pb-[40px] border-[0] border-b border-solid border-border-darik"
           >
             <div class="flex flex-col">
-              <h2 class="text-[20px] text-black font-semibold">Файлы к задаче</h2>
+              <h2 class="text-[20px] text-black font-semibold xl:text-[18px]">
+                Файлы к задаче
+              </h2>
               <p class="text-[14px] text-grey-64">
                 Загрузите локалние файли для деталной информатсии для заказа
               </p>
@@ -296,7 +302,9 @@
                     }
                   "
                 />
-                <p class="text-[20px] text-black font-medium">Договорная дней</p>
+                <p class="text-[20px] text-black font-medium xl:text-[14px]">
+                  Договорная дней
+                </p>
                 <a-tooltip placement="top">
                   <template slot="title">
                     <span>prompt text</span>
@@ -343,7 +351,9 @@
                     }
                   "
                 />
-                <p class="text-[20px] text-black font-medium">Договорная цена</p>
+                <p class="text-[20px] text-black font-medium xl:text-[14px]">
+                  Договорная цена
+                </p>
                 <a-tooltip placement="top">
                   <template slot="title">
                     <span>prompt text</span>
@@ -375,7 +385,7 @@
     <div class="mt-8">
       <button
         @click="onSubmit"
-        class="w-full border border-solid border-blue bg-blue rounded-[8px] h-[60px] flex justify-center items-center text-base text-white font-medium gap-2"
+        class="w-full border border-solid border-blue bg-blue rounded-[8px] h-[60px] flex justify-center items-center text-base text-white font-medium gap-2 xl:hidden"
         :class="{ 'pointer-events-none opacity-50': loadingBtn }"
       >
         Опубликовать
@@ -397,8 +407,36 @@
           />
         </svg>
       </button>
+      <div
+        class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:flex flex-col gap-2"
+      >
+        <button
+          @click="onSubmit"
+          class="border border-solid border-blue bg-blue rounded-[12px] h-[52px] w-full flex justify-center items-center text-[14px] text-white font-medium gap-2"
+          :class="{ 'pointer-events-none opacity-50': loadingBtn }"
+        >
+          Опубликовать
+          <LoaderBtn v-if="loadingBtn" />
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M8 12L10.5347 14.2812C10.9662 14.6696 11.6366 14.6101 11.993 14.1519L16 9M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
-   <SpicialsticsCheck
+    <SpicialsticsCheck
       @saveChecked="saveChecked"
       :visible="visible"
       @handleOk="handleOk"
@@ -495,7 +533,7 @@ export default {
       };
       reader.readAsDataURL(file); // Use readAsDataURL to get Base64 data
     },
-  
+
     saveChecked(checkedList) {
       this.activeCheckedList = [...checkedList];
       this.checkedList = [];
@@ -506,9 +544,12 @@ export default {
     deleteChecked(id) {
       this.activeCheckedList = this.activeCheckedList.filter((item) => item.id != id);
     },
-  
+
     open() {
       this.openBottom = true;
+      setTimeout(() => {
+        if (this.openBottom) this.openBottom = false;
+      }, 10);
     },
     close() {
       this.openBottom = false;
@@ -799,5 +840,19 @@ export default {
 }
 .required :deep(label)::after {
   display: none !important;
+}
+@media (max-width: 1200px) {
+  :deep(.order-item label),
+  :deep(.order-select label) {
+    font-size: 14px;
+  }
+  .order-upload {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .fixed-btns {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+  }
 }
 </style>

@@ -115,6 +115,7 @@
       </div>
     </a-modal>
     <vue-bottom-sheet-vue2
+      v-model="closeHandle"
       ref="openSpecials"
       class="bottom-drawer spicial-drawer h-full"
       :init-sheet-height="700"
@@ -266,6 +267,7 @@ export default {
   props: ["visible", "openBottom", "specialities", "activeCheckedList"],
   data() {
     return {
+      closeHandle: "",
       checkedList: [],
       errorSelect: false,
       modalList: null,
@@ -278,6 +280,7 @@ export default {
     closeChecked() {
       this.checkedList = [];
       this.$emit("handleOk");
+      this.$refs.openSpecials.close();
     },
 
     onchecked(obj) {
@@ -309,14 +312,15 @@ export default {
           this.checkedList = [...this.activeCheckedList];
       }
     },
+    "this.$refs.openSpecials.showSheet"(val) {
+      console.log("asdfsfsdf", val);
+    },
     openBottom(val) {
       if (val) {
         if (this.activeCheckedList.length > 0) {
           this.checkedList = [...this.activeCheckedList];
         }
         this.$refs.openSpecials.open();
-      } else {
-        this.$refs.openSpecials.close();
       }
     },
   },
