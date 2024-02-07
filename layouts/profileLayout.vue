@@ -16,9 +16,11 @@
           class="xl:hidden"
           :userInfo="$store.state.userInfo"
         />
+
         <PersonalBlockMobile
           class="hidden xl:flex"
           :class="{ 'xl:hidden': $route.name !== `profile-user` }"
+          :user="false"
         />
         <div class="min-w-0 x" :class="{ 'xl:hidden': $route.name == `profile-user` }">
           <ProfileTab v-if="$route.name.includes('profile')" />

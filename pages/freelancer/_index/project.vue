@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="profile">
-    <ProfileLayout :profile="false">
+    <ProfileLayout :profile="false" :show="false">
       <div class="mt-8">
         <Alerts />
       </div>
-      <div class="personal-information mt-8">
+      <div class="personal-information mt-8 ">
         <PersonalInfo :isEdit="true" />
         <Achievements />
       </div>
@@ -48,5 +48,12 @@ export default {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 16px;
+}
+@media (max-width: 1200px) {
+    .personal-information {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
 }
 </style>

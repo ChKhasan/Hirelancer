@@ -141,7 +141,11 @@
         />
       </div>
       <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer">
-        <FreelancersFilter class="hidden xl:flex pb-6" />
+        <FreelancersFilter
+          class="hidden xl:flex pb-6"
+          :specialities="specialities"
+          @filter="queryCreater"
+        />
       </vue-bottom-sheet-vue2>
     </div>
   </div>
@@ -160,7 +164,7 @@ export default {
   async asyncData({ store, query }) {
     const [freeLancersData, specialitiesData] = await Promise.all([
       store.dispatch("fetchFreelancers/getFreelancers", {
-        params: { page: 1, page_size: 5, ...query },
+        params: { page: query.page || 1, page_size: query.page_size || 5, ...query },
       }),
       store.dispatch("fetchSpecialities/getSpecialities"),
     ]);

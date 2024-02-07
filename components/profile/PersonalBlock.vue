@@ -227,9 +227,9 @@
           <h6 class="text-[12px] font-semibold text-grey-40 uppercase">
             Социальные сети
           </h6>
-          <PersonalMessengers />
+          <PersonalMessengers :userInfo="userInfo" />
         </div>
-        <div v-if="profile">
+        <!-- <div v-if="profile">
           <div
             class="personalBlock-price border border-dashed border-blue rounded-[15px] px-[20px] py-[20px] bg-white"
           >
@@ -258,7 +258,7 @@
           <p class="absolute z-10 text-white text-[18px] font-semibold">
             Получить про аккаунт
           </p>
-        </button>
+        </button> -->
       </div>
       <!-- <div class="mt-[34px] flex flex-col gap-8">
         <div class="flex flex-col gap-3">

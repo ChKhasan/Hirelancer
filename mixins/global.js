@@ -35,6 +35,8 @@ export default {
         });
       }
       this.current = Number(this.$route.query.page);
+      this.params.pageSize = Number(this.$route.query.page_size) || 5;
+      this.params.page = Number(this.$route.query.page) || 1;
     },
   },
 };

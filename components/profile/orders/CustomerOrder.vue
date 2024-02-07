@@ -154,7 +154,7 @@
                         stroke="#5C46E6"
                         stroke-width="1.5"
                       /></svg
-                    >{{order?.view_count}}
+                    >{{ order?.view_count }}
                   </p>
                   <p class="text-base text-grey-64 flex gap-[8px] items-center">
                     <svg
@@ -185,7 +185,7 @@
                         ry="0.833333"
                         fill="#5C46E6"
                       /></svg
-                    >{{order?.request_count}} запросов
+                    >{{ order?.request_count }} запросов
                   </p>
                 </div>
                 <p
@@ -342,18 +342,20 @@
           </div>
         </div>
       </div>
-      <div class="mt-6 pb-[120px]">
+      <!-- <div class="mt-6 pb-[120px]">
         <CustomerChat />
-      </div>
+      </div> -->
     </div>
-    <!-- <div class="mt-20 bg-bg-grey pt-20 pb-[120px]">
+    <div class="mt-20 bg-bg-grey pt-20 pb-[120px]">
       <div class="max-w-[1440px] mx-auto">
-      <div class="order-left-chat mb-6">
-        <h4 class="text-[24px] font-semibold text-black">Предложений (14)</h4>
-      </div>
+        <div class="order-left-chat mb-6">
+          <h4 class="text-[24px] font-semibold text-black">
+            Предложений ({{ order?.requests?.length }})
+          </h4>
+        </div>
         <div class="order-left-chat">
-          <div class="list  flex flex-col gap-4">
-            <OffersOrderCard />
+          <div class="list flex flex-col gap-4">
+            <OffersOrderCard v-for="request in order?.requests" :key="request?.id" :request="request" />
             <button
               class="flex py-4 rounded-lg bg-grey-light w-full items-center justify-center gap-6 text-base font-medium text-blue"
             >
@@ -381,7 +383,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div>
       <Transition name="opacity">
         <div

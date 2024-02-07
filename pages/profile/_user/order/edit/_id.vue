@@ -69,8 +69,27 @@
               </div>
 
               <button
-                class="w-6"
+                class="w-6 xl:hidden"
                 @click="(visible = true), (checkedList = [...activeCheckedList])"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="3"
+                  height="13"
+                  viewBox="0 0 3 13"
+                  fill="none"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.5 1.25C2.5 1.94036 1.94036 2.5 1.25 2.5C0.559644 2.5 0 1.94036 0 1.25C0 0.559644 0.559644 0 1.25 0C1.94036 0 2.5 0.559644 2.5 1.25ZM2.5 6.25C2.5 6.94036 1.94036 7.5 1.25 7.5C0.559644 7.5 0 6.94036 0 6.25C0 5.55964 0.559644 5 1.25 5C1.94036 5 2.5 5.55964 2.5 6.25ZM1.25 12.5C1.94036 12.5 2.5 11.9404 2.5 11.25C2.5 10.5596 1.94036 10 1.25 10C0.559644 10 0 10.5596 0 11.25C0 11.9404 0.559644 12.5 1.25 12.5Z"
+                    fill="#020105"
+                  />
+                </svg>
+              </button>
+              <button
+                class="w-6 xl:block hidden"
+                @click="open"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +250,7 @@
               <img alt="example" style="width: 100%" :src="previewImage" />
             </a-modal>
           </div>
-          <div class="grid grid-cols-2 gap-[70px]">
+          <div class="grid grid-cols-2 gap-[70px] md:grid-cols-1 md:gap-4">
             <a-form-model-item
               class="order-item w-full mb-0"
               label="Срок исполнения в днях"
@@ -282,7 +301,7 @@
             </div>
           </div>
           <div class="border-[0] border-b border-solid border-border-darik"></div>
-          <div class="grid grid-cols-2 gap-[70px]">
+          <div class="grid grid-cols-2 gap-[70px] md:grid-cols-1 md:gap-4">
             <a-form-model-item class="order-item w-full mb-0" label="Цена">
               <a-input
                 :class="{ 'opacity-50 pointer-events-none': form.price_negotiable }"
@@ -354,115 +373,20 @@
         </svg>
       </button>
     </div>
-    <a-modal
-      v-model="visible"
-      :body-style="{ padding: '32px 40px', borderRadius: '30px' }"
-      :dialog-style="{ padding: '32px', borderRadius: '24px' }"
-      centered
-      class="modal"
-      :closable="false"
-      width="1198px"
-      @ok="handleOk"
-    >
-      <div class="flex flex-col gap-8">
-        <div class="flex justify-between items-center">
-          <h6 class="text-black text-[24px] font-semibold">Sohangizni tanlang</h6>
-          <p class="text-[18px] text-grey-80 flex gap-2 items-center">
-            <span class="text-main-color font-medium">{{ checkedList.length }}</span
-            >: yonalish tanlandi
-            <span>(max 3 ta)</span>
-          </p>
-        </div>
-        <div class="modal-body">
-          <div
-            class="flex flex-col gap-4 max-h-[620px] overflow-y-scroll modal-list pr-[9px]"
-          >
-            <div
-              class="cursor-pointer flex gap-3 items-center h-[67px] px-6 rounded-xl bg-bg-f9 text-black text-base font-medium border-[2px] border-solid border-bg-f9"
-              v-for="item in specialities"
-              @click="onSelect(item?.id)"
-              :class="{
-                active: (modalList ? modalList : specialities[0]?.id) == item?.id,
-              }"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="56"
-                height="57"
-                viewBox="0 0 56 57"
-                fill="none"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M27.9997 47.1665C19.7523 47.1665 13.0664 40.3609 13.0664 31.9657C13.0664 23.6363 17.8326 13.9167 25.2689 10.4409C26.1357 10.0357 27.0677 9.83317 27.9997 9.83317V47.1665Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.3"
-                  d="M30.7308 10.4412C29.864 10.0361 28.932 9.8335 28 9.8335V22.9003L36.2724 14.6279C34.662 12.8586 32.7997 11.4082 30.7308 10.4412Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.4"
-                  d="M28 22.9003V33.167L40.3466 20.8203C39.2787 18.5427 37.9049 16.4214 36.2724 14.6279L28 22.9003Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.6"
-                  d="M28 42.4998L42.5805 27.9193C42.17 25.5104 41.4098 23.0876 40.3466 20.8198L28 33.1665V42.4998Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.7"
-                  d="M42.5805 27.9194L28 42.5V47.1665C36.2475 47.1665 42.9333 40.3609 42.9333 31.9657C42.9333 30.6419 42.8129 29.2829 42.5805 27.9194Z"
-                  fill="#009A10"
-                />
-              </svg>
-              {{ item?.name_ru }}
-            </div>
-          </div>
-          <div class="modal-board flex flex-col justify-between">
-            <div class="flex gap-3 flex-wrap">
-              <button
-                class="px-4 py-2 bg-bg-grey rounded-[22px] flex items-center gap-2"
-                v-for="child in specialities?.find(
-                  (elem) =>
-                    elem.id == (modalList != null ? modalList : specialities[0]?.id)
-                )?.children"
-                @click="onchecked(child)"
-              >
-                <a-checkbox
-                  :checked="
-                    Boolean(checkedList.find((elemChild) => elemChild.id == child.id))
-                  "
-                />
-                <p class="text-grey-80 text-[14px] font-medium">{{ child?.name_ru }}</p>
-              </button>
-            </div>
-            <div class="flex gap-4 justify-end">
-              <button
-                @click="closeChecked"
-                class="h-[60px] border border-solid w-[227px] border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
-              >
-                Bekor qilish
-              </button>
-              <button
-                @click="saveChecked"
-                class="h-[60px] border border-solid w-[227px] border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] text-white font-medium"
-              >
-                Tasdiqlash
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </a-modal>
+  <SpicialsticsCheck
+      @saveChecked="saveChecked"
+      :visible="visible"
+      @handleOk="handleOk"
+      :specialities="specialities"
+      :activeCheckedList="activeCheckedList"
+      :openBottom="openBottom"
+    />
     <Loader v-if="loading" />
   </div>
 </template>
 <script>
 import Loader from "@/components/Loader.vue";
+import SpicialsticsCheck from "../../../../../components/modals/SpicialsticsCheck.vue";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -475,6 +399,8 @@ function getBase64(file) {
 export default {
   data() {
     return {
+      activeSpecialities: [],
+      openBottom: false,
       checkedList: [],
       activeCheckedList: [],
       errorSelect: false,
@@ -526,10 +452,11 @@ export default {
       this.checkedList = [];
       this.visible = false;
     },
-    saveChecked() {
-      this.activeCheckedList = [...this.checkedList];
+    saveChecked(checkedList) {
+      this.activeCheckedList = [...checkedList];
       this.checkedList = [];
       this.visible = false;
+      this.close();
     },
     onchecked(obj) {
       if (this.checkedList.includes(obj)) {
@@ -546,6 +473,12 @@ export default {
     },
     onSelect(id) {
       this.modalList = id;
+    },
+    open() {
+      this.openBottom = true;
+    },
+    close() {
+      this.openBottom = false;
     },
     onSubmit() {
       let formData = new FormData();
@@ -611,10 +544,10 @@ export default {
           id: this.$route.params.id,
         });
         this.order = data?.content;
+        this.activeCheckedList = data?.content?.specialities;
         Object.keys(this.form).forEach((elem) => {
           this.form[elem] = data?.content[elem];
         });
-        console.log(this.form);
       } catch (e) {
       } finally {
         this.loading = false;
@@ -653,7 +586,7 @@ export default {
       this.visible = false;
     },
   },
-  components: { Loader },
+  components: { Loader, SpicialsticsCheck },
 };
 </script>
 <style lang="css" scoped>

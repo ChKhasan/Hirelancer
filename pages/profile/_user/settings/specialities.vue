@@ -67,7 +67,27 @@
 
           <button
             @click="visible = true"
-            class="py-[7px] text-base text-white h-[38px] flex items-center rounded-[4px] gap-2 border border-solid border-main-color pl-2 pr-3 bg-main-color"
+            class="py-[7px] text-base text-white h-[38px] flex items-center rounded-[4px] gap-2 border border-solid border-main-color pl-2 pr-3 bg-main-color xl:hidden"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M12 6V18M18 12L6 12"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+            >Qo’shish
+          </button>
+          <button
+            @click="open"
+            class="py-[7px] text-base text-white h-[38px] items-center rounded-[4px] gap-2 border border-solid border-main-color pl-2 pr-3 bg-main-color hidden xl:flex"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,113 +112,14 @@
         </div>
       </div>
     </div>
-    <!-- </ProfileLayout> -->
-    <a-modal
-      v-model="visible"
-      :body-style="{ padding: '32px 40px', borderRadius: '30px' }"
-      :dialog-style="{ padding: '32px', borderRadius: '24px' }"
-      centered
-      class="modal"
-      :closable="false"
-      width="1198px"
-      @ok="handleOk"
-    >
-      <div class="flex flex-col gap-8">
-        <div class="flex justify-between items-center">
-          <h6 class="text-black text-[24px] font-semibold">Sohangizni tanlang</h6>
-          <p class="text-[18px] text-grey-80 flex gap-2 items-center">
-            <span class="text-main-color font-medium">{{ checkedList.length }}</span
-            >: yonalish tanlandi
-            <span>(max 3 ta)</span>
-          </p>
-        </div>
-        <div class="modal-body">
-          <div
-            class="flex flex-col gap-4 max-h-[620px] overflow-y-scroll modal-list pr-[9px]"
-          >
-            <div
-              class="cursor-pointer flex gap-3 items-center h-[67px] px-6 rounded-xl bg-bg-f9 text-black text-base font-medium border-[2px] border-solid border-bg-f9"
-              v-for="item in specialities"
-              @click="onSelect(item?.id)"
-              :class="{
-                active: (modalList ? modalList : specialities[0]?.id) == item?.id,
-              }"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="56"
-                height="57"
-                viewBox="0 0 56 57"
-                fill="none"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M27.9997 47.1665C19.7523 47.1665 13.0664 40.3609 13.0664 31.9657C13.0664 23.6363 17.8326 13.9167 25.2689 10.4409C26.1357 10.0357 27.0677 9.83317 27.9997 9.83317V47.1665Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.3"
-                  d="M30.7308 10.4412C29.864 10.0361 28.932 9.8335 28 9.8335V22.9003L36.2724 14.6279C34.662 12.8586 32.7997 11.4082 30.7308 10.4412Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.4"
-                  d="M28 22.9003V33.167L40.3466 20.8203C39.2787 18.5427 37.9049 16.4214 36.2724 14.6279L28 22.9003Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.6"
-                  d="M28 42.4998L42.5805 27.9193C42.17 25.5104 41.4098 23.0876 40.3466 20.8198L28 33.1665V42.4998Z"
-                  fill="#009A10"
-                />
-                <path
-                  opacity="0.7"
-                  d="M42.5805 27.9194L28 42.5V47.1665C36.2475 47.1665 42.9333 40.3609 42.9333 31.9657C42.9333 30.6419 42.8129 29.2829 42.5805 27.9194Z"
-                  fill="#009A10"
-                />
-              </svg>
-              {{ item?.name_ru }}
-            </div>
-          </div>
-          <div class="modal-board flex flex-col justify-between">
-            <div class="flex gap-3 flex-wrap">
-              <button
-                class="px-4 py-2 bg-bg-grey rounded-[22px] flex items-center gap-2"
-                v-for="child in specialities?.find(
-                  (elem) =>
-                    elem.id == (modalList != null ? modalList : specialities[0]?.id)
-                )?.children"
-                @click="onchecked(child)"
-              >
-                <a-checkbox
-                  :checked="
-                    Boolean(checkedList.find((elemChild) => elemChild.id == child.id))
-                  "
-                />
-                <p class="text-grey-80 text-[14px] font-medium">
-                  {{ child?.name_ru }}{{ child?.id }}
-                </p>
-              </button>
-            </div>
-            <div class="flex gap-4 justify-end">
-              <button
-                @click="closeChecked"
-                class="h-[60px] border border-solid w-[227px] border-border-darik rounded-[12px] flex justify-center items-center text-[18px] text-black font-medium"
-              >
-                Bekor qilish
-              </button>
-              <button
-                @click="saveChecked"
-                class="h-[60px] border border-solid w-[227px] border-blue bg-blue rounded-[12px] flex justify-center items-center text-[18px] text-white font-medium"
-              >
-                Tasdiqlash
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </a-modal>
+    <SpicialsticsCheck
+      @saveChecked="saveChecked"
+      :visible="visible"
+      @handleOk="handleOk"
+      :specialities="specialities"
+      :activeCheckedList="activeCheckedList"
+      :openBottom="openBottom"
+    />
   </div>
 </template>
 <script>
@@ -210,13 +131,13 @@ import Alerts from "@/components/profile/Alerts.vue";
 import ProfileLayout from "@/components/profile/ProfileLayout.vue";
 import Statistics from "@/components/profile/Statistics.vue";
 import Comments from "@/components/profile/Comments.vue";
-import moment from "moment";
+import SpicialsticsCheck from "@/components/modals/SpicialsticsCheck.vue";
 export default {
   layout: "profileLayout",
   data() {
     return {
-      checkedList: [],
       activeCheckedList: [],
+      openBottom: false,
       errorSelect: false,
       modalList: null,
       visible: false,
@@ -244,38 +165,20 @@ export default {
           ]);
           this.specialities = specialitiesData.content;
           this.activeCheckedList = userInfoData.specialities;
-          this.checkedList = [...this.activeCheckedList];
           this.loading = false;
         }
       } finally {
         this.loading = false;
       }
     },
-    closeChecked() {
-      this.checkedList = [];
-      this.visible = false;
-    },
-    async saveChecked() {
-      this.activeCheckedList = await [...this.checkedList];
-      this.checkedList = [];
+    async saveChecked(checkedList) {
+      this.activeCheckedList = await [...checkedList];
       this.onSubmit();
       this.visible = false;
-    },
-    onchecked(obj) {
-      if (this.checkedList.includes(obj)) {
-        this.checkedList = this.checkedList.filter((item) => item.id != obj.id);
-      } else {
-        if (this.checkedList.length == 3) {
-          this.checkedList.shift();
-        }
-        this.checkedList.push(obj);
-      }
+      this.close();
     },
     async deleteChecked(id) {
       this.onSubmit(id);
-    },
-    onSelect(id) {
-      this.modalList = id;
     },
     onSubmit(id) {
       let formData = new FormData();
@@ -285,6 +188,12 @@ export default {
         }
       });
       this.__POST_REGISTER(formData);
+    },
+    open() {
+      this.openBottom = true;
+    },
+    close() {
+      this.openBottom = false;
     },
     async __POST_REGISTER(form) {
       try {
@@ -319,6 +228,7 @@ export default {
     Statistics,
     Alerts,
     Comments,
+    SpicialsticsCheck,
   },
 };
 </script>

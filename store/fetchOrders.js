@@ -34,4 +34,8 @@ export const actions = {
     const res = await this.$axiosInstance.$post(`/order_request`, data);
     return res;
   },
+  async postSelectRequest({}, payload) {
+    const res = await this.$axiosInstance.$post(`/orders/${payload.id}/select?_method=put`, payload.data);
+    return res;
+  },
 };

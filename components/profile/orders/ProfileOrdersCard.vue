@@ -58,7 +58,7 @@
       </div>
       <div class="flex items-end">
         <nuxt-link
-          to="/profile/orders/order"
+        :to="`/profile/customer/order/view/${order?.id}`"
           class="text-blue text-base font-medium flex gap-2 items-center"
           >Подробнее<svg
             xmlns="http://www.w3.org/2000/svg"

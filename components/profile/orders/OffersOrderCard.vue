@@ -108,44 +108,25 @@
           </div>
         </div>
         <div class="flex flex-col gap-2">
-          <h3 class="text-grey-80 text-[20px] font-semibold">600 000 сум</h3>
+          <h3 class="text-grey-80 text-[20px] font-semibold">
+            {{ request?.price.toLocaleString() }} сум
+          </h3>
           <p class="text-grey-64 text-[14px] flex gap-[6px]">
-            Срок:<span class="text-black">5 дней</span>
+            Срок:<span class="text-black">{{ request?.deadline }} дней</span>
           </p>
         </div>
       </div>
     </div>
     <div class="text mt-4 pb-6">
       <p
-        class="text-grey-64 text-base leading-6 max-h-[96px]  overflow-hidden"
+        class="text-grey-64 text-base leading-6 max-h-[96px] overflow-hidden"
         :class="{ active: openBlock == true }"
       >
-        Приветствую! Меня заинтересовал ваш проект. Моя цель – создавать интересные и
-        интуитивно понятные пользовательские интерфейсы, которые вдохновляют и привлекают
-        пользователей, улучшают их опыт и способствуют достижению бизнес-целей. Портфолио:
-        https://www.behance.net/polinatim Буду рада обсудить детали моей кандидатуры и
-        возможности сотрудничества. Пожалуйста, свяжитесь со мной для дальнейшего
-        обсуждения. С уважение Приветствую! Меня заинтересовал ваш проект. Моя цель –
-        создавать интересные и интуитивно понятные пользовательские интерфейсы, которые
-        вдохновляют и привлекают пользователей, улучшают их опыт и способствуют достижению
-        бизнес-целей. Портфолио: https://www.behance.net/polinatim Буду рада обсудить
-        детали моей кандидатуры и возможности сотрудничества. Пожалуйста, свяжитесь со
-        мной для дальнейшего обсуждения. С уважение Приветствую! Меня заинтересовал ваш
-        проект. Моя цель – создавать интересные и интуитивно понятные пользовательские
-        интерфейсы, которые вдохновляют и привлекают пользователей, улучшают их опыт и
-        способствуют достижению бизнес-целей. Портфолио: https://www.behance.net/polinatim
-        Буду рада обсудить детали моей кандидатуры и возможности сотрудничества.
-        Пожалуйста, свяжитесь со мной для дальнейшего обсуждения. С уважение Приветствую!
-        Меня заинтересовал ваш проект. Моя цель – создавать интересные и интуитивно
-        понятные пользовательские интерфейсы, которые вдохновляют и привлекают
-        пользователей, улучшают их опыт и способствуют достижению бизнес-целей. Портфолио:
-        https://www.behance.net/polinatim Буду рада обсудить детали моей кандидатуры и
-        возможности сотрудничества. Пожалуйста, свяжитесь со мной для дальнейшего
-        обсуждения. С уважение
+        {{ request?.additional_info }}
       </p>
       <button
         @click="openBlock = true"
-        v-if="!openBlock"
+        v-if="!openBlock && request?.additional_info?.length > 400"
         class="text-main-color text-base flex gap-1 mt-1"
       >
         Раскрыть<svg
@@ -170,12 +151,15 @@
     >
       <div class="flex gap-8 items-center">
         <button
+          @click="sendRequest(request)"
           class="rounded-[8px] bg-main-color px-5 h-12 flex items-center text-base text-white font-semibold leading-6"
         >
           Выбрать исполнителем
         </button>
         <p class="flex gap-4 text-base text-grey-40 items-center">
-          14:30 <span class="bg-grey-8 h-[24px] flex w-[1px]"></span> 25.02.2023
+          {{ moment(request?.created_at).format(hourFormat) }}
+          <span class="bg-grey-8 h-[24px] flex w-[1px]"></span>
+          {{ moment(request?.created_at).format(dateFormat) }}
         </p>
       </div>
       <div class="flex gap-6 items-center">
@@ -225,11 +209,38 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
+  props: ["request"],
   data() {
     return {
       openBlock: false,
+      dateFormat: "DD.MM.YYYY",
+      hourFormat: "HH:mm",
     };
+  },
+  methods: {
+    moment,
+    sendRequest(request) {
+      const data = {
+        id: request?.order_id,
+        data: {
+          request_id: request.id,
+        },
+      };
+      this.__POST_ORDER(data);
+    },
+    async __POST_ORDER(payload) {
+      try {
+        await this.$store.dispatch("fetchOrders/postSelectRequest", payload);
+      } catch (e) {
+        console.log(e.response);
+        this.$notification["error"]({
+          message: "Error",
+          description: e.response.statusText,
+        });
+      }
+    },
   },
 };
 </script>
@@ -243,6 +254,6 @@ export default {
   max-height: 1000px;
 }
 .text p {
-transition: 2s;
+  transition: 2s;
 }
 </style>

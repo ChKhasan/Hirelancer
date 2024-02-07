@@ -1,8 +1,8 @@
 <template lang="html">
-  <div class="portfolio">
+  <div class="portfolio xl:px-4">
     <!-- <ProfileLayout :profile="true"> -->
-    <div class="head flex flex-col gap-4 mt-8">
-      <div class="flex justify-between">
+    <div class="head flex flex-col gap-4 mt-8 xl:mt-0">
+      <div class="flex justify-between xl:hidden">
         <h3 class="text-[24px] text-black font-semibold">Заказы</h3>
         <button
           @click="$router.push('/profile/orders/add')"
@@ -14,7 +14,7 @@
       <div class="flex justify-between items-center">
         <OrdersTab />
         <button
-          class="border border-solid border-grey-8 rounded-[12px] h-12 w-12 flex justify-center items-center"
+          class="border border-solid border-grey-8 rounded-[12px] h-12 w-12 flex justify-center items-center xl:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,8 @@
     </div>
 
     <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-else>
-      <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
+      <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" class="xl:hidden" />
+      <ProfileOrderCardMobile v-for="order in orders" :order="order" :key="order?.id" class="xl:flex hidden"/>
     </div>
     <div
       class="w-full h-[150px] flex justify-center items-center"
@@ -69,6 +70,7 @@ import ProfileLayout from "@/components/profile/ProfileLayout.vue";
 import PortfolioCard from "@/components/profile/portfolio/PortfolioCard.vue";
 import VPagination from "@/components/VPagination.vue";
 import ProfileOrdersCard from "@/components/profile/orders/ProfileOrdersCard.vue";
+import ProfileOrderCardMobile from "@/components/profile/orders/ProfileOrderCardMobile.vue";
 import OrdersTab from "@/components/profile/orders/OrdersTab.vue";
 import Loader from "@/components/Loader.vue";
 import CompletedOrdersCard from "@/components/profile/orders/CompletedOrdersCard.vue";
@@ -112,6 +114,7 @@ export default {
     OrdersTab,
     Loader,
     CompletedOrdersCard,
+    ProfileOrderCardMobile,
   },
 };
 </script>

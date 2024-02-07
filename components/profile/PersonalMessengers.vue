@@ -1,8 +1,10 @@
 <template lang="html">
   <div class="flex gap-3">
     <a
+      :href="userInfo?.contacts?.twitter"
+      target="_blank"
+      :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.twitter }"
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
-      href="#"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -17,8 +19,10 @@
         /></svg
     ></a>
     <a
+      :href="userInfo?.contacts?.facebook"
+      target="_blank"
+      :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.facebook }"
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
-      href="#"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +38,9 @@
     ></a>
     <a
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
-      href="#"
+      :href="userInfo?.contacts?.dribble"
+      target="_blank"
+      :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.dribble }"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +56,9 @@
     ></a>
     <a
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
-      href="#"
+      :href="userInfo?.contacts?.github"
+      target="_blank"
+      :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.github }"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -65,8 +73,10 @@
         /></svg
     ></a>
     <a
+      :href="userInfo?.contacts?.instagram"
+      target="_blank"
+      :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.instagram }"
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
-      href="#"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +92,9 @@
     ></a>
     <a
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
-      href="#"
+      :href="userInfo?.contacts?.telegram"
+      target="_blank"
+      :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.telegram }"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -99,6 +111,8 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["userInfo"],
+};
 </script>
 <style lang=""></style>

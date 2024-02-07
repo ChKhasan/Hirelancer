@@ -1,10 +1,12 @@
 <template lang="html">
-  <div class="freelancer-tab flex justify-start">
-    <div class="rounded-2xl bg-bg-grey px-4 py-4 flex gap-6">
+  <div class="freelancer-tab flex justify-start xl:mx-[-16px] xl:border-[0] xl:border-b xl:border-solid xl:border-border-darik">
+    <div
+      class="rounded-2xl bg-bg-grey px-4 xl:px-0 py-4 flex gap-6 xl:bg-transparent xl:overflow-x-scroll xl:gap-3 scroll-none xl:pb-6"
+    >
       <nuxt-link
         :to="`/freelancer/${$route.params.index}`"
         :class="{ active: $route.name == `freelancer-index` }"
-        class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="xl:ml-4 text-black text-base xl:text-[12px] xl:leading-[12px] xl:py-3 font-medium flex flex-col gap-2 items-center bg-white xl:bg-bg-grey px-4 justify-center min-w-[120px] min-h-[79px] xl:min-w-[96px] xl:min-h-[68px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -27,7 +29,7 @@
       <nuxt-link
         :to="`/freelancer/${$route.params.index}/portfolio`"
         :class="{ active: $route.name == `freelancer-index-portfolio` }"
-        class="text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="text-black text-base xl:text-[12px] xl:leading-[12px] xl:py-3 font-medium flex flex-col gap-2 items-center bg-white xl:bg-bg-grey px-4 justify-center min-w-[120px] min-h-[79px] xl:min-w-[96px] xl:min-h-[68px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -48,7 +50,7 @@
       >
       <nuxt-link
         to="/"
-        class="opacity-50 pointer-events-none text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="opacity-50 pointer-events-none text-black text-base xl:text-[12px] xl:leading-[12px] xl:py-3 font-medium flex flex-col gap-2 items-center bg-white xl:bg-bg-grey px-4 justify-center min-w-[120px] min-h-[79px] xl:min-w-[96px] xl:min-h-[68px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -69,7 +71,7 @@
       >
       <nuxt-link
         to="/"
-        class="opacity-50 pointer-events-none text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="opacity-50 pointer-events-none text-black text-base xl:text-[12px] xl:leading-[12px] xl:py-3 font-medium flex flex-col gap-2 items-center bg-white xl:bg-bg-grey px-4 justify-center min-w-[120px] min-h-[79px] xl:min-w-[96px] xl:min-h-[68px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -93,7 +95,7 @@
       >
       <nuxt-link
         to="/"
-        class="opacity-50 pointer-events-none text-black text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
+        class="opacity-50 pointer-events-none text-black text-base xl:text-[12px] xl:leading-[12px] xl:py-3 font-medium flex flex-col gap-2 items-center bg-white xl:bg-bg-grey px-4 justify-center min-w-[120px] min-h-[79px] xl:min-w-[96px] xl:min-h-[68px] rounded-[12px] hover:text-black"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -126,5 +128,14 @@ export default {};
 }
 .freelancer-tab .active svg path {
   stroke: white;
+}
+@media (max-width: 1200px) {
+  .freelancer-tab svg {
+    width: 20px;
+    height: 20px;
+  }
+  .scroll-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

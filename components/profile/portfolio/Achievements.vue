@@ -1,8 +1,11 @@
 <template lang="html">
   <div class="achievements">
-    <div class="border border-solid border-grey-8 rounded-2xl xl:border-0 xl:border-b xl:pb-6 xl:rounded-none">
+    <div
+      class="border border-solid border-grey-8 rounded-2xl xl:border-b xl:pb-6 xl:border xl:border-solid xl:border-border-darik xl:px-4 xl:py-4"
+      :class="{ 'profile-info': profile }"
+    >
       <div
-        class="head px-6 py-4 border-[0] border-b border-solid border-grey-8 xl:px-0 xl:border-t xl:border-b-0 xl:pt-6"
+        class="head px-6 py-4 border-[0] border-b border-solid border-grey-8 xl:px-0 xl:pt-0 xl:border-0"
       >
         <h6
           class="text-[18px] font-medium text-black xl:flex xl:justify-between xl:w-full items-center"
@@ -28,7 +31,7 @@
         </h6>
       </div>
       <div
-        class="body pt-6 px-6 flex flex-col gap-6 max-h-[340px] overflow-y-scroll mr-2 xl:px-0 xl:pt-0 xl:gap-4"
+        class="body pt-6 px-6 flex flex-col gap-6 max-h-[340px] overflow-y-scroll mr-2 xl:px-0 xl:pt-0 xl:gap-4 xl:mr-[-14px]"
       >
         <div
           class="pb-6 border-[0] border-b border-solid border-grey-8 flex flex-col gap-2 xl:pb-0 xl:border-0"
@@ -59,6 +62,8 @@
 <script>
 export default {
   name: "Achievements",
+  props: ["profile"],
+
   data() {
     return {
       data: [1, 2, 3, 4],
@@ -73,5 +78,14 @@ export default {
 .body::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background: var(--grey-8);
+}
+@media (max-width: 1200px) {
+  .profile-info {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid var(--border-darik);
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 </style>

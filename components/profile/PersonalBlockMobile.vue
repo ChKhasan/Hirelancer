@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="m-personal-block px-4 mx-auto flex flex-col">
+  <div class="m-personal-block mx-auto flex flex-col">
     <div class="flex flex-col gap-4">
       <div
         class="user-info px-4 py-4 border border-solid border-grey-light rounded-2xl bg-bg-grey"
@@ -12,9 +12,7 @@
           </div>
           <div class="flex justify-center flex-col gap-2">
             <h4 class="text-black text-[14px] font-semibold leading-[19px]">
-              {{
-                  `${$store.state.userInfo["name"]} ${$store.state.userInfo["surname"]}`
-                }}
+              {{ `${$store.state.userInfo["name"]} ${$store.state.userInfo["surname"]}` }}
             </h4>
             <p class="text-grey-40 text-[12px]">Зарегистрирован: более 5 лет назад</p>
           </div>
@@ -114,7 +112,7 @@
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-2 client-types">
+      <div class="grid grid-cols-2 client-types" v-if="!user">
         <button
           @click="$router.push(`/profile/freelancer`)"
           :class="{ activeF: $route.params.user == 'freelancer' }"
@@ -174,7 +172,7 @@
           </svg>
         </button>
       </div>
-      <div class="list">
+      <div class="list" v-if="!user">
         <ul class="rounded-[16px] border border-solid border-grey-light">
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
@@ -225,7 +223,7 @@
 
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
-              to=""
+            :to="`/profile/${$route.params.user}/orders/active/status`"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -315,7 +313,7 @@
           </li>
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
-              to=""
+            :to="`/profile/${$route.params.user}/settings`"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
               ><svg
                 width="18"
@@ -526,7 +524,8 @@
             ></nuxt-link>
           </li>
           <li class="border-[0] border-b border-solid border-grey-light">
-            <button @click="$store.dispatch('logout')"
+            <button
+              @click="$store.dispatch('logout')"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
             >
               <svg
@@ -578,9 +577,9 @@
         </ul>
       </div>
     </div>
-    <div class="flex justify-center flex-col items-center gap-11 mt-6">
+    <div class="flex justify-center flex-col items-center gap-11 mt-6" v-if="!user">
       <p class="text-[12px] text-grey-40">УЧАСТНИК С: 21 МАЯ 2010 ГОДА</p>
-      <button
+      <!-- <button
         class="pro-btn overflow-hidden relative h-[52px] w-full rounded-[12px] flex items-center justify-center"
       >
         <img
@@ -591,12 +590,13 @@
         <p class="absolute z-10 text-white text-base font-semibold">
           Получить про аккаунт
         </p>
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
 <script>
 export default {
+  props: ["user"],
   data() {
     return {
       isFreelancer: false,

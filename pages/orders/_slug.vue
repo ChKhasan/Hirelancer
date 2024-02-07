@@ -220,7 +220,7 @@
             </div>
           </div>
           <div class="flex-col gap-4 hidden xl:flex xl:mt-6 xl:gap-6">
-            <ClientCard :client="order?.client"/>
+            <ClientCard :client="order?.client" />
             <PriceCard @open="openModal" :order="order" />
           </div>
           <div class="flex flex-col gap-4 mt-8 xl:mt-6">
@@ -280,7 +280,7 @@
           </div>
         </div>
         <div class="flex flex-col gap-4 xl:hidden">
-          <ClientCard :client="order?.client"/>
+          <ClientCard :client="order?.client" />
           <PriceCard @open="openModal" :order="order" />
         </div>
       </div>
@@ -384,7 +384,6 @@ export default {
       }
     },
     async __POST_ORDER(data) {
-      if (window.innerWidth > 1200) this.visible = true;
       try {
         await this.$store.dispatch("fetchOrders/postSendRequest", {
           ...data,
@@ -393,8 +392,10 @@ export default {
         this.bottomModal = false;
         this.visible = true;
         this.close();
-        this.openSuccess();
-        this.closeModal();
+        await this.closeModal();
+        if (window.innerWidth > 1200) this.visible = true;
+
+        // this.openSuccess();
         // this.$router.go(-1);
       } catch (e) {
         this.$notification["error"]({

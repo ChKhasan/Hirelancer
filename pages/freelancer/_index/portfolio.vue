@@ -1,32 +1,33 @@
 <template lang="html">
-  <div class="portfolio">
-    <ProfileLayout :profile="false" :freelancer="freelancer">
-      <div class="head flex flex-col gap-4 mt-8">
-        <h3 class="text-[24px] text-black font-semibold">Портфолио</h3>
-        <div class="flex justify-between items-center">
-          <div class="buttons flex gap-6">
+  <div class="portfolio xl:px-4">
+    <ProfileLayout :profile="false" :freelancer="freelancer" :show="false">
+      <div class="head flex flex-col gap-4 mt-8 xl:mt-6">
+        <h3 class="text-[24px] text-black font-semibold xl:hidden">Портфолио</h3>
+        <div class="flex justify-between items-center xl:mx-[-16px]">
+          <div class="buttons flex gap-6 md:overflow-x-scroll w-full scroll-none xl:gap-2">
             <button
-              class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="xl:ml-4 px-6 whitespace-nowrap py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:py-0 xl:flex xl:items-center xl:leading-[20px] xl:text-[14px] xl:h-[36px] xl:rounded-lg xl:border xl:px-6 xl:min-w-[156px] xl:justify-center"
             >
               All works
             </button>
             <button
-              class="active px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="active px-6 whitespace-nowrap py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:py-0 xl:flex xl:items-center xl:leading-[20px] xl:text-[14px] xl:h-[36px] xl:rounded-lg xl:border xl:px-6 xl:min-w-[156px] xl:justify-center"
             >
               Веб-дизайн
             </button>
             <button
-              class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+              class="px-6 whitespace-nowrap py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:py-0 xl:flex xl:items-center xl:leading-[20px] xl:text-[14px] xl:h-[36px] xl:rounded-lg xl:border xl:px-6 xl:min-w-[156px] xl:justify-center"
             >
               Логотипы
             </button>
             <button
-              class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+            
+              class="xl:mr-4 px-6 whitespace-nowrap py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:py-0 xl:flex xl:items-center xl:leading-[20px] xl:text-[14px] xl:h-[36px] xl:rounded-lg xl:border xl:px-6 xl:min-w-[156px] xl:justify-center"
             >
               Фото
             </button>
           </div>
-          <div class="flex gap-[27px]">
+          <div class="flex gap-[27px] md:hidden">
             <button
               class="border border-solid border-grey-8 rounded-[12px] h-12 w-12 flex justify-center items-center"
             >
@@ -48,12 +49,21 @@
           </div>
         </div>
       </div>
-      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px]">
+      <div class="list grid grid-cols-3 gap-4 mt-6 mb-[40px] md:grid-cols-2 xl:hidden">
         <PortfolioViewCard
           v-for="portfolio in portfolios"
           :portfolio="portfolio"
           :key="portfolio?.id"
         />
+      </div>
+      <div class="list grid-cols-3 gap-4 xl:grid-cols-2 xl:gap-1 hidden xl:grid mt-4">
+        <PortfolioCard
+          v-for="portfolio in portfolios"
+          :portfolio="portfolio"
+          :key="portfolio?.id"
+        />
+
+        <PortfolioMoreCard class="xl:hidden" v-if="portfolios.length > 5" />
       </div>
       <div>
         <VPagination />
@@ -103,5 +113,10 @@ export default {
   border-color: var(--blue);
   color: var(--blue);
   background-color: #fff;
+}
+@media (max-width: 1200px) {
+  .scroll-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

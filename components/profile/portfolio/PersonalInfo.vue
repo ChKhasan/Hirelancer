@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="personal-info">
     <div
-      class="border border-solid border-grey-8 px-6 py-4 rounded-2xl h-full xl:border-[0] xl:px-0 xl:border-t xl:pt-6 xl:pb-0 rounded-none"
+      class="border border-solid border-grey-8 px-6 py-4 rounded-2xl h-full xl:rounded-[16px] xl:border-t xl:pt-6 xl:pb-0 xl:px-4 xl:py-4 xl:border"
+      :class="{ 'profile-info': profile }"
     >
       <div class="flex justify-between">
         <h6 class="text-[18px] font-medium text-black xl:font-semibold">О фрилансере</h6>
@@ -74,7 +75,17 @@
 </template>
 <script>
 export default {
-  props: ["isEdit"],
+  props: ["isEdit", "profile"],
 };
 </script>
-<style lang=""></style>
+<style lang="css" scoped>
+@media (max-width: 1200px) {
+  .profile-info {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid var(--border-darik);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+</style>

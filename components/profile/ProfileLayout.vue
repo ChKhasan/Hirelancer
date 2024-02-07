@@ -1,13 +1,15 @@
 <template lang="html">
   <div class="profile-layout max-w-[1680px] mx-auto pt-12 xl:pt-6 xl:pb-6 pb-[100px]">
     <div class="profile-grid">
-      <PersonalBlock :profile="profile" class="xl:hidden" :userInfo="freelancer" />
-      <PersonalBlockMobile
-        :freelancer="freelancer"
-        class="hidden xl:flex"
-        :class="{ 'xl:hidden': $route.name !== `profile-user` }"
-      />
-      <div class="min-w-0 x" :class="{ 'xl:hidden': $route.name == `profile-user` }">
+      <PersonalBlock :profile="profile" class="xl:hidden" :userInfo="freelancer"  />
+
+      <div class="min-w-0">
+        <PersonalBlockMobile
+          :freelancer="freelancer"
+          :user="true"
+          class="hidden xl:flex"
+          v-if="!$route.name.includes('profile')"
+        />
         <ProfileTab v-if="profile" />
         <FreelancerTab v-else />
         <slot></slot>
@@ -24,7 +26,7 @@ import FreelancerTab from "./FreelancerTab.vue";
 
 export default {
   name: "ProfileLayout",
-  props: ["profile", "freelancer"],
+  props: ["profile", "freelancer", "show"],
   data() {
     return {};
   },
