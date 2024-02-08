@@ -425,7 +425,11 @@
               </div>
               <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between">
                 <p class="text-grey-64 text-[14px] xl:font-medium">Срок:</p>
-                <h4 class="text-black text-base font-semibold xl:text-[14px] xl:font-medium">По договоренности</h4>
+                <h4
+                  class="text-black text-base font-semibold xl:text-[14px] xl:font-medium"
+                >
+                  По договоренности
+                </h4>
               </div>
             </div>
             <div class="buttons flex flex-col gap-4">
@@ -525,7 +529,7 @@
               class="flex py-4 rounded-lg bg-grey-light w-full items-center justify-center gap-6 text-base font-medium text-blue xl:text-[14px] xl:gap-4 xl:flex-row-reverse"
             >
               <svg
-              class="xl:h-5"
+                class="xl:h-5"
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
                 height="25"
@@ -574,6 +578,20 @@
         :visibleProp="visibleComplaint"
         @submit="submitComplaint"
       />
+    </div>
+    <div
+      class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:grid gap-4"
+    >
+      <div class="flex flex-col gap-1">
+        <p class="text-[12px] text-grey-64">Buyrtma narxi:</p>
+        <h5 class="text-base text-main-color font-semibold whitespace-nowrap">99 200 000 so’m</h5>
+      </div>
+      <button
+        @click="onSubmit()"
+        class="border border-solid border-blue bg-blue rounded-[12px] h-11 w-full flex justify-center items-center text-[12px] text-white font-medium gap-2"
+      >
+        Изменить данные
+      </button>
     </div>
     <Loader v-if="loading" />
   </div>
@@ -745,6 +763,11 @@ export default {
   .file-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+  }
+  .fixed-btns {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+    grid-template-columns: 1fr 2fr;
   }
 }
 </style>
