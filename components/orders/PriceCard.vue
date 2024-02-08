@@ -8,7 +8,7 @@
           Buyrtma narxi:
         </p>
         <h1 class="text-blue text-[24px] font-semibold xl:text-base">
-          {{ order?.price.toLocaleString() }} so’m
+          <!-- {{ order?.price.toLocaleString() }} so’m -->
         </h1>
       </div>
       <div class="flex flex-col xl:flex-row xl:justify-between xl:items-center">

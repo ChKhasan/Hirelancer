@@ -37,7 +37,7 @@ export default {
     baseURL: process.env.BASE_URL,
   },
   env: {
-    baseUrl: process.env.BASE_URL || "http://localhost:3000",
+    baseUrl: process.env.BASE_URL || "https://api.hirelancer.ndc.uz",
   },
   build: {
     babel: {

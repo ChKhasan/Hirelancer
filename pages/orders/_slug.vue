@@ -132,11 +132,12 @@
               </div>
             </div>
             <div
-              class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[80%] xl:mx-auto"
+              class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[80%] xl:mx-auto white-space-nowrap"
             >
               <div class="flex items-center gap-[28px] xl:justify-between">
                 <p class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center">
                   <svg
+                    class="min-w-5"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -190,10 +191,11 @@
                 </p>
               </div>
               <p
-                class="underline text-base text-pantone-2023 flex items-center gap-[10px] xl:text-center mx-auto"
+                class="underline text-base text-pantone-2023 flex items-center gap-[10px] xl:text-center mx-auto xl:text-[14px] white-space-nowrap"
               >
                 Сообщить модератору о нарушении
                 <svg
+                  class="min-w-5"
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
                   height="18"

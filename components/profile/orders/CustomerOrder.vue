@@ -3,7 +3,7 @@
     <div class="max-w-[1200px] mx-auto">
       <nuxt-link
         to="/profile/customer/orders/active/status"
-        class="flex gap-2 w-[126px] py-3 border border-main-color border-solid rounded-lg justify-center items-center text-base font-medium text-grey-80 hover:text-blue"
+        class="flex gap-2 w-[126px] py-3 border border-main-color border-solid rounded-lg justify-center items-center text-base font-medium text-grey-80 hover:text-blue xl:hidden"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -22,18 +22,18 @@
         </svg>
         Отмена
       </nuxt-link>
-      <div class="flex flex-col gap-2 mt-6">
+      <div class="flex flex-col gap-2 mt-6 xl:hidden">
         <h3 class="text-[24px] text-black font-semibold">Заказ: #{{ order?.id }}</h3>
         <p class="text-base text-grey-64">Заказы / Активные заказы</p>
       </div>
-      <div class="content-box mt-6">
+      <div class="content-box mt-6 xl:mt-0">
         <div class="flex flex-col gap-6">
           <div
-            class="info-box rounded-3xl border-solid border-grey-8 border relative overflow-hidden max-h-[430px]"
+            class="info-box rounded-3xl border-solid border-grey-8 border relative overflow-hidden max-h-[430px] xl:rounded-2xl"
             :class="{ active: openBlock == true }"
           >
             <div class="info px-8 py-8 xl:px-4 xl:py-4">
-              <div class="head flex justify-between xl:flex-col">
+              <div class="head flex justify-between xl:flex-col xl:gap-4">
                 <div class="flex gap-4 items-center">
                   <span
                     class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium xl:hidden"
@@ -55,7 +55,7 @@
                     >Срочный заказ</span
                   >
                   <span
-                    class="hidden xl:flex gap-[4px] status-red items-center px-[8px] py-[4px] text-dark-yellow text-[12px] font-medium border border-solid border-dark-yellow rounded-[500px]"
+                    class="hidden xl:flex gap-[4px] xl:gap-4 status-red items-center px-[8px] py-[4px] text-dark-yellow text-[12px] font-medium border border-solid border-dark-yellow rounded-[500px]"
                     ><svg
                       width="16"
                       height="16"
@@ -98,7 +98,7 @@
                   >
                 </div>
 
-                <div class="flex gap-6 items-center">
+                <div class="flex gap-6 items-center xl:hidden">
                   <div class="flex gap-6">
                     <p class="text-base text-grey-64 flex gap-[6px]">
                       Заказ:<span class="font-medium text-black">#{{ order?.id }}</span>
@@ -108,13 +108,27 @@
                   <span class="h-[19px] w-[1px] bg-grey-8"></span>
                   <p class="text-base text-grey-40">{{ orderDate }}</p>
                 </div>
+                <div class="justify-between items-center xl:flex hidden">
+                  <div class="flex gap-4">
+                    <p class="text-base text-grey-40 xl:text-[14px]">{{ orderHours }}</p>
+                    <p class="text-base text-grey-40 xl:text-[14px]">{{ orderDate }}</p>
+                  </div>
+
+                  <div class="flex gap-6">
+                    <p class="text-base text-grey-64 flex gap-[6px]">
+                      Заказ:<span class="font-medium text-black">#{{ order?.id }}</span>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8">
-                <h1 class="title text-[24px] font-semibold text-black mb-4">
+              <div
+                class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8 xl:mt-4"
+              >
+                <h1 class="title text-[24px] font-semibold text-black mb-4 xl:text-base">
                   {{ order?.name }}
                 </h1>
 
-                <p class="text-base text-grey-80">
+                <p class="text-base text-grey-80 xl:text-base">
                   {{ order?.description }}
                 </p>
                 <!-- <p class="text-base text-grey-80 mt-8">
@@ -126,8 +140,8 @@
                   completing specific assigned tasks and billing hours to ASU Prep.
                 </p> -->
               </div>
-              <div class="files flex flex-col gap-4 mt-4">
-                <h6 class="text-black text-[20px] font-semibold">Файлы к задаче</h6>
+              <!-- <div class="files flex flex-col gap-4 mt-4">
+                <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">Файлы к задаче</h6>
                 <div class="file-list flex gap-4 justify-start">
                   <FileCard />
                   <FileCard />
@@ -235,6 +249,130 @@
                     />
                   </svg>
                 </p>
+              </div> -->
+              <div class="files flex flex-col gap-4 mt-4">
+                <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">
+                  Файлы к задаче
+                </h6>
+                <div class="file-list flex gap-4 justify-start xl:flex-wrap">
+                  <FileCard />
+                  <FileCard />
+                  <FileCard />
+                  <FileCard />
+                </div>
+              </div>
+              <div class="files flex flex-col gap-4 mt-4 xl:mt-6 mb-6">
+                <h6 class="text-black text-[20px] xl:text-[18px] font-semibold">
+                  Категории:
+                </h6>
+                <div class="flex gap-2 items-center xl:flex-col xl:items-start">
+                  <div
+                    class="flex gap-2 items-center"
+                    v-for="(specialit, index) in order?.specialities"
+                    :key="specialit?.id"
+                  >
+                    <span
+                      class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
+                      >{{ specialit?.name_ru }} </span
+                    ><span
+                      v-if="index + 1 != order?.specialities.length"
+                      class="text-[20px] text-grey-64 xl:hidden"
+                      >/</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[80%] xl:mx-auto"
+              >
+                <div class="flex items-center gap-[28px] xl:justify-between">
+                  <p
+                    class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.6084 8.21087C18.5748 9.2276 18.5748 10.7723 17.6084 11.789C15.9786 13.5038 13.1794 15.8333 9.99984 15.8333C6.82024 15.8333 4.02108 13.5038 2.39126 11.789C1.42492 10.7723 1.42492 9.2276 2.39126 8.21087C4.02108 6.49607 6.82024 4.16663 9.99984 4.16663C13.1794 4.16663 15.9786 6.49607 17.6084 8.21087Z"
+                        stroke="#5C46E6"
+                        stroke-width="1.5"
+                      />
+                      <circle
+                        cx="10"
+                        cy="10"
+                        r="2.5"
+                        stroke="#5C46E6"
+                        stroke-width="1.5"
+                      /></svg
+                    >{{ order?.view_count }}
+                  </p>
+                  <p
+                    class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M10.8332 2.5H9.1665C5.02437 2.5 1.6665 5.85786 1.6665 10V14.1667C1.6665 16.0076 3.15889 17.5 4.99984 17.5H10.8332C14.9753 17.5 18.3332 14.1421 18.3332 10C18.3332 5.85786 14.9753 2.5 10.8332 2.5Z"
+                        stroke="#5C46E6"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      />
+                      <circle cx="9.99984" cy="9.99996" r="0.833333" fill="#5C46E6" />
+                      <ellipse
+                        cx="13.3333"
+                        cy="9.99996"
+                        rx="0.833333"
+                        ry="0.833333"
+                        fill="#5C46E6"
+                      />
+                      <ellipse
+                        cx="6.66683"
+                        cy="9.99996"
+                        rx="0.833333"
+                        ry="0.833333"
+                        fill="#5C46E6"
+                      /></svg
+                    >{{ order?.request_count }} запросов
+                  </p>
+                </div>
+                <p
+                  class="underline text-base text-pantone-2023 flex items-center gap-[10px] xl:text-center mx-auto xl:text-[14px] white-space-nowrap"
+                >
+                  Сообщить модератору о нарушении
+                  <svg
+                    class="min-w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                  >
+                    <path
+                      opacity="0.4"
+                      d="M7.96798 1.16592C8.85365 -0.388639 11.1464 -0.388642 12.032 1.16592L19.7041 14.6324C20.5649 16.1433 19.4445 18 17.6721 18H2.32789C0.555459 18 -0.564896 16.1433 0.29587 14.6324L7.96798 1.16592Z"
+                      fill="#BB2649"
+                    />
+                    <path
+                      d="M11 14C11 14.5523 10.5523 15 10 15C9.44772 15 9 14.5523 9 14C9 13.4477 9.44772 13 10 13C10.5523 13 11 13.4477 11 14Z"
+                      fill="#BB2649"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M10 5.25C10.4142 5.25 10.75 5.58579 10.75 6V11C10.75 11.4142 10.4142 11.75 10 11.75C9.58579 11.75 9.25 11.4142 9.25 11V6C9.25 5.58579 9.58579 5.25 10 5.25Z"
+                      fill="#BB2649"
+                    />
+                  </svg>
+                </p>
               </div>
             </div>
             <div
@@ -266,30 +404,34 @@
         </div>
         <div class="flex flex-col gap-4">
           <div
-            class="card price-card px-[24px] py-[24px] rounded-2xl bg-bg-grey flex flex-col gap-6"
+            class="card price-card px-[24px] py-[24px] xl:px-4 xl:py-4 rounded-2xl bg-bg-grey flex flex-col gap-6"
           >
-            <div>
+            <div class="xl:hidden">
               <h4>Tanlangan frilanser</h4>
               <p>Tanlangan vaqti: 16:32 28.09.2023</p>
             </div>
             <div class="flex flex-col gap-[10px]">
-              <div class="flex flex-col">
-                <p class="text-grey-64 text-[14px]">Buyrtma narxi:</p>
+              <div class="flex flex-col xl:flex-row xl:justify-between xl:items-center">
+                <p
+                  class="text-grey-64 text-[14px] xl:text-base xl:text-grey-64 xl:font-semibold"
+                >
+                  Buyrtma narxi:
+                </p>
 
                 <h1 class="text-blue text-[24px] font-semibold">
                   {{ order?.price && order?.price.toLocaleString() }} so’m
                 </h1>
-                <p class="text-grey-40 text-[15px] line-through">750 000</p>
+                <p class="text-grey-40 text-[15px] line-through xl:hidden">750 000</p>
               </div>
-              <div class="flex flex-col">
-                <p class="text-grey-64 text-[14px]">Срок:</p>
-                <h4 class="text-black text-base font-semibold">По договоренности</h4>
+              <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between">
+                <p class="text-grey-64 text-[14px] xl:font-medium">Срок:</p>
+                <h4 class="text-black text-base font-semibold xl:text-[14px] xl:font-medium">По договоренности</h4>
               </div>
             </div>
             <div class="buttons flex flex-col gap-4">
               <button
                 @click="visibleClose = true"
-                class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-main-color border-main-color text-base text-white font-medium"
+                class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-main-color border-main-color text-base xl:text-[14px] text-white font-medium"
               >
                 Завершить заказ
                 <svg
@@ -311,7 +453,7 @@
               </button>
               <button
                 @click="visibleCancel = true"
-                class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-white border-grey-24 text-base text-light-red font-medium"
+                class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-white border-grey-24 text-base xl:text-[14px] text-light-red font-medium"
               >
                 Отменить заказ
                 <svg
@@ -365,10 +507,10 @@
         <CustomerChat />
       </div> -->
     </div>
-    <div class="mt-20 bg-bg-grey pt-20 pb-[120px]">
+    <div class="mt-20 bg-bg-grey pt-20 pb-[120px] xl:mx-[-16px] xl:px-4 xl:pt-4 xl:mt-10">
       <div class="max-w-[1440px] mx-auto">
         <div class="order-left-chat mb-6">
-          <h4 class="text-[24px] font-semibold text-black">
+          <h4 class="text-[24px] font-semibold text-black xl:text-[18px]">
             Предложений ({{ order?.requests?.length }})
           </h4>
         </div>
@@ -380,9 +522,10 @@
               :request="request"
             />
             <button
-              class="flex py-4 rounded-lg bg-grey-light w-full items-center justify-center gap-6 text-base font-medium text-blue"
+              class="flex py-4 rounded-lg bg-grey-light w-full items-center justify-center gap-6 text-base font-medium text-blue xl:text-[14px] xl:gap-4 xl:flex-row-reverse"
             >
               <svg
+              class="xl:h-5"
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
                 height="25"
@@ -574,7 +717,7 @@ export default {
   transition: 0.3s;
 }
 .active {
-  max-height: 1000px;
+  max-height: 2000px;
 }
 @keyframes opacityAnim {
   0% {

@@ -1,9 +1,11 @@
 <template lang="html">
-  <div class="create-order pt-[110px] pb-[120px] max-w-[953px] mx-auto">
+  <div class="create-order pt-[110px] pb-[120px] max-w-[953px] mx-auto md:pt-6 md:px-4">
     <div class="head flex justify-between items-center">
-      <h1 class="flex text-[24px] text-black font-semibold">Buyurtma o'zgartirish</h1>
+      <h1 class="flex text-[24px] text-black font-semibold xl:hidden">
+        Buyurtma qo’shish
+      </h1>
 
-      <div class="buttons flex gap-4">
+      <div class="buttons flex gap-4 md:hidden">
         <button
           @click="$router.go(-1)"
           class="border-[2px] border-solid border-border-darik rounded-[12px] h-[60px] w-[204px] flex justify-center items-center text-[18px] text-grey-64 font-medium"
@@ -14,9 +16,11 @@
     </div>
 
     <div
-      class="form-block px-8 py-8 rounded-[16px] bg-white border-border-darik border-solid border mt-4"
+      class="form-block px-8 py-8 md:px-4 md:py-4 rounded-[16px] bg-white border-border-darik border-solid border mt-4 xl:mt-0"
     >
-      <h2 class="text-[20px] text-black font-semibold mb-6">Информация о заказе</h2>
+      <h2 class="text-[20px] text-black font-semibold mb-6 xl:text-base">
+        Информация о заказе
+      </h2>
 
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
         <div class="flex flex-col gap-6">
@@ -69,7 +73,7 @@
               </div>
 
               <button
-                class="w-6 xl:hidden"
+                class="w-6 md:hidden"
                 @click="(visible = true), (checkedList = [...activeCheckedList])"
               >
                 <svg
@@ -87,7 +91,7 @@
                   />
                 </svg>
               </button>
-              <button class="w-6 xl:block hidden" @click="open">
+              <button class="w-6 hidden md:block" @click="open">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="3"
@@ -106,34 +110,34 @@
             </div>
 
             <!-- <a-select
-      
-                    mode="multiple"
-      
-                    v-model="form.specialities"
-      
-                    style="width: 100%"
-      
-                    placeholder="Категорие"
-      
-                    option-label-prop="label"
-      
-                  >
-      
-                    <a-select-option
-      
-                      v-for="elem in specialities"
-      
-                      :value="elem?.id"
-      
-                      :label="elem?.name_ru"
-      
-                      :key="elem?.id"
-      
-                      >{{ elem?.name_ru }}
-      
-                    </a-select-option>
-      
-                  </a-select> -->
+    
+                  mode="multiple"
+    
+                  v-model="form.specialities"
+    
+                  style="width: 100%"
+    
+                  placeholder="Категорие"
+    
+                  option-label-prop="label"
+    
+                >
+    
+                  <a-select-option
+    
+                    v-for="elem in specialities"
+    
+                    :value="elem?.id"
+    
+                    :label="elem?.name_ru"
+    
+                    :key="elem?.id"
+    
+                    >{{ elem?.name_ru }}
+    
+                  </a-select-option>
+    
+                </a-select> -->
           </a-form-model-item>
 
           <a-form-model-item class="order-item w-full mb-0" prop="description">
@@ -174,18 +178,45 @@
             class="images pb-[40px] border-[0] border-b border-solid border-border-darik"
           >
             <div class="flex flex-col">
-              <h2 class="text-[20px] text-black font-semibold">Файлы к задаче</h2>
+              <h2 class="text-[20px] text-black font-semibold xl:text-[18px]">
+                Файлы к задаче
+              </h2>
               <p class="text-[14px] text-grey-64">
                 Загрузите локалние файли для деталной информатсии для заказа
               </p>
             </div>
             <div class="clearfix flex flex-col mt-6">
               <div class="flex order-upload gap-2">
-                <a-upload
+                <!-- <a-upload
                   list-type="picture-card"
                   :file-list="fileList"
                   @preview="handlePreview"
                   @change="handleChange"
+                >
+                  <div v-if="fileList.length < 10" class="flex justify-center bg-bg-grey">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M14.4357 13.7854C16.2815 13.7854 17.7774 12.2896 17.7774 10.4437C17.7774 8.5979 16.2815 7.10207 14.4357 7.10207C14.1782 7.10207 13.9299 7.13707 13.689 7.1929C12.9674 5.4979 11.2865 4.30957 9.3282 4.30957C6.71154 4.30957 4.58987 6.43124 4.58987 9.0479C3.28154 9.0479 2.2207 10.1087 2.2207 11.4171C2.2207 12.7254 3.28154 13.7862 4.58987 13.7862M7.12737 12.4412L9.56904 9.99957L12.0107 12.4412M9.56904 15.6896V10.0071"
+                        stroke="black"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </a-upload> -->
+                <a-upload
+                  list-type="picture-card"
+                  :file-list="fileList"
+                  :before-upload="handleBeforeUpload"
+                  :custom-request="customRequest"
                 >
                   <div v-if="fileList.length < 10" class="flex justify-center bg-bg-grey">
                     <svg
@@ -271,7 +302,9 @@
                     }
                   "
                 />
-                <p class="text-[20px] text-black font-medium">Договорная дней</p>
+                <p class="text-[20px] text-black font-medium xl:text-[14px]">
+                  Договорная дней
+                </p>
                 <a-tooltip placement="top">
                   <template slot="title">
                     <span>prompt text</span>
@@ -318,7 +351,9 @@
                     }
                   "
                 />
-                <p class="text-[20px] text-black font-medium">Договорная цена</p>
+                <p class="text-[20px] text-black font-medium xl:text-[14px]">
+                  Договорная цена
+                </p>
                 <a-tooltip placement="top">
                   <template slot="title">
                     <span>prompt text</span>
@@ -350,10 +385,13 @@
     <div class="mt-8">
       <button
         @click="onSubmit"
-        class="w-full border border-solid border-blue bg-blue rounded-[8px] h-[60px] flex justify-center items-center text-base text-white font-medium gap-2"
+        class="w-full border border-solid border-blue bg-blue rounded-[8px] h-[60px] flex justify-center items-center text-base text-white font-medium gap-2 xl:hidden"
+        :class="{ 'pointer-events-none opacity-50': loadingBtn }"
       >
         Опубликовать
+        <LoaderBtn v-if="loadingBtn" />
         <svg
+          v-else
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -369,6 +407,34 @@
           />
         </svg>
       </button>
+      <div
+        class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:flex flex-col gap-2"
+      >
+        <button
+          @click="onSubmit"
+          class="border border-solid border-blue bg-blue rounded-[12px] h-[52px] w-full flex justify-center items-center text-[14px] text-white font-medium gap-2"
+          :class="{ 'pointer-events-none opacity-50': loadingBtn }"
+        >
+          Опубликовать
+          <LoaderBtn v-if="loadingBtn" />
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M8 12L10.5347 14.2812C10.9662 14.6696 11.6366 14.6101 11.993 14.1519L16 9M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     <SpicialsticsCheck
       @saveChecked="saveChecked"
@@ -396,6 +462,7 @@ function getBase64(file) {
 export default {
   data() {
     return {
+      loadingBtn: false,
       activeSpecialities: [],
       openBottom: false,
       checkedList: [],
@@ -573,6 +640,27 @@ export default {
     // },
     handleCancel() {
       this.previewVisible = false;
+    },
+    handleBeforeUpload(file) {
+      return true;
+    },
+    customRequest({ onSuccess, onError, file }) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const uploadedFile = {
+          uid: file.uid,
+          name: file.name,
+          originFileObj: file,
+          url: reader.result,
+        };
+        this.fileList.push(uploadedFile);
+        onSuccess();
+      };
+      reader.onerror = () => {
+        console.error("Error reading file as binary data");
+        onError(new Error("Error reading file"));
+      };
+      reader.readAsDataURL(file); // Use readAsDataURL to get Base64 data
     },
     async handlePreview(file) {
       if (!file.url && !file.preview) {
@@ -795,5 +883,19 @@ export default {
 }
 .required :deep(label)::after {
   display: none !important;
+}
+@media (max-width: 1200px) {
+  :deep(.order-item label),
+  :deep(.order-select label) {
+    font-size: 14px;
+  }
+  .order-upload {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .fixed-btns {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+  }
 }
 </style>
