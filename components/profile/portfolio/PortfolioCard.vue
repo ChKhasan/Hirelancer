@@ -1,10 +1,17 @@
 <template lang="html">
-  <div class="portfolio-card rounded-2xl xl:rounded-lg border border-solid border-grey-8">
+  <div class="portfolio-card rounded-2xl xl:rounded-lg border border-solid border-grey-8 overflow-hidden">
     <a :href="portfolio?.link">
       <div
         class="image overflow-hidden h-[270px] border-[0] border-b border-solid border-grey-8 relative xl:h-[121px]"
       >
         <img
+          v-if="portfolio?.images[0]?.img"
+          class="h-full w-full object-cover"
+          :src="`${baseUrl}/storage/${portfolio?.images[0]?.img}`"
+          alt=""
+        />
+        <img
+          v-else
           class="h-full w-full object-cover"
           src="@/assets/images/portfolio.png"
           alt=""
@@ -82,6 +89,13 @@
 <script>
 export default {
   props: ["portfolio"],
+
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+  },
+  mounted() {},
 };
 </script>
 <style lang="css" scoped>

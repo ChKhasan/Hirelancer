@@ -28,13 +28,16 @@ export default {
 
   buildModules: ["@nuxtjs/tailwindcss"],
 
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios","@nuxtjs/dotenv"],
   axios: {
     credentials: false,
     init(axios) {
       axios.defaults.withCredentials = true;
     },
-    baseURL: "https://hirelancer.kifa.uz/api",
+    baseURL: process.env.BASE_URL,
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || "http://localhost:3000",
   },
   build: {
     babel: {

@@ -47,7 +47,10 @@
         </div>
       </div>
       <div class="right flex gap-12">
-        <div class="buttons flex gap-4" v-if="$store.state.auth && Boolean($store.state.userInfo['name'])">
+        <div
+          class="buttons flex gap-4"
+          v-if="$store.state.auth && Boolean($store.state.userInfo['name'])"
+        >
           <button
             class="w-[52px] h-[52px] rounded-full border-[2px] border-grey-8 border-solid flex items-center justify-center"
           >
@@ -137,9 +140,7 @@
         </button>
         <div class="login flex gap-6" v-else>
           <button
-            @click="
-              $store.state.auth ? $router.push('/profile/freelancer') : (visible = true)
-            "
+            @click="$router.push('/registration')"
             class="text-black text-[18px] font-normal"
           >
             {{

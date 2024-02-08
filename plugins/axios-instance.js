@@ -1,7 +1,6 @@
 export default ({ $axios, redirect, error }, inject) => {
   const axiosInstance = $axios.create({
-    baseURL:
-      process.env.BASE_URL || "https://hirelancer.kifa.uz/api",
+    baseURL: process.env.BASE_URL,
   });
   // axiosInstance.setHeader("Content-Type", "application/json");
 

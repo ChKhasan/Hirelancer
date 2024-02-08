@@ -137,7 +137,7 @@
                     class="text-[18px] text-grey-64 font-semibold xl:text-base xl:flex xl:gap-2 xl:items-center"
                   >
                     <svg
-                      class="xl:w-5 xl:h-5"
+                      class="xl:w-5 xl:h-5 hidden xl:block"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -182,7 +182,7 @@
                     class="text-[18px] text-grey-64 font-semibold xl:text-base xl:flex xl:gap-2 xl:items-center"
                   >
                     <svg
-                      class="xl:w-5 xl:h-5"
+                      class="xl:w-5 xl:h-5 hidden xl:block"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"

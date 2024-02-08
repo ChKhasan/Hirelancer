@@ -87,10 +87,7 @@
                   />
                 </svg>
               </button>
-              <button
-                class="w-6 xl:block hidden"
-                @click="open"
-              >
+              <button class="w-6 xl:block hidden" @click="open">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="3"
@@ -373,7 +370,7 @@
         </svg>
       </button>
     </div>
-  <SpicialsticsCheck
+    <SpicialsticsCheck
       @saveChecked="saveChecked"
       :visible="visible"
       @handleOk="handleOk"
@@ -428,6 +425,11 @@ export default {
       fileList: [],
       uploadList: [1, 2, 3, 4, 5, 6, 7, 8],
     };
+  },
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
   },
   mounted() {
     this.loading = true;
@@ -551,6 +553,15 @@ export default {
         Object.keys(this.form).forEach((elem) => {
           this.form[elem] = data?.content[elem];
         });
+        this.fileList = this.order.files.map((item, index) => {
+          return {
+            uid: (index + 1) * -1,
+            name: "image.png",
+            status: "done",
+            url: this.baseUrl + "/storage/" + item.file,
+            id: item.id,
+          };
+        });
       } catch (e) {
       } finally {
         this.loading = false;
@@ -571,8 +582,9 @@ export default {
       this.previewVisible = true;
     },
     handleChange({ fileList }) {
+      console.log(fileList);
       this.fileList = fileList.map((item) => {
-        let url = URL.createObjectURL(item.originFileObj);
+        let url = item.id ? item.url : URL.createObjectURL(item.originFileObj);
         return {
           ...item,
           url: url,

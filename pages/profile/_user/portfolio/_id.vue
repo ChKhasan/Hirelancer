@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="create-order pt-[110px] pb-[120px] max-w-[1200px] mx-auto xl:pt-6 xl:px-4">
     <div class="head flex justify-between">
-      <h1 class="flex text-[32px] text-black font-semibold xl:text-[18px]">Добавить работу</h1>
+      <h1 class="flex text-[32px] text-black font-semibold xl:text-[18px]">
+        Добавить работу
+      </h1>
       <div class="buttons flex gap-4 xl:hidden">
         <button
           @click="$router.go(-1)"
@@ -132,7 +134,9 @@
           </a-form-model-item>
           <div class="images">
             <div class="flex flex-col gap-2">
-              <h2 class="text-base text-black font-medium  xl:text-[14px]">Добавить фото</h2>
+              <h2 class="text-base text-black font-medium xl:text-[14px]">
+                Добавить фото
+              </h2>
               <p class="text-[14px] text-grey-64">
                 Первое фото будет на обложке объявления. Перетащите, чтобы изменить
                 порядок.
@@ -316,6 +320,14 @@ export default {
       portfolio: {},
     };
   },
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+    imageRequired() {
+      return Object.values(this.fileList).some((elem) => elem.length);
+    },
+  },
   async asyncData({ store }) {
     const [specialitiesData] = await Promise.all([
       store.dispatch("fetchSpecialities/getSpecialities"),
@@ -349,7 +361,8 @@ export default {
           uid: "-1",
           name: "image.png",
           status: "done",
-          url: item.img,
+          url: this.baseUrl + "/storage/" + item.img,
+          id: item.id,
         };
       });
     },
@@ -360,8 +373,13 @@ export default {
       });
       this.uploadList.forEach((elem) => {
         if (this.fileList[elem].length > 0)
-          if (this.fileList[elem][0].originFileObj) {
-            formData.append("images[]", this.fileList[elem][0].originFileObj);
+          if (this.fileList[elem][0].originFileObj || this.fileList[elem][0]?.id) {
+            formData.append(
+              "images[]",
+              this.fileList[elem][0]?.id
+                ? this.fileList[elem][0]?.id
+                : this.fileList[elem][0].originFileObj
+            );
           } else {
             formData.append("images[]", "");
           }
@@ -377,12 +395,17 @@ export default {
       }
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          if (this.fileList.file1.length == 0) {
+          console.log("img");
+
+          if (!this.imageRequired) {
+            console.log("img1");
             this.$notification["error"]({
               message: "Error",
               description: "Img is required",
             });
           } else {
+            console.log("img2");
+
             this.__PUT_WORK(formData);
           }
         } else {

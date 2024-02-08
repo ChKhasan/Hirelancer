@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="pt-12 order">
+  <div class="pt-12 xl:pt-6 order xl:px-4">
     <div class="max-w-[1200px] mx-auto">
       <nuxt-link
         to="/profile/customer/orders/active/status"
@@ -32,11 +32,11 @@
             class="info-box rounded-3xl border-solid border-grey-8 border relative overflow-hidden max-h-[430px]"
             :class="{ active: openBlock == true }"
           >
-            <div class="info px-8 py-8">
-              <div class="head flex justify-between">
+            <div class="info px-8 py-8 xl:px-4 xl:py-4">
+              <div class="head flex justify-between xl:flex-col">
                 <div class="flex gap-4 items-center">
                   <span
-                    class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
+                    class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium xl:hidden"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -53,6 +53,25 @@
                         stroke-linejoin="round"
                       /></svg
                     >Срочный заказ</span
+                  >
+                  <span
+                    class="hidden xl:flex gap-[4px] status-red items-center px-[8px] py-[4px] text-dark-yellow text-[12px] font-medium border border-solid border-dark-yellow rounded-[500px]"
+                    ><svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11.9503 9.36369C11.9503 11.5456 10.1815 13.3145 7.99958 13.3145C5.81764 13.3145 4.04883 11.5456 4.04883 9.36369C4.04883 8.63663 4.18708 7.9016 4.4224 7.19066C4.6138 7.98724 5.33084 8.57922 6.18614 8.57922C7.18792 8.57922 8.00002 7.76711 8.00002 6.76534C8.00002 5.76356 7.31698 5.08179 7.31698 4.10792C7.31698 2.84034 8.23509 1.8689 9.28796 1.8689C9.28796 3.38843 9.84455 3.96339 10.4488 4.93889C11.166 6.09689 11.9503 7.36322 11.9503 9.36369Z"
+                        stroke="#F2994A"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    Срочный заказ</span
                   >
                   <span class="h-[19px] w-[1px] bg-grey-8"></span>
                   <span
@@ -355,7 +374,11 @@
         </div>
         <div class="order-left-chat">
           <div class="list flex flex-col gap-4">
-            <OffersOrderCard v-for="request in order?.requests" :key="request?.id" :request="request" />
+            <OffersOrderCard
+              v-for="request in order?.requests"
+              :key="request?.id"
+              :request="request"
+            />
             <button
               class="flex py-4 rounded-lg bg-grey-light w-full items-center justify-center gap-6 text-base font-medium text-blue"
             >
@@ -378,7 +401,7 @@
               Предложений
             </button>
           </div>
-          <div>
+          <div class="xl:hidden">
             <OffersChat />
           </div>
         </div>
@@ -566,5 +589,19 @@ export default {
   display: grid;
   grid-template-columns: 1fr 470px;
   gap: 16px;
+}
+@media (max-width: 1200px) {
+  .content-box {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .order-left-chat {
+    grid-template-columns: 1fr;
+  }
+  .file-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>

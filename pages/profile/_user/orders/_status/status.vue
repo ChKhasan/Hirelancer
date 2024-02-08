@@ -50,14 +50,34 @@
     </div>
 
     <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-else>
-      <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" class="xl:hidden" />
-      <ProfileOrderCardMobile v-for="order in orders" :order="order" :key="order?.id" class="xl:flex hidden"/>
+      <ProfileOrdersCard
+        v-for="order in orders"
+        :order="order"
+        :key="order?.id"
+        class="xl:hidden"
+      />
+      <ProfileOrderCardMobile
+        v-for="order in orders"
+        :order="order"
+        :key="order?.id"
+        class="xl:flex hidden"
+      />
     </div>
     <div
       class="w-full h-[150px] flex justify-center items-center"
       v-if="!loading && orders.length == 0"
     >
       <a-empty />
+    </div>
+    <div
+      class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:flex flex-col gap-2"
+    >
+      <button
+        @click="$router.push('/profile/orders/add')"
+        class="border border-solid border-blue bg-blue rounded-[12px] h-[52px] w-full flex justify-center items-center text-[14px] text-white font-medium gap-2"
+      >
+        Добавить проект
+      </button>
     </div>
     <div>
       <VPagination />
@@ -84,7 +104,7 @@ export default {
     };
   },
   async mounted() {
-    this.__GET_ORDERS();
+    if (this.$store.state.userInfo["id"]) this.__GET_ORDERS();
   },
   methods: {
     async __GET_ORDERS() {
@@ -123,5 +143,11 @@ export default {
   width: 100%;
   height: 230px;
   border-radius: 16px;
+}
+@media (max-width: 1200px) {
+  .fixed-btns {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+  }
 }
 </style>

@@ -19,11 +19,7 @@ export const mutations = {
 export const actions = {
   logout({ commit }, payload) {
     try {
-      this.$axios.$get("/auth/logout", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-        },
-      });
+      this.$axiosInstance.$get("/api/auth/logout");
       commit("logout");
     } catch (e) {
       commit("logout");
