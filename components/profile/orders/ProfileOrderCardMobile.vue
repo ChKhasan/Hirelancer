@@ -45,7 +45,7 @@
           </div>
           <div class="info flex flex-col">
             <p class="text-[12px] text-grey-40">Клиент</p>
-            <p class="text-[14px] text-grey-80 font-medium">Ikromova Munisa</p>
+            <p class="text-[14px] text-grey-80 font-medium">{{ order?.client?.name }}</p>
           </div>
         </div>
       </div>
@@ -53,7 +53,9 @@
         <div class="grid grid-cols-2 gap-2">
           <p class="text-[12px] text-grey-64 flex gap-[6px] flex-col">
             Срок начала:
-            <span class="text-black text-[14px] font-medium">25.03.2023</span>
+            <span class="text-black text-[14px] font-medium">{{
+              moment(order?.created_at).format(dateFormat)
+            }}</span>
           </p>
           <p class="text-[12px] text-grey-64 flex gap-[6px] flex-col">
             Срок выполнение:
@@ -63,7 +65,7 @@
       </div>
       <div class="mt-4">
         <nuxt-link
-        :to="`/profile/customer/order/view/${order?.id}`"
+          :to="`/profile/customer/order/view/${order?.id}`"
           class="text-main-color border border-solid border-main-color rounded-[8px] h-11 justify-center text-[14px] font-medium flex gap-2 items-center"
           >Подробнее<svg
             width="24"
@@ -82,13 +84,21 @@
           </svg>
         </nuxt-link>
       </div>
-      
     </div>
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   props: ["order"],
+  data() {
+    return {
+      dateFormat: "DD.MM.YYYY",
+    };
+  },
+  methods: {
+    moment,
+  },
 };
 </script>
 <style lang="css" scoped>

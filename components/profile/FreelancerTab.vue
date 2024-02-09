@@ -48,7 +48,7 @@
         </svg>
         Портфолио</nuxt-link
       >
-      <nuxt-link
+      <!-- <nuxt-link
         to="/"
         class="opacity-50 pointer-events-none text-black text-base xl:text-[12px] xl:leading-[12px] xl:py-3 font-medium flex flex-col gap-2 items-center bg-white xl:bg-bg-grey px-4 justify-center min-w-[120px] min-h-[79px] xl:min-w-[96px] xl:min-h-[68px] rounded-[12px] hover:text-black"
         ><svg
@@ -113,7 +113,7 @@
           />
         </svg>
         Блоги</nuxt-link
-      >
+      > -->
     </div>
   </div>
 </template>

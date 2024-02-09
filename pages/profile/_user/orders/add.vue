@@ -167,12 +167,19 @@
                 </svg>
               </a-tooltip>
             </label>
-            <a-input
+            <quill-editor
+              style="min-height: 250px"
+              :options="editorOption"
+              :value="form.description"
+              v-model="form.description"
+              placeholder="Большое спасибо за всю мебель. Очень качественно и по доступным ценам Мы очень рады совместной работе с вами!  "
+            />
+            <!-- <a-input
               type="textarea"
               rows="5"
               v-model="form.description"
               placeholder="Большое спасибо за всю мебель. Очень качественно и по доступным ценам Мы очень рады совместной работе с вами!  "
-            />
+            /> -->
           </a-form-model-item>
           <div
             class="images pb-[40px] border-[0] border-b border-solid border-border-darik"
@@ -240,10 +247,10 @@
                 <div
                   v-for="(item, index) in fileList"
                   :key="index"
-                  class="w-[104px] gap-2 flex flex-col"
+                  class="w-[104px] gap-2 flex flex-col xl:w-full"
                 >
                   <div
-                    class="w-full img-card overflow-hidden h-[104px] border border-solid border-grey-8 rounded-[4px] flex justify-center items-center relative"
+                    class="w-full img-card overflow-hidden h-[104px] xl:h-[90px] border border-solid border-grey-8 rounded-[4px] flex justify-center items-center relative"
                   >
                     <img class="object-cover" :src="item.url" alt="" />
                     <button
@@ -451,7 +458,9 @@
 import Loader from "@/components/Loader.vue";
 import LoaderBtn from "@/components/loader-btn.vue";
 import SpicialsticsCheck from "@/components/modals/SpicialsticsCheck.vue";
-
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -463,6 +472,9 @@ function getBase64(file) {
 export default {
   data() {
     return {
+      editorOption: {
+        theme: "snow",
+      },
       specialities: [],
       openBottom: false,
       loadingBtn: false,
@@ -581,14 +593,7 @@ export default {
       }
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          if (this.fileList.length == 0) {
-            this.$notification["error"]({
-              message: "Error",
-              description: "Img is required",
-            });
-          } else {
-            this.__POST_ORDER(formData);
-          }
+          this.__POST_ORDER(formData);
         } else {
           return false;
         }
@@ -841,6 +846,34 @@ export default {
 .required :deep(label)::after {
   display: none !important;
 }
+
+:deep(.ql-toolbar.ql-snow) {
+  border-radius: 10px 10px 0 0;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid var(--grey-8, #ebebeb);
+}
+:deep(.ql-container) {
+  border-radius: 0 0 10px 10px;
+  background: #fff;
+  border: none;
+  min-height: 250px;
+}
+:deep(.ql-editor) {
+  min-height: 250px;
+}
+.form-item :deep(input) {
+  border-radius: 8px;
+  border: 1px solid #e0e0ed;
+  background: #fff;
+  padding-left: 50px;
+}
+:deep(.quill-editor) {
+  border-radius: 8px;
+  border: 1px solid var(--grey-8);
+  font-family: "TT Interfaces";
+  font-size: 16px;
+}
 @media (max-width: 1200px) {
   :deep(.order-item label),
   :deep(.order-select label) {
@@ -848,11 +881,18 @@ export default {
   }
   .order-upload {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 30%);
   }
   .fixed-btns {
     border-radius: 16px 16px 0px 0px;
     box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+  }
+  .order-upload :deep(.ant-upload-select-picture-card) {
+    width: 100%;
+    height: 90px;
+  }
+  .order-upload :deep(.ant-upload-picture-card-wrapper) {
+    width: 100%;
   }
 }
 </style>

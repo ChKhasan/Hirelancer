@@ -4,7 +4,7 @@
   >
     <div class="head flex justify-between items-center xl:flex-col xl:items-start">
       <div
-        class="flex gap-[10px] flex-col items-start xl:pb-4 xl:border-[0] xl:border-b xl:border-solid xl:border-grey-8"
+        class="flex gap-[10px] flex-col items-start xl:pb-4 xl:border-[0] xl:border-b xl:border-solid xl:border-grey-8 max-w-[76%] xl:max-w-full"
       >
         <h3
           class="text-[20px] text-black font-medium cursor-pointer xl:text-base"
@@ -13,11 +13,17 @@
           {{ order?.name }}
         </h3>
       </div>
-      <p class="text-[20px] text-black font-medium xl:text-base" v-if="order?.price">
-        {{ order?.price }} сум
+      <p
+        class="text-[20px] text-black font-medium xl:text-base xl:mt-4"
+        v-if="order?.price"
+      >
+        {{ order?.price.toLocaleString() }} сум
+      </p>
+      <p class="text-[20px] text-black font-medium xl:text-base xl:mt-4" v-else>
+        По договоренности
       </p>
     </div>
-    <div class="body flex justify-between mt-6">
+    <div class="body flex justify-between mt-6 xl:mt-4">
       <div class="flex gap-[40px] xl:gap-0 xl:grid xl:grid-cols-2 xl:w-full">
         <div class="flex gap-4 items-center xl:order-last">
           <p class="text-base text-grey-64 flex gap-[6px] xl:flex-col xl:text-[12px]">
@@ -64,13 +70,15 @@
       >
         <div @click="open(1)" class="flex justify-between">
           <div class="flex gap-[80px]">
-            <h4 class="text-base font-medium text-black xl:text-dark-yellow xl:text-[14px]">
+            <h4
+              class="text-base font-medium text-black xl:text-dark-yellow xl:text-[14px]"
+            >
               Предложений: {{ order?.request_count }}
             </h4>
           </div>
           <span
             ><svg
-            class="xl:hidden"
+              class="xl:hidden"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -90,12 +98,31 @@
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+              />
+            </svg>
+            <svg
+              class="hidden xl:block"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M6 2L18 2C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18L2 6C2 3.79086 3.79086 2 6 2Z"
+                stroke="#F2994A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13 8H16M16 8V11M16 8L8 16M8 16L8 13M8 16H11"
+                stroke="#F2994A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               /></svg
-          >
-          <svg class="hidden xl:block" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M6 2L18 2C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18L2 6C2 3.79086 3.79086 2 6 2Z" stroke="#F2994A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M13 8H16M16 8V11M16 8L8 16M8 16L8 13M8 16H11" stroke="#F2994A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
+          ></span>
         </div>
         <div
           class="flex justify-between offer-body"

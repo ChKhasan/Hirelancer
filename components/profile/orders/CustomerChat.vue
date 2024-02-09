@@ -14,7 +14,9 @@
       </div>
       <div class="flex justify-between items-center">
         <div class="flex flex-col gap-1">
-          <h5 class="text-[20px] text-black font-medium">Muhammadullo Egamberdiyev</h5>
+          <h5 class="text-[20px] text-black font-medium">
+            {{ order?.selected_request?.freelancer?.name }}
+          </h5>
           <p class="text-grey-40 text-base">14:30</p>
         </div>
 
@@ -125,7 +127,9 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["order"],
+};
 </script>
 <style lang="css" scoped>
 .head {

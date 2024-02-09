@@ -8,13 +8,15 @@
           Buyrtma narxi:
         </p>
         <h1 class="text-blue text-[24px] font-semibold xl:text-base">
-          <!-- {{ order?.price.toLocaleString() }} so’m -->
+          {{
+            order?.price ? `${order?.price.toLocaleString()} so’m` : "По договоренности"
+          }}
         </h1>
       </div>
       <div class="flex flex-col xl:flex-row xl:justify-between xl:items-center">
         <p class="text-grey-64 text-[14px] xl:font-medium">Срок:</p>
         <h4 class="text-black text-base font-semibold xl:font-medium xl:text-[14px]">
-          По договоренности
+          По договоренности 12
         </h4>
       </div>
     </div>

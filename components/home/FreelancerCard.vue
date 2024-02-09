@@ -133,6 +133,7 @@
         </div>
       </div>
     </div>
+    
     <div class="justify-between hidden xl:flex mt-4">
       <div
         class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px]"

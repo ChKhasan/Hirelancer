@@ -69,7 +69,7 @@
         </svg>
         Портфолио</nuxt-link
       >
-      <nuxt-link
+      <!-- <nuxt-link
         v-if="$route.params.user == 'freelancer'"
         to="/"
         class="opacity-50 pointer-events-none text-black  text-base font-medium flex flex-col gap-2 items-center bg-white px-4 justify-center min-w-[120px] min-h-[79px] rounded-[12px] hover:text-black"
@@ -160,7 +160,7 @@
           />
         </svg>
         Исполнители</nuxt-link
-      >
+      > -->
       <nuxt-link
       :to="`/profile/${$route.params.user}/settings`"
         :class="{ active: $route.name.includes('settings') }"

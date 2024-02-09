@@ -2,7 +2,7 @@
   <div class="pt-12 order">
     <div class="max-w-[1286px] mx-auto pb-[55px]">
       <nuxt-link
-        to="/"
+        to="/profile/freelancer/orders/active/status"
         class="flex gap-4 w-[162px] py-3 border border-grey-24 border-solid rounded-lg justify-center items-center text-base font-medium text-blue hover:text-blue"
       >
         <svg
@@ -30,12 +30,12 @@
             <div
               class="status flex justify-center pt-[36px] pb-8 border-[0] border-b border-solid border-grey-8 relative"
             >
-              <OrderStatus />
+              <OrderStatus :status="status" />
             </div>
             <div class="info px-8 py-8">
               <div class="head flex justify-between">
                 <div class="flex gap-4 items-center">
-                  <span
+                  <!-- <span
                     class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -53,36 +53,13 @@
                         stroke-linejoin="round"
                       /></svg
                     >Срочный заказ</span
-                  >
-                  <span class="h-[19px] w-[1px] bg-grey-8"></span>
-                  <span
-                    class="flex gap-[7px] items-center rounded-[8px] px-[8px] py-[4px] text-green text-[14px] font-medium"
-                    ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="20"
-                      viewBox="0 0 18 20"
-                      fill="none"
-                    >
-                      <path
-                        opacity="0.4"
-                        d="M7.37552 0.722073L2.3777 2.94333C0.932081 3.58583 -0.0219094 5.02467 0.0700804 6.60396C0.429713 12.7782 2.23776 15.4963 6.93588 18.677C8.18048 19.5196 9.82104 19.5217 11.0647 18.6777C15.7773 15.4797 17.5206 12.7231 17.9119 6.62535C18.0139 5.03561 17.0583 3.5815 15.6026 2.93452L10.6246 0.722073C9.59037 0.262401 8.40979 0.262402 7.37552 0.722073Z"
-                        fill="#009A10"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M12.4939 6.43558C12.8056 6.70834 12.8372 7.18216 12.5645 7.49389L9.69455 10.7738C9.07786 11.4786 8.01561 11.5729 7.28433 10.9879L5.53151 9.58566C5.20806 9.3269 5.15562 8.85494 5.41438 8.53149C5.67313 8.20804 6.1451 8.1556 6.46855 8.41436L8.22137 9.81662C8.32584 9.90019 8.47759 9.88671 8.56569 9.78603L11.4356 6.50613C11.7084 6.1944 12.1822 6.16282 12.4939 6.43558Z"
-                        fill="#009A10"
-                      /></svg
-                    >Идет прием заявок</span
-                  >
+                  > -->
                 </div>
 
                 <div class="flex gap-6">
-                  <p class="text-base text-grey-40">07 мая 2023, 15:24</p>
+                  <p class="text-base text-grey-40">{{ orderDate }}, {{ orderHours }}</p>
                   <p class="text-base text-grey-64 flex gap-[6px]">
-                    Заказ:<span class="font-medium text-black">#14511</span>
+                    Заказ:<span class="font-medium text-black">#{{ order?.id }}</span>
                   </p>
                 </div>
               </div>
@@ -260,7 +237,9 @@
               <div class="flex flex-col">
                 <p class="text-grey-64 text-[14px]">Buyrtma narxi:</p>
 
-                <h1 class="text-blue text-[24px] font-semibold">99 200 000 so’m</h1>
+                <h1 class="text-blue text-[24px] font-semibold xl:text-base">
+                  99 200 000 so’m
+                </h1>
                 <p class="text-grey-40 text-[15px] line-through">750 000</p>
               </div>
               <div class="flex flex-col">
@@ -369,7 +348,9 @@
               <div class="flex flex-col">
                 <p class="text-grey-64 text-[14px]">Buyrtma narxi:</p>
 
-                <h1 class="text-blue text-[24px] font-semibold">99 200 000 so’m</h1>
+                <h1 class="text-blue text-[24px] font-semibold xl:text-base">
+                  99 200 000 so’m
+                </h1>
                 <p class="text-grey-40 text-[15px] line-through">750 000</p>
               </div>
               <div class="flex flex-col">
@@ -451,8 +432,9 @@ import CancellationOrder from "@/components/modals/CancellationOrder.vue";
 import ComplaintOrder from "@/components/modals/ComplaintOrder.vue";
 import OrderChat from "@/components/orders/OrderChat.vue";
 import Loader from "@/components/Loader.vue";
-
+import moment from "moment";
 export default {
+  props: ["order"],
   data() {
     return {
       bottomModal: false,
@@ -463,6 +445,19 @@ export default {
       visibleComplaint: false,
       loading: true,
     };
+  },
+
+  computed: {
+    orderDate() {
+      return moment(this.order?.created_at).format("DD.MM.YYYY");
+    },
+    orderHours() {
+      return moment(this.order?.created_at).format("HH:mm");
+    },
+    status() {
+      const status = this.order?.selected_request?.id ? 2 : 1;
+      return 3;
+    },
   },
   mounted() {
     this.loading = true;

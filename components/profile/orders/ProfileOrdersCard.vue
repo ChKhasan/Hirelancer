@@ -4,7 +4,7 @@
   >
     <div class="head flex justify-between items-center">
       <div class="flex gap-[10px] flex-col items-start">
-        <span
+        <!-- <span
           class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@
               stroke-linejoin="round"
             /></svg
           >Срочный заказ</span
-        >
+        > -->
         <h3 class="text-[20px] text-black font-medium">
           {{ order?.name }}
         </h3>
@@ -32,33 +32,46 @@
       </p>
     </div>
     <div class="body flex justify-between">
-      <div class="flex gap-[40px]">
+      <div class="flex" :class="!order?.client?.avatar ? 'gap-5' : 'gap-[40px]'">
         <div class="flex gap-4 items-center">
-          <div class="image min-w-[56px] h-[56px] rounded-full overflow-hidden">
+          <div
+            v-if="order?.client?.avatar"
+            class="image min-w-[56px] h-[56px] rounded-full overflow-hidden"
+          >
             <img
               class="w-full h-full object-cover"
               src="@/assets/images/Avatar 5.png"
               alt=""
             />
           </div>
-          <div class="info flex flex-col">
+          <div
+            class="info flex gap-2"
+            :class="!order?.client?.avatar ? 'flex-row items-center' : 'flex-col'"
+          >
             <p class="text-[14px] text-grey-40">Клиент</p>
-            <p class="text-base text-grey-80 font-medium">Ikromova Munisa</p>
+            <p class="text-base text-grey-80 font-medium">{{ order?.client?.name }}</p>
           </div>
         </div>
-        <span class="h-[56px] w-[1px] bg-grey-8"></span>
-        <div class="flex flex-col gap-2">
+        <span class="h-full w-[1px] bg-grey-8"></span>
+        <div
+          class="flex"
+          :class="!order?.client?.avatar ? 'flex-row gap-5' : 'flex-col gap-2'"
+        >
           <p class="text-base text-grey-64 flex gap-[6px]">
-            Срок начала: <span class="text-black">25.03.2023</span>
+            Срок начала:
+            <span class="text-black">{{
+              moment(order?.created_at).format(dateFormat)
+            }}</span>
           </p>
+          <span v-if="!order?.client?.avatar" class="h-full w-[1px] bg-grey-8"></span>
           <p class="text-base text-grey-64 flex gap-[6px]">
-            Срок выполнение: <span class="text-black">05.04.2023</span>
+            Срок выполнение: <span class="text-black">----</span>
           </p>
         </div>
       </div>
       <div class="flex items-end">
         <nuxt-link
-        :to="`/profile/customer/order/view/${order?.id}`"
+          :to="`/profile/freelancer/order/view/${order?.id}`"
           class="text-blue text-base font-medium flex gap-2 items-center"
           >Подробнее<svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,10 +99,10 @@
             <h4 class="text-base font-medium text-black">Предложения</h4>
             <div class="flex gap-[40px]">
               <p class="text-base text-grey-64 flex gap-[6px]">
-                Срок: <span class="text-black">5 дней</span>
+                Срок: <span class="text-black">{{ order?.deadline }} дней</span>
               </p>
               <p class="text-base text-grey-64 flex gap-[6px]">
-                Цена: <span class="text-black">600 000 сум</span>
+                Цена: <span class="text-black">{{ order?.price }} сум</span>
               </p>
             </div>
           </div>
@@ -115,12 +128,7 @@
           :class="{ inactive: !offersList.includes(1) }"
         >
           <div class="pt-6 flex flex-col gap-6">
-            <p class="text-base text-grey-80">
-              Join our world-class innovation team, revolutionizing education at ASU Prep
-              Digital. Our mission is to enhance student performance and provide access to
-              transformative educational pathways. We're seeking Graphic Designers to
-              create visually engaging digital lessons for grades 8-12.
-            </p>
+            <span class="text-base text-grey-80" v-html="order?.description"> </span>
             <div class="flex justify-end">
               <button class="text-light-red text-base font-medium">
                 Отменить запрос
@@ -133,14 +141,18 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   props: ["order"],
   data() {
     return {
       offersList: [],
+      dateFormat: "DD.MM.YYYY",
+      test: true,
     };
   },
   methods: {
+    moment,
     open(id) {
       if (!this.offersList.includes(id)) {
         this.offersList.push(id);

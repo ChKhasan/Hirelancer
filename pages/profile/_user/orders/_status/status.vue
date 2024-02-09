@@ -5,6 +5,7 @@
       <div class="flex justify-between xl:hidden">
         <h3 class="text-[24px] text-black font-semibold">Заказы</h3>
         <button
+          v-if="$route.name.includes('customer')"
           @click="$router.push('/profile/orders/add')"
           class="bg-blue flex justify-center gap-2 h-[60px] w-[220px] px-6 rounded-[8px] text-white text-base text-medium items-center"
         >
@@ -46,22 +47,14 @@
       class="list flex flex-col gap-4 mt-6 mb-[40px]"
       v-if="$route.params.user == 'customer' && !loading"
     >
-      <CompletedOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
+      <!-- <CompletedOrdersCard v-for="order in orders" :order="order" :key="order?.id" /> -->
     </div>
 
-    <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-else>
-      <ProfileOrdersCard
-        v-for="order in orders"
-        :order="order"
-        :key="order?.id"
-        class="xl:hidden"
-      />
-      <ProfileOrderCardMobile
-        v-for="order in orders"
-        :order="order"
-        :key="order?.id"
-        class="xl:flex hidden"
-      />
+    <div class="list flex flex-col gap-4 mt-6 mb-[40px] xl:hidden" v-else>
+      <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
+    </div>
+    <div class="list flex-col gap-4 mt-6 mb-[40px] xl:flex hidden" v-else>
+      <ProfileOrderCardMobile v-for="order in orders" :order="order" :key="order?.id" />
     </div>
     <div
       class="w-full h-[150px] flex justify-center items-center"
@@ -70,6 +63,7 @@
       <a-empty />
     </div>
     <div
+      v-if="$route.params.user == 'customer'"
       class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:flex flex-col gap-2"
     >
       <button
@@ -103,28 +97,41 @@ export default {
       loading: true,
     };
   },
+  computed: {
+    handleUser() {
+      return this.$store.state.userInfo["id"];
+    },
+  },
   async mounted() {
     if (this.$store.state.userInfo["id"]) this.__GET_ORDERS();
   },
   methods: {
     async __GET_ORDERS() {
+      const params = {
+        status:
+          this.$route.params.status == "active"
+            ? 1
+            : this.$route.params.status == "completed"
+            ? 0
+            : -1,
+      };
+      this.$route.params.user == "customer"
+        ? (params.client = this.$store.state.userInfo["id"])
+        : (params.freelancer = this.$store.state.userInfo["id"]);
       try {
         const data = await this.$store.dispatch("fetchOrders/getMyOrders", {
-          params: {
-            status:
-              this.$route.params.status == "active"
-                ? 1
-                : this.$route.params.status == "completed"
-                ? 0
-                : -1,
-            client: this.$store.state.userInfo["id"],
-          },
+          params: { ...params },
         });
         this.orders = data?.data;
       } catch (e) {
       } finally {
         this.loading = false;
       }
+    },
+  },
+  watch: {
+    handleUser(val) {
+      if (val) this.__GET_ORDERS();
     },
   },
   components: {

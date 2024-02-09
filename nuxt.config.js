@@ -22,6 +22,7 @@ export default {
     { src: "~plugins/v-mask.js", ssr: false },
     { src: "~plugins/vue-otp-input.js", ssr: false },
     { src: "~plugins/vue-drawer-layout.js", ssr: false },
+    { src: "~plugins/quill-editor.js", ssr: false },
   ],
 
   components: true,

@@ -89,7 +89,7 @@
     <div
       class="footer flex justify-between mt-[23px] xl:flex-row-reverse xl:mt-[20px] xl:gap-[20px]"
     >
-      <h1 class="text-grey-80 text-2xl font-semibold xl:text-base">
+      <h1 class="text-grey-80 text-2xl font-semibold xl:text-base" v-if="order?.price">
         {{ order?.price.toLocaleString() }} sum
       </h1>
       <div class="flex gap-8 xl:flex-col xl:gap-[20px]">

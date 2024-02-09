@@ -347,7 +347,7 @@
                   /></svg></span
             ></nuxt-link>
           </li>
-          <li class="border-[0] border-b border-solid border-grey-light">
+          <!-- <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
               to=""
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
@@ -384,8 +384,8 @@
                     stroke-linejoin="round"
                   /></svg></span
             ></nuxt-link>
-          </li>
-          <li class="border-[0] border-b border-solid border-grey-light">
+          </li> -->
+          <!-- <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
               to=""
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
@@ -522,7 +522,7 @@
                     stroke-linejoin="round"
                   /></svg></span
             ></nuxt-link>
-          </li>
+          </li> -->
           <li class="border-[0] border-b border-solid border-grey-light">
             <button
               @click="$store.dispatch('logout')"
