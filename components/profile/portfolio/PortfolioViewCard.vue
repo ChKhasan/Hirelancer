@@ -1,5 +1,5 @@
-<template lang="html">
-  <a :href="portfolio?.link">
+<template>
+  <div @click="$emit('handleOk')" class="wrapper">
     <div class="portfolio-card rounded-lg overflow-hidden cursor-pointer">
       <div class="image h-[270px] relative">
         <img
@@ -59,7 +59,9 @@
       <div
         class="body px-4 pt-3 pb-4 flex rounded-b-lg flex-col gap-[6px] border-[0] border-t-0 border-b border-x border-solid border-grey-8"
       >
-        <h4 class="text-black text-[18px] font-semibold">{{ portfolio?.name }}</h4>
+        <h4 class="text-black text-[18px] font-semibold">
+          {{ portfolio?.name }}
+        </h4>
         <div class="flex justify-between">
           <p class="text-[15px] text-grey-40">
             {{ portfolio?.specialities[0]?.name_ru }}
@@ -67,15 +69,11 @@
         </div>
       </div>
     </div>
-  </a>
+  </div>
 </template>
 <script>
 export default {
   props: ["portfolio"],
 };
 </script>
-<style lang="css" scoped>
-.count {
-  box-shadow: 0px 4px 16px 0px rgba(11, 11, 21, 0.16);
-}
-</style>
+<style lang="css" scoped></style>
