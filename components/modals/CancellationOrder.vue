@@ -12,7 +12,7 @@
       <div class="flex flex-col gap-8 pl-4">
         <div class="flex justify-between">
           <h4 class="text-black text-[24px] font-semibold">
-            Loyihani yopish uchun mijozni tasdig’i kutilmoqda
+            {{ title }}
           </h4>
           <button @click="visible = false">
             <svg
@@ -52,7 +52,7 @@
 </template>
 <script>
 export default {
-  props: ["visibleProp"],
+  props: ["visibleProp", "title"],
   data() {
     return {
       visible: false,

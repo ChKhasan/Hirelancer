@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="card file-card flex flex-col gap-[8px]">
-    <div class="image h-[104px] w-[104px] xl:w-full xl:h-[90px] xl:rounded-lg overflow-hidden">
+    <div class="image h-[104px] w-[104px] xl:w-full xl:h-[90px] rounded-[4px] xl:rounded-lg overflow-hidden">
       <img
         v-if="file?.file"
         loading="lazy"

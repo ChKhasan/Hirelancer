@@ -1,9 +1,9 @@
 <template lang="html">
-  <div class="pt-12 order">
+  <div class="pt-12 order xl:px-4">
     <div class="max-w-[1286px] mx-auto pb-[55px]">
       <nuxt-link
         to="/profile/freelancer/orders/active/status"
-        class="flex gap-4 w-[162px] py-3 border border-grey-24 border-solid rounded-lg justify-center items-center text-base font-medium text-blue hover:text-blue"
+        class="flex gap-4 w-[162px] py-3 border border-grey-24 border-solid rounded-lg justify-center items-center text-base font-medium text-blue hover:text-blue xl:hidden"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@
         </svg>
         Отмена
       </nuxt-link>
-      <div class="content-box mt-6">
+      <div class="content-box mt-6 xl:mt-0">
         <div class="flex flex-col gap-6">
           <div
             class="info-box rounded-3xl border-solid border-grey-8 border relative overflow-hidden max-h-[430px]"
@@ -32,7 +32,7 @@
             >
               <OrderStatus :status="status" />
             </div>
-            <div class="info px-8 py-8">
+            <div class="info px-8 py-8 xl:px-4 xl:py-4">
               <div class="head flex justify-between">
                 <div class="flex gap-4 items-center">
                   <!-- <span
@@ -63,60 +63,55 @@
                   </p>
                 </div>
               </div>
-              <div class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8">
-                <h1 class="title text-[24px] font-semibold text-black mb-4">
-                  Нужен разработчик в теме форекс/крипто/трейдинг, знаком с патернами
-                  графического анализа на графиках
+              <div
+                class="body mt-6 pb-4 border-[0] border-b border-solid border-grey-8 xl:mt-4"
+              >
+                <h1 class="title text-[24px] font-semibold text-black mb-4 xl:text-base">
+                  {{ order?.name }}
                 </h1>
-                <p class="text-base text-grey-80">
-                  Join our world-class innovation team, revolutionizing education at ASU
-                  Prep Digital. Our mission is to enhance student performance and provide
-                  access to transformative educational pathways. We're seeking Graphic
-                  Designers to create visually engaging digital lessons for grades
-                  8-12.Contract Expectations:During the first month, you'll familiarize
-                  yourself with our media and curriculum teams, learn to build lessons
-                  using our proprietary tool, and adhere to the style guide(s) for your
-                  assigned course. After the initial month, we'll assess the contract's
-                  progress and decide on an extension. If it's a mutually beneficial fit,
-                  the contract will be extended in 3-month increments.
-                </p>
-                <p class="text-base text-grey-80 mt-8">
-                  As we're developing curriculum for the next 4 years, there's potential
-                  for a long-term contract.This is a project-based contract and not a
-                  retainer arrangement. It does not involve a continuous or ongoing
-                  engagement where ASU Prep retains the contractor's services even when
-                  there is no project-based work. Instead, the contract centers around
-                  completing specific assigned tasks and billing hours to ASU Prep.
-                </p>
+
+                <span
+                  class="text-base text-grey-80 xl:text-base"
+                  v-html="order?.description"
+                >
+                </span>
               </div>
               <div class="files flex flex-col gap-4 mt-4">
-                <h6 class="text-black text-[20px] font-semibold">Файлы к задаче</h6>
-                <div class="file-list flex gap-4 justify-start">
-                  <FileCard />
-                  <FileCard />
-                  <FileCard />
-                  <FileCard />
+                <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">
+                  Файлы к задаче
+                </h6>
+                <div class="file-list flex gap-4 justify-start xl:flex-wrap">
+                  <FileCard v-for="file in order?.files" :file="file" :key="file?.id" />
                 </div>
               </div>
-              <div class="files flex flex-col gap-4 mt-4 mb-6">
-                <h6 class="text-black text-[20px] font-semibold">Категории:</h6>
-                <div class="flex gap-[8px] items-center">
-                  <span
-                    class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
-                    >Программирование </span
-                  ><span class="text-[20px] text-grey-64">/</span>
-                  <span
-                    class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
+              <div class="files flex flex-col gap-4 mt-4 xl:mt-6 mb-6">
+                <h6 class="text-black text-[20px] xl:text-[18px] font-semibold">
+                  Категории:
+                </h6>
+                <div class="flex gap-2 items-center xl:flex-col xl:items-start">
+                  <div
+                    class="flex gap-2 items-center"
+                    v-for="(specialit, index) in order?.specialities"
+                    :key="specialit?.id"
                   >
-                    Мобильные приложения
-                  </span>
+                    <span
+                      class="rounded-[22px] py-2 px-4 bg-bg-grey text-grey-64 text-[14px] font-medium"
+                      >{{ specialit?.name_ru }} </span
+                    ><span
+                      v-if="index + 1 != order?.specialities.length"
+                      class="text-[20px] text-grey-64 xl:hidden"
+                      >/</span
+                    >
+                  </div>
                 </div>
               </div>
               <div
-                class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between"
+                class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[90%] xl:mx-auto"
               >
-                <div class="flex items-center gap-[28px]">
-                  <p class="text-base text-grey-64 flex gap-[8px] items-center">
+                <div class="flex items-center gap-[28px] xl:justify-between">
+                  <p
+                    class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -136,9 +131,11 @@
                         stroke="#5C46E6"
                         stroke-width="1.5"
                       /></svg
-                    >300
+                    >{{ order?.view_count }}
                   </p>
-                  <p class="text-base text-grey-64 flex gap-[8px] items-center">
+                  <p
+                    class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -167,14 +164,15 @@
                         ry="0.833333"
                         fill="#5C46E6"
                       /></svg
-                    >42 запросов
+                    >{{ order?.request_count }} запросов
                   </p>
                 </div>
                 <p
-                  class="underline text-base text-pantone-2023 flex items-center gap-[10px]"
+                  class="underline text-base text-pantone-2023 flex items-center gap-[10px] xl:text-center xl:mx-auto xl:text-[14px] white-space-nowrap"
                 >
                   Сообщить модератору о нарушении
                   <svg
+                    class="min-w-5"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="18"
@@ -229,7 +227,7 @@
           <OrderChat />
         </div>
         <div class="flex flex-col gap-4">
-          <ClientCard />
+          <ClientCard :client="order?.client" />
           <div
             class="card price-card px-[24px] py-[24px] rounded-2xl bg-bg-grey flex flex-col gap-6"
           >
@@ -247,10 +245,11 @@
                 <h4 class="text-black text-base font-semibold">По договоренности</h4>
               </div>
             </div>
-            <EndingProcess />
+            <EndingProcess v-if="status == 2" />
             <span class="w-full h-[2px] bg-grey-light flex"></span>
             <div class="buttons flex flex-col gap-4">
               <button
+                v-if="status == 2"
                 @click="visibleClose = true"
                 class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-main-color border-main-color text-base text-white font-medium"
               >
@@ -273,6 +272,7 @@
                 </svg>
               </button>
               <button
+                v-if="status != 3"
                 @click="visibleCancel = true"
                 class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-white border-grey-24 text-base text-grey-64 font-medium"
               >
@@ -293,7 +293,8 @@
                   />
                 </svg>
               </button>
-              <button
+              <!-- <button
+                v-if="status > 1"
                 class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-white border-grey-light text-base text-blue font-medium"
               >
                 Написать<svg
@@ -310,8 +311,9 @@
                     stroke-linecap="round"
                   />
                 </svg>
-              </button>
+              </button> -->
               <button
+                v-if="status == 3"
                 @click="visibleComplaint = true"
                 class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-light-red2 border-light-red text-base text-light-red font-medium"
               >
@@ -341,7 +343,7 @@
               </button>
             </div>
           </div>
-          <div
+          <!-- <div
             class="card price-card px-[24px] py-[24px] rounded-2xl bg-bg-grey flex flex-col gap-6"
           >
             <div class="flex flex-col gap-[10px]">
@@ -386,7 +388,7 @@
                 Mijoz ishni bitganligni tasdiqlanishi kutilmoqda
               </p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -403,11 +405,16 @@
           <BottomModal @close="closeModal" />
         </div>
       </Transition>
-      <CloseOrder @handleOkProp="handleOk" :visibleProp="visibleClose" />
+      <CloseOrder
+        @handleOkProp="handleOk"
+        :visibleProp="visibleClose"
+        @submit="submitFinish"
+      />
       <CancellationOrder
         @handleOkProp="handleOkCancel"
         :visibleProp="visibleCancel"
         @submit="submitCancel"
+        title="So'rovni bekor qilishingizga aminmisiz ?"
       />
       <ComplaintOrder
         @handleOkProp="handleOkComplaint"
@@ -456,7 +463,7 @@ export default {
     },
     status() {
       const status = this.order?.selected_request?.id ? 2 : 1;
-      return 3;
+      return 2;
     },
   },
   mounted() {
@@ -468,12 +475,14 @@ export default {
     }
   },
   methods: {
+    moment,
     handleOk() {
       this.visibleClose = false;
     },
     handleOkCancel() {
       this.visibleCancel = false;
     },
+    submitFinish() {},
     handleOkComplaint() {
       this.visibleComplaint = false;
     },
@@ -483,8 +492,25 @@ export default {
     closeModal() {
       this.bottomModal = false;
     },
-    submitCancel() {},
+    submitCancel() {
+      // this.__CANCEL_ORDER();
+    },
     submitComplaint() {},
+    async __CANCEL_ORDER() {
+      try {
+        const data = await this.$store.dispatch("fetchOrders/postCanceledOrder", {
+          id: this.$route.params.id,
+        });
+        this.$router.go(-1);
+      } catch (e) {
+        if (e.response) {
+          this.$notification["error"]({
+            message: "Error",
+            description: e.response.statusText,
+          });
+        }
+      }
+    },
   },
   components: {
     FileCard,
@@ -552,6 +578,25 @@ export default {
 
   100% {
     opacity: 1;
+  }
+}
+@media (max-width: 1200px) {
+  .content-box {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .order-left-chat {
+    grid-template-columns: 1fr;
+  }
+  .file-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fixed-btns {
+    border-radius: 16px 16px 0px 0px;
+    box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+    grid-template-columns: 1fr 2fr;
   }
 }
 </style>

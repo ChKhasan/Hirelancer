@@ -1,33 +1,35 @@
 <template lang="html">
-  <div class="profile">
+  <div class="profile xl:px-4">
     <!-- <ProfileLayout :profile="true"> -->
-    <div class="head flex flex-col gap-4 mt-8">
+    <div class="head flex flex-col gap-4 mt-8 xl:hidden">
       <h3 class="text-[24px] text-black font-semibold">Настройки</h3>
     </div>
-    <div class="buttons flex gap-6 mt-4">
+    <div class="buttons flex gap-6 mt-4 xl:gap-3">
       <button
         :to="`/profile/${$route.params.user}/settings`"
         @click="$router.push(`/profile/${$route.params.user}/settings`)"
-        :class="{ active: !$route.name.includes('settings') }"
-        class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+        :class="{ active: !$route.name.includes('specialities') }"
+        class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base xl:text-[14px] text-grey-64 font-medium xl:py-0 xl:flex xl:items-center xl:h-9 whitespace-nowrap xl:rounded-lg xl:border xl:px-4"
       >
         Shaxsiy ma'lumotlar
       </button>
       <button
-        @click="$router.push(`/profile/${$route.params.user}/specialities`)"
+        @click="$router.push(`/profile/${$route.params.user}/settings/specialities`)"
         :class="{ active: $route.name.includes('specialities') }"
-        class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+        class="px-6 py-0 xl:flex xl:items-center rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base xl:text-[14px] text-grey-64 font-medium xl:py-2 xl:h-9 whitespace-nowrap xl:rounded-lg xl:border xl:px-4"
       >
         Mutaxassisliklar
       </button>
     </div>
     <div class="max-w-[818px] pt-6 flex flex-col gap-6 relative">
-      <div class="px-8 py-6 border border-solid border-border-darik rounded-[16px]">
-        <h3 class="text-[20px] text-black font-medium mb-6">
+      <div
+        class="px-8 py-6 border border-solid border-border-darik rounded-[16px] xl:px-4 xl:py-4"
+      >
+        <h3 class="text-[20px] text-black font-medium mb-6 xl:text-base xl:font-semibold">
           Mutaxassisligingizni tanlang
         </h3>
 
-        <div class="specialities-list flex justify-start gap-[10px]" v-if="loading">
+        <div class="specialities-list flex justify-start gap-[10px] xl:grid xl:gap-2 xl:grid-cols-2" v-if="loading">
           <a-skeleton
             :paragraph="false"
             width="50px"
@@ -44,7 +46,7 @@
           <div
             v-for="elem in activeCheckedList"
             :key="elem?.id"
-            class="py-[7px] text-base text-grey-80 font-medium h-[38px] flex items-center rounded-[4px] gap-2 border border-solid border-grey-light pl-2 pr-3 bg-bg-grey"
+            class="py-[7px] text-base xl:text-[14px] text-grey-80 font-medium h-[38px] flex items-center rounded-[4px] gap-2 border border-solid border-grey-light pl-2 pr-3 bg-bg-grey"
           >
             {{ elem?.name_ru }}
             <button @click="deleteChecked(elem?.id)">
@@ -67,9 +69,10 @@
 
           <button
             @click="visible = true"
-            class="py-[7px] text-base text-white h-[38px] flex items-center rounded-[4px] gap-2 border border-solid border-main-color pl-2 pr-3 bg-main-color xl:hidden"
+            class="py-[7px] text-base text-white h-[38px] flex items-center rounded-[4px] gap-2 border border-solid border-main-color pl-2 pr-3 bg-main-color xl:hidden xl:text-[14px]"
           >
             <svg
+              class="xl:h-5"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -107,8 +110,8 @@
           </button>
         </div>
         <div class="flex justify-between mt-4">
-          <p class="text-[14px] text-grey-64">Mutaxasliklaringizni tanlang. Max 3 ta</p>
-          <button class="text-main-color text-[14px]">Kopaytirish</button>
+          <p class="text-[14px] text-grey-64 xl:text-[12px]">Mutaxasliklaringizni tanlang. Max 3 ta</p>
+          <button class="text-main-color text-[14px] xl:text-[12px]">Kopaytirish</button>
         </div>
       </div>
     </div>

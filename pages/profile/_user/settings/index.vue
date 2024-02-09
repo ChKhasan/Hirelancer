@@ -1,22 +1,22 @@
 <template lang="html">
-  <div class="profile">
+  <div class="profile xl:px-4">
     <!-- <ProfileLayout :profile="true"> -->
-    <div class="head flex flex-col gap-4 mt-8">
-      <h3 class="text-[24px] text-black font-semibold">Настройки</h3>
+    <div class="head flex flex-col gap-4 mt-8 xl:mt-0">
+      <h3 class="text-[24px] text-black font-semibold xl:hidden">Настройки</h3>
     </div>
-    <div class="buttons flex gap-6 mt-4">
+    <div class="buttons flex gap-6 mt-4 xl:gap-3">
       <button
         :to="`/profile/${$route.params.user}/settings`"
         @click="$router.push(`/profile/${$route.params.user}/settings`)"
         :class="{ active: !$route.name.includes('specialities') }"
-        class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+        class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base xl:text-[14px] text-grey-64 font-medium xl:py-0 xl:flex xl:items-center xl:h-9 whitespace-nowrap xl:rounded-lg xl:border xl:px-4"
       >
         Shaxsiy ma'lumotlar
       </button>
       <button
         @click="$router.push(`/profile/${$route.params.user}/settings/specialities`)"
         :class="{ active: $route.name.includes('specialities') }"
-        class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium"
+        class="px-6 py-0 xl:flex xl:items-center rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base xl:text-[14px] text-grey-64 font-medium xl:py-2 xl:h-9 whitespace-nowrap xl:rounded-lg xl:border xl:px-4"
       >
         Mutaxassisliklar
       </button>
@@ -30,13 +30,135 @@
           <a-spin class="" />
         </div>
         <div
-          :class="{ 'pointer-events-none': laoding }"
-          class="px-8 py-6 border border-solid border-border-darik rounded-[16px] pb-[120px] relative z-0"
+          class="px-8 py-6 border border-solid border-border-darik rounded-[16px] relative z-0 xl:hidden"
         >
-          <h3 class="text-[20px] text-black font-medium mb-6">Shaxsiy ma'lumotlar</h3>
+          <div class="flex gap-6">
+            <div class="image w-[118px] h-[118px]">
+              <img
+                class="w-full h-full"
+                src="../../../../assets/images/Avatar 5.png"
+                alt=""
+              />
+            </div>
+            <div class="body flex flex-col gap-4">
+              <p class="text-[14px] text-black max-w-[157px]">
+                Foto hajmi 4 mb dan oshmasligi kerak
+              </p>
+              <div class="flex gap-4">
+                <button>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9 6L12 3M12 3L15 6M12 3L12 15"
+                      stroke="#5C46E6"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.5 9L7 9C4.79086 9 3 10.7909 3 13L3 17C3 19.2091 4.79086 21 7 21L17 21C19.2091 21 21 19.2091 21 17L21 13C21 10.7909 19.2091 9 17 9L16.5 9"
+                      stroke="#5C46E6"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 8V18C5 20.2091 6.79086 22 9 22H15C17.2091 22 19 20.2091 19 18V8M14 11V17M10 11L10 17M16 5L14.5937 2.8906C14.2228 2.3342 13.5983 2 12.9296 2H11.0704C10.4017 2 9.7772 2.3342 9.40627 2.8906L8 5M16 5H8M16 5H21M8 5H3"
+                      stroke="#F2154A"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          :class="{ 'pointer-events-none': laoding }"
+          class="px-8 py-6 border border-solid border-border-darik rounded-[16px] pb-[120px] relative z-0 xl:px-4 xl:py-4"
+        >
+          <h3
+            class="text-[20px] text-black font-medium mb-6 xl:text-base xl:font-semibold xl:mb-4"
+          >
+            Shaxsiy ma'lumotlar
+          </h3>
           <div>
-            <div class="flex flex-col gap-6">
-              <div class="grid grid-cols-2 gap-4">
+            <div class="gap-6 hidden xl:grid xl:grid-cols-2 mb-6">
+              <div class="image w-[148px] h-[148px]">
+                <img
+                  class="w-full h-full"
+                  src="../../../../assets/images/Avatar 5.png"
+                  alt=""
+                />
+              </div>
+              <div class="body flex flex-col gap-4 justify-center">
+                <p class="text-[14px] text-black max-w-[157px]">
+                  Foto hajmi 4 mb dan oshmasligi kerak
+                </p>
+                <div class="flex gap-4">
+                  <button>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 6L12 3M12 3L15 6M12 3L12 15"
+                        stroke="#5C46E6"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M7.5 9L7 9C4.79086 9 3 10.7909 3 13L3 17C3 19.2091 4.79086 21 7 21L17 21C19.2091 21 21 19.2091 21 17L21 13C21 10.7909 19.2091 9 17 9L16.5 9"
+                        stroke="#5C46E6"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <button>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 8V18C5 20.2091 6.79086 22 9 22H15C17.2091 22 19 20.2091 19 18V8M14 11V17M10 11L10 17M16 5L14.5937 2.8906C14.2228 2.3342 13.5983 2 12.9296 2H11.0704C10.4017 2 9.7772 2.3342 9.40627 2.8906L8 5M16 5H8M16 5H21M8 5H3"
+                        stroke="#F2154A"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-6 xl:gap-4">
+              <div class="grid grid-cols-2 gap-4 xl:grid-cols-1">
                 <a-form-model-item ref="name" class="form-item" label="Ism">
                   <a-input v-model="form.name" placeholder="Ism" />
                 </a-form-model-item>
@@ -44,7 +166,7 @@
                   <a-input v-model="form.surname" placeholder="Familya" />
                 </a-form-model-item>
               </div>
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 xl:grid-cols-1">
                 <a-form-model-item
                   ref="name"
                   class="form-item"
@@ -69,7 +191,7 @@
                   </a-select>
                 </a-form-model-item>
               </div>
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 xl:grid-cols-1">
                 <a-form-model-item ref="name" class="form-item" label="Mamlakatingiz">
                   <a-select v-model="form.country_id" placeholder="Mamlakatingiz">
                     <a-select-option
@@ -102,13 +224,17 @@
           </div>
         </div>
         <div
-          class="px-8 py-6 border border-solid border-border-darik rounded-[16px]"
+          class="px-8 py-6 border border-solid border-border-darik rounded-[16px] xl:px-4 xl:py-4"
           :class="{ 'pointer-events-none': laoding }"
         >
-          <h3 class="text-[20px] text-black font-medium mb-6">Aloqa ma'lumotlarim</h3>
+          <h3
+            class="text-[20px] text-black font-medium mb-6 xl:text-base xl:font-semibold"
+          >
+            Aloqa ma'lumotlarim
+          </h3>
           <div>
-            <div class="flex flex-col gap-6">
-              <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col gap-6 xl:gap-4">
+              <div class="grid grid-cols-2 gap-4 xl:grid-cols-1">
                 <a-form-model-item
                   ref="name"
                   class="form-item relative flex items-center"
@@ -155,7 +281,7 @@
                   </span>
                 </a-form-model-item>
               </div>
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 xl:grid-cols-1">
                 <a-form-model-item ref="name" class="form-item" label="Facebook">
                   <a-input v-model="form.facebook" placeholder="@" />
                   <span class="absolute right-4">
@@ -190,7 +316,7 @@
                   ></span>
                 </a-form-model-item>
               </div>
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 xl:grid-cols-1">
                 <a-form-model-item ref="name" class="form-item" label="Instagram">
                   <a-input v-model="form.instagram" placeholder="@" />
                   <span class="absolute right-4"
@@ -228,7 +354,7 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-end gap-4 max-w-[818px] mt-8">
+      <div class="flex justify-end gap-4 max-w-[818px] mt-8 xl:hidden">
         <button
           class="text-[18px] font-medium text-black border-[2px] border-solid border-border-darik rounded-[12px] h-[60px] w-[204px] flex justify-center items-center"
         >
@@ -243,6 +369,24 @@
       </div>
     </a-form-model>
     <!-- </ProfileLayout> -->
+    <div
+      class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:flex gap-2"
+    >
+      <button
+        @click="$router.go(-1)"
+        class="border border-solid border-border-darik rounded-[12px] h-11 w-full flex justify-center items-center text-[12px] text-grey-64 font-medium"
+      >
+        Bekor qilish
+      </button>
+      <button
+        @click="onSubmit()"
+        class="border border-solid border-blue bg-blue rounded-[12px] h-11 w-full flex justify-center items-center text-[12px] text-white font-medium gap-2"
+        :class="{ 'pointer-events-none opacity-50': laoding }"
+      >
+        <LoaderBtn v-if="laoding" />
+        <span v-else>Saqlash</span>
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -366,6 +510,7 @@ export default {
           });
         }
       } catch (e) {
+        console.log(e);
         this.$notification["error"]({
           message: "Error",
           description: e.response.statusText,
@@ -465,5 +610,22 @@ export default {
   background-color: rgba(255, 255, 255, 0.3);
   z-index: 100;
   pointer-events: none;
+}
+.fixed-btns {
+  border-radius: 16px 16px 0px 0px;
+  box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
+}
+@media (max-width: 1200px) {
+  .form-item :deep(.ant-form-item-label label) {
+    font-size: 14px;
+  }
+  .form-item :deep(.ant-select-selection) {
+    height: 44px;
+    font-size: 14px;
+  }
+  .form-item :deep(.ant-input) {
+  height: 44px;
+  font-size: 14px;
+}
 }
 </style>

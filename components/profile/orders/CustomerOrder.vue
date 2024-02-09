@@ -499,6 +499,7 @@
         @handleOkProp="handleOkCancel"
         :visibleProp="visibleCancel"
         @submit="submitCancel"
+        title="Loyihani yopish uchun mijozni tasdig’i kutilmoqda"
       />
       <ComplaintOrder
         @handleOkProp="handleOkComplaint"
