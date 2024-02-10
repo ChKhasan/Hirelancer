@@ -536,6 +536,7 @@
       />
     </div>
     <div
+      v-if="status == 1"
       class="fixed-btns fixed bottom-0 w-full z-[20000] py-4 px-4 bg-white left-0 hidden xl:grid gap-4"
     >
       <div class="flex flex-col gap-1">
