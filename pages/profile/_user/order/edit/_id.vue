@@ -140,7 +140,7 @@
                 </a-select> -->
           </a-form-model-item>
 
-          <a-form-model-item class="order-item w-full mb-0" prop="description">
+          <div class="order-item">
             <label class="flex gap-3 mb-3"
               >Buyurtma tavsifi
 
@@ -167,20 +167,22 @@
                 </svg>
               </a-tooltip>
             </label>
-            <quill-editor
-              style="min-height: 250px"
-              :options="editorOption"
-              :value="form.description"
-              v-model="form.description"
-              placeholder="Большое спасибо за всю мебель. Очень качественно и по доступным ценам Мы очень рады совместной работе с вами!  "
-            />
-            <!-- <a-input
-              type="textarea"
-              rows="5"
-              v-model="form.description"
-              placeholder="Большое спасибо за всю мебель. Очень качественно и по доступным ценам Мы очень рады совместной работе с вами!  "
-            /> -->
-          </a-form-model-item>
+            <a-form-model-item class="order-item w-full mb-0" prop="description">
+              <quill-editor
+                style="min-height: 250px"
+                :options="editorOption"
+                :value="form.description"
+                v-model="form.description"
+                placeholder="Большое спасибо за всю мебель. Очень качественно и по доступным ценам Мы очень рады совместной работе с вами!  "
+              />
+              <!-- <a-input
+                type="textarea"
+                rows="5"
+                v-model="form.description"
+                placeholder="Большое спасибо за всю мебель. Очень качественно и по доступным ценам Мы очень рады совместной работе с вами!  "
+              /> -->
+            </a-form-model-item>
+          </div>
           <div
             class="images pb-[40px] border-[0] border-b border-solid border-border-darik"
           >
@@ -289,6 +291,7 @@
             <a-form-model-item
               class="order-item w-full mb-0"
               label="Срок исполнения в днях"
+              prop="deadline"
             >
               <a-input
                 type="number"
@@ -339,7 +342,7 @@
           </div>
           <div class="border-[0] border-b border-solid border-border-darik"></div>
           <div class="grid grid-cols-2 gap-[70px] md:grid-cols-1 md:gap-4">
-            <a-form-model-item class="order-item w-full mb-0" label="Цена">
+            <a-form-model-item class="order-item w-full mb-0" label="Цена" prop="price">
               <a-input
                 :class="{ 'opacity-50 pointer-events-none': form.price_negotiable }"
                 v-model="form.price"
@@ -494,9 +497,13 @@ export default {
         files: [],
       },
       rules: {
-        name: [{ required: true, message: "This field is required", trigger: "blur" }],
+        name: [{ required: true, message: "This field is required", trigger: "change" }],
         description: [
-          { required: true, message: "This field is required", trigger: "blur" },
+          { required: true, message: "This field is required", trigger: "change" },
+        ],
+        price: [{ required: true, message: "This field is required", trigger: "change" }],
+        deadline: [
+          { required: true, message: "This field is required", trigger: "change" },
         ],
       },
       previewVisible: false,
@@ -690,6 +697,26 @@ export default {
     },
     handleOk() {
       this.visible = false;
+    },
+  },
+  watch: {
+    "form.deadline_negotiable"(val) {
+      if (val) {
+        delete this.rules.deadline;
+      } else {
+        this.rules.deadline = [
+          { required: true, message: "This field is required", trigger: "blur" },
+        ];
+      }
+    },
+    "form.price_negotiable"(val) {
+      if (val) {
+        delete this.rules.price;
+      } else {
+        this.rules.price = [
+          { required: true, message: "This field is required", trigger: "blur" },
+        ];
+      }
     },
   },
   components: { Loader, SpicialsticsCheck },
@@ -914,6 +941,9 @@ export default {
   border: 1px solid var(--grey-8);
   font-family: "TT Interfaces";
   font-size: 16px;
+}
+:deep(.has-error .quill-editor) {
+  border-color: red;
 }
 @media (max-width: 1200px) {
   :deep(.order-item label),

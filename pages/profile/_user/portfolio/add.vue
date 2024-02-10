@@ -86,7 +86,7 @@
               </div>
 
               <button
-                class="w-6 xl:hidden"
+                class="w-10 flex justify-center items-center xl:hidden h-10 "
                 @click="(visible = true), (checkedList = [...activeCheckedList])"
               >
                 <svg

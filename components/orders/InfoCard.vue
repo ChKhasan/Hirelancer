@@ -6,21 +6,29 @@
       <h5 class="text-[20px] xl:text-[18px] text-black font-medium xl:font-semibold">
         {{ title }}
       </h5>
-      <span class="text-base text-grey-80 xl:text-[14px] xl:leading-[19.5px]" v-html="subtitle">
-   
+      <span
+        class="text-base text-grey-80 xl:text-[14px] xl:leading-[19.5px]"
+        v-html="subtitle"
+      >
       </span>
     </div>
     <button
       @click="$emit('submit')"
       class="xl:w-full xl:flex xl:justify-center flex gap-2 border border-solid border-blue px-6 py-3 rounded-[8px] text-blue text-[14px] font-medium"
+      :class="{
+        'pointer-events-none opacity-50': order?.requests.find(
+          (item) => item.freelancer_id == $store.state.userInfo?.id
+        ),
+      }"
     >
-      {{ btn }} <slot></slot>
+      {{ btn }}
+      <slot></slot>
     </button>
   </div>
 </template>
 <script>
 export default {
-  props: ["title", "subtitle", "btn"],
+  props: ["title", "subtitle", "btn", "order"],
 };
 </script>
 <style lang=""></style>

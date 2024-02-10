@@ -232,6 +232,7 @@
               <p>1. Наличиеопыта и портфолио</p>
               <p>2. Оперативность выполнения заказов</p>`"
               btn="Отправить заявку"
+              :order="order"
               @submit="openModal"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -256,6 +257,7 @@
               <p>1. Наличиеопыта и портфолио</p>
               <p>2. Оперативность выполнения заказов</p>`"
               btn="Войти"
+              :order="order"
               @submit="$router.push('/registration')"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -291,7 +293,7 @@
         </div>
       </div>
     </div>
-    <SimilarOrders :orders="orders"/>
+    <SimilarOrders :orders="orders" />
     <div>
       <Transition name="opacity">
         <div
@@ -419,6 +421,7 @@ export default {
     },
     closeModal() {
       this.bottomModal = false;
+      this.close();
     },
   },
   components: {

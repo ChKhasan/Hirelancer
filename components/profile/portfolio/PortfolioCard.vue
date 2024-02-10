@@ -26,10 +26,9 @@
         </div>
       </div>
     </div>
-    <div
-      class="body px-4 pt-3 pb-4 flex flex-col gap-[44px] xl:gap-1 xl:px-3 xl:py-3"
-    >
+    <div class="body px-4 pt-3 pb-4 flex flex-col gap-[44px] xl:gap-1 xl:px-3 xl:py-3">
       <h4
+        @click="$router.push(`/profile/freelancer/portfolio/${portfolio?.id}`)"
         class="text-black text-[18px] font-semibold xl:text-[14px] xl:font-medium cursor-pointer"
       >
         {{ portfolio?.name }}
@@ -39,9 +38,7 @@
           {{ portfolio?.specialities[0]?.name_ru }}
         </p>
         <div class="flex gap-6">
-          <p
-            class="text-[14px] font-medium flex gap-[6px] items-center xl:text-[12px]"
-          >
+          <p class="text-[14px] font-medium flex gap-[6px] items-center xl:text-[12px]">
             <svg
               class="xl:w-4 xl:h-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +59,7 @@
               /></svg
             >300
           </p>
-          <p
-            class="text-[14px] font-medium flex gap-[6px] items-center xl:text-[12px]"
-          >
+          <p class="text-[14px] font-medium flex gap-[6px] items-center xl:text-[12px]">
             <svg
               class="xl:w-4 xl:h-4"
               xmlns="http://www.w3.org/2000/svg"

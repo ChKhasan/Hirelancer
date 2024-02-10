@@ -361,6 +361,29 @@
             </div>
             <div class="buttons flex flex-col gap-4" v-if="!order?.end_of_execution">
               <button
+                v-if="status == 1"
+                @click="$router.push(`/profile/customer/order/edit/${order?.id}`)"
+                class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-main-color border-main-color text-base xl:text-[14px] text-white font-medium"
+              >
+                Изменить данные
+                <svg
+                  width="25"
+                  height="24"
+                  viewBox="0 0 25 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.9591 6.96428L15.4444 9.44963M4.48559 15.4369L15.9381 3.98438L20.5177 8.56393L9.06515 20.0165H4.48438L4.48559 15.4369Z"
+                    stroke="white"
+                    stroke-width="1.5"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
                 v-if="status == 2"
                 @click="visibleComplite = true"
                 class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-main-color border-main-color text-base xl:text-[14px] text-white font-medium"
@@ -531,7 +554,7 @@
         </h4>
       </div>
       <button
-        @click="onSubmit()"
+        @click="$router.push(`/profile/customer/order/edit/${order?.id}`)"
         class="border border-solid border-blue bg-blue rounded-[12px] h-11 w-full flex justify-center items-center text-[12px] text-white font-medium gap-2"
       >
         Изменить данные

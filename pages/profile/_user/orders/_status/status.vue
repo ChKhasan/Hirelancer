@@ -53,7 +53,10 @@
     <div class="list flex flex-col gap-4 mt-6 mb-[40px] xl:hidden" v-else>
       <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
-    <div class="list flex-col gap-4 mt-6 mb-[40px] xl:flex hidden" v-else>
+    <div
+      class="list flex-col gap-4 mt-6 mb-[40px] xl:flex hidden"
+      v-if="$route.params.user == 'freelancer' && !loading"
+    >
       <ProfileOrderCardMobile v-for="order in orders" :order="order" :key="order?.id" />
     </div>
     <div

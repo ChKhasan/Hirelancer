@@ -45,12 +45,13 @@
             </div>
           </div>
         </a-form-model>
-        <p class="text-base text-grey-80  xl:mt-[-24px] xl:text-[14px]">
+        <p class="text-base text-grey-80 xl:mt-[-24px] xl:text-[14px]">
           Join our world-class innovation team, revolutionizing education at ASU Prep
           Digital. Our mission is to enhance student performance and provide access
         </p>
         <div class="buttons flex gap-4 xl:flex-col-reverse">
           <button
+            @click="$emit('close')"
             class="px-[24px] items-center border border-solid rounded-[8px] xl:rounded-xl h-[52px] border-grey-24 flex justify-center text-base xl:text-[14px] text-grey-64 font-medium"
           >
             Отмена
@@ -180,7 +181,7 @@ export default {
     font-size: 14px;
   }
   .form-item :deep(input) {
-  height: 44px;
-}
+    height: 44px;
+  }
 }
 </style>

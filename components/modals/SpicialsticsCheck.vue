@@ -246,7 +246,7 @@
         </div>
         <div class="flex gap-2 flex-col w-full mt-20">
           <button
-            @click="$emit('saveChecked', checkedList)"
+            @click="saveSelected"
             class="h-[52px] border border-solid border-blue bg-blue rounded-[12px] flex justify-center items-center text-[14px] text-white font-medium"
           >
             Tasdiqlash
@@ -282,7 +282,10 @@ export default {
       this.$emit("handleOk");
       this.$refs.openSpecials.close();
     },
-
+    saveSelected() {
+      this.$emit("saveChecked", this.checkedList);
+      this.$refs.openSpecials.close();
+    },
     onchecked(obj) {
       if (this.checkedList.find((item) => item.id == obj.id)) {
         this.checkedList = this.checkedList.filter((item) => item.id != obj.id);

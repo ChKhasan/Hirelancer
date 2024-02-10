@@ -373,15 +373,8 @@ export default {
       });
       this.uploadList.forEach((elem) => {
         if (this.fileList[elem].length > 0)
-          if (this.fileList[elem][0].originFileObj || this.fileList[elem][0]?.id) {
-            formData.append(
-              "images[]",
-              this.fileList[elem][0]?.id
-                ? this.fileList[elem][0]?.id
-                : this.fileList[elem][0].originFileObj
-            );
-          } else {
-            formData.append("images[]", "");
+          if (!this.fileList[elem][0]?.id) {
+            formData.append("images[]", this.fileList[elem][0].originFileObj);
           }
       });
       formData.append("name", this.form.name);

@@ -110,17 +110,40 @@ export default {
       portfolios: [],
     };
   },
+  computed: {
+    handleUser() {
+      return this.$store.state.userInfo["id"];
+    },
+  },
   async mounted() {
-    this.loading = true;
-    const [portfolioData] = await Promise.all([
-      this.$store.dispatch("fetchPortfolio/getWorks", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
-        },
-      }),
-    ]);
-    this.portfolios = portfolioData.data;
-    this.loading = false;
+    this.__GET_PORTFOLIOS();
+  },
+  methods: {
+    async __GET_PORTFOLIOS() {
+      try {
+        this.loading = true;
+        const [portfolioData] = await Promise.all([
+          this.$store.dispatch("fetchPortfolio/getWorks", {
+            params: {
+              freelancer: this.$store.state.userInfo["id"],
+            },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
+            },
+          }),
+        ]);
+        this.portfolios = portfolioData.data;
+        this.loading = false;
+      } catch (e) {
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+  watch: {
+    handleUser(val) {
+      if (val) this.__GET_PORTFOLIOS();
+    },
   },
   components: {
     ProfileLayout,

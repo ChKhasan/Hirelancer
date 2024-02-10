@@ -1,10 +1,10 @@
 <template lang="html">
   <div
-    class="offers-order-card border border-solid border-border-darik rounded-2xl bg-white px-6 py-6"
+    class="offers-order-card border border-solid border-border-darik rounded-2xl bg-white px-6 py-6 xl:px-4 xl:py-4"
   >
     <div class="head">
       <div
-        class="image w-[60px] h-[60px] border-[2px] border-solid border-agro-green rounded-full overflow-hidden"
+        class="image w-[60px] h-[60px] xl:h-[52px] xl:w-[52px] border-[2px] border-solid border-agro-green rounded-full overflow-hidden"
       >
         <img
           class="w-full h-full object-cover"
@@ -15,7 +15,7 @@
       <div class="info flex justify-between">
         <div>
           <h4
-            class="text-[18px] font-medium text-black truncate name whitespace-normal flex gap-2"
+            class="text-[18px] font-medium text-black truncate name whitespace-normal flex gap-2 xl:text-[14px]"
           >
             Akmal Egamberdiyev
             <svg
@@ -35,8 +35,10 @@
               />
             </svg>
           </h4>
-          <div class="flex items-center gap-3 mt-2">
-            <p class="text-base font-medium text-yellow flex gap-1 items-center">
+          <div class="flex items-center gap-3 mt-2 xl:mt-2">
+            <p
+              class="text-base font-medium text-yellow flex gap-1 items-center xl:text-[12px]"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -51,10 +53,11 @@
               >4.4 (56)
             </p>
             <div class="flex gap-2">
-              <p class="text-grey-40 text-base">Oтзывы:</p>
+              <p class="text-grey-40 text-base xl:hidden">Oтзывы:</p>
               <p class="text-[14px] flex gap-2 items-center">
-                <span class="text-green text-base flex gap-1">
+                <span class="text-green text-base flex gap-1 xl:text-[14px] items-center">
                   <svg
+                    class="xl:h-[14px]"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -77,10 +80,13 @@
                     /></svg
                   >26</span
                 >
-                <span class="bg-grey-8 h-[24px] flex w-[1px]"></span>
+                <span class="bg-grey-8 h-[24px] xl:h-5 flex w-[1px]"></span>
 
-                <span class="text-pantone-2023 text-base flex gap-1">
+                <span
+                  class="text-pantone-2023 text-base flex gap-1 xl:text-[14px] items-center"
+                >
                   <svg
+                    class="xl:h-[14px]"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -107,7 +113,27 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-2">
+        <button
+          class="border-[2px] border-solid border-grey-light rounded-full h-11 w-11 items-center justify-center hidden xl:flex"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M18.667 19.9139L12 16.0839L5.33301 19.9139V7.08594C5.33301 5.42894 6.67601 4.08594 8.33301 4.08594H15.666C17.323 4.08594 18.666 5.42894 18.666 7.08594V19.9139H18.667Z"
+              stroke="#5C46E6"
+              stroke-width="1.5"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="flex flex-col gap-2 xl:hidden">
           <h3 class="text-grey-80 text-[20px] font-semibold" v-if="request?.price">
             {{ request?.price.toLocaleString() }} сум
           </h3>
@@ -121,9 +147,28 @@
         </div>
       </div>
     </div>
-    <div class="text mt-4 pb-6">
+    <div class="hidden justify-between gap-2 xl:flex mt-5">
+      <h3 class="text-grey-80 text-base font-semibold" v-if="request?.price">
+        {{ request?.price.toLocaleString() }} сум
+      </h3>
+      <h3 class="text-grey-80 text-base font-semibold" v-else>По договоренности</h3>
+      <p class="text-grey-64 text-[12px] flex gap-[6px]">
+        Срок:<span class="text-black" v-if="request?.deadline"
+          >{{ request?.deadline }} дней</span
+        >
+        <span v-else class="text-black"> По договоренности</span>
+      </p>
+    </div>
+    <div class="hidden xl:block mt-3">
+      <p class="flex gap-3 text-[12px] text-grey-40 items-center ">
+        {{ moment(request?.created_at).format(hourFormat) }}
+        <span class="bg-grey-8 h-4 flex w-[1px]"></span>
+        {{ moment(request?.created_at).format(dateFormat) }}
+      </p>
+    </div>
+    <div class="text mt-4 pb-6 xl:mt-3 xl:pb-0">
       <p
-        class="text-grey-64 text-base leading-6 max-h-[96px] overflow-hidden"
+        class="text-grey-64 text-base leading-6 max-h-[96px] overflow-hidden xl:text-[14px]"
         :class="{ active: openBlock == true }"
       >
         {{ request?.additional_info }}
@@ -151,16 +196,16 @@
       </button>
     </div>
     <div
-      class="footer border-[0] border-t border-solid border-border-darik pt-6 flex justify-between"
+      class="footer border-[0] border-t border-solid border-border-darik pt-6 xl:pt-5 flex justify-between xl:border-[0] xl:gap-2"
     >
-      <div class="flex gap-8 items-center">
+      <div class="flex gap-8 items-center xl:w-full">
         <button
           @click="sendRequest(request)"
-          class="rounded-[8px] bg-main-color px-5 h-12 flex items-center text-base text-white font-semibold leading-6"
+          class="rounded-[8px] bg-main-color px-5 h-12 flex items-center text-base text-white font-semibold leading-6 xl:text-[14px] xl:font-medium xl:w-full xl:justify-center"
         >
           Выбрать исполнителем
         </button>
-        <p class="flex gap-4 text-base text-grey-40 items-center">
+        <p class="flex gap-4 text-base text-grey-40 items-center xl:hidden">
           {{ moment(request?.created_at).format(hourFormat) }}
           <span class="bg-grey-8 h-[24px] flex w-[1px]"></span>
           {{ moment(request?.created_at).format(dateFormat) }}
@@ -168,7 +213,7 @@
       </div>
       <div class="flex gap-6 items-center">
         <button
-          class="border-[2px] border-solid border-grey-light rounded-full h-12 w-12 flex items-center justify-center"
+          class="border-[2px] border-solid border-grey-light rounded-full h-12 w-12 flex items-center justify-center xl:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -188,9 +233,10 @@
           </svg>
         </button>
         <button
-          class="w-[190px] h-12 flex items-center justify-center gap-2 rounded-lg border-[2px] border-solid border-main-color bg-bg-grey text-blue text-base font-medium"
+          class="w-[190px] xl:w-12 h-12 flex items-center justify-center gap-2 rounded-lg border-[2px] border-solid border-main-color bg-bg-grey text-blue text-base font-medium xl:border"
         >
-          Написать<svg
+          <span class="xl:hidden">Написать</span
+          ><svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -260,5 +306,11 @@ export default {
 }
 .text p {
   transition: 2s;
+}
+@media (max-width: 1200px) {
+  .head {
+    grid-template-columns: 52px 1fr;
+    gap: 10px;
+  }
 }
 </style>
