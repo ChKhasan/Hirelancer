@@ -74,8 +74,9 @@ button {
 .font-tt {
   font-family: "TT Interfaces";
 }
-*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol
-      *)) {
+*:where(
+    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+  ) {
   all: unset;
   display: revert;
 }
@@ -196,8 +197,24 @@ a:hover {
   background-color: var(--blue);
   border-radius: 6px;
 }
+.ant-modal-content {
+  border-radius: 16px !important;
+}
 @media (max-width: 1200px) {
+  .ant-modal {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
   .auth-item label {
     font-size: 14px;
+  }
+  .ant-modal-body {
+    margin: 0 !important;
+    padding: 56px 16px !important;
+  }
+  .ant-carousel {
+    margin-right: -4px !important;
   }
 }
