@@ -72,7 +72,7 @@
             /></svg
         ></span>
       </span>
-      <p class="text-base font-medium text-grey-40">Идет прием заявок</p>
+      <p class="text-base font-medium text-grey-40">Процесс выполнения</p>
     </div>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@
             /></svg
         ></span>
       </span>
-      <p class="text-base font-medium text-grey-40">Идет прием заявок</p>
+      <p class="text-base font-medium text-grey-40">Выполненно</p>
     </div>
   </div>
 </template>

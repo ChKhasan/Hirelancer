@@ -36,9 +36,8 @@
             /></svg
         ></a>
       </div>
-     
-      <OrdersList class="xl:mt-0" />
-    
+
+      <OrdersList class="xl:mt-0" :orders="orders"/>
     </div>
   </div>
 </template>
@@ -52,7 +51,13 @@ export default {
       tab: true,
     };
   },
- 
+  async asyncData({ store }) {
+    const [ordersData] = await Promise.all([store.dispatch("fetchOrders/getOrders")]);
+    const orders = ordersData.data;
+    return {
+      orders,
+    };
+  },
   components: { Banner, OrdersList },
 };
 </script>

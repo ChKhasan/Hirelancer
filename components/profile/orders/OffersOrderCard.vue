@@ -108,11 +108,15 @@
           </div>
         </div>
         <div class="flex flex-col gap-2">
-          <h3 class="text-grey-80 text-[20px] font-semibold">
+          <h3 class="text-grey-80 text-[20px] font-semibold" v-if="request?.price">
             {{ request?.price.toLocaleString() }} сум
           </h3>
+          <h3 class="text-grey-80 text-[20px] font-semibold" v-else>По договоренности</h3>
           <p class="text-grey-64 text-[14px] flex gap-[6px]">
-            Срок:<span class="text-black">{{ request?.deadline }} дней</span>
+            Срок:<span class="text-black" v-if="request?.deadline"
+              >{{ request?.deadline }} дней</span
+            >
+            <span v-else class="text-black"> По договоренности</span>
           </p>
         </div>
       </div>
@@ -233,6 +237,7 @@ export default {
     async __POST_ORDER(payload) {
       try {
         await this.$store.dispatch("fetchOrders/postSelectRequest", payload);
+        this.$emit("selected");
       } catch (e) {
         console.log(e.response);
         this.$notification["error"]({

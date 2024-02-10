@@ -25,6 +25,15 @@
             </svg>
           </button>
           <button
+            v-if="$store.state.auth && Boolean($store.state.userInfo['name'])"
+            @click="$router.push('/profile/customer')"
+            class="xl:hidden h-[60px] w-[204px] flex justify-center items-center bg-blue rounded-xl text-base font-medium text-white"
+          >
+            Buyurtma qoshish
+          </button>
+          <button
+            v-else
+            @click="$router.push('/registration')"
             class="xl:hidden h-[60px] w-[204px] flex justify-center items-center bg-blue rounded-xl text-base font-medium text-white"
           >
             Buyurtma qoshish

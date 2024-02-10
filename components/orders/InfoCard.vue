@@ -6,9 +6,9 @@
       <h5 class="text-[20px] xl:text-[18px] text-black font-medium xl:font-semibold">
         {{ title }}
       </h5>
-      <p class="text-base text-grey-80 xl:text-[14px] xl:leading-[19.5px]">
-        {{ subtitle }}
-      </p>
+      <span class="text-base text-grey-80 xl:text-[14px] xl:leading-[19.5px]" v-html="subtitle">
+   
+      </span>
     </div>
     <button
       @click="$emit('submit')"

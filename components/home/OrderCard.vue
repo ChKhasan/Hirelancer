@@ -75,9 +75,11 @@
       <h6 class="text-[20px] font-semibold text-black xl:text-base xl:leading-[19px]">
         {{ order?.name }}
       </h6>
-      <p class="text-base text-grey-80 xl:text-[14px] xl:line-clamp-3">
-        {{ order?.description }}
-      </p>
+      <span
+        class="text-base text-grey-80 xl:text-[14px] xl:line-clamp-3"
+        v-html="order?.description"
+      >
+      </span>
       <div class="justify-start hidden xl:flex mt-[-4px]">
         <button
           class="underline text-grey-80 text-base font-medium text-center xl:text-main-color"
@@ -92,6 +94,10 @@
       <h1 class="text-grey-80 text-2xl font-semibold xl:text-base" v-if="order?.price">
         {{ order?.price.toLocaleString() }} sum
       </h1>
+      <h1 class="text-grey-80 text-2xl font-semibold xl:text-base" v-else>
+        По договоренности
+      </h1>
+
       <div class="flex gap-8 xl:flex-col xl:gap-[20px]">
         <div class="flex gap-[24px] items-center xl:gap-[12px]">
           <p

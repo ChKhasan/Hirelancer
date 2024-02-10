@@ -28,16 +28,7 @@
     </div>
     <div class="max-w-[1286px] mx-auto list-grid">
       <div class="list flex flex-col gap-4">
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
+        <OrderCard v-for="order in orders" :order="order" :key="order?.id" />
       </div>
       <div class="flex flex-col gap-4 xl:hidden">
         <TelegramCard class="bg-white" />
@@ -68,7 +59,10 @@
 import TelegramCard from "../TelegramCard.vue";
 import OrderCard from "../home/OrderCard.vue";
 
-export default { components: { OrderCard, TelegramCard } };
+export default {
+  props: ["orders"],
+  components: { OrderCard, TelegramCard },
+};
 </script>
 <style lang="css" scoped>
 .list-grid {

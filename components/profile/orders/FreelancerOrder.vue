@@ -235,19 +235,30 @@
               <div class="flex flex-col">
                 <p class="text-grey-64 text-[14px]">Buyrtma narxi:</p>
 
-                <h1 class="text-blue text-[24px] font-semibold xl:text-base">
-                  99 200 000 so’m
+                <h1
+                  class="text-blue text-[24px] font-semibold xl:text-base"
+                  v-if="order?.price"
+                >
+                  {{ order?.price.toLocaleString() }} so’m
                 </h1>
-                <p class="text-grey-40 text-[15px] line-through">750 000</p>
+                <h1 class="text-blue text-[24px] font-semibold xl:text-base" v-else>
+                  По договоренности
+                </h1>
+                <!-- <p class="text-grey-40 text-[15px] line-through">750 000</p> -->
               </div>
               <div class="flex flex-col">
                 <p class="text-grey-64 text-[14px]">Срок:</p>
-                <h4 class="text-black text-base font-semibold">По договоренности</h4>
+                <h4 class="text-black text-base font-semibold" v-if="order?.deadline">
+                  {{ order?.deadline }}
+                </h4>
+                <h4 class="text-black text-base font-semibold" v-else>
+                  По договоренности
+                </h4>
               </div>
             </div>
-            <EndingProcess v-if="status == 2" />
+            <EndingProcess v-if="status == 2" :selected="order?.selected_request" />
             <span class="w-full h-[2px] bg-grey-light flex"></span>
-            <div class="buttons flex flex-col gap-4">
+            <div class="buttons flex flex-col gap-4" v-if="!order?.end_of_execution">
               <button
                 v-if="status == 2"
                 @click="visibleClose = true"
@@ -420,6 +431,7 @@
         @handleOkProp="handleOkComplaint"
         :visibleProp="visibleComplaint"
         @submit="submitComplaint"
+        title="Mijozga qanday shikoyatingiz bor?"
       />
     </div>
     <Loader v-if="loading" />
@@ -462,8 +474,9 @@ export default {
       return moment(this.order?.created_at).format("HH:mm");
     },
     status() {
-      const status = this.order?.selected_request?.id ? 2 : 1;
-      return 2;
+      let status = this.order?.selected_request?.id ? 2 : 1;
+      if (this.order?.complete_requests?.length > 0) status = 3;
+      return status;
     },
   },
   mounted() {
@@ -482,7 +495,9 @@ export default {
     handleOkCancel() {
       this.visibleCancel = false;
     },
-    submitFinish() {},
+    submitFinish() {
+      this.__COMPLETE_ORDER();
+    },
     handleOkComplaint() {
       this.visibleComplaint = false;
     },
@@ -495,13 +510,43 @@ export default {
     submitCancel() {
       // this.__CANCEL_ORDER();
     },
-    submitComplaint() {},
+    submitComplaint(formData) {
+      this.__COMPLAINTS_ORDER(formData);
+    },
     async __CANCEL_ORDER() {
       try {
         const data = await this.$store.dispatch("fetchOrders/postCanceledOrder", {
           id: this.$route.params.id,
         });
         this.$router.go(-1);
+      } catch (e) {
+        if (e.response) {
+          this.$notification["error"]({
+            message: "Error",
+            description: e.response.statusText,
+          });
+        }
+      }
+    },
+    async __COMPLETE_ORDER() {
+      try {
+        const data = await this.$store.dispatch("fetchOrders/postCompleteOrder", {
+          order_id: this.$route.params.id,
+        });
+        this.$emit("selected");
+      } catch (e) {
+        if (e.response) {
+          this.$notification["error"]({
+            message: "Error",
+            description: e.response.statusText,
+          });
+        }
+      }
+    },
+    async __COMPLAINTS_ORDER(formData) {
+      try {
+        const data = await this.$store.dispatch("fetchOrders/postComplaints", formData);
+        this.handleOkComplaint();
       } catch (e) {
         if (e.response) {
           this.$notification["error"]({
@@ -569,7 +614,7 @@ export default {
   transition: 0.3s;
 }
 .active {
-  max-height: 1000px;
+  max-height: 3000px;
 }
 @keyframes opacityAnim {
   0% {

@@ -77,21 +77,18 @@
     </div>
     <div class="left">
       <div class="flex flex-col gap-4 mb-[100px]">
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
-        <OrderCard class="border border-solid border-grey-8" />
+        <OrderCard
+          class="border border-solid border-grey-8"
+          v-for="order in orders"
+          :order="order"
+          :key="order.id"
+        />
       </div>
       <VPagination />
     </div>
     <div class="right flex flex-col gap-6">
       <div
-        class="filter px-6 py-6 border  border-solid border-grey-8 rounded-3xl flex flex-col gap-6"
+        class="filter px-6 py-6 border border-solid border-grey-8 rounded-3xl flex flex-col gap-6"
       >
         <div class="flex flex-col gap-6">
           <h4 class="text-[20px] font-semibold text-black">Тип работы</h4>
@@ -157,12 +154,14 @@
           </button>
         </div>
       </div>
-      <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer" >
+      <vue-bottom-sheet-vue2 ref="myBottomSheet" class="bottom-drawer">
         <div
           class="filter px-6 xl:border-0 py-6 xl:px-4 xl:pb-4 xl:py-4 border border-solid border-grey-8 rounded-3xl flex flex-col gap-6"
         >
           <div class="flex flex-col gap-6">
-            <h4 class="text-[20px] xl:text-[18px] font-semibold text-black">Тип работы</h4>
+            <h4 class="text-[20px] xl:text-[18px] font-semibold text-black">
+              Тип работы
+            </h4>
             <div
               class="flex flex-col gap-6 border-[0] xl:border-0 border-b border-solid border-grey-8 pb-6 xl:pb-0"
             >
@@ -190,7 +189,9 @@
             </div>
           </div>
           <div class="flex flex-col gap-6">
-            <h4 class="text-[20px] xl:text-[18px] font-semibold text-black">Тип заказов</h4>
+            <h4 class="text-[20px] xl:text-[18px] font-semibold text-black">
+              Тип заказов
+            </h4>
             <div class="flex flex-col gap-6">
               <span class="xl:text-base text-[18px] text-grey-80 flex gap-4 items-end">
                 <a-checkbox />Все типы</span
@@ -236,6 +237,7 @@ import VPagination from "../VPagination.vue";
 import OrderCard from "../home/OrderCard.vue";
 
 export default {
+  props: ["orders"],
   methods: {
     open() {
       this.$refs.myBottomSheet.open();

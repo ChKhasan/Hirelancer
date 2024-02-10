@@ -3,7 +3,7 @@
     <button
       @click="$router.push(`/profile/${$route.params.user}/orders/active/status`)"
       :class="{ active: $route.params.status == 'active' }"
-      class="xl:ml-4 px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px] "
+      class="xl:ml-4 px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px]"
     >
       Активные заказы (0)
     </button>
@@ -11,16 +11,17 @@
       v-if="$route.params.user == 'freelancer'"
       @click="$router.push(`/profile/${$route.params.user}/orders/offers/status`)"
       :class="{ active: $route.params.status == 'offers' }"
-      class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px] "
+      class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px]"
     >
-      Предложения (0)
+      Ожидания подверждения (0)
     </button>
+
     <button
       @click="$router.push(`/profile/${$route.params.user}/orders/completed/status`)"
       :class="{ active: $route.params.status == 'completed' }"
-      class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px] "
+      class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px]"
     >
-      Выполненные (0)
+      {{ $route.params.user == "customer" ? "Выполненные" : "Завершено" }} (0)
     </button>
     <button
       @click="$router.push(`/profile/${$route.params.user}/orders/cancel/status`)"

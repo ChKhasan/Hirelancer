@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="flex gap-3">
     <a
+      v-if="userInfo?.contacts?.twitter"
       :href="userInfo?.contacts?.twitter"
       target="_blank"
       :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.twitter }"
@@ -19,6 +20,7 @@
         /></svg
     ></a>
     <a
+      v-if="userInfo?.contacts?.facebook"
       :href="userInfo?.contacts?.facebook"
       target="_blank"
       :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.facebook }"
@@ -37,6 +39,7 @@
         /></svg
     ></a>
     <a
+      v-if="userInfo?.contacts?.dribble"
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       :href="userInfo?.contacts?.dribble"
       target="_blank"
@@ -55,6 +58,7 @@
         /></svg
     ></a>
     <a
+    v-if="userInfo?.contacts?.github"
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       :href="userInfo?.contacts?.github"
       target="_blank"
@@ -73,6 +77,7 @@
         /></svg
     ></a>
     <a
+    v-if="userInfo?.contacts?.instagram"
       :href="userInfo?.contacts?.instagram"
       target="_blank"
       :class="{ 'pointer-events-none opacity-50': !userInfo?.contacts?.instagram }"
@@ -91,6 +96,7 @@
         /></svg
     ></a>
     <a
+    v-if="userInfo?.contacts?.telegram"
       class="rounded-[12px] border border-solid border-grey-8 flex w-[44px] h-[44px] justify-center items-center bg-white"
       :href="userInfo?.contacts?.telegram"
       target="_blank"

@@ -2,7 +2,7 @@
   <div
     class="ending-process flex flex-col gap-2 items-center h-[92px] w-full justify-center rounded-[8px] bg-dark-yellow"
   >
-    <div class="text-white text-[18px] font-medium flex gap-2 items-center ">
+    <div class="text-white text-[18px] font-medium flex gap-2 items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -33,10 +33,19 @@
         /></svg
       >Процесс выполнения
     </div>
-    <p class="text-white text-[12px]">Boshlangan vaqti: 16:32 28.09.2023</p>
+    <p class="text-white text-[12px]">
+      Boshlangan vaqti:
+      {{ moment(selected?.created_at).format("HH:mm DD.MM.YYYY") }}
+    </p>
   </div>
 </template>
 <script>
-export default {};
+import moment from "moment";
+export default {
+  props: ["selected"],
+  methods: {
+    moment,
+  },
+};
 </script>
 <style lang="css" scoped></style>

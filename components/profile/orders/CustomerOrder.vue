@@ -35,7 +35,7 @@
             <div class="info px-8 py-8 xl:px-4 xl:py-4">
               <div class="head flex justify-between xl:flex-col xl:gap-4">
                 <div class="flex gap-4 items-center xl:flex-wrap">
-                  <span
+                  <!-- <span
                     class="flex gap-[4px] status-red items-center rounded-[8px] px-[8px] py-[4px] text-light-red text-[14px] font-medium xl:hidden"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@
                     </svg>
                     Срочный заказ</span
                   >
-                  <span class="h-[19px] w-[1px] bg-grey-8"></span>
+                  <span class="h-[19px] w-[1px] bg-grey-8"></span> -->
                   <span
                     v-if="order?.selected_request?.id"
                     class="flex gap-[7px] items-center rounded-[8px] px-[8px] py-[4px] text-main-color text-[14px] font-medium"
@@ -310,7 +310,10 @@
             <div v-if="order?.selected_request?.id">
               <div class="flex flex-col gap-2 mb-4">
                 <h4 class="text-[20px] font-semibold text-black">Tanlangan frilanser</h4>
-                <p class="text-[14px] text-black">Tanlangan vaqti: 16:32 28.09.2023</p>
+                <p class="text-[14px] text-black">
+                  Tanlangan vaqti:
+                  {{ selectedDate }}
+                </p>
               </div>
               <SelectedFreelancer
                 class="mx-[-16px] xl:mx-0"
@@ -356,9 +359,10 @@
                 </h4>
               </div>
             </div>
-            <div class="buttons flex flex-col gap-4">
+            <div class="buttons flex flex-col gap-4" v-if="!order?.end_of_execution">
               <button
-                @click="visibleClose = true"
+                v-if="status == 2"
+                @click="visibleComplite = true"
                 class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-main-color border-main-color text-base xl:text-[14px] text-white font-medium"
               >
                 Завершить заказ
@@ -451,6 +455,7 @@
               v-for="request in order?.requests"
               :key="request?.id"
               :request="request"
+              @selected="$emit('selected')"
             />
             <button
               class="flex py-4 rounded-lg bg-grey-light w-full items-center justify-center gap-6 text-base font-medium text-blue xl:text-[14px] xl:gap-4 xl:flex-row-reverse"
@@ -501,10 +506,10 @@
         @submit="submitCancel"
         title="Loyihani yopish uchun mijozni tasdig’i kutilmoqda"
       />
-      <ComplaintOrder
-        @handleOkProp="handleOkComplaint"
-        :visibleProp="visibleComplaint"
-        @submit="submitComplaint"
+      <CompliteOrder
+        @handleOkProp="handleOkComplite"
+        :visibleProp="visibleComplite"
+        @submit="submitComplite"
       />
     </div>
     <div
@@ -553,6 +558,7 @@ import OffersOrderCard from "./OffersOrderCard.vue";
 import OffersChat from "./OffersChat.vue";
 import moment from "moment";
 import SelectedFreelancer from "./SelectedFreelancer.vue";
+import CompliteOrder from "../../modals/CompliteOrder.vue";
 export default {
   props: ["order", "loading"],
   data() {
@@ -562,7 +568,7 @@ export default {
       openBlock: false,
       visibleClose: false,
       visibleCancel: false,
-      visibleComplaint: false,
+      visibleComplite: false,
     };
   },
   computed: {
@@ -571,6 +577,13 @@ export default {
     },
     orderHours() {
       return moment(this.order?.created_at).format("HH:mm");
+    },
+    status() {
+      let status = this.order?.selected_request?.id ? 2 : 1;
+      return status;
+    },
+    selectedDate() {
+      return moment(this.order?.selected_request?.created_at).format("HH:mm DD.MM.YYYY");
     },
   },
   mounted() {
@@ -586,8 +599,8 @@ export default {
     handleOkCancel() {
       this.visibleCancel = false;
     },
-    handleOkComplaint() {
-      this.visibleComplaint = false;
+    handleOkComplite() {
+      this.visibleComplite = false;
     },
     openModal() {
       this.bottomModal = true;
@@ -598,13 +611,31 @@ export default {
     submitCancel() {
       this.__CANCEL_ORDER();
     },
-    submitComplaint() {},
+    submitComplite(formData) {
+      this.__COMPLITE_ORDER(formData);
+    },
     async __CANCEL_ORDER() {
       try {
         const data = await this.$store.dispatch("fetchOrders/postCanceledOrder", {
           id: this.$route.params.id,
         });
         this.$router.go(-1);
+      } catch (e) {
+        if (e.response) {
+          this.$notification["error"]({
+            message: "Error",
+            description: e.response.statusText,
+          });
+        }
+      }
+    },
+    async __COMPLITE_ORDER(formData) {
+      try {
+        const data = await this.$store.dispatch(
+          "fetchOrders/postCompliteCustomer",
+          formData
+        );
+        this.handleOkComplite();
       } catch (e) {
         if (e.response) {
           this.$notification["error"]({
@@ -632,6 +663,7 @@ export default {
     OffersOrderCard,
     OffersChat,
     SelectedFreelancer,
+    CompliteOrder,
   },
 };
 </script>

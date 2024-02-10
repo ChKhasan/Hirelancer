@@ -17,6 +17,21 @@ export const actions = {
     const res = await this.$axiosInstance.$post(`/api/orders/create`, data);
     return res;
   },
+  async postComplaints({}, data) {
+    const res = await this.$axiosInstance.$post(`/api/complaints`, data);
+    return res;
+  },
+  async postCompliteCustomer({}, data) {
+    const res = await this.$axiosInstance.$post(`/api/customer_feedbacks`, data);
+    return res;
+  },
+  async postCompleteOrder({}, data) {
+    const res = await this.$axiosInstance.$post(
+      `/api/order_complete_requests`,
+      data
+    );
+    return res;
+  },
   async putOrder({}, payload) {
     return await this.$axiosInstance.$post(
       `/api/orders/update/${payload.id}?_method=put`,

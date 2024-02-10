@@ -223,7 +223,7 @@
             </svg>
           </button>
         </div>
-        <div class="messengers flex flex-col gap-3">
+        <div class="messengers flex flex-col gap-3" v-if="messengersHandle">
           <h6 class="text-[12px] font-semibold text-grey-40 uppercase">
             Социальные сети
           </h6>
@@ -388,7 +388,9 @@
           УЧАСТНИК С: 21 МАЯ 2010 ГОДА
         </p>
         <span class="h-[1px] w-full bg-grey-8"></span>
+
         <button
+          v-if="profile"
           @click="$store.dispatch('logout')"
           class="underline text-base text-pantone-2023 flex items-center gap-[10px]"
         >
@@ -420,6 +422,36 @@
             />
           </svg>
         </button>
+        <p
+          v-else
+          class="underline text-base text-pantone-2023 flex items-center gap-[10px] xl:text-center mx-auto xl:text-[14px] white-space-nowrap"
+        >
+          Сообщить модератору о нарушении
+          <svg
+            class="min-w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="18"
+            viewBox="0 0 20 18"
+            fill="none"
+          >
+            <path
+              opacity="0.4"
+              d="M7.96798 1.16592C8.85365 -0.388639 11.1464 -0.388642 12.032 1.16592L19.7041 14.6324C20.5649 16.1433 19.4445 18 17.6721 18H2.32789C0.555459 18 -0.564896 16.1433 0.29587 14.6324L7.96798 1.16592Z"
+              fill="#BB2649"
+            />
+            <path
+              d="M11 14C11 14.5523 10.5523 15 10 15C9.44772 15 9 14.5523 9 14C9 13.4477 9.44772 13 10 13C10.5523 13 11 13.4477 11 14Z"
+              fill="#BB2649"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M10 5.25C10.4142 5.25 10.75 5.58579 10.75 6V11C10.75 11.4142 10.4142 11.75 10 11.75C9.58579 11.75 9.25 11.4142 9.25 11V6C9.25 5.58579 9.58579 5.25 10 5.25Z"
+              fill="#BB2649"
+            />
+          </svg>
+        </p>
         <!-- <p class="underline text-base text-pantone-2023 flex items-center gap-[10px]">
           Сообщить модератору о нарушении
           <svg
@@ -462,6 +494,18 @@ export default {
       data: [1, 2, 3, 4, 5, 6],
       isFreelancer: false,
     };
+  },
+  computed: {
+    messengersHandle() {
+      return (
+        this.userInfo?.contacts?.twitter ||
+        this.userInfo?.contacts?.facebook ||
+        this.userInfo?.contacts?.dribble ||
+        this.userInfo?.contacts?.github ||
+        this.userInfo?.contacts?.instagram ||
+        this.userInfo?.contacts?.telegram
+      );
+    },
   },
   mounted() {
     const swiper = new Swiper(".events-swiper-small", {

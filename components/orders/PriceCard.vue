@@ -22,6 +22,9 @@
     </div>
     <div class="buttons flex flex-col gap-4 xl:hidden">
       <button
+        v-if="
+          !order?.requests.find((item) => item.freelancer_id == $store.state.userInfo?.id)
+        "
         @click="$emit('open')"
         class="h-[52px] justify-center flex items-center gap-2 rounded-[8px] border border-solid bg-blue border-blue text-base text-white font-medium"
       >

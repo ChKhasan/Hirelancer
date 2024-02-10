@@ -5,7 +5,7 @@
       <div class="flex justify-between xl:hidden">
         <h3 class="text-[24px] text-black font-semibold">Заказы</h3>
         <button
-          v-if="$route.name.includes('customer')"
+          v-if="$route.params.user == 'customer'"
           @click="$router.push('/profile/orders/add')"
           class="bg-blue flex justify-center gap-2 h-[60px] w-[220px] px-6 rounded-[8px] text-white text-base text-medium items-center"
         >

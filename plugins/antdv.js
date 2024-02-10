@@ -6,7 +6,7 @@ import {
   Select,
   Pagination,
   // Slider,
-  // Rate,
+  Rate,
   FormModel,
   // Carousel,
   // Button,
@@ -51,7 +51,7 @@ Vue.use(Select);
 // Vue.use(Switch);
 Vue.use(Pagination);
 // Vue.use(Input);
-// Vue.use(Rate);
+Vue.use(Rate);
 // Vue.use(Carousel);
 
 // Vue.use(Alert);

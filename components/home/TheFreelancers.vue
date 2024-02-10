@@ -6,7 +6,7 @@
       </h1>
       <nuxt-link
         class="flex gap-[6px] items-center text-blue text-[18px] font-medium xl:text-[14px]"
-        to="/"
+        to="/freelancers"
         >Ko’proq ko’rish
         <svg
           xmlns="http://www.w3.org/2000/svg"

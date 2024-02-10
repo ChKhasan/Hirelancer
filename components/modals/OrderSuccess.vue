@@ -76,7 +76,7 @@
             </svg>
           </a>
           <button
-            @click="visible = false"
+            @click="toProfile"
             class="px-6 justify-center h-[40px] rounded-[8px] border border-solid border-blue bg-white text-blue text-base font-medium flex items-center"
           >
             Посмотреть заказ
@@ -98,6 +98,10 @@ export default {
     handleOk() {
       this.visible = false;
       this.$emit("handleOkProp");
+    },
+    toProfile() {
+      this.visible = false;
+      this.$router.push("/profile/freelancer/orders/active/status");
     },
   },
   watch: {

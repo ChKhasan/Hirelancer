@@ -87,9 +87,11 @@
               <h1 class="title text-[24px] font-semibold text-black mb-4 xl:text-[18px]">
                 {{ order?.name }}
               </h1>
-              <p class="text-base text-grey-80 xl:text-[14px]">
-                {{ order?.description }}
-              </p>
+              <span
+                class="text-base text-grey-80 xl:text-[14px]"
+                v-html="order?.description"
+              >
+              </span>
               <!-- <p class="text-base text-grey-80 mt-8 xl:mt-5 xl:text-[14px]">
                 As we're developing curriculum for the next 4 years, there's potential for
                 a long-term contract.This is a project-based contract and not a retainer
@@ -103,11 +105,8 @@
               <h6 class="text-black text-[20px] font-semibold xl:text-[18px]">
                 Файлы к задаче
               </h6>
-              <div class="file-list flex gap-4 justify-start xl:flex-wrap">
-                <FileCard />
-                <FileCard />
-                <FileCard />
-                <FileCard />
+              <div class="file-list flex gap-4 justify-start xl:grid xl:grid-cols-3">
+                <FileCard v-for="file in order?.files" :file="file" :key="file?.id" />
               </div>
             </div>
             <div class="files flex flex-col gap-4 mt-4 xl:mt-6 mb-6">
@@ -132,7 +131,7 @@
               </div>
             </div>
             <div
-              class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[80%] xl:mx-auto white-space-nowrap"
+              class="content-bottom border-[0] border-t border-solid border-grey-8 pt-4 flex justify-between xl:flex-col xl:gap-6 xl:max-w-[90%] xl:mx-auto white-space-nowrap"
             >
               <div class="flex items-center gap-[28px] xl:justify-between">
                 <p class="text-base xl:text-[14px] text-grey-64 flex gap-2 items-center">
@@ -227,10 +226,37 @@
           </div>
           <div class="flex flex-col gap-4 mt-8 xl:mt-6">
             <InfoCard
+              v-if="$store.state.auth && Boolean($store.state.userInfo['name'])"
+              title="Отправьте заявке для получение заказа"
+              :subtitle="`<p>Условия обсуждаются индивидуально.Наши ожидания от исполнителей:</p>
+              <p>1. Наличиеопыта и портфолио</p>
+              <p>2. Оперативность выполнения заказов</p>`"
+              btn="Отправить заявку"
+              @submit="openModal"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M4.46094 13.3333V15.3175C4.46094 15.9367 5.1126 16.34 5.66677 16.0625L17.7943 10L5.66677 3.93751C5.1126 3.66001 4.46094 4.06334 4.46094 4.68251V10H10.0168"
+                  stroke="#5C46E6"
+                  stroke-width="1.5"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                /></svg
+            ></InfoCard>
+            <InfoCard
+              v-else
               title="Войдите чтобы отправить заявку"
-              subtitle=" Условия обсуждаются индивидуально.Наши ожидания от исполнителей:1. Наличие
-                опыта и портфолио2. Оперативность выполнения заказов"
+              :subtitle="`<p>Условия обсуждаются индивидуально.Наши ожидания от исполнителей:</p>
+              <p>1. Наличиеопыта и портфолио</p>
+              <p>2. Оперативность выполнения заказов</p>`"
               btn="Войти"
+              @submit="$router.push('/registration')"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -257,28 +283,6 @@
                   stroke-linejoin="round"
                 /></svg
             ></InfoCard>
-            <InfoCard
-              title="Отправьте заявке для получение заказа"
-              subtitle="Условия обсуждаются индивидуально.Наши ожидания от исполнителей:1. Наличие
-                опыта и портфолио2. Оперативность выполнения заказов"
-              btn="Отправить заявку"
-              @submit="openModal"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-              >
-                <path
-                  d="M4.46094 13.3333V15.3175C4.46094 15.9367 5.1126 16.34 5.66677 16.0625L17.7943 10L5.66677 3.93751C5.1126 3.66001 4.46094 4.06334 4.46094 4.68251V10H10.0168"
-                  stroke="#5C46E6"
-                  stroke-width="1.5"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                /></svg
-            ></InfoCard>
           </div>
         </div>
         <div class="flex flex-col gap-4 xl:hidden">
@@ -287,7 +291,7 @@
         </div>
       </div>
     </div>
-    <SimilarOrders />
+    <SimilarOrders :orders="orders"/>
     <div>
       <Transition name="opacity">
         <div
@@ -339,14 +343,18 @@ export default {
   },
   async asyncData({ store, params }) {
     try {
-      const [orderData] = await Promise.all([
+      const [orderData, ordersData] = await Promise.all([
         store.dispatch("fetchOrders/getOrderById", {
           id: params.slug,
         }),
+        store.dispatch("fetchOrders/getOrders"),
       ]);
       const order = orderData?.content;
+      const orders = ordersData.data;
+
       return {
         order,
+        orders,
       };
     } catch (e) {
     } finally {

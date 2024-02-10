@@ -17,7 +17,7 @@ export const actions = {
   },
   async postUserEdit({}, payload) {
     const res = await this.$axiosInstance.$post(
-      `/settings/freelancer/update-personal-data`,
+      `/api/settings/freelancer/update-personal-data`,
       payload
     );
     return res;

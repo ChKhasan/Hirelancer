@@ -1,7 +1,17 @@
 <template lang="html">
   <div>
-    <CustomerOrder v-if="$route.params.user == 'customer'" :order="order" :loading="loading" />
-    <FreelancerOrder v-if="$route.params.user == 'freelancer'" :order="order" :loading="loading" />
+    <CustomerOrder
+      v-if="$route.params.user == 'customer'"
+      :order="order"
+      :loading="loading"
+      @selected="selected"
+    />
+    <FreelancerOrder
+      v-if="$route.params.user == 'freelancer'"
+      :order="order"
+      :loading="loading"
+      @selected="selected"
+    />
   </div>
 </template>
 <script>
@@ -19,6 +29,9 @@ export default {
     this.__GET_ORDERS();
   },
   methods: {
+    selected() {
+      this.__GET_ORDERS();
+    },
     async __GET_ORDERS() {
       try {
         const data = await this.$store.dispatch("fetchOrders/getOrderById", {
