@@ -74,9 +74,8 @@ button {
 .font-tt {
   font-family: "TT Interfaces";
 }
-*:where(
-    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
-  ) {
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol
+      *)) {
   all: unset;
   display: revert;
 }
@@ -216,5 +215,17 @@ a:hover {
   }
   .ant-carousel {
     margin-right: -4px !important;
+  }
+}
+@media (max-width: 576px) {
+  .fade-left-enter-active,
+  .fade-left-leave-active {
+    transition: transform 0.3s;
+    z-index: 1;
+  }
+  .fade-left-enter,
+  .fade-left-leave-to {
+    transform: translateX(100%);
+    z-index: 1;
   }
 }

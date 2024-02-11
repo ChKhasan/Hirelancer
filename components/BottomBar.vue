@@ -171,6 +171,7 @@ export default {
 <style lang="css" scoped>
 .bottom-bar {
   box-shadow: 0px 4px 8px 0px rgba(0, 25, 53, 0.16);
+  z-index: 99999;
 }
 .bottom-bar .active {
   color: var(--main-color);

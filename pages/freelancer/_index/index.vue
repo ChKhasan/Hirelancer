@@ -1,18 +1,20 @@
 <template lang="html">
-  <div class="profile xl:px-4">
-    <ProfileLayout :profile="false" :freelancer="freelancer" :show="true">
-      <div class="personal-information mt-8 xl:mt-6">
-        <PersonalInfo :isEdit="false" :freelancer="freelancer" :profile="false" />
-        <Achievements :profile="false"/>
-      </div>
-      <div class="portfolio-block mt-[40px] xl:mt-6">
-        <Portfolios :portfolios="portfolios" />
-      </div>
-      <div class="events-block mt-[45px] xl:mt-[56px]">
-        <Events />
-      </div>
-    </ProfileLayout>
-  </div>
+  <transition name="fade-left" mode="out-in">
+    <div class="profile xl:px-4">
+      <ProfileLayout :profile="false" :freelancer="freelancer" :show="true">
+        <div class="personal-information mt-8 xl:mt-6">
+          <PersonalInfo :isEdit="false" :freelancer="freelancer" :profile="false" />
+          <Achievements :profile="false" />
+        </div>
+        <div class="portfolio-block mt-[40px] xl:mt-6">
+          <Portfolios :portfolios="portfolios" />
+        </div>
+        <div class="events-block mt-[45px] xl:mt-[56px]">
+          <Events />
+        </div>
+      </ProfileLayout>
+    </div>
+  </transition>
 </template>
 <script>
 import PersonalInfo from "@/components/profile/portfolio/PersonalInfo.vue";
@@ -22,6 +24,10 @@ import Events from "@/components/profile/Events.vue";
 import ProfileLayout from "@/components/profile/ProfileLayout.vue";
 
 export default {
+  transition: {
+    name: "fade-left",
+    mode: "out-in",
+  },
   components: {
     PersonalInfo,
     Achievements,

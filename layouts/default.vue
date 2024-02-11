@@ -38,6 +38,9 @@ export default {
   },
 
   async mounted() {
+    this.$router.afterEach(() => {
+      window.scrollTo(0, 0);
+    });
     if (localStorage.getItem("auth-token")) {
       try {
         const [userInfoData] = await Promise.all([
@@ -51,4 +54,9 @@ export default {
   components: { TheHeader, TheFooter, BottomBar, MobileHeader },
 };
 </script>
-<style lang="css"></style>
+<style lang="css">
+.layout {
+  height: 100vh;
+  overflow: hidden;
+}
+</style>
