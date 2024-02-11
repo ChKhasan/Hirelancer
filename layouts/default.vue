@@ -56,7 +56,7 @@ export default {
 </script>
 <style lang="css">
 .layout {
-  height: 100vh;
   overflow: hidden;
+  width: 100%;
 }
 </style>
