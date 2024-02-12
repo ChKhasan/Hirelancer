@@ -31,6 +31,7 @@ export default {
     const freelancers = freeLancersData.data;
     const specialities = specialitiesData.content;
     const orders = ordersData.data;
+    console.log(freelancers);
     return {
       freelancers,
       specialities,

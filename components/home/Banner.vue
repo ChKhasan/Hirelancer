@@ -65,7 +65,7 @@
                 : 'registration'
             )
           "
-          class="flex gap-2 h-[60px] px-[20px] text-[18px] bg-blue rounded-xl text-white font-tt items-center font-medium"
+          class="flex justify-center gap-2 h-[60px] px-[20px] min-w-[243px] text-base bg-blue rounded-xl text-white font-tt items-center font-medium"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -90,9 +90,9 @@
                 : 'registration'
             )
           "
-          class="flex g h-[60px] px-[20px] border-solid text-[18px] border-grey-64 bg-white border rounded-xl text-grey-64 font-tt items-center font-regular"
+          class="h-[60px] flex justify-center min-w-[220px] px-[20px] border-solid text-base border-main-color bg-transparent border rounded-xl text-main-color font-tt items-center font-semibold"
         >
-          Frilanserga aylaning
+        Daromad topish
         </button>
       </div>
     </div>

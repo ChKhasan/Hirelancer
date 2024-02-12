@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="buttons flex gap-6 xl:overflow-y-scroll xl:gap-2 xl:mx-[-16px] scroll-none">
+  
     <button
       @click="$router.push(`/profile/${$route.params.user}/orders/active/status`)"
       :class="{ active: $route.params.status == 'active' }"
@@ -41,7 +42,16 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+     
+    };
+  },
+  methods: {
+  
+  },
+};
 </script>
 <style lang="css" scoped>
 .buttons .active {
