@@ -1,6 +1,7 @@
 export const state = () => ({
   userInfo: {},
   auth: false,
+  pageData: {},
 });
 
 export const mutations = {
@@ -10,6 +11,9 @@ export const mutations = {
     localStorage.getItem("auth-token")
       ? (state.auth = true)
       : (state.auth = false);
+  },
+  setPageData(state, payload) {
+    state.pageData = payload;
   },
   logout(state) {
     localStorage.removeItem("auth-token");

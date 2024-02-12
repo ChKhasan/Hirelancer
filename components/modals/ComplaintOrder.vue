@@ -40,7 +40,7 @@
               <img
                 loading="lazy"
                 class="w-full h-full"
-                src="../../assets/images/Avatar 5.png"
+                src="../../assets/images/user-avatar.jpg"
                 alt=""
               />
               <span class="absolute bottom-0 right-[-7px]">

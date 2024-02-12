@@ -2,15 +2,17 @@
   <div
     class="card client-card px-[22px] py-[22px] xl:px-4 xl:py-4 border border-solid border-grey-8 rounded-2xl"
   >
-    <div
-      class="image w-[60px] h-[60px] xl:w-[52px] xl:h-[52px] rounded-full border-[2px] border-solid border-agro-green relative"
-    >
-      <img
-        loading="lazy"
-        class="w-full h-full"
-        src="../../assets/images/Avatar 5.png"
-        alt=""
-      />
+    <div class="relative w-[60px] h-[60px] xl:w-[52px] xl:h-[52px]">
+      <div
+        class="image w-[60px] h-[60px] xl:w-[52px] xl:h-[52px] rounded-full border-[2px] border-solid border-agro-green relative overflow-hidden"
+      >
+        <img
+          loading="lazy"
+          class="w-full h-full"
+          src="../../assets/images/user-avatar.jpg"
+          alt=""
+        />
+      </div>
       <span class="absolute bottom-0 right-[-7px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"

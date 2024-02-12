@@ -3,12 +3,15 @@
     <div class="fixed top-0 left-0 w-full z-50" ref="mHeader">
       <MobileHeader class="xl:block" />
     </div>
-    <TheHeader class="xl:hidden" />
+    <TheHeader class="xl:hidden" ref="header" />
     <div
       v-if="$route.name == 'index'"
       class="header-bg xl:block hidden w-full h-[104px]"
     ></div>
-    <div v-else class="header-bg xl:block hidden w-full h-[56px]"></div>
+    <div v-else class="header-bg xl:block hidden w-full" :style="`height: 56px`"></div>
+    <!-- <h1>
+      {{ layoutData }}
+    </h1> -->
     <Nuxt />
     <TheFooter />
     <BottomBar v-if="routes.includes($route.name)" />
@@ -36,7 +39,14 @@ export default {
       routes: ["freelancers", "profile-index", "index", "orders"],
     };
   },
-
+  computed: {
+    layoutData() {
+      return this.$store.state.pageData || {};
+    },
+    headerHeight() {
+      return this.$refs.mHeader.offsetHeight;
+    },
+  },
   async mounted() {
     this.$router.afterEach(() => {
       window.scrollTo(0, 0);

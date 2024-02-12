@@ -134,8 +134,19 @@
             <!-- <p class="text-[14px] text-green">Я - Фрилансер</p> -->
             <p class="text-[14px] text-light-red">Я - заказчик</p>
           </div>
-          <div class="h-[52px] w-[52px]">
-            <img class="w-full h-full" src="@/assets/images/Avatar 5.png" alt="" />
+          <div class="h-[52px] w-[52px] rounded-full overflow-hidden">
+            <img
+              class="w-full h-full object-cover"
+              v-if="$store.state.userInfo['avatar']"
+              :src="`${imgUrl}${$store.state.userInfo['avatar']}`"
+              alt=""
+            />
+            <img
+              class="w-full h-full"
+              v-else
+              src="@/assets/images/user-avatar.jpg"
+              alt=""
+            />
           </div>
         </button>
         <div class="login flex gap-6" v-else>
@@ -170,6 +181,14 @@ export default {
     return {
       visible: false,
     };
+  },
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+    imgUrl() {
+      return this.baseUrl + "/storage/";
+    },
   },
   methods: {
     handleOk() {

@@ -8,6 +8,7 @@
         <h6 class="text-[18px] font-medium text-black xl:font-semibold">О фрилансере</h6>
         <button
           v-if="isEdit"
+          @click="$router.push(`/profile/${$route.params.user}/settings`)"
           class="flex gap-[6px] text-base text-blue font-medium items-center xl:hidden"
         >
           Редактировать
@@ -52,30 +53,15 @@
         </button>
       </div>
       <div
-        class="body pt-6 border-[0] border-t border-solid border-grey-8 mt-4 flex flex-col gap-4 xl:border-[0] xl:pt-0"
-      >
-        <p class="text-base text-grey-64 xl:text-[14px]">
-          В течение последнего десятилетия мы стремились помочь нашим партнерам, от малого
-          и среднего бизнеса до таких предприятий, как Corel и Oppo, расширить свое
-          цифровое присутствие и повысить качество своих продуктов. Мы всегда стараемся
-          делать это с большой отдачей и страстью, потому что это Путь!
-        </p>
-        <p class="text-base text-grey-64 xl:text-[14px]">
-          Наша приверженность принесла нам звездную оценку 4,9 ★★★★★ на основе более чем
-          60 отзывов на Clutch. Наша страсть привела к получению более 70 наград, в том
-          числе Top-1 Dribbble
-        </p>
-        <p class="text-base text-grey-64 xl:text-[14px]">
-          Так что, если наша команда находит отклик у вас, просто напишите нам. Давайте
-          обсудим, чего мы можем достичь вместе!
-        </p>
-      </div>
+        class="body pt-6 border-[0] border-t border-solid border-grey-8 mt-4 flex flex-col gap-4 xl:border-[0] xl:pt-0 text-base text-grey-64 xl:text-[14px]"
+        v-html="userInfo?.bio"
+      ></div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ["isEdit", "profile"],
+  props: ["isEdit", "profile", "userInfo"],
 };
 </script>
 <style lang="css" scoped>

@@ -9,7 +9,7 @@
         <div class="rounded-full overflow-hidden h-full w-full">
           <img
             class="w-full h-full object-cover"
-            src="@/assets/images/Avatar 5.png"
+            src="@/assets/images/user-avatar.jpg"
             alt=""
           />
         </div>

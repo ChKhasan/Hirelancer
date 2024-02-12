@@ -228,4 +228,7 @@ a:hover {
     transform: translateX(100%);
     z-index: 1;
   }
+  .ant-upload-list-item-actions {
+    opacity: 1 !important;
+  }
 }

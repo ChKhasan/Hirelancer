@@ -33,10 +33,17 @@
           class="px-8 py-6 border border-solid border-border-darik rounded-[16px] relative z-0 xl:hidden"
         >
           <div class="flex gap-6">
-            <div class="image w-[118px] h-[118px]">
+            <div class="image w-[118px] h-[118px] rounded-full overflow-hidden">
               <img
-                class="w-full h-full"
-                src="../../../../assets/images/Avatar 5.png"
+                class="w-full h-full object-cover"
+                v-if="fileList.length > 0"
+                :src="fileList.at(-1).url"
+                alt=""
+              />
+              <img
+                v-else
+                class="w-full h-full object-cover"
+                src="../../../../assets/images/user-avatar.jpg"
                 alt=""
               />
             </div>
@@ -45,31 +52,41 @@
                 Foto hajmi 4 mb dan oshmasligi kerak
               </p>
               <div class="flex gap-4">
-                <button>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9 6L12 3M12 3L15 6M12 3L12 15"
-                      stroke="#5C46E6"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M7.5 9L7 9C4.79086 9 3 10.7909 3 13L3 17C3 19.2091 4.79086 21 7 21L17 21C19.2091 21 21 19.2091 21 17L21 13C21 10.7909 19.2091 9 17 9L16.5 9"
-                      stroke="#5C46E6"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-                <button>
+                <a-upload
+                  name="file"
+                  :before-upload="handleBeforeUpload"
+                  :custom-request="customRequest"
+                  :file-list="fileList"
+                >
+                  <div class="reupload">
+                    <button>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9 6L12 3M12 3L15 6M12 3L12 15"
+                          stroke="#5C46E6"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M7.5 9L7 9C4.79086 9 3 10.7909 3 13L3 17C3 19.2091 4.79086 21 7 21L17 21C19.2091 21 21 19.2091 21 17L21 13C21 10.7909 19.2091 9 17 9L16.5 9"
+                          stroke="#5C46E6"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </a-upload>
+
+                <button @click="removeAvatar">
                   <svg
                     width="24"
                     height="24"
@@ -101,10 +118,17 @@
           </h3>
           <div>
             <div class="gap-6 hidden xl:grid xl:grid-cols-2 mb-6">
-              <div class="image w-[148px] h-[148px]">
+              <div class="image w-[148px] h-[148px] rounded-full overflow-hidden">
                 <img
-                  class="w-full h-full"
-                  src="../../../../assets/images/Avatar 5.png"
+                  class="w-full h-full object-cover"
+                  v-if="fileList.length > 0"
+                  :src="fileList.at(-1).url"
+                  alt=""
+                />
+                <img
+                  v-else
+                  class="w-full h-full object-cover"
+                  src="../../../../assets/images/user-avatar.jpg"
                   alt=""
                 />
               </div>
@@ -113,31 +137,38 @@
                   Foto hajmi 4 mb dan oshmasligi kerak
                 </p>
                 <div class="flex gap-4">
-                  <button>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 6L12 3M12 3L15 6M12 3L12 15"
-                        stroke="#5C46E6"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M7.5 9L7 9C4.79086 9 3 10.7909 3 13L3 17C3 19.2091 4.79086 21 7 21L17 21C19.2091 21 21 19.2091 21 17L21 13C21 10.7909 19.2091 9 17 9L16.5 9"
-                        stroke="#5C46E6"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  <button>
+                  <a-upload
+                    name="file"
+                    :before-upload="handleBeforeUpload"
+                    :custom-request="customRequest"
+                    :file-list="fileList"
+                  >
+                    <button>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9 6L12 3M12 3L15 6M12 3L12 15"
+                          stroke="#5C46E6"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M7.5 9L7 9C4.79086 9 3 10.7909 3 13L3 17C3 19.2091 4.79086 21 7 21L17 21C19.2091 21 21 19.2091 21 17L21 13C21 10.7909 19.2091 9 17 9L16.5 9"
+                          stroke="#5C46E6"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </a-upload>
+                  <button @click="removeAvatar">
                     <svg
                       width="24"
                       height="24"
@@ -217,7 +248,14 @@
               </div>
               <div class="grid">
                 <a-form-model-item ref="name" class="form-item" label="Bio">
-                  <a-input v-model="form.bio" placeholder="O’zhaqingizda ma’lumot" />
+                  <!-- <a-input v-model="form.bio" placeholder="O’zhaqingizda ma’lumot" /> -->
+                  <quill-editor
+                    style="min-height: 250px"
+                    :options="editorOption"
+                    :value="form.bio"
+                    v-model="form.bio"
+                    placeholder="O’zingiz haqingizda ma’lumot"
+                  />
                 </a-form-model-item>
               </div>
             </div>
@@ -399,12 +437,20 @@ import ProfileLayout from "@/components/profile/ProfileLayout.vue";
 import Statistics from "@/components/profile/Statistics.vue";
 import Comments from "@/components/profile/Comments.vue";
 import moment from "moment";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 export default {
   layout: "profileLayout",
   data() {
     return {
+      editorOption: {
+        theme: "snow",
+      },
       userInfo: {},
       laoding: false,
+      uploadLoading: false,
+      fileList: [],
       form: {
         name: "",
         surname: "",
@@ -445,6 +491,14 @@ export default {
       },
     };
   },
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+    imgUrl() {
+      return this.baseUrl + "/storage/";
+    },
+  },
   async asyncData({ store }) {
     const [regionsData, countriesData] = await Promise.all([
       store.dispatch("fetchRegions/getRegions"),
@@ -460,45 +514,99 @@ export default {
   },
 
   async mounted() {
-    this.laoding = true;
-    if (localStorage.getItem("auth-token")) {
-      const [userInfoData] = await Promise.all([
-        this.$store.dispatch("fetchAuth/getUserInfo"),
-      ]);
-      this.userInfo = userInfoData;
-      if (userInfoData["name"]) {
-        Object.keys(this.form).forEach((item) => {
-          if (userInfoData[item]) {
-            this.form[item] = userInfoData[item];
-          }
-        });
-        Object.keys(userInfoData.contacts).forEach((item) => {
-          if (userInfoData.contacts[item]) {
-            this.form[item] = String(userInfoData.contacts[item]);
-          }
-        });
-        this.form["country_id"] = userInfoData?.country?.id;
-        this.form["region_id"] = userInfoData?.region?.id;
-        this.form["bio"] = userInfoData?.bio ? userInfoData?.bio : "";
-      }
-    }
-    this.laoding = false;
+    this.__GET_USER_INFO();
   },
   methods: {
     onChange(date, dateString) {},
+    removeAvatar() {
+      this.fileList = [];
+    },
     onSubmit() {
+      let formData = new FormData();
       const data = {
         ...this.form,
         date_of_birth: moment(this.form.date_of_birth).format("DD.MM.YYYY"),
-        phone: this.form.phone.replaceAll(" ", ""),
+        phone: "+998" + this.form.phone.replaceAll(" ", ""),
       };
+      Object.keys(data)
+        .filter((elem) => elem != "avatar")
+        .forEach((elem) => {
+          formData.append(`${elem}`, data[elem]);
+        });
+      if (!this.fileList.at(-1)?.id) {
+        formData.append("avatar", this.fileList.at(-1).originFileObj);
+      }
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.__POST_REGISTER(data);
+          this.__POST_REGISTER(formData);
         } else {
           return false;
         }
       });
+    },
+    handleBeforeUpload(file) {
+      return true;
+    },
+    customRequest({ onSuccess, onError, file }) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const uploadedFile = {
+          uid: file.uid,
+          name: file.name,
+          originFileObj: file,
+          url: reader.result,
+        };
+        this.fileList.push(uploadedFile);
+        onSuccess();
+      };
+      reader.onerror = () => {
+        console.error("Error reading file as binary data");
+        onError(new Error("Error reading file"));
+      };
+      reader.readAsDataURL(file); // Use readAsDataURL to get Base64 data
+    },
+    async __GET_USER_INFO() {
+      try {
+        this.laoding = true;
+        if (localStorage.getItem("auth-token")) {
+          const userInfoData = await this.$store.dispatch("fetchAuth/getUserInfo");
+          this.userInfo = userInfoData;
+          this.$store.commit("getUserInfo", userInfoData);
+          if (userInfoData["name"]) {
+            Object.keys(this.form).forEach((item) => {
+              if (userInfoData[item]) {
+                this.form[item] = userInfoData[item];
+              }
+            });
+            Object.keys(userInfoData.contacts).forEach((item) => {
+              if (userInfoData.contacts[item]) {
+                this.form[item] = String(userInfoData.contacts[item]);
+              }
+            });
+            this.form.phone = "+" + userInfoData.contacts.phone;
+            this.fileList = [
+              {
+                uid: "-1",
+                name: "image.png",
+                status: "done",
+                url: this.imgUrl + userInfoData.avatar,
+                id: 1,
+              },
+            ];
+            this.form["country_id"] = userInfoData?.country?.id;
+            this.form["region_id"] = userInfoData?.region?.id;
+            this.form["bio"] = (await userInfoData?.bio) ? userInfoData?.bio : "";
+            window.scrollTo(0, 0);
+          }
+        }
+      } catch (e) {
+        if (e.response.status == 401) {
+          localStorage.removeItem("auth-token");
+          this.$router.push("/");
+        }
+      } finally {
+        this.laoding = false;
+      }
     },
     async __POST_REGISTER(form) {
       try {
@@ -508,6 +616,7 @@ export default {
             message: "Success",
             description: "Успешно изменен",
           });
+          this.__GET_USER_INFO()
         }
       } catch (e) {
         console.log(e);
@@ -615,6 +724,30 @@ export default {
   border-radius: 16px 16px 0px 0px;
   box-shadow: 0px 4px 36px 0px rgba(0, 25, 53, 0.16);
 }
+:deep(.ant-upload-list) {
+  display: none;
+}
+
+:deep(.ql-editor) {
+  min-height: 250px;
+}
+
+:deep(.quill-editor) {
+  border-radius: 8px;
+  border: 1px solid var(--grey-8);
+  font-family: "TT Interfaces";
+  font-size: 16px;
+}
+:deep(.ql-toolbar),
+:deep(.ql-container) {
+  border: 0 !important;
+}
+:deep(.ql-toolbar .ql-toolbar) {
+  border-bottom: 1px solid var(--grey-8);
+}
+:deep(.has-error .quill-editor) {
+  border-color: red;
+}
 @media (max-width: 1200px) {
   .form-item :deep(.ant-form-item-label label) {
     font-size: 14px;
@@ -624,8 +757,8 @@ export default {
     font-size: 14px;
   }
   .form-item :deep(.ant-input) {
-  height: 44px;
-  font-size: 14px;
-}
+    height: 44px;
+    font-size: 14px;
+  }
 }
 </style>

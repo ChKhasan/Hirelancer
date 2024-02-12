@@ -30,7 +30,7 @@
       <Loader v-if="loading" />
     </div>
     <TheFooter />
-    <BottomBar />
+    <BottomBar v-if="routes.includes($route.name)" />
   </div>
 </template>
 <script>
@@ -48,6 +48,7 @@ export default {
   middleware: "auth",
   data() {
     return {
+      routes: ["freelancers", "profile-index", "index", "orders"],
       loading: false,
     };
   },

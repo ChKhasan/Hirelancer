@@ -39,7 +39,7 @@
           <div class="image min-w-[56px] h-[56px] rounded-full overflow-hidden">
             <img
               class="w-full h-full object-cover"
-              src="@/assets/images/Avatar 5.png"
+              src="@/assets/images/user-avatar.jpg"
               alt=""
             />
           </div>

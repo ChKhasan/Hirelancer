@@ -58,6 +58,13 @@
       </div>
       <div class="buttons flex gap-4 xl:hidden">
         <button
+          @click="
+            $router.push(
+              $store.state.auth && Boolean($store.state.userInfo['name'])
+                ? 'profile/customer/orders/active/status'
+                : 'registration'
+            )
+          "
           class="flex gap-2 h-[60px] px-[20px] text-[18px] bg-blue rounded-xl text-white font-tt items-center font-medium"
         >
           <svg
@@ -76,7 +83,13 @@
           >Buyurtma yuboring
         </button>
         <button
-          @click="$router.push('/registration')"
+          @click="
+            $router.push(
+              $store.state.auth && Boolean($store.state.userInfo['name'])
+                ? 'profile/freelancer'
+                : 'registration'
+            )
+          "
           class="flex g h-[60px] px-[20px] border-solid text-[18px] border-grey-64 bg-white border rounded-xl text-grey-64 font-tt items-center font-regular"
         >
           Frilanserga aylaning
@@ -89,7 +102,7 @@
         width="100%"
         height="100%"
         alt=""
-        class=" xl:object-cover h-full"
+        class="xl:object-cover h-full"
       />
     </div>
   </div>

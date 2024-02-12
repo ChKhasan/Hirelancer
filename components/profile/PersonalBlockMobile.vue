@@ -8,7 +8,18 @@
           <div
             class="h-[72px] overflow-hidden rounded-full border border-solid border-grey-light"
           >
-            <img class="w-full h-full" src="../../assets/images/Avatar 5.png" alt="" />
+            <img
+              class="w-full h-full object-cover"
+              v-if="$store.state.userInfo['avatar']"
+              :src="`${imgUrl}${$store.state.userInfo['avatar']}`"
+              alt=""
+            />
+            <img
+              v-else
+              class="w-full h-full object-cover"
+              src="../../assets/images/user-avatar.jpg"
+              alt=""
+            />
           </div>
           <div class="flex justify-center flex-col gap-2">
             <h4 class="text-black text-[14px] font-semibold leading-[19px]">
@@ -223,7 +234,7 @@
 
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
-            :to="`/profile/${$route.params.user}/orders/active/status`"
+              :to="`/profile/${$route.params.user}/orders/active/status`"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -313,7 +324,7 @@
           </li>
           <li class="border-[0] border-b border-solid border-grey-light">
             <nuxt-link
-            :to="`/profile/${$route.params.user}/settings`"
+              :to="`/profile/${$route.params.user}/settings`"
               class="flex w-full gap-3 items-center text-[14px] font-medium text-black relative p-4"
               ><svg
                 width="18"
@@ -601,6 +612,14 @@ export default {
     return {
       isFreelancer: false,
     };
+  },
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+    imgUrl() {
+      return this.baseUrl + "/storage/";
+    },
   },
 };
 </script>

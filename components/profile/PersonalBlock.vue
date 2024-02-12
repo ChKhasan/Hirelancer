@@ -5,10 +5,23 @@
     >
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-6 items-center">
-          <div
-            class="image w-[112px] h-[112px] rounded-full border-[1px] border-solid border-grey-8 relative"
-          >
-            <img class="w-full h-full" src="../../assets/images/Avatar 5.png" alt="" />
+          <div class="relative w-[112px] h-[112px]">
+            <div
+              class="image w-[112px] h-[112px] rounded-full border-[1px] border-solid border-grey-8 relative overflow-hidden"
+            >
+              <img
+                class="w-full h-full object-cover"
+                v-if="userInfo?.avatar"
+                :src="`${imgUrl}${userInfo?.avatar}`"
+                alt=""
+              />
+              <img
+                class="w-full h-full"
+                v-else
+                src="../../assets/images/user-avatar.jpg"
+                alt=""
+              />
+            </div>
             <span class="absolute bottom-0 right-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -495,7 +508,14 @@ export default {
       isFreelancer: false,
     };
   },
+
   computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+    imgUrl() {
+      return this.baseUrl + "/storage/";
+    },
     messengersHandle() {
       return (
         this.userInfo?.contacts?.twitter ||

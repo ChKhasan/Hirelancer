@@ -8,8 +8,15 @@
         <!-- <img v-if="freelancer?.avatar" class="w-full h-full object-cover" :src="freelancer?.avatar" alt="" /> -->
         <div class="rounded-full overflow-hidden h-full w-full">
           <img
+            v-if="freelancer?.avatar"
             class="w-full h-full object-cover"
-            src="@/assets/images/Avatar 5.png"
+            :src="`${imgUrl}${freelancer?.avatar}`"
+            alt=""
+          />
+          <img
+            v-else
+            class="w-full h-full object-cover"
+            src="@/assets/images/user-avatar.jpg"
             alt=""
           />
         </div>
@@ -51,7 +58,7 @@
                   d="M5.85246 1.90841C6.32186 0.91953 7.67811 0.919528 8.14751 1.9084L8.95876 3.61743C9.14516 4.01012 9.50547 4.28229 9.92227 4.34526L11.7363 4.61932C12.7859 4.77789 13.205 6.11898 12.4455 6.88871L11.1329 8.21901C10.8313 8.52467 10.6936 8.96506 10.7648 9.39666L11.0747 11.2751C11.254 12.3619 10.1568 13.1908 9.21796 12.6776L7.59547 11.7908C7.22267 11.587 6.7773 11.587 6.40451 11.7908L4.78202 12.6776C3.84322 13.1908 2.74599 12.3619 2.92528 11.2751L3.23515 9.39666C3.30635 8.96506 3.16872 8.52467 2.86712 8.21901L1.5545 6.88871C0.794995 6.11898 1.2141 4.77789 2.26371 4.61932L4.07771 4.34526C4.49451 4.28229 4.85482 4.01012 5.04122 3.61744L5.85246 1.90841Z"
                   fill="#F2C94C"
                 /></svg
-              >{{ freelancer?.rating }} ({{ freelancer?.rating_count }})
+              >{{ Math.ceil(freelancer?.rating) }} ({{ freelancer?.rating_count }})
             </p>
             <p class="text-[14px] flex gap-1 items-center">
               <svg
@@ -133,7 +140,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="justify-between hidden xl:flex mt-4">
       <div
         class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px]"
@@ -160,6 +167,14 @@
 <script>
 export default {
   props: ["freelancer"],
+  computed: {
+    baseUrl() {
+      return process.env.BASE_URL;
+    },
+    imgUrl() {
+      return this.baseUrl + "/storage/";
+    },
+  },
 };
 </script>
 <style lang="css" scoped>

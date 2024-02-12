@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="mobile-header px-4 hidden bg-white w-full py-2 z-50">
     <div class="flex justify-between items-center">
-      <button
+      <!-- <button
         v-for="item in titleList"
         v-if="$route.name?.includes('profile') && item.pathName === $route.name"
         @click="$router.go(-1)"
@@ -21,15 +21,15 @@
             stroke-linejoin="round"
           />
         </svg>
-      </button>
-      <h4
+      </button> -->
+      <!-- <h4
         v-for="item in titleList"
         v-if="item.pathName === $route.name"
         class="text-black text-[18px] font-medium"
       >
         {{ item.title }}
-      </h4>
-      <nuxt-link to="/" v-if="!titleList.find((item) => item.pathName === $route.name)"
+      </h4> -->
+      <nuxt-link to="/"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="94"
@@ -108,19 +108,23 @@ export default {
         {
           title: "Buyurtmalar",
           pathName: "orders",
+          shodow: true,
         },
         {
           title: "Freelanserlar",
           pathName: "freelancers",
+          shodow: true,
         },
         {
           title: "Портфолио",
           pathName: "profile-user-portfolio",
+          shodow: true,
         },
         {
           title: "Профиль",
           pathName: "profile-user-info",
-        },  
+          shodow: true,
+        },
       ],
     };
   },

@@ -20,7 +20,7 @@
         <div class="image w-[56px] h-[56px] rounded-full overflow-hidden xl:w-10 xl:h-10">
           <img
             class="w-full h-full object-cover"
-            src="../../assets/images/Avatar 5.png"
+            src="../../assets/images/user-avatar.jpg"
             alt=""
           />
         </div>

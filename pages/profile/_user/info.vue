@@ -5,7 +5,7 @@
         <Alerts />
       </div>
       <div class="personal-information mt-8" v-if="$route.params.user == 'freelancer'">
-        <PersonalInfo :isEdit="true" :profile="true"  />
+        <PersonalInfo :isEdit="true" :profile="true" :userInfo="$store.state.userInfo" />
         <Achievements :profile="true" />
       </div>
       <div

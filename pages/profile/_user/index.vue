@@ -1,25 +1,22 @@
 <template lang="html">
   <div class="profile">
     <!-- <ProfileLayout :profile="true"> -->
-      <div class="mt-8">
-        <Alerts />
-      </div>
-      <div class="personal-information mt-8" v-if="$route.params.user == 'freelancer'">
-        <PersonalInfo :isEdit="true" :profile="true" />
-        <Achievements :profile="true" />
-      </div>
-      <div
-        class="personal-information mt-[45px]"
-        v-if="$route.params.user == 'freelancer'"
-      >
-        <Statistics />
-      </div>
-      <div class="mt-[45px]">
-        <Events />
-      </div>
-      <div class="mt-[40px]" v-if="$route.params.user == 'freelancer'">
-        <Comments />
-      </div>
+    <div class="mt-8">
+      <Alerts />
+    </div>
+    <div class="personal-information mt-8" v-if="$route.params.user == 'freelancer'">
+      <PersonalInfo :isEdit="true" :profile="true" :userInfo="$store.state.userInfo" />
+      <Achievements :profile="true" />
+    </div>
+    <div class="personal-information mt-[45px]" v-if="$route.params.user == 'freelancer'">
+      <Statistics />
+    </div>
+    <div class="mt-[45px]">
+      <Events />
+    </div>
+    <div class="mt-[40px]" v-if="$route.params.user == 'freelancer'">
+      <Comments />
+    </div>
     <!-- </ProfileLayout> -->
   </div>
 </template>
@@ -60,10 +57,10 @@ export default {
   grid-gap: 16px;
 }
 @media (max-width: 1200px) {
-    .personal-information {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
+  .personal-information {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 </style>
