@@ -3,7 +3,7 @@
     <div class="flex gap-4">
       <button
         v-if="load"
-        class="h-[52px] rounded-[8px] bg-bg-grey text-grey-40 text-base border border-solid border-grey-8 w-[228px] flex justify-center items-center"
+        class="h-[52px] rounded-[8px] bg-bg-grey text-grey-40 text-base border border-solid border-grey-8 w-[228px] flex justify-center items-center xl:hidden"
       >
         Load more
       </button>
@@ -104,5 +104,21 @@ export default {
   .order-pagination :deep(.ant-pagination-item) a {
     font-size: 14px;
   }
+  
+}
+@media (max-width: 576px) {
+  .order-pagination :deep(.ant-pagination-item),
+  .order-pagination :deep(.ant-pagination-prev),
+  .order-pagination :deep(.ant-pagination-next),
+  .order-pagination :deep(.ant-pagination-jump-prev),
+  .order-pagination :deep(.ant-pagination-jump-next) {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 4px;
+  }
+  .order-pagination :deep(.ant-pagination-item) a {
+    font-size: 14px;
+  }
+  
 }
 </style>

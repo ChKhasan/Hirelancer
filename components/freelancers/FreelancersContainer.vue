@@ -52,12 +52,7 @@
         />
       </div>
 
-      <VPagination
-        :load="true"
-        class="xl:hidden"
-        :totalPage="totalPage"
-        @getData="__GET_FREELANCERS"
-      />
+      <VPagination :load="true" :totalPage="totalPage" @getData="__GET_FREELANCERS" />
     </div>
   </div>
 </template>
