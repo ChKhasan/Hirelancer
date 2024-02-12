@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="pt-12 xl:pt-6 order xl:px-4">
+  <div class="pt-12 xl:pt-6 order xl:px-4" :class="{ 'pb-10': !order?.status }">
     <div class="max-w-[1200px] mx-auto">
       <nuxt-link
         to="/profile/customer/orders/active/status"
@@ -22,9 +22,31 @@
         </svg>
         Отмена
       </nuxt-link>
-      <div class="flex flex-col gap-2 mt-6 xl:hidden">
-        <h3 class="text-[24px] text-black font-semibold">Заказ: #{{ order?.id }}</h3>
-        <p class="text-base text-grey-64">Заказы / Активные заказы</p>
+      <div class="flex justify-between items-end">
+        <div class="flex flex-col gap-2 mt-6 xl:hidden">
+          <h3 class="text-[24px] text-black font-semibold">Заказ: #{{ order?.id }}</h3>
+          <p class="text-base text-grey-64">Заказы / Активные заказы</p>
+        </div>
+        <p
+          v-if="!order?.status && !order?.end_of_execution"
+          class="text-base text-[#F2994A] font-medium flex fap-2 items-center xl:hidden "
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9.92154 2.57125C11.2077 1.80958 12.7923 1.80958 14.0785 2.57125L18.9215 5.43932C20.2077 6.20099 21 7.6086 21 9.13192V14.8681C21 16.3914 20.2077 17.799 18.9215 18.5607L18.301 18.9281L14.0785 21.4288C12.7923 22.1904 11.2077 22.1904 9.92154 21.4288L5.69896 18.9281L5.07846 18.5607C3.7923 17.799 3 16.3914 3 14.8681V9.13192C3 7.6086 3.7923 6.20099 5.07846 5.43932L9.92154 2.57125ZM16.0952 15.2041C15.023 14.4572 13.5831 14 12 14C10.4169 14 8.97703 14.4572 7.90484 15.2041C7.39026 15.5626 7.49802 16.2988 8.03578 16.6215L11.4855 18.6913C11.8022 18.8813 12.1978 18.8813 12.5145 18.6913L15.9642 16.6215C16.502 16.2988 16.6097 15.5626 16.0952 15.2041ZM12 6C13.6569 6 15 7.34315 15 9C15 10.6569 13.6569 12 12 12C10.3431 12 9 10.6569 9 9C9 7.34315 10.3431 6 12 6Z"
+              fill="#F2994A"
+            />
+          </svg>
+          Ваш заказ ожидание модерации. Скоро ваш заказ опубликуется
+        </p>
       </div>
       <div class="content-box mt-6 xl:mt-0">
         <div class="flex flex-col gap-6">
@@ -92,6 +114,30 @@
                       />
                     </svg>
                     Испольнитель выбран</span
+                  >
+                  <span
+                    v-if="!order?.status && !order?.end_of_execution"
+                    class="flex gap-[7px] items-center rounded-[8px] px-[8px] py-[4px] text-grey-40 text-[14px] font-medium"
+                    ><svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        opacity="0.4"
+                        d="M10.3741 2.72171L5.37624 4.94296C3.93062 5.58546 2.97663 7.0243 3.06862 8.6036C3.42825 14.7778 5.23629 17.496 9.93442 20.6766C11.179 21.5192 12.8196 21.5213 14.0633 20.6773C18.7758 17.4793 20.5192 14.7228 20.9104 8.62498C21.0124 7.03525 20.0569 5.58113 18.6012 4.93415L13.6232 2.72171C12.5889 2.26203 11.4083 2.26204 10.3741 2.72171Z"
+                        fill="#9A999B"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15.4939 8.43558C15.8056 8.70834 15.8372 9.18216 15.5645 9.49389L12.6946 12.7738C12.0779 13.4786 11.0156 13.5729 10.2843 12.9879L8.53151 11.5857C8.20806 11.3269 8.15562 10.8549 8.41438 10.5315C8.67313 10.208 9.1451 10.1556 9.46855 10.4144L11.2214 11.8166C11.3258 11.9002 11.4776 11.8867 11.5657 11.786L14.4356 8.50613C14.7084 8.1944 15.1822 8.16282 15.4939 8.43558Z"
+                        fill="#9A999B"
+                      />
+                    </svg>
+                    На модерации</span
                   >
                   <span
                     v-else
@@ -281,10 +327,7 @@
               v-if="!openBlock"
               @click="openBlock = true"
             >
-              <button
-                class="flex gap-2 text-purple text-base font-medium items-center"
-               
-              >
+              <button class="flex gap-2 text-purple text-base font-medium items-center">
                 Раскрыть<svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -463,18 +506,16 @@
         <CustomerChat :order="order" />
       </div>
     </div>
-    <div
-      class="mt-20 bg-bg-grey pt-20 pb-[120px] xl:mx-[-16px] xl:px-4 xl:pt-4 xl:mt-10"
-      v-if="!order?.selected_request?.id"
-    >
+    <div class="mt-20 bg-bg-grey pt-20 pb-[120px] xl:mx-[-16px] xl:px-4 xl:pt-4 xl:mt-10">
       <div class="max-w-[1440px] mx-auto">
         <div class="order-left-chat mb-6">
           <h4 class="text-[24px] font-semibold text-black xl:text-[18px]">
             Предложений ({{ order?.requests?.length }})
           </h4>
         </div>
-        <div class="order-left-chat">
-          <div class="list flex flex-col gap-4">
+        <div class="order-left-chat" >
+        
+          <div class="list flex flex-col gap-4" v-if="!order?.selected_request?.id && order?.status">
             <OffersOrderCard
               v-for="request in order?.requests"
               :key="request?.id"
@@ -504,10 +545,42 @@
               Предложений
             </button>
           </div>
-          <div class="xl:hidden">
+          <div class="xl:hidden" v-if="!order?.selected_request?.id && order?.status">
             <OffersChat />
           </div>
+          <div
+          v-else
+          class="flex gap-6 items-center justify-center py-4 xl:py-2 w-full border border-solid border-[#EDE5E0] bg-[#FFF5EC] rounded-[12px]"
+        >
+          <svg
+          class="xl:hidden"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 2L18 2C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18L2 6C2 3.79086 3.79086 2 6 2Z"
+              stroke="#F2994A"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M13 8H16M16 8V11M16 8L8 16M8 16L8 13M8 16H11"
+              stroke="#F2994A"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <p class="text-[#F2994A] text-base font-medium xl:text-[12px] text-center">
+            Вы можете получать заявка после успешной прохождение модерации
+          </p>
         </div>
+        </div>
+       
       </div>
     </div>
     <div>
@@ -750,7 +823,12 @@ export default {
   gap: 16px;
 }
 .show-all {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.86) 46.88%, #FFF 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.86) 46.88%,
+    #fff 100%
+  );
 }
 @media (max-width: 1200px) {
   .content-box {

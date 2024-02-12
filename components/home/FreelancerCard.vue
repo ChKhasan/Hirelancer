@@ -118,10 +118,13 @@
           </div>
         </div>
         <div class="flex justify-between xl:hidden">
-          <div
-            class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px]"
-          >
-            Adobe Photoshop
+          <div>
+            <div
+              v-if="freelancer?.specialities[0]?.name_ru"
+              class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px] xl:hidden"
+            >
+              {{ freelancer?.specialities[0]?.name_ru }}
+            </div>
           </div>
           <p
             :class="{ online: freelancer?.online }"
@@ -142,11 +145,21 @@
     </div>
 
     <div class="justify-between hidden xl:flex mt-4">
-      <div
-        class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px]"
-      >
-        Adobe Photoshop
+      <div class="flex jsutify-start gap-1" v-if="freelancer?.specialities.length > 0">
+        <div
+          v-for="specialit in freelancer?.specialities.slice(0, 1)"
+          class="bg-apple-grey text-xs font-medium text-grey-64 px-4 flex items-center rounded-[22px] h-[28px]"
+        >
+          {{ specialit?.name_ru }}
+        </div>
+        <div
+          v-if="freelancer?.specialities.length > 1"
+          class="bg-apple-grey text-xs font-medium text-purple px-4 flex rounded-[22px] h-[28px] w-[28px] justify-center items-center"
+        >
+          {{ freelancer?.specialities.length - 1 }}+
+        </div>
       </div>
+      <span v-else></span>
       <p
         :class="{ online: freelancer?.online }"
         class="text-[14px] text-grey-24 flex gap-[4px] items-center"

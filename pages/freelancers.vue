@@ -1,21 +1,6 @@
 <template lang="html">
   <transition name="fade-left" mode="out-in">
     <div class="freelancers pt-16 pb-[120px] xl:px-4 xl:pt-6 xl:pb-6">
-      <div class="grid grid-cols-3">
-        <div
-          v-for="(tab, index) in tabs"
-          :key="tab.id"
-          :draggable="true"
-          @dragstart="onDragStart(index)"
-          @dragover.prevent
-          @drop="onDrop(index)"
-          @click="selectTab(tab.id)"
-          :class="{ active: selectedTab === tab.id }"
-        >
-          {{ tab.title }}
-        </div>
-      </div>
-      {{ selectedTab }}
       <div class="2xl:container mx-auto">
         <div class="title flex justify-between xl:hidden">
           <h2 class="text-black text-[32px] font-semibold">Frilanserlar</h2>
@@ -191,13 +176,6 @@ export default {
   data() {
     return {
       loading: false,
-      tabs: [
-        { id: 1, title: "Tab 1" },
-        { id: 2, title: "Tab 2" },
-        { id: 3, title: "Tab 3" },
-      ],
-      selectedTab: 1,
-      dragIndex: null,
     };
   },
   async asyncData({ store, query }) {
@@ -225,17 +203,6 @@ export default {
     this.$store.commit("setPageData", {});
   },
   methods: {
-    selectTab(tabId) {
-      this.selectedTab = tabId;
-    },
-    onDragStart(index) {
-      this.dragIndex = index;
-    },
-    onDrop(dropIndex) {
-      const draggedTab = this.tabs.splice(this.dragIndex, 1)[0];
-      this.tabs.splice(dropIndex, 0, draggedTab);
-      this.dragIndex = null;
-    },
     open() {
       this.$refs.myBottomSheet.open();
     },
