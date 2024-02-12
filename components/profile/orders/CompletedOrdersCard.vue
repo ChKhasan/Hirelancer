@@ -50,22 +50,24 @@
           :to="`/profile/customer/order/view/${order?.id}`"
           class="text-blue text-base font-medium flex gap-2 items-center xl:w-full xl:border xl:border-solid xl:border-main-color xl:rounded-[8px] xl:h-11 xl:justify-center xl:text-[14px] xl:font-medium xl:flex xl:gap-2 xl:items-center"
           >Подробнее<svg
-            xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M14 8L18 12M18 12L14 16M18 12L6 12"
+              d="M16 14L12 18M12 18L8 14M12 18L12 6"
               stroke="#5C46E6"
               stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"
-            /></svg
-        ></nuxt-link>
+            />
+          </svg>
+        </nuxt-link>
       </div>
       <div
+        v-if="$route.params.status != 'pending'"
         class="rounded-[8px] border border-solid border-light-yellow-br xl:border-yellow-br bg-light-yellow px-6 xl:pl-4 xl:pr-3 py-4 xl:py-3 cursor-pointer overflow-hidden"
       >
         <div @click="open(1)" class="flex justify-between">

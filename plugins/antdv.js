@@ -14,7 +14,7 @@ import {
   Upload,
   Modal,
   // Popconfirm,
-  // Radio,
+  Radio,
   // Icon,
   // Spin,
   // Dropdown,
@@ -32,7 +32,6 @@ import {
   Spin,
   // BackTop,
   Tooltip,
-  Radio,
   Progress,
 } from "ant-design-vue";
 const { info, success, error, warning, confirm } = Modal;
@@ -67,7 +66,7 @@ Vue.use(FormModel);
 Vue.use(Upload);
 Vue.use(Modal);
 // Vue.use(Popconfirm);
-// Vue.use(Radio);
+Vue.use(Radio);
 // Vue.use(Icon);
 Vue.use(Input);
 Vue.use(Spin);

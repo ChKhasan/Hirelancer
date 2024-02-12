@@ -35,7 +35,15 @@
       </div>
     </div>
 
-    <div class="list flex flex-col gap-4 mt-6 mb-[40px]" v-if="loading">
+    <div
+      class="list gap-4 mt-6 mb-[40px]"
+      v-if="loading"
+      :class="
+        $route.params.user == 'customer' && $route.params.status == 'completed'
+          ? 'grid grid-cols-2 xl:grid-cols-1'
+          : 'flex flex-col'
+      "
+    >
       <a-skeleton
         :paragraph="false"
         class="loading-card"
@@ -45,12 +53,28 @@
     </div>
     <div
       class="list flex flex-col gap-4 mt-6 mb-[40px]"
-      v-if="$route.params.user == 'customer' && !loading"
+      v-if="
+        $route.params.user == 'customer' &&
+        !loading &&
+        ($route.params.status == 'active' || $route.params.status == 'pending')
+      "
     >
       <CompletedOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
-
-    <div class="list flex flex-col gap-4 mt-6 mb-[40px] xl:hidden" v-else>
+    <div
+      class="list grid grid-cols-2 gap-4 mt-6 mb-[40px] xl:grid-cols-1"
+      v-if="
+        $route.params.user == 'customer' &&
+        !loading &&
+        $route.params.status == 'completed'
+      "
+    >
+      <ComplitedCard v-for="order in orders" :order="order" :key="order?.id" />
+    </div>
+    <div
+      class="list flex flex-col gap-4 mt-6 mb-[40px] xl:hidden"
+      v-if="$route.params.user == 'freelancer' && !loading"
+    >
       <ProfileOrdersCard v-for="order in orders" :order="order" :key="order?.id" />
     </div>
     <div
@@ -91,6 +115,7 @@ import ProfileOrderCardMobile from "@/components/profile/orders/ProfileOrderCard
 import OrdersTab from "@/components/profile/orders/OrdersTab.vue";
 import Loader from "@/components/Loader.vue";
 import CompletedOrdersCard from "@/components/profile/orders/CompletedOrdersCard.vue";
+import ComplitedCard from "../../../../../components/profile/orders/ComplitedCard.vue";
 
 export default {
   layout: "profileLayout",
@@ -98,6 +123,12 @@ export default {
     return {
       orders: [],
       loading: true,
+      status: {
+        active: 1,
+        completed: 0,
+        pending: 0,
+        cancel: -1,
+      },
     };
   },
   computed: {
@@ -111,12 +142,7 @@ export default {
   methods: {
     async __GET_ORDERS() {
       const params = {
-        status:
-          this.$route.params.status == "active"
-            ? 1
-            : this.$route.params.status == "completed"
-            ? 0
-            : -1,
+        status: this.status[this.$route.params.status],
       };
       this.$route.params.user == "customer"
         ? (params.client = this.$store.state.userInfo["id"])
@@ -126,7 +152,12 @@ export default {
           params: { ...params },
         });
         this.orders = data?.data;
-        console.log(this.orders);
+        if (this.$route.params.status == "completed") {
+          this.orders = this.orders.filter((elem) => elem?.end_of_execution);
+        }
+        if (this.$route.params.status == "pending") {
+          this.orders = this.orders.filter((elem) => !elem?.end_of_execution);
+        }
       } catch (e) {
       } finally {
         this.loading = false;
@@ -146,6 +177,7 @@ export default {
     Loader,
     CompletedOrdersCard,
     ProfileOrderCardMobile,
+    ComplitedCard,
   },
 };
 </script>

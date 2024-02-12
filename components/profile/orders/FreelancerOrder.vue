@@ -199,12 +199,13 @@
               </div>
             </div>
             <div
-              class="flex items-center justify-center py-[19px] w-full bg-bg-grey absolute bottom-0"
+              class="flex items-end justify-center pb-6 xl:pb-2 h-[113px] w-full bg-bg-grey absolute bottom-0 show-all cursor-pointer xl:h-11 xl:justify-end xl:pr-4"
               v-if="!openBlock"
+              @click="openBlock = true"
             >
               <button
                 class="flex gap-2 text-purple text-base font-medium items-center"
-                @click="openBlock = true"
+               
               >
                 Раскрыть<svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -624,6 +625,9 @@ export default {
   100% {
     opacity: 1;
   }
+}
+.show-all {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.86) 46.88%, #FFF 100%);
 }
 @media (max-width: 1200px) {
   .content-box {

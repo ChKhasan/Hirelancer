@@ -8,6 +8,14 @@
       Активные заказы (0)
     </button>
     <button
+      v-if="$route.params.user == 'customer'"
+      @click="$router.push(`/profile/${$route.params.user}/orders/pending/status`)"
+      :class="{ active: $route.params.status == 'pending' }"
+      class="px-6 py-3 rounded-[12px] border-solid border-[2px] border-bg-grey bg-bg-grey text-base text-grey-64 font-medium xl:whitespace-nowrap xl:border xl:h-9 xl:py-0 xl:flex xl:items-center xl:rounded-[8px] xl:text-[14px]"
+    >
+      Ожидание модерации (0)
+    </button>
+    <button
       v-if="$route.params.user == 'freelancer'"
       @click="$router.push(`/profile/${$route.params.user}/orders/offers/status`)"
       :class="{ active: $route.params.status == 'offers' }"

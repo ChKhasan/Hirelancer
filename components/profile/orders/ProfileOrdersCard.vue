@@ -90,13 +90,51 @@
         ></nuxt-link>
       </div>
     </div>
-    <div class="offers" v-if="$route.name.includes('orders-offers')">
+    <div
+      class="offers"
+      v-if="$route.params.status == 'offers' || $route.params.status == 'completed'"
+    >
       <div
-        class="rounded-[8px] border border-solid border-light-yellow-br bg-light-yellow px-6 py-4 cursor-pointer overflow-hidden"
+        class="rounded-[8px] border border-solid px-6 py-4 cursor-pointer overflow-hidden"
+        :class="
+          order?.selected_request?.freelancer?.id == $store.state.userInfo?.id
+            ? 'border-[#C5EBC5] bg-[#FAFFFA] '
+            : 'border-light-yellow-br bg-light-yellow '
+        "
       >
         <div @click="open(1)" class="flex justify-between">
           <div class="flex gap-[80px]">
-            <h4 class="text-base font-medium text-black">Предложения</h4>
+            <h4 class="text-base font-medium text-black flex items-center gap-2">
+              <svg
+                v-if="
+                  order?.selected_request?.freelancer?.id == $store.state.userInfo?.id
+                "
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g opacity="0.4">
+                  <path
+                    d="M17 12C17 13.1046 16.1046 14 15 14H7V17C7 18.1046 7.89543 19 9 19H19C20.1046 19 21 18.1046 21 17V9C21 7.89543 20.1046 7 19 7H17V12Z"
+                    fill="#009A10"
+                  />
+                </g>
+                <path
+                  d="M3.75 15H15.1072C16.1526 15 17.0001 14.1046 17.0001 13V5C17.0001 3.89543 16.1526 3 15.1072 3H3.75V15Z"
+                  fill="#009A10"
+                />
+                <path
+                  opacity="0.4"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M3 1.25C3.41421 1.25 3.75 1.58579 3.75 2V22C3.75 22.4142 3.41421 22.75 3 22.75C2.58579 22.75 2.25 22.4142 2.25 22V2C2.25 1.58579 2.58579 1.25 3 1.25Z"
+                  fill="#009A10"
+                />
+              </svg>
+              Предложения
+            </h4>
             <div class="flex gap-[40px]">
               <p class="text-base text-grey-64 flex gap-[6px]">
                 Срок: <span class="text-black">{{ order?.deadline }} дней</span>
@@ -129,7 +167,10 @@
         >
           <div class="pt-6 flex flex-col gap-6">
             <span class="text-base text-grey-80" v-html="order?.description"> </span>
-            <div class="flex justify-end">
+            <div
+              class="flex justify-end"
+              v-if="order?.selected_request?.freelancer?.id != $store.state.userInfo?.id"
+            >
               <button class="text-light-red text-base font-medium">
                 Отменить запрос
               </button>
