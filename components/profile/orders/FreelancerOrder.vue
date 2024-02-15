@@ -203,10 +203,7 @@
               v-if="!openBlock"
               @click="openBlock = true"
             >
-              <button
-                class="flex gap-2 text-purple text-base font-medium items-center"
-               
-              >
+              <button class="flex gap-2 text-purple text-base font-medium items-center">
                 Раскрыть<svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -509,7 +506,7 @@ export default {
       this.bottomModal = false;
     },
     submitCancel() {
-      // this.__CANCEL_ORDER();
+      this.__CANCEL_ORDER();
     },
     submitComplaint(formData) {
       this.__COMPLAINTS_ORDER(formData);
@@ -534,6 +531,7 @@ export default {
         const data = await this.$store.dispatch("fetchOrders/postCompleteOrder", {
           order_id: this.$route.params.id,
         });
+        this.handleOk();
         this.$emit("selected");
       } catch (e) {
         if (e.response) {
@@ -627,7 +625,12 @@ export default {
   }
 }
 .show-all {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.86) 46.88%, #FFF 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.86) 46.88%,
+    #fff 100%
+  );
 }
 @media (max-width: 1200px) {
   .content-box {

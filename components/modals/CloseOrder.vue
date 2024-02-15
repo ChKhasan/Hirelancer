@@ -59,7 +59,7 @@
             @click="$emit('submit')"
             class="h-[54px] items-center w-[194px] flex justify-center gap-2 border border-solid border-main-color bg-main-color rounded-[8px] text-base font-medium text-white"
           >
-            Yaxshi, yopish
+            Yaxshi, yopish 
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -87,7 +87,7 @@ export default {
   props: ["visibleProp"],
   data() {
     return {
-      visible: false,
+      visible: true,
     };
   },
   methods: {
